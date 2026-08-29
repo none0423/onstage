@@ -1,3 +1,5 @@
+.env
+.env.local
 tools/.debug/
 .DS_Store
 node_modules/

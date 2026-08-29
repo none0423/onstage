@@ -50,6 +50,17 @@ function flatParse(block) {
   }
   return o;
 }
+/** 블록에서 <name>…</name> 값 하나만 안전하게 꺼낸다.
+    값 안에 HTML 이나 다른 태그가 들어 있어도(KOPIS 의 sty 등) 어긋나지 않는다. */
+function pick(block, name) {
+  const open = `<${name}>`;
+  const a = block.indexOf(open);
+  if (a < 0) return "";
+  const b = block.indexOf(`</${name}>`, a);
+  if (b < 0) return "";
+  return decode(block.slice(a + open.length, b).replace(CDATA_OPEN, "").replace(CDATA_CLOSE, ""));
+}
+
 /** <name>…</name> 블록들을 문자열로 잘라내기 (정규식 없이) */
 function slices(xml, name) {
   const open = `<${name}>`, close = `</${name}>`;
@@ -86,8 +97,51 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
 
   /* ── 1. KOPIS 오픈API (국내·내한) ───────────── */
   const KOPIS = "https://www.kopis.or.kr/openApi/restful/pblprfr";
-  const BIG_VENUE = /돔|아레나|체조경기장|경기장|스타디움|킨텍스|월드컵|올림픽|엑스코|벡스코|인스파이어|핸드볼|장충|올림픽홀|블루스퀘어|예스24|무신사|명화|악스|AX/;
-  const IS_VISIT = /내한|IN SEOUL|IN KOREA|WORLD TOUR/i;
+  /* 수집 범위 손잡이 — KOPIS 대중음악은 1년에 수백 건이라 공연장으로 거른다.
+     넓히려면 키워드를 추가하고, 대형 공연만 보려면 앞쪽 몇 개만 남기면 된다. */
+  const BIG_VENUE = new RegExp([
+    "돔", "아레나", "체조경기장", "경기장", "스타디움", "월드컵", "올림픽", "핸드볼",   // 대형
+    "킨텍스", "엑스코", "벡스코", "세텍", "SETEC",                                     // 전시장
+    "블루스퀘어", "장충", "인스파이어", "KBS", "예스24", "무신사", "명화", "악스", "AX"  // 중형·라이브홀
+  ].join("|"));
+  /* 해외 아티스트의 내한 공연 판별.
+     'WORLD TOUR' 는 국내 아티스트(PLAVE·ARTMS 등)도 흔히 쓰므로 넣지 않는다. */
+  const IS_VISIT = /내한|IN SEOUL|IN KOREA/i;
+  /* KOPIS 는 국내 아티스트의 해외 공연도 등록한다 (area === "해외") */
+  const OVERSEAS = { 일본: ["japan", "일본"], 대만: ["asia", "대만"], 홍콩: ["asia", "홍콩"], 태국: ["asia", "태국"],
+                     싱가포르: ["asia", "싱가포르"], 마카오: ["asia", "마카오"], 필리핀: ["asia", "필리핀"],
+                     말레이시아: ["asia", "말레이시아"], 인도네시아: ["asia", "인도네시아"], 베트남: ["asia", "베트남"] };
+  /* 공연 제목을 아티스트 / 투어명으로 나눈다: "쏜애플 콘서트: 나의 세기 [부산]" → 쏜애플 / 콘서트: 나의 세기 */
+  const TRAILING_REGION = /\s*\[[^\]]*\]\s*$/;
+  const SHOW_KIND = /\s(?=(?:단독\s?공연|전국투어|클럽\s?투어|월드투어|아시아\s?투어|팬\s?콘서트|팬미팅|내한공연|콘서트|리사이틀|공연|FAN\s?CONCERT|FANCON|CONCERT|WORLD\s?TOUR|ASIA\s?TOUR|TOUR|LIVE|SHOW|FESTIVAL))/i;
+  const TRAILING_ORDINAL = /\s+\d+\s*(?:st|nd|rd|th)?$/i;
+  /* 아티스트명 뒤에 붙는 수식어 ("자라 라슨 첫 단독" → "자라 라슨"). 떼어낸 말은 투어명 앞으로 옮긴다. */
+  const TRAILING_MODIFIER = /\s+(첫\s*번째|첫|단독|솔로|앵콜|앙코르|ENCORE|SOLO|ASIA|WORLD|ARENA|DOME|STADIUM|JAPAN|GLOBAL)$/i;
+
+  function splitKopisTitle(raw, city) {
+    const t = raw.replace(TRAILING_REGION, "").trim();
+    let artist = t, tour = "";
+    const i = t.search(SHOW_KIND);
+    if (i > 0) { artist = t.slice(0, i).trim(); tour = t.slice(i).trim(); }
+    else {
+      const c = t.indexOf(":");
+      if (c > 0) { artist = t.slice(0, c).trim(); tour = t.slice(c + 1).trim(); }
+    }
+    const moved = [];
+    for (const re of [TRAILING_ORDINAL, TRAILING_MODIFIER, TRAILING_MODIFIER, TRAILING_MODIFIER]) {
+      const m = artist.match(re);
+      if (!m) continue;
+      moved.unshift(m[0].trim());
+      artist = artist.slice(0, m.index).trim();
+    }
+    if (moved.length) tour = `${moved.join(" ")} ${tour}`.trim();
+    return { artist: artist || t, tour: tour || `${city} 공연` };
+  }
+  /* KOPIS 상세의 relates 에서 고를 예매처 우선순위 (앞일수록 우선) */
+  const VENDOR_RANK = ["놀유니버스", "인터파크", "NOL", "티켓링크", "예스24", "YES24", "멜론", "네이버"];
+  const rankOf = n => { const i = VENDOR_RANK.findIndex(k => n.includes(k)); return i < 0 ? 99 : i; };
+  /* area 는 '서울특별시' 같은 시·도 단위로 온다 */
+  const SHORT_AREA = /특별자치도|특별자치시|특별시|광역시|(?<=[가-힣])도$/;
 
   async function kopis() {
     if (!keys.kopis) { log("⚠️  KOPIS_KEY 없음 → 국내·내한 건너뜀"); return []; }
@@ -114,36 +168,66 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       const cached = prevById.get(id);
       let price = cached?.price, vendor = cached?.vendor, doorsNote = cached?.doorsNote;
 
-      /* 상세는 처음 보는 공연만 — 한도가 남아 있을 때만 (남은 건 다음 실행에서) */
-      if (!cached && used < MAX_SUBREQUESTS - 2) {
+      let others = cached?.otherVendors;
+      /* 상세 조회를 실제로 끝냈는지 표시. 서브리퀘스트 한도로 못 받은 항목은
+         다음 실행에서 다시 시도해야 하므로 '캐시에 있음'만으로 건너뛰면 안 된다. */
+      let detailed = cached?.kopisDetail === true;
+
+      if (!detailed && used < MAX_SUBREQUESTS - 2) {
         try {
-          const d = flatParse(await get(`${KOPIS}/${r.mt20id}?service=${keys.kopis}`));
-          price = d.pcseguidance || "예매처 공지 참고";
-          doorsNote = d.dtguidance || "";
+          const xml = await get(`${KOPIS}/${r.mt20id}?service=${keys.kopis}`);
+          /* 응답 최외곽이 <dbs> 라서 통째로 파싱하면 안 된다. <db> 를 먼저 자른다. */
+          const db = slices(xml, "db")[0] || "";
+          price = pick(db, "pcseguidance") || "예매처 공지 참고";
+          doorsNote = pick(db, "dtguidance") || "";
+          /* relates 가 실제 예매 페이지 URL 을 준다 — 카드 클릭 시 여기로 간다 */
+          const links = slices(slices(db, "relates")[0] || "", "relate")
+            .map(x => ({ name: pick(x, "relatenm"), url: pick(x, "relateurl") }))
+            .filter(v => v.name && /^https?:\/\//.test(v.url))
+            .sort((a, b) => rankOf(a.name) - rankOf(b.name));
+          if (links.length) { vendor = links[0]; others = links.slice(1, 4); }
+          detailed = true;
           fetched++;
         } catch (e) { log(`⚠️  KOPIS 상세 ${r.mt20id}: ${e.message}`); }
       }
 
+      /* KOPIS 는 공연 '기간'만 준다. 그 사이 실제 회차가 며칠인지는 알 수 없으므로
+         날마다 펼치지 않고 시작·종료만 담고 period 로 표시한다. */
       const from = r.prfpdfrom.replace(/\./g, "-");
       const to = (r.prfpdto || r.prfpdfrom).replace(/\./g, "-");
-      const dates = [];
-      for (let d = new Date(from + "T00:00:00"), end = new Date(to + "T00:00:00"); d <= end && dates.length < 12; d.setDate(d.getDate() + 1))
-        dates.push(isoOf(d));
+      const dates = from === to ? [from] : [from, to];
+
+      /* 해외 등록분은 제목의 [국가 …] 로 나라를 판별한다. 못 알아보면 버린다(오분류 방지). */
+      let category, country, city;
+      if (r.area === "해외") {
+        const hit = Object.keys(OVERSEAS).find(k => r.prfnm.includes(k) || (r.fcltynm || "").includes(k));
+        if (!hit) continue;
+        [category, country] = OVERSEAS[hit];
+        const sub = r.prfnm.match(new RegExp(`\\[${hit}\\s+([^\\]]+)\\]`));
+        city = (sub ? sub[1] : country).trim();
+      } else {
+        category = IS_VISIT.test(r.prfnm) ? "visit" : "domestic";
+        country = "대한민국";
+        city = (r.area || "").replace(SHORT_AREA, "") || r.area || "대한민국";
+      }
+      const { artist, tour } = splitKopisTitle(r.prfnm, city);
 
       out.push({
-        id, auto: true, sourceName: "KOPIS",
-        artist: r.prfnm, tour: "KOPIS 등록 공연",
-        category: IS_VISIT.test(r.prfnm) ? "visit" : "domestic",
-        country: "대한민국", city: r.area || "대한민국", venue: r.fcltynm,
+        id, auto: true, sourceName: "KOPIS", kopisDetail: detailed,
+        period: dates.length > 1,          // 기간 공연 — 회차 수 미상
+        artist, tour,
+        category,
+        country, city, venue: r.fcltynm,
         mapQuery: r.fcltynm,
         dates,
         doorsNote: doorsNote || "예매처 공지 참고",
         ticketOpen: null,
-        ticketStatus: r.prfstate === "공연중" ? "판매중" : "예정",
+        /* KOPIS 는 오픈 시각을 주지 않는다. 예매 링크가 있으면 이미 판매 중으로 본다. */
+        ticketStatus: r.prfstate === "공연완료" ? "종료" : vendor?.url ? "판매중" : "예정",
         price: price || "예매처 공지 참고",
         vendor: vendor?.url ? vendor
               : { name: "NOL 티켓", url: `https://tickets.interpark.com/search?keyword=${encodeURIComponent(r.prfnm)}` },
-        otherVendors: [],
+        otherVendors: others || [],
         goods: { note: "", url: null },
         tips: "",
         source: `https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=${r.mt20id}`,

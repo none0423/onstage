@@ -80,12 +80,14 @@ function fmtDate(s) {
   const d = new Date(s + "T00:00:00");
   return `${d.getFullYear()}. ${d2(d.getMonth() + 1)}. ${d2(d.getDate())}`;
 }
-function fmtDateRange(dates) {
+function fmtDateRange(dates, period) {
   if (!dates || !dates.length) return "-";
   const first = fmtDate(dates[0]);
   if (dates.length === 1) return first;
   const last = new Date(dates[dates.length - 1] + "T00:00:00");
-  return `${first}–${d2(last.getDate())} (${dates.length}회차)`;
+  const tail = `${d2(last.getMonth() + 1)}. ${d2(last.getDate())}`;
+  /* period 는 '기간만 아는' 공연 — 회차 수를 모르므로 표시하지 않는다 */
+  return period ? `${first} – ${tail}` : `${first}–${d2(last.getDate())} (${dates.length}회차)`;
 }
 const mmdd = s => { const d = new Date(s + "T00:00:00"); return `${d2(d.getMonth() + 1)}.${d2(d.getDate())}`; };
 
@@ -100,8 +102,13 @@ function daysToOpen(c) {
   const open = new Date(c.ticketOpen); open.setHours(0, 0, 0, 0);
   return Math.round((open - startOfToday()) / MS_DAY);
 }
+/** 아직 남아 있는 가장 이른 공연일. 이미 시작된 다일 공연이면 오늘 이후의 회차를 가리킨다. */
+function nextDate(c) {
+  const t = startOfToday();
+  return c.dates.find(d => new Date(d + "T00:00:00") >= t) || c.dates[c.dates.length - 1];
+}
 function daysToShow(c) {
-  return Math.round((new Date(c.dates[0] + "T00:00:00") - startOfToday()) / MS_DAY);
+  return Math.round((new Date(nextDate(c) + "T00:00:00") - startOfToday()) / MS_DAY);
 }
 function isPast(c) { return new Date(c.dates[c.dates.length - 1] + "T23:59:59") < new Date(); }
 
@@ -266,7 +273,7 @@ function cardHTML(c) {
     </div>
     <div class="ev-body">
       <p class="ev-title">${esc(c.artist)} · ${esc(c.city)}</p>
-      <p class="ev-sub">${esc(fmtDateRange(c.dates))} · ${esc(c.venue)}</p>
+      <p class="ev-sub">${esc(fmtDateRange(c.dates, c.period))} · ${esc(c.venue)}</p>
       <p class="ev-open">${openLine}</p>
       <div class="ev-foot">
         <span>${esc(code(c))}</span><span class="sep">·</span>
@@ -298,10 +305,10 @@ function renderChips() {
 function renderUpNext() {
   const box = document.getElementById("upnext");
   const next = EVENTS.filter(c => !isPast(c))
-    .sort((a, b) => a.dates[0].localeCompare(b.dates[0]))[0];
+    .sort((a, b) => nextDate(a).localeCompare(nextDate(b)))[0];
   if (!next) { box.hidden = true; return; }
   const st = statusOf(next);
-  const d = new Date(next.dates[0] + "T00:00:00");
+  const d = new Date(nextDate(next) + "T00:00:00");
   const f = flightPlan(next);
   box.hidden = false;
   box.innerHTML = `
@@ -334,8 +341,8 @@ function renderSummary() {
   const openMode = opens.length > 0;
   const rows = openMode
     ? opens.map(c => ({ c, d: daysToOpen(c), text: `${fmtOpen(c.ticketOpen)} 오픈 · ${c.vendor.name} · ${c.city} ${c.venue}` }))
-    : live.sort((a, b) => a.dates[0].localeCompare(b.dates[0])).slice(0, 6)
-        .map(c => ({ c, d: daysToShow(c), text: `${fmtDate(c.dates[0])} · ${c.city} ${c.venue} · ${c.vendor.name}` }));
+    : live.sort((a, b) => nextDate(a).localeCompare(nextDate(b))).slice(0, 6)
+        .map(c => ({ c, d: daysToShow(c), text: `${fmtDate(nextDate(c))} · ${c.city} ${c.venue} · ${c.vendor.name}` }));
 
   const sec = document.getElementById("soon");
   if (!rows.length) { sec.hidden = true; return; }
