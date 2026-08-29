@@ -61,8 +61,19 @@ function mergeEvents(feed) {
   const keys = c => [`a:${norm(c.artist)}|${c.dates[0]}`, `v:${norm(c.venue)}|${c.dates[0]}`];
   const ids = new Set(CONCERTS.map(c => c.id));
   const seen = new Set(CONCERTS.flatMap(keys));
-  return [...CONCERTS, ...feed.filter(c => c && c.dates?.length && c.vendor?.url
-    && !ids.has(c.id) && !keys(c).some(k => seen.has(k)))];
+  const valid = feed.filter(c => c && c.dates?.length && c.vendor?.url);
+
+  /* 중복으로 가려진 자동 항목에 포스터가 있으면 수동 항목이 물려받는다.
+     손으로 쓴 공연이 이미지 없이 남는 걸 막는다. */
+  const byKey = new Map();
+  for (const c of valid) for (const k of keys(c)) if (!byKey.has(k)) byKey.set(k, c);
+  const manual = CONCERTS.map(c => {
+    if (c.images?.length) return c;
+    const donor = keys(c).map(k => byKey.get(k)).find(x => x?.images?.length);
+    return donor ? { ...c, images: donor.images } : c;
+  });
+
+  return [...manual, ...valid.filter(c => !ids.has(c.id) && !keys(c).some(k => seen.has(k)))];
 }
 let EVENTS = mergeEvents(FEED_LIST);
 
@@ -219,6 +230,16 @@ function cardHTML(c) {
   const flight = flightPlan(c);
   const areas = stayAreas(c);
 
+  const shots = (c.images || []).filter(u => /^https:\/\//.test(u)).slice(0, 2);
+  const poster = shots[0];
+  /* 포스터 로드에 실패하면 has-img 를 떼어 생성 그라디언트로 되돌린다 */
+  const art = poster ? `
+      <img class="ev-blur" src="${esc(poster)}" alt="" aria-hidden="true" loading="lazy"
+           onerror="this.remove()">
+      <img class="ev-poster" src="${esc(poster)}" alt="${esc(c.artist)} 공연 포스터" loading="lazy" decoding="async"
+           onerror="this.parentElement.classList.remove('has-img');this.remove()">` : "";
+
+
   const openLine =
     st.phase === "onsale"  ? `<span class="on">예매 진행 중</span> · ${esc(c.price || "가격 미정")}`
     : st.phase === "upcoming" || st.phase === "today"
@@ -237,6 +258,13 @@ function cardHTML(c) {
       <p class="det-h">✈ 항공 · ${HOME_AIRPORT} → ${esc(flight.dest)}</p>
       <p class="det-note">${esc(mmdd(flight.out))} 출발 – ${esc(mmdd(flight.back))} 귀국 기준 (공연 전날 출발 / 마지막 공연 다음 날 귀국)</p>
       ${linkRow(flight.links)}
+    </div>`);
+
+  if (shots.length > 1) det.push(`
+    <div class="det-blk">
+      <p class="det-h">🖼 포스터</p>
+      <div class="shots">${shots.map((u, i) =>
+        `<img src="${esc(u)}" alt="${esc(c.artist)} 이미지 ${i + 1}" loading="lazy" onerror="this.remove()">`).join("")}</div>
     </div>`);
 
   det.push(`
@@ -266,7 +294,8 @@ function cardHTML(c) {
 
   return `
   <article class="ev" data-url="${esc(c.vendor.url)}">
-    <div class="ev-art" style="${artOf(c.id)}">
+    <div class="ev-art${poster ? " has-img" : ""}" style="${artOf(c.id)}">
+      ${art}
       <span class="ev-badge ${st.tone}">${esc(st.badge)}</span>
       <span class="ev-tour">${esc(c.tour)}</span>
       <h3 class="ev-name">${esc(c.artist)}</h3>

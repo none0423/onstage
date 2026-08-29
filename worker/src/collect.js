@@ -77,6 +77,14 @@ function slices(xml, name) {
   return out;
 }
 
+/* KOPIS 포스터는 http 로 오고 www 도메인은 301 이다. 혼합 콘텐츠 차단과
+   리다이렉트를 피하려고 정규 https 주소로 바꾼다. */
+function normalizePoster(url) {
+  if (!url) return null;
+  const u = String(url).trim().replace(/^http:\/\//, "https://").replace("https://www.kopis.or.kr", "https://kopis.or.kr");
+  return /^https:\/\//.test(u) ? u : null;
+}
+
 /* ── 수집 본체 ───────────────────────────────── */
 export async function collectAll({ keys = {}, previous = [], only = null, log = () => {} } = {}) {
   const prevById = new Map(previous.map(c => [c.id, c]));
@@ -230,6 +238,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         otherVendors: others || [],
         goods: { note: "", url: null },
         tips: "",
+        images: [normalizePoster(r.poster)].filter(Boolean),
         source: `https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=${r.mt20id}`,
         tags: []
       });
@@ -241,6 +250,17 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   /* ── 2. Ticketmaster Discovery API (아시아) ── */
   const TM_COUNTRIES = ["SG", "MY"];   // TM 운영국 중 아시아. JP·KR·TW·HK·TH 는 미운영
   const TM_KO = { SG: ["싱가포르", "싱가포르"], MY: ["말레이시아", "쿠알라룸푸르"] };
+
+  /* 가로형(16_9 → 3_2) 중 폭 640 이상을 우선해 최대 2장 */
+  function pickTmImages(list) {
+    if (!Array.isArray(list)) return [];
+    const score = i => (i.ratio === "16_9" ? 0 : i.ratio === "3_2" ? 1 : 2) * 100
+                     + Math.abs((i.width || 0) - 1024) / 100;
+    return [...new Set(list
+      .filter(i => i.url && /^https:\/\//.test(i.url) && (i.width || 0) >= 640)
+      .sort((a, b) => score(a) - score(b))
+      .map(i => i.url))].slice(0, 2);
+  }
 
   async function ticketmaster() {
     if (!keys.ticketmaster) { log("⚠️  TICKETMASTER_KEY 없음 → 아시아 건너뜀"); return []; }
@@ -274,6 +294,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
             ticketOpen: ev.sales?.public?.startDateTime || null,   // ← 티켓 오픈 시각
             ticketStatus: st === "onsale" ? "판매중" : st === "offsale" ? "종료" : "예정",
             price: pr ? `${pr.currency} ${pr.min} ~ ${pr.max}` : "예매처 공지 참고",
+            images: pickTmImages(ev.images),
             vendor: { name: `Ticketmaster ${cc}`, url: ev.url },
             otherVendors: [],
             goods: { note: "", url: null },
@@ -358,6 +379,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         otherVendors: [{ name: "티켓피아", url: "https://t.pia.jp/" }, { name: "로손티켓", url: "https://l-tike.com/" }],
         goods: { note: "", url: null },
         stay: { areas: TD_STAY },
+        images: [],            // 도쿄돔 달력 페이지에는 공연 이미지가 없다
         tips: "",
         source: TD_URL,
         tags: ["돔"]

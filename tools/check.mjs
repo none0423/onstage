@@ -28,6 +28,7 @@ const AIRPORTS = new Set(
   : new Set();
 const STATUS = ["예정", "판매중", "매진", "종료"];
 const errors = [], warns = [], ids = new Set();
+let noImage = 0;
 
 for (const [i, c] of CONCERTS.entries()) {
   const at = `[${i}] ${c.artist ?? "(artist 없음)"}`;
@@ -60,12 +61,20 @@ for (const [i, c] of CONCERTS.entries()) {
       if (!a || !a.name || !a.note) errors.push(`${at}: stay.areas 항목에 name/note 가 필요합니다`);
   } else warns.push(`${at}: stay 없음 → 공연장 이름으로만 숙소를 검색합니다`);
   if (c.source && !/^https?:\/\//.test(c.source)) errors.push(`${at}: source 는 http(s) 주소여야 합니다`);
+  if (c.images !== undefined) {
+    if (!Array.isArray(c.images)) errors.push(`${at}: images 는 배열이어야 합니다`);
+    else for (const u of c.images)
+      /* http 이미지는 https 사이트에서 혼합 콘텐츠로 차단된다 */
+      if (!/^https:\/\//.test(u)) errors.push(`${at}: images 는 https 주소여야 합니다 — '${u}'`);
+  } else noImage++;
   if (!c.source) warns.push(`${at}: source 없음 → 카드에 출처 링크가 표시되지 않습니다`);
   if (c.country !== "대한민국" && !AIRPORTS.has(c.city))
     warns.push(`${at}: '${c.city}' 가 app.js AIRPORT 목록에 없어 항공권 블록이 생성되지 않습니다`);
 }
 
 if (!/^\d{4}-\d{2}-\d{2}$/.test(DATA_UPDATED || "")) errors.push("DATA_UPDATED 형식 오류 (YYYY-MM-DD)");
+/* 이미지는 자동 수집분에서 물려받을 수 있으므로 항목마다 경고하지 않고 한 줄로 요약한다 */
+if (noImage) warns.push(`images 없는 수동 공연 ${noImage}건 → 자동 수집분에 같은 공연이 있으면 포스터를 물려받고, 없으면 그라디언트로 표시됩니다`);
 
 /* ── 자동 수집분(data/feed.js)은 화면을 깨뜨리는 필드만 검사한다 ── */
 let FEED = [];
@@ -88,6 +97,8 @@ if (existsSync(feedPath)) {
     if (!CATS.includes(c.category)) errors.push(`${at}: category '${c.category}' 오류`);
     if (!/^https?:\/\//.test(c.vendor?.url || "")) errors.push(`${at}: vendor.url 오류`);
     if (c.ticketOpen && isNaN(new Date(c.ticketOpen))) errors.push(`${at}: ticketOpen 파싱 실패`);
+    if (c.images && (!Array.isArray(c.images) || c.images.some(u => !/^https:\/\//.test(u))))
+      errors.push(`${at}: images 는 https 주소 배열이어야 합니다`);
   }
 }
 
