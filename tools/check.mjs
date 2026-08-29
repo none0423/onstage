@@ -15,7 +15,11 @@ try {
   process.exit(1);
 }
 
-const CATS = ["japan", "visit", "asia", "domestic"];   // 'soon' 은 가상 필터라 데이터 값이 아니다
+const CATS = ["japan", "visit", "asia", "domestic"];
+/* data/genres.js 의 장르 키 — 데이터에 genre 를 직접 쓸 때 오탈자를 잡는다 */
+const GENRE_KEYS = new Set(
+  (new Function(readFileSync(join(root, "data/genres.js"), "utf8") + "; return GENRES;")() || [])
+    .map(g => g.key));   // 'soon' 은 가상 필터라 데이터 값이 아니다
 /* app.js 의 AIRPORT 맵에 등록된 도시 — 해외 공연의 항공권 블록 생성 여부를 함께 검사 */
 const AIRPORTS = new Set(
   (readFileSync(join(root, "assets/app.js"), "utf8")
@@ -67,6 +71,8 @@ for (const [i, c] of CONCERTS.entries()) {
       /* http 이미지는 https 사이트에서 혼합 콘텐츠로 차단된다 */
       if (!/^https:\/\//.test(u)) errors.push(`${at}: images 는 https 주소여야 합니다 — '${u}'`);
   } else noImage++;
+  if (c.genre && !GENRE_KEYS.has(c.genre))
+    errors.push(`${at}: genre '${c.genre}' 는 ${[...GENRE_KEYS].join("|")} 중 하나여야 합니다`);
   if (!c.source) warns.push(`${at}: source 없음 → 카드에 출처 링크가 표시되지 않습니다`);
   if (c.country !== "대한민국" && !AIRPORTS.has(c.city))
     warns.push(`${at}: '${c.city}' 가 app.js AIRPORT 목록에 없어 항공권 블록이 생성되지 않습니다`);

@@ -40,11 +40,46 @@ const AIRPORT = {
   "상하이": "PVG", "베이징": "PEK", "타이페이": "TPE"
 };
 
+/* ── 장르 판정 ───────────────────────────────
+   순서: 데이터에 직접 적은 genre → 아티스트 표 → 제목 키워드 → Ticketmaster 장르 → 미분류.
+   Ticketmaster 를 맨 뒤에 두는 이유는 63건 중 54건이 "Pop" 으로만 와서 변별력이 없기 때문이다. */
+const GENRE_LABEL = Object.fromEntries((typeof GENRES !== "undefined" ? GENRES : []).map(g => [g.key, g.label]));
+const gnorm = s => String(s || "").toLowerCase().replace(/[\s.\-_'"()\[\]:·,!?&/]/g, "");
+
+/* 짧은 이름(2~3자)은 단어 단위로만 맞춘다. 'IVE' 가 'live' 안에서 걸리는 걸 막기 위함이다. */
+const GENRE_LONG = [], GENRE_SHORT = new Map();
+for (const [name, g] of Object.entries(typeof ARTIST_GENRE !== "undefined" ? ARTIST_GENRE : {})) {
+  const n = gnorm(name);
+  if (n.length >= 4) GENRE_LONG.push([n, g]);
+  else if (n.length >= 2) GENRE_SHORT.set(n, g);
+}
+GENRE_LONG.sort((a, b) => b[0].length - a[0].length);      // 긴 이름부터 확인
+
+function genreOf(c) {
+  if (c.genre) return c.genre;
+  const full = gnorm(c.artist);
+  for (const [n, g] of GENRE_LONG) if (full.includes(n)) return g;
+  /* 짧은 이름은 통째로 같거나 한 단어로 일치할 때만 인정한다.
+     'IVE' 가 'live' 안에서 걸리는 걸 막으면서 '벤슨 분' 같은 띄어쓴 이름도 잡는다. */
+  if (GENRE_SHORT.has(full)) return GENRE_SHORT.get(full);
+  for (const w of String(c.artist || "").split(/\s+/)) {
+    const g = GENRE_SHORT.get(gnorm(w));
+    if (g) return g;
+  }
+  const text = `${c.artist} ${c.tour} ${(c.tags || []).join(" ")}`;
+  for (const [g, re] of (typeof GENRE_KEYWORDS !== "undefined" ? GENRE_KEYWORDS : [])) if (re.test(text)) return g;
+  for (const t of c.tags || []) {
+    const g = (typeof TM_GENRE_MAP !== "undefined" ? TM_GENRE_MAP : {})[t];
+    if (g) return g;
+  }
+  return null;                                              // 미분류
+}
+
 const DAY = ["일", "월", "화", "수", "목", "금", "토"];
 const DAY_EN = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 const MS_DAY = 86400000;
 
-const state = { cat: "all", q: "", sort: "open", hidePast: true };
+const state = { cat: "all", genre: "all", q: "", sort: "open", hidePast: true };
 
 /* ── 수동 데이터(concerts.js) + 자동 수집 병합 ──────────
    자동 수집분은 두 곳에서 온다.
@@ -185,15 +220,21 @@ function matchCat(c, cat) {
   return c.category === cat;
 }
 
+const matchGenre = (c, g) => g === "all" || (g === "none" ? !genreOf(c) : genreOf(c) === g);
+
+function matchSearch(c, q) {
+  return [c.artist, c.tour, c.city, c.venue, c.country, c.vendor.name,
+          GENRE_LABEL[genreOf(c)] || "", (c.tags || []).join(" ")]
+    .join(" ").toLowerCase().includes(q);
+}
+
 function visibleList() {
   let list = EVENTS.slice();
   if (state.hidePast) list = list.filter(c => !isPast(c));
-  list = list.filter(c => matchCat(c, state.cat));
+  list = list.filter(c => matchCat(c, state.cat) && matchGenre(c, state.genre));
   if (state.q.trim()) {
     const q = state.q.trim().toLowerCase();
-    list = list.filter(c =>
-      [c.artist, c.tour, c.city, c.venue, c.country, c.vendor.name, (c.tags || []).join(" ")]
-        .join(" ").toLowerCase().includes(q));
+    list = list.filter(c => matchSearch(c, q));
   }
   const rank = c => {                       // 오픈예정 → 예매중 → 미정 → 종료
     const d = daysToOpen(c);
@@ -298,6 +339,7 @@ function cardHTML(c) {
     <div class="ev-art${poster ? " has-img" : ""}" style="${artOf(c.id)}">
       ${art}
       <span class="ev-badge ${st.tone}">${esc(st.badge)}</span>
+      ${genreOf(c) ? `<span class="ev-genre">${esc(GENRE_LABEL[genreOf(c)])}</span>` : ""}
       <span class="ev-tour">${esc(c.tour)}</span>
       <h3 class="ev-name">${esc(c.artist)}</h3>
     </div>
@@ -324,12 +366,27 @@ function cardHTML(c) {
 }
 
 function renderChips() {
-  const base = state.hidePast ? EVENTS.filter(c => !isPast(c)) : EVENTS;
+  let base = state.hidePast ? EVENTS.filter(c => !isPast(c)) : EVENTS;
+  if (state.q.trim()) { const q = state.q.trim().toLowerCase(); base = base.filter(c => matchSearch(c, q)); }
+
+  /* 각 축의 개수는 다른 축의 필터를 적용한 뒤 센다 (교차 필터 시 0건 칩을 누르는 일이 없도록) */
+  const forCat = base.filter(c => matchGenre(c, state.genre));
   document.getElementById("tabs").innerHTML = CATEGORIES.map(k => {
-    const n = base.filter(c => matchCat(c, k.key)).length;
+    const n = forCat.filter(c => matchCat(c, k.key)).length;
     return `<button class="chip" role="tab" data-cat="${k.key}" aria-selected="${state.cat === k.key}">
       ${k.label}<span class="n">${n}</span></button>`;
   }).join("");
+
+  const forGenre = base.filter(c => matchCat(c, state.cat));
+  const chip = (key, label) => {
+    const n = forGenre.filter(c => matchGenre(c, key)).length;
+    return n === 0 && key !== "all" && key !== state.genre ? ""
+      : `<button class="chip" role="tab" data-genre="${key}" aria-selected="${state.genre === key}">
+           ${label}<span class="n">${n}</span></button>`;
+  };
+  const list = (typeof GENRES !== "undefined" ? GENRES : []);
+  document.getElementById("genres").innerHTML =
+    chip("all", "전체") + list.map(g => chip(g.key, g.label)).join("") + chip("none", "미분류");
 }
 
 function renderUpNext() {
@@ -412,6 +469,10 @@ function render() {
 document.getElementById("tabs").addEventListener("click", e => {
   const b = e.target.closest(".chip");
   if (b) { state.cat = b.dataset.cat; render(); }
+});
+document.getElementById("genres").addEventListener("click", e => {
+  const b = e.target.closest(".chip");
+  if (b) { state.genre = b.dataset.genre; render(); }
 });
 document.getElementById("search").addEventListener("input", e => { state.q = e.target.value; render(); });
 document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });

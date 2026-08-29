@@ -288,3 +288,19 @@ h1,h2,h3,p{margin:0}
 }
 .ev-art.has-img.wide .ev-tour,
 .ev-art.has-img.wide .ev-name{max-width:64%}
+
+/* ── 장르 필터 ─────────────────────── */
+.chip-row-sub{border-bottom:1px solid var(--line);padding:14px 0 20px;margin-top:-1px;align-items:flex-start}
+.chip-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);padding-top:8px;flex:none;
+}
+.chips-sm .chip{padding:6px 14px;font-size:13px}
+.chips-sm .chip .n{font-size:10.5px;margin-left:6px}
+
+.ev-genre{
+  position:absolute;top:14px;left:14px;z-index:4;
+  font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.06em;
+  padding:3px 7px;color:#fff;background:rgba(12,12,14,.55);
+  border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(4px);
+}

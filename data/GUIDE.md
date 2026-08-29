@@ -32,6 +32,7 @@
   images: [                         // 공연 포스터 · 아티스트 사진. 반드시 https, 최대 2장
     "https://kopis.or.kr/upload/pfmPoster/PF_....jpg"
   ],
+  genre: "kpop",                    // 생략 가능. 보통은 data/genres.js 표가 알아서 판단합니다
   tips: "예매 팁 한두 문장",
   source: "https://www.tokyo-dome.co.jp/...",     // 정보 출처. 카드 하단에 표시됨
   tags: ["돔", "추첨제"]
@@ -81,6 +82,10 @@
   - 2장 이상이면 카드 상세에 포스터 갤러리가 생깁니다
   - **`http://` 주소는 넣지 마세요.** https 사이트에서 혼합 콘텐츠로 차단됩니다
   - 손으로 안 넣어도, 같은 공연이 자동 수집분에 있으면 그쪽 포스터를 물려받습니다
+- **장르** : `data/genres.js` 의 아티스트 표 → 제목 키워드 → Ticketmaster 장르 순으로 판단
+  - 공연 하나만 예외 처리하려면 그 항목에 `genre: "rock"` 을 직접 적으면 최우선으로 적용됩니다
+  - 보통은 **아티스트 표에 한 줄 넣는 편이 낫습니다.** 그 아티스트의 모든 공연에 적용되고
+    앞으로 자동 수집되는 공연에도 계속 적용됩니다
 - **요약 숫자, UP NEXT, 오픈 임박/카운트다운, 카테고리별 개수**
 
 ## 주요 예매처 URL
@@ -95,6 +100,21 @@
 | 싱가포르 | Ticketmaster SG `https://ticketmaster.sg/` · SISTIC `https://www.sistic.com.sg/` |
 
 `vendor.url` 은 가능하면 **해당 공연 상세/예매 페이지 URL**을 넣으세요. 카드를 클릭하면 그 주소로 바로 이동합니다.
+
+## 장르를 채우는 법
+
+장르는 `data/genres.js` 의 `ARTIST_GENRE` 표로 정해집니다. 한 줄만 넣으면 됩니다.
+
+```js
+"아티스트명": "kpop",
+```
+
+쓸 수 있는 값: `kpop` `jpop` `pop` `rock` `hiphop` `ballad` `trot` `festival` `etc`
+
+이름은 공백·기호를 무시하고 찾습니다. 4자 이상이면 부분 일치(`NELL` → `NELL'S SEASON` 도 매칭),
+2~3자면 정확히 일치하거나 한 단어로 떨어질 때만 매칭합니다(`IVE` 가 `live` 안에서 걸리지 않도록).
+
+사이트 장르 칩에서 **미분류**를 누르면 아직 안 채운 공연만 모아 볼 수 있습니다.
 
 ## 입력 후 검사
 
