@@ -11,21 +11,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 There is no package manager, no build step, no test framework, and no dependencies.
 
 ```bash
-open index.html        # run the site (works over file://, no server needed)
-node tools/check.mjs   # the only check — validates data/concerts.js, exits 1 on error
+open index.html                          # run the site (works over file://, no server needed)
+node tools/check.mjs                     # the only check — validates both data files, exits 1 on error
+node tools/collect.mjs                   # run the collector (writes data/feed.js)
+node tools/collect.mjs --only=tokyodome  # one source; --debug dumps raw responses to tools/.debug/
 ```
 
-`tools/check.mjs` is what CI runs (`.github/workflows/deploy.yml`) before deploying to GitHub Pages. Run it after any edit to `data/concerts.js`.
+`tools/check.mjs` runs in both workflows before anything is deployed. Run it after any edit to `data/concerts.js`.
+`tools/collect.mjs` needs `KOPIS_KEY` / `TICKETMASTER_KEY` in the env; without them those sources are skipped with a warning rather than failing, and Tokyo Dome still collects. Deployment and key setup are documented in `SETUP.md`.
 
 ## Hard constraints
 
 - **Zero recurring cost** is a product requirement, not an accident. No backend, no database, no paid APIs. Lodging/map/flight info is produced as *search deep links*, never fetched.
-- **No scraping of ticket vendors.** Interpark, e+, ticket pia etc. block bots and forbid automated collection; working around that requires paid proxies and breaks the cost constraint. Data is curated by hand. This decision is documented in README.md — don't quietly reverse it.
+- **No scraping of ticket vendors.** Interpark, e+, ticket pia etc. block bots and forbid automated collection. Automated collection goes through official APIs only (KOPIS, Ticketmaster Discovery), plus one venue's own public schedule page (Tokyo Dome, one request per run, no robots.txt restrictions). Never add a vendor scraper — it breaks both the cost constraint and the sites' terms.
 - **Must keep working over `file://`.** That is why `data/concerts.js` declares plain globals (`CONCERTS`, `DATA_UPDATED`) loaded via `<script>` instead of JSON + `fetch`, and why there are no ES modules in `assets/`. Converting to modules or `fetch` breaks double-click-to-open. The Pretendard webfont from jsDelivr is the only external resource; it degrades to the system Korean stack offline, so never make layout depend on it.
 
 ## Architecture
 
-Three files matter: `index.html` (static shell with fixed element IDs), `assets/app.js` (all logic), `data/concerts.js` (all content). Page order: nav → hero → stats → search/chips → UP NEXT → 오픈 임박 → card grid → 원정 가이드 → footer.
+Four files matter: `index.html` (static shell with fixed element IDs), `assets/app.js` (all logic), `data/concerts.js` (hand-curated content), `data/feed.js` (generated). Page order: nav → hero → stats → search/chips → UP NEXT → 오픈 임박 → card grid → 원정 가이드 → footer.
+
+**Two data sources, one merge.** `data/concerts.js` is authored by hand; `data/feed.js` is overwritten by `tools/collect.mjs` and must never be edited by hand. `app.js` merges them once at load into `EVENTS`, and every render function reads `EVENTS`, not `CONCERTS`. Manual entries always win: a feed entry is dropped if its `id`, its normalized `artist|firstDate`, **or** its `venue|firstDate` already exists in `CONCERTS` — the venue key exists because the same show appears under different spellings (`후지이 카제 (藤井風)` vs `Fujii Kaze`). Feed entries carry `auto: true` and `sourceName`, which render as an `AUTO` chip in the card footer.
+
+**Collection runs hourly in CI.** `.github/workflows/collect.yml` (cron `7 * * * *`) runs the collector, validates, and commits `data/feed.js` **only when it changed** — the timestamp line is excluded from that comparison so an unchanged run produces no commit and no deploy. Because a `GITHUB_TOKEN` push does not trigger other workflows, that job explicitly calls `deploy.yml` via `workflow_call` instead of relying on `on: push`; `deploy.yml` therefore has to keep its `workflow_call` trigger.
+
+**Each collector source is independent.** A source that throws logs a warning and the others still produce a feed; only an all-sources failure exits non-zero and leaves the previous `data/feed.js` untouched. KOPIS detail lookups are cached against the previous feed by id, so a run only pays for genuinely new shows.
 
 **Rendering** is a full re-render: `render()` rebuilds `#grid` and `#tabs` from `innerHTML`, driven by the module-level `state` object (`cat`, `q`, `sort`, `hidePast`). Every event handler mutates `state` then calls `render()`. `renderUpNext()` and `renderSummary()` run once at init. All interpolated data goes through `esc()`.
 
@@ -53,6 +62,6 @@ Three files matter: `index.html` (static shell with fixed element IDs), `assets/
 
 ## Editing data
 
-`data/concerts.js` is the only file that changes during normal operation. Bump `DATA_UPDATED` (YYYY-MM-DD) whenever entries change — it is shown in the hero eyebrow. Field-by-field rules and vendor URLs are in `data/GUIDE.md`.
+`data/concerts.js` is the only file a human edits during normal operation; `data/feed.js` is machine-owned. Bump `DATA_UPDATED` (YYYY-MM-DD) whenever entries change — it is shown in the hero eyebrow. Field-by-field rules and vendor URLs are in `data/GUIDE.md`.
 
 The entries in the file are **real concerts** collected from public sources on 2026-08-29; each carries a `source` URL rendered at the bottom of its card. Never add or edit a concert from memory — dates, prices, venues, and ticket-open times must come from the user or from a source you actually fetched, and the `source` field must point at it. When a fact isn't in the source, write "예매처 공지 참고" rather than guessing. Tokyo Dome entries come from the venue's own schedule page, which is the most authoritative source available for Japan.
