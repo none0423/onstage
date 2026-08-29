@@ -1,0 +1,21 @@
+# Cloudflare Worker — 티켓 정보 수집 크론
+#   npx wrangler kv namespace create FEED     → 출력된 id 를 아래 id 에 붙여넣기
+#   npx wrangler secret put TICKETMASTER_KEY
+#   npx wrangler secret put KOPIS_KEY
+#   npx wrangler secret put COLLECT_TOKEN     (수동 실행용, 선택)
+#   npx wrangler deploy
+
+name = "onstage-collector"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# 매시 정각. Cloudflare 크론은 GitHub 과 달리 거의 정시에 실행됩니다.
+[triggers]
+crons = ["0 * * * *"]
+
+[[kv_namespaces]]
+binding = "FEED"
+id = "PUT_YOUR_KV_NAMESPACE_ID_HERE"
+
+[observability]
+enabled = true

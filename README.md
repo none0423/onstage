@@ -23,6 +23,7 @@ open index.html
 | 호스팅 | 정적 파일 → GitHub Pages 또는 Cloudflare Pages | **0원** |
 | 서버 / DB | 없음 (데이터가 `data/concerts.js` 한 파일) | **0원** |
 | 항공·숙박·지도 정보 | 유료 API 대신 **검색 딥링크 생성** | **0원** |
+| 수집 크론 | Cloudflare Workers + KV 무료 티어 | **0원** |
 | 배포 자동화 | GitHub Actions 무료 티어 (퍼블릭 저장소 무제한) | **0원** |
 | 사용자 관리 | 10명 이하 → 로그인 없이 URL만 공유 | **0원** |
 
@@ -33,8 +34,9 @@ GitHub 저장소 만들기 → Pages 켜기 → API 키 발급 → Secrets 등�
 
 요약하면,
 
-- `.github/workflows/collect.yml` 이 **매시 07분**에 KOPIS·Ticketmaster·도쿄돔에서 정보를 모아 `data/feed.js` 를 갱신
-- 내용이 바뀌었을 때만 커밋하고, 그때만 Pages를 재배포
+- **Cloudflare Worker 크론이 매시 정각**에 KOPIS·Ticketmaster·도쿄돔에서 정보를 모아 Workers KV에 저장
+- 사이트가 페이지를 열 때 `/feed.json` 을 읽어가므로 **재배포 없이** 최신 데이터가 반영됨
+- Worker에 못 닿으면 저장소의 `data/feed.js`(예비본)로 조용히 대체
 - `data/concerts.js`(손으로 관리)가 자동 수집분보다 항상 우선
 
 ## 배포 (수동으로 할 경우 둘 중 하나만)
@@ -107,11 +109,17 @@ node tools/check.mjs
 
 ```
 index.html            화면 구조
+data/config.js        Worker 엔드포인트 주소 (비우면 예비 데이터만 사용)
 assets/styles.css     디자인 토큰 + 레이아웃
 assets/app.js         필터·정렬·상태 계산·카드 아트·숙소 링크 생성
 data/concerts.js      ← 공연 데이터 (여기만 고치면 됨)
 data/GUIDE.md         입력 가이드
+data/feed.js          자동 수집 예비본 (Worker 미배포·오프라인용)
+tools/collect.mjs     로컬 수집 CLI
 tools/check.mjs       데이터 형식 검사기
+worker/src/collect.js 수집 로직 (Worker·CLI 공용)
+worker/src/index.js   Cloudflare Worker — 크론 + /feed.json
+worker/wrangler.toml  Worker 설정 (크론 주기·KV)
 .github/workflows/    GitHub Pages 자동 배포
 ```
 

@@ -46,17 +46,25 @@ const MS_DAY = 86400000;
 
 const state = { cat: "all", q: "", sort: "open", hidePast: true };
 
-/* ── 수동 데이터(concerts.js) + 자동 수집(feed.js) 병합 ──
-   같은 공연이 양쪽에 있으면 손으로 쓴 쪽이 이긴다. */
-const FEED_LIST = typeof FEED !== "undefined" ? FEED : [];
-const EVENTS = (() => {
+/* ── 수동 데이터(concerts.js) + 자동 수집 병합 ──────────
+   자동 수집분은 두 곳에서 온다.
+     1) data/feed.js  — 저장소에 들어 있는 예비 데이터 (오프라인에서도 동작)
+     2) Cloudflare Worker /feed.json — 매시 갱신되는 최신 데이터 (있으면 이쪽 우선)
+   같은 공연이 겹치면 손으로 쓴 concerts.js 가 언제나 이긴다. */
+let FEED_LIST = typeof FEED !== "undefined" ? FEED : [];
+let FEED_AT = typeof FEED_UPDATED !== "undefined" ? FEED_UPDATED : null;
+let FEED_LIVE = false;
+
+function mergeEvents(feed) {
   const norm = s => String(s).toLowerCase().replace(/[\s.\-_'"()\[\]]/g, "");
   /* 아티스트 표기가 달라도(후지이 카제 / Fujii Kaze) 같은 공연장·같은 날이면 같은 공연 */
   const keys = c => [`a:${norm(c.artist)}|${c.dates[0]}`, `v:${norm(c.venue)}|${c.dates[0]}`];
   const ids = new Set(CONCERTS.map(c => c.id));
   const seen = new Set(CONCERTS.flatMap(keys));
-  return [...CONCERTS, ...FEED_LIST.filter(c => !ids.has(c.id) && !keys(c).some(k => seen.has(k)))];
-})();
+  return [...CONCERTS, ...feed.filter(c => c && c.dates?.length && c.vendor?.url
+    && !ids.has(c.id) && !keys(c).some(k => seen.has(k)))];
+}
+let EVENTS = mergeEvents(FEED_LIST);
 
 /* ── 날짜 유틸 ───────────────────────────────── */
 const startOfToday = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
@@ -369,15 +377,47 @@ function openVendor(e) {
 document.getElementById("grid").addEventListener("click", openVendor);
 document.getElementById("briefing-list").addEventListener("click", openVendor);
 
-/* ── 초기화 ─────────────────────────────────── */
-(function init() {
-  document.getElementById("data-updated").textContent = DATA_UPDATED.replace(/-/g, ".");
-  const fu = document.getElementById("feed-updated");
-  if (typeof FEED_UPDATED !== "undefined" && FEED_LIST.length) {
-    const d = new Date(FEED_UPDATED);
-    fu.textContent = `AUTO ${d2(d.getMonth() + 1)}.${d2(d.getDate())} ${d2(d.getHours())}:${d2(d.getMinutes())} 수집 ${FEED_LIST.length}건`;
-  } else fu.remove();
+function paintFeedLabel() {
+  const el = document.getElementById("feed-updated");
+  if (!el) return;
+  if (!FEED_LIST.length || !FEED_AT) { el.textContent = ""; return; }
+  const d = new Date(FEED_AT);
+  el.textContent = `${FEED_LIVE ? "LIVE" : "AUTO"} ${d2(d.getMonth() + 1)}.${d2(d.getDate())} `
+    + `${d2(d.getHours())}:${d2(d.getMinutes())} 수집 ${FEED_LIST.length}건`;
+}
+
+function repaint() {
+  EVENTS = mergeEvents(FEED_LIST);
+  paintFeedLabel();
   renderUpNext();
   renderSummary();
   render();
+}
+
+/* Cloudflare Worker 에서 최신 수집분을 받아온다. 실패하면 조용히 예비 데이터를 쓴다. */
+async function refreshLiveFeed() {
+  const base = (typeof FEED_ENDPOINT !== "undefined" ? FEED_ENDPOINT : "").replace(/\/+$/, "");
+  if (!base) return;
+  try {
+    const res = await fetch(`${base}/feed.json`, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (!Array.isArray(data.events) || !data.events.length) return;
+    FEED_LIST = data.events;
+    FEED_AT = data.updated || FEED_AT;
+    FEED_LIVE = true;
+    repaint();
+  } catch (e) {
+    console.warn("실시간 피드를 못 받아 예비 데이터를 사용합니다:", e.message);
+  }
+}
+
+/* ── 초기화 ─────────────────────────────────── */
+(function init() {
+  document.getElementById("data-updated").textContent = DATA_UPDATED.replace(/-/g, ".");
+  paintFeedLabel();
+  renderUpNext();
+  renderSummary();
+  render();
+  refreshLiveFeed();
 })();

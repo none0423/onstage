@@ -13,12 +13,14 @@ There is no package manager, no build step, no test framework, and no dependenci
 ```bash
 open index.html                          # run the site (works over file://, no server needed)
 node tools/check.mjs                     # the only check — validates both data files, exits 1 on error
-node tools/collect.mjs                   # run the collector (writes data/feed.js)
-node tools/collect.mjs --only=tokyodome  # one source; --debug dumps raw responses to tools/.debug/
+node tools/collect.mjs                   # run the collector locally (writes data/feed.js)
+node tools/collect.mjs --only=tokyodome  # one source
+cd worker && npx wrangler deploy         # deploy the cron Worker
+cd worker && npx wrangler tail           # live Worker logs
 ```
 
-`tools/check.mjs` runs in both workflows before anything is deployed. Run it after any edit to `data/concerts.js`.
-`tools/collect.mjs` needs `KOPIS_KEY` / `TICKETMASTER_KEY` in the env; without them those sources are skipped with a warning rather than failing, and Tokyo Dome still collects. Deployment and key setup are documented in `SETUP.md`.
+`tools/check.mjs` runs in the deploy workflow. Run it after any edit to `data/concerts.js`.
+Collection needs `KOPIS_KEY` / `TICKETMASTER_KEY` (env locally, Wrangler secrets in the Worker); without them those sources are skipped with a warning rather than failing, and Tokyo Dome still collects. Deployment and key setup are documented in `SETUP.md`.
 
 ## Hard constraints
 
@@ -32,9 +34,13 @@ Four files matter: `index.html` (static shell with fixed element IDs), `assets/a
 
 **Two data sources, one merge.** `data/concerts.js` is authored by hand; `data/feed.js` is overwritten by `tools/collect.mjs` and must never be edited by hand. `app.js` merges them once at load into `EVENTS`, and every render function reads `EVENTS`, not `CONCERTS`. Manual entries always win: a feed entry is dropped if its `id`, its normalized `artist|firstDate`, **or** its `venue|firstDate` already exists in `CONCERTS` — the venue key exists because the same show appears under different spellings (`후지이 카제 (藤井風)` vs `Fujii Kaze`). Feed entries carry `auto: true` and `sourceName`, which render as an `AUTO` chip in the card footer.
 
-**Collection runs hourly in CI.** `.github/workflows/collect.yml` (cron `7 * * * *`) runs the collector, validates, and commits `data/feed.js` **only when it changed** — the timestamp line is excluded from that comparison so an unchanged run produces no commit and no deploy. Because a `GITHUB_TOKEN` push does not trigger other workflows, that job explicitly calls `deploy.yml` via `workflow_call` instead of relying on `on: push`; `deploy.yml` therefore has to keep its `workflow_call` trigger.
+**Collection runs hourly on Cloudflare Workers, not in CI.** `worker/src/index.js` has the `scheduled` handler (cron `0 * * * *` in `worker/wrangler.toml`), stores the result in Workers KV, and serves it at `GET /feed.json` with permissive CORS. The site fetches that at load, so **fresh data needs no redeploy** — GitHub Pages only rebuilds when the design or `data/concerts.js` changes. `data/config.js` holds the Worker URL; an empty string disables the fetch and the site runs on the bundled `data/feed.js` alone.
 
-**Each collector source is independent.** A source that throws logs a warning and the others still produce a feed; only an all-sources failure exits non-zero and leaves the previous `data/feed.js` untouched. KOPIS detail lookups are cached against the previous feed by id, so a run only pays for genuinely new shows.
+**Free-tier limits shaped the collector.** Workers Free allows **10 ms CPU and 50 subrequests per invocation**. Parsing is therefore `indexOf`/`split` with pre-compiled module-level regexes (measured ~0.4 ms for Tokyo Dome's 233 KB page), and `MAX_SUBREQUESTS = 45` hard-caps requests — KOPIS detail lookups stop when the budget runs low and resume next hour. Never move regex construction inside a loop, and never raise the cap without checking the plan.
+
+**`worker/src/collect.js` is the single collection implementation**, shared by the Worker and `tools/collect.mjs`. It touches no platform APIs beyond `fetch`, so it must stay free of `node:*` imports. `worker/package.json` (`type: module`) is what makes Node treat it as ESM.
+
+**Each collector source is independent.** A source that throws is recorded in `errors` and its *previous* entries are carried over, so one broken parser can't wipe a category; an all-sources failure leaves KV (and `data/feed.js`) untouched rather than publishing an empty feed.
 
 **Rendering** is a full re-render: `render()` rebuilds `#grid` and `#tabs` from `innerHTML`, driven by the module-level `state` object (`cat`, `q`, `sort`, `hidePast`). Every event handler mutates `state` then calls `render()`. `renderUpNext()` and `renderSummary()` run once at init. All interpolated data goes through `esc()`.
 
