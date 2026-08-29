@@ -100,15 +100,27 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const errors = [];
   let used = 0;
 
-  async function get(url, { json: asJson = false } = {}) {
-    if (used >= MAX_SUBREQUESTS) throw new Error("서브리퀘스트 한도 도달 — 다음 실행으로 이월");
-    used++;
-    const res = await fetch(url, {
-      headers: { "User-Agent": UA, Accept: asJson ? "application/json" : "*/*" },
-      signal: AbortSignal.timeout(20000)
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status} — ${url.replace(/(service|apikey)=[^&]+/, "$1=***")}`);
-    return asJson ? res.json() : res.text();
+  const safeUrl = u => String(u).replace(/(service|apikey)=[^&]+/, "$1=***");
+
+  /* retry: 일시적 실패(4xx/5xx·네트워크)에 한해 한 번 더 시도한다.
+     KOPIS 상세는 같은 요청이 Worker 에서 간헐적으로 400 을 반환하는 일이 있다. */
+  async function get(url, { json: asJson = false, retry = 0 } = {}) {
+    for (let attempt = 0; ; attempt++) {
+      if (used >= MAX_SUBREQUESTS) throw new Error("서브리퀘스트 한도 도달 — 다음 실행으로 이월");
+      used++;
+      try {
+        const res = await fetch(url, {
+          headers: { "User-Agent": UA, Accept: asJson ? "application/json" : "*/*" },
+          signal: AbortSignal.timeout(20000)
+        });
+        if (res.ok) return asJson ? res.json() : res.text();
+        const body = (await res.text().catch(() => "")).replace(/\s+/g, " ").slice(0, 160);
+        throw new Error(`HTTP ${res.status} — ${safeUrl(url)}${body ? ` · ${body}` : ""}`);
+      } catch (e) {
+        if (attempt >= retry) throw e;
+        await new Promise(r => setTimeout(r, 400));
+      }
+    }
   }
 
   /* ── 1. KOPIS 오픈API (국내·내한) ───────────── */
@@ -189,9 +201,10 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
          다음 실행에서 다시 시도해야 하므로 '캐시에 있음'만으로 건너뛰면 안 된다. */
       let detailed = cached?.kopisDetail === true;
 
-      if (!detailed && used < MAX_SUBREQUESTS - RESERVED_FOR_LATER_SOURCES) {
+      /* 재시도가 요청 1개를 더 쓸 수 있으므로 여유를 하나 더 본다 */
+      if (!detailed && used < MAX_SUBREQUESTS - RESERVED_FOR_LATER_SOURCES - 1) {
         try {
-          const xml = await get(`${KOPIS}/${r.mt20id}?service=${keys.kopis}`);
+          const xml = await get(`${KOPIS}/${r.mt20id}?service=${keys.kopis}`, { retry: 1 });
           /* 응답 최외곽이 <dbs> 라서 통째로 파싱하면 안 된다. <db> 를 먼저 자른다. */
           const db = slices(xml, "db")[0] || "";
           price = pick(db, "pcseguidance") || "예매처 공지 참고";
@@ -238,8 +251,10 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         dates,
         doorsNote: doorsNote || "예매처 공지 참고",
         ticketOpen: null,
-        /* KOPIS 는 오픈 시각을 주지 않는다. 예매 링크가 있으면 이미 판매 중으로 본다. */
-        ticketStatus: r.prfstate === "공연완료" ? "종료" : vendor?.url ? "판매중" : "예정",
+        /* KOPIS 는 판매가 시작된 공연을 등록하고 오픈 시각은 주지 않는다.
+           공연완료가 아니면 판매중으로 본다. (예전에는 vendor 유무로 판단했는데,
+           상세를 못 받은 항목도 대체 vendor 가 채워져 사실상 늘 판매중이 되었다.) */
+        ticketStatus: r.prfstate === "공연완료" ? "종료" : "판매중",
         price: price || "예매처 공지 참고",
         vendor: vendor?.url ? vendor
               : { name: "NOL 티켓", url: `https://tickets.interpark.com/search?keyword=${encodeURIComponent(r.prfnm)}` },
