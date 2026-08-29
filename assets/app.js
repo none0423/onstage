@@ -236,7 +236,8 @@ function cardHTML(c) {
   const art = poster ? `
       <img class="ev-blur" src="${esc(poster)}" alt="" aria-hidden="true" loading="lazy"
            onerror="this.remove()">
-      <img class="ev-poster" src="${esc(poster)}" alt="${esc(c.artist)} 공연 포스터" loading="lazy" decoding="async"
+      <img class="ev-poster" src="${esc(poster)}" alt="${esc(c.artist)} 공연 이미지" loading="lazy" decoding="async"
+           onload="this.parentElement.classList.toggle('wide', this.naturalWidth > this.naturalHeight)"
            onerror="this.parentElement.classList.remove('has-img');this.remove()">` : "";
 
 
@@ -366,10 +367,22 @@ function renderSummary() {
   set("sum-total", live.filter(c => daysToShow(c) <= 30).length);   // 30일 내 공연
 
   /* 오픈 임박 건이 있으면 그것을, 없으면 가장 가까운 공연 카운트다운을 보여준다 */
-  const opens = live.filter(isSoon).sort((a, b) => daysToOpen(a) - daysToOpen(b)).slice(0, 6);
+  /* 같은 아티스트가 같은 시각에 여러 회차를 열면 목록에서는 한 줄로 묶는다 */
+  const opensSeen = new Set();
+  const opens = live.filter(isSoon)
+    .sort((a, b) => daysToOpen(a) - daysToOpen(b) || a.dates[0].localeCompare(b.dates[0]))
+    .filter(c => {
+      const k = `${c.artist}|${c.ticketOpen}`;
+      return opensSeen.has(k) ? false : opensSeen.add(k);
+    })
+    .slice(0, 6);
   const openMode = opens.length > 0;
   const rows = openMode
-    ? opens.map(c => ({ c, d: daysToOpen(c), text: `${fmtOpen(c.ticketOpen)} 오픈 · ${c.vendor.name} · ${c.city} ${c.venue}` }))
+    ? opens.map(c => {
+        const n = live.filter(x => x.artist === c.artist && x.ticketOpen === c.ticketOpen).length;
+        return { c, d: daysToOpen(c),
+          text: `${fmtOpen(c.ticketOpen)} 오픈 · ${c.vendor.name} · ${c.city} ${c.venue}${n > 1 ? ` 외 ${n - 1}회차` : ""}` };
+      })
     : live.sort((a, b) => nextDate(a).localeCompare(nextDate(b))).slice(0, 6)
         .map(c => ({ c, d: daysToShow(c), text: `${fmtDate(nextDate(c))} · ${c.city} ${c.venue} · ${c.vendor.name}` }));
 

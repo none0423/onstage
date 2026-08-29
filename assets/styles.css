@@ -276,3 +276,15 @@ h1,h2,h3,p{margin:0}
   width:96px;aspect-ratio:3/4;object-fit:cover;
   border:1px solid var(--line);background:var(--paper);
 }
+
+/* 가로형 이미지(Ticketmaster 등)는 세로 포스터처럼 자르지 않고 패널 전체를 채운다 */
+.ev-art.has-img.wide .ev-poster{
+  width:100%;object-position:center 28%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 30%,#000 62%);
+          mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 30%,#000 62%);
+}
+.ev-art.has-img.wide::after{
+  background:linear-gradient(90deg,rgba(10,10,12,.86) 0%,rgba(10,10,12,.55) 42%,rgba(10,10,12,.1) 72%);
+}
+.ev-art.has-img.wide .ev-tour,
+.ev-art.has-img.wide .ev-name{max-width:64%}

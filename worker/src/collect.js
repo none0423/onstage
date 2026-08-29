@@ -282,6 +282,11 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
           const [koCountry, koCity] = TM_KO[cc] || [cc, cc];
           const pr = ev.priceRanges?.[0];
           const st = ev.dates?.status?.code;
+          if (st === "cancelled") continue;
+          /* TM 은 '아직 판매 시작 전' 도 offsale 로 준다. 오픈 시각이 미래면 예정으로 봐야
+             '예매 마감' 으로 잘못 표시되지 않는다. */
+          const openAt = ev.sales?.public?.startDateTime || null;
+          const notYet = openAt && new Date(openAt) > new Date();
           out.push({
             id: `tm-${ev.id}`, auto: true, sourceName: "Ticketmaster",
             artist: ev._embedded?.attractions?.[0]?.name || ev.name,
@@ -291,8 +296,10 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
             mapQuery: [v.name, v.city?.name].filter(Boolean).join(" "),
             dates: [start],
             doorsNote: ev.dates?.start?.localTime ? `${ev.dates.start.localTime.slice(0, 5)} 시작` : "예매처 공지 참고",
-            ticketOpen: ev.sales?.public?.startDateTime || null,   // ← 티켓 오픈 시각
-            ticketStatus: st === "onsale" ? "판매중" : st === "offsale" ? "종료" : "예정",
+            ticketOpen: openAt,                                    // ← 티켓 오픈 시각 (UTC)
+            ticketStatus: notYet ? "예정"
+                        : st === "onsale" ? "판매중"
+                        : st === "offsale" ? "종료" : "예정",
             price: pr ? `${pr.currency} ${pr.min} ~ ${pr.max}` : "예매처 공지 참고",
             images: pickTmImages(ev.images),
             vendor: { name: `Ticketmaster ${cc}`, url: ev.url },
