@@ -10,6 +10,14 @@
 const UA = "onstage-collector/1.0 (personal concert dashboard; 10 users)";
 const MAX_SUBREQUESTS = 45;
 
+/* 소스 우선순위 — 앞일수록 먼저 실행되어 요청 예산을 먼저 쓰고,
+   같은 공연이 여러 소스에 있으면 앞쪽 소스의 데이터가 남는다. */
+const SOURCE_ORDER = ["kopis", "tokyodome", "ticketmaster"];
+const SOURCE_PREFIX = { kopis: "kopis-", tokyodome: "td-", ticketmaster: "tm-" };
+/* KOPIS 가 먼저 돌지만 뒤 소스가 굶지 않도록 요청을 남겨 둔다.
+   도쿄돔 1개 + Ticketmaster 최대 4개 + 여유 1개. */
+const RESERVED_FOR_LATER_SOURCES = 6;
+
 /* ── 공통 유틸 ───────────────────────────────── */
 const d2 = n => String(n).padStart(2, "0");
 const isoOf = d => `${d.getFullYear()}-${d2(d.getMonth() + 1)}-${d2(d.getDate())}`;
@@ -181,7 +189,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
          다음 실행에서 다시 시도해야 하므로 '캐시에 있음'만으로 건너뛰면 안 된다. */
       let detailed = cached?.kopisDetail === true;
 
-      if (!detailed && used < MAX_SUBREQUESTS - 2) {
+      if (!detailed && used < MAX_SUBREQUESTS - RESERVED_FOR_LATER_SOURCES) {
         try {
           const xml = await get(`${KOPIS}/${r.mt20id}?service=${keys.kopis}`);
           /* 응답 최외곽이 <dbs> 라서 통째로 파싱하면 안 된다. <db> 를 먼저 자른다. */
@@ -397,13 +405,13 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   }
 
   /* ── 실행 · 병합 ────────────────────────────── */
-  const SOURCES = { tokyodome, ticketmaster, kopis };   // 요청이 적은 순서 = 한도에 안전
+  const SOURCES = { kopis, tokyodome, ticketmaster };
   let all = [];
-  for (const [name, fn] of Object.entries(SOURCES)) {
+  for (const name of SOURCE_ORDER) {
     if (only && only !== name) continue;
     try {
       log(` → ${name}`);
-      all.push(...await fn());
+      all.push(...await SOURCES[name]());
     } catch (e) {
       errors.push(`${name}: ${e.message}`);
       log(`⚠️  ${name} 실패: ${e.message}`);
@@ -412,7 +420,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
 
   /* 한 소스만 돌린 경우, 나머지 소스의 이전 결과는 유지 */
   if (only) {
-    const prefix = { kopis: "kopis-", ticketmaster: "tm-", tokyodome: "td-" }[only];
+    const prefix = SOURCE_PREFIX[only];
     all = [...previous.filter(c => !c.id.startsWith(prefix)), ...all];
   }
   /* 실패한 소스가 있으면 그 소스의 이전 결과를 살려 둔다 */
@@ -421,11 +429,33 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     all = [...previous.filter(c => !got.has(c.id.split("-")[0])), ...all];
   }
 
+  /* 소스 간 중복 제거 — 같은 공연이 두 소스에 잡히면 우선순위가 높은 쪽만 남긴다.
+     (예: 한국 아티스트의 해외 공연이 KOPIS 해외 등록분과 Ticketmaster 양쪽에 있는 경우)
+
+     같은 소스 안에서는 절대 합치지 않는다. KOPIS 는 올림픽공원처럼 여러 홀을 한 이름으로
+     주기 때문에, 공연장·날짜로 묶으면 같은 날 다른 공연이 지워진다(전유진/박지현 사례). */
+  const srcOf = id => SOURCE_ORDER.find(n => id.startsWith(SOURCE_PREFIX[n])) || "?";
+  const rankOfId = id => {
+    const i = SOURCE_ORDER.indexOf(srcOf(id));
+    return i < 0 ? 99 : i;
+  };
+  const norm = v => String(v || "").toLowerCase().replace(/[\s.\-_'"()\[\]]/g, "");
+
   const today = todayISO();
-  const seen = new Set();
+  const seenId = new Set();
+  const claimed = new Map();                                  // 아티스트|날짜 → 선점한 소스
   const events = all
     .filter(c => c.dates?.length && c.dates[c.dates.length - 1] >= today)
-    .filter(c => (seen.has(c.id) ? false : seen.add(c.id)))
+    .sort((a, b) => rankOfId(a.id) - rankOfId(b.id))          // 우선순위 높은 소스가 먼저 선점
+    .filter(c => {
+      if (seenId.has(c.id)) return false;
+      const key = `${norm(c.artist)}|${c.dates[0]}`;
+      const owner = claimed.get(key);
+      if (owner && owner !== srcOf(c.id)) return false;        // 다른 소스가 이미 가진 공연
+      claimed.set(key, srcOf(c.id));
+      seenId.add(c.id);
+      return true;
+    })
     .sort((a, b) => a.dates[0].localeCompare(b.dates[0]));
 
   stats.subrequests = used;

@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-08-29T05:27:55.056Z";
+const FEED_UPDATED = "2026-08-29T05:36:39.892Z";
 
 const FEED = [
   {
@@ -5641,66 +5641,6 @@ const FEED = [
     "tags": []
   },
   {
-    "id": "td-2026-12-05-YOASOBI",
-    "auto": true,
-    "sourceName": "도쿄돔 공식",
-    "artist": "YOASOBI",
-    "tour": "ASIA 10-CITY DOME & STADIUM TOUR 2026-2027 “超惑星”",
-    "category": "japan",
-    "country": "일본",
-    "city": "도쿄",
-    "venue": "도쿄돔",
-    "mapQuery": "東京ドーム",
-    "dates": [
-      "2026-12-05",
-      "2026-12-06"
-    ],
-    "doorsNote": "開場 15:30／開演 18:00",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
-    },
-    "otherVendors": [
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "스이도바시 (水道橋)",
-          "note": "도보 3분 · JR 주오소부선"
-        },
-        {
-          "name": "이다바시·코라쿠엔 (飯田橋)",
-          "note": "도보 10분 · 지하철 4개 노선"
-        },
-        {
-          "name": "아키하바라 (秋葉原)",
-          "note": "JR 3정거장 · 숙소 선택지 많음"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": [
-      "돔"
-    ]
-  },
-  {
     "id": "kopis-PF298220",
     "auto": true,
     "sourceName": "KOPIS",
@@ -5808,6 +5748,66 @@ const FEED = [
     ],
     "source": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296039",
     "tags": []
+  },
+  {
+    "id": "td-2026-12-05-YOASOBI",
+    "auto": true,
+    "sourceName": "도쿄돔 공식",
+    "artist": "YOASOBI",
+    "tour": "ASIA 10-CITY DOME & STADIUM TOUR 2026-2027 “超惑星”",
+    "category": "japan",
+    "country": "일본",
+    "city": "도쿄",
+    "venue": "도쿄돔",
+    "mapQuery": "東京ドーム",
+    "dates": [
+      "2026-12-05",
+      "2026-12-06"
+    ],
+    "doorsNote": "開場 15:30／開演 18:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "이플러스 (e+)",
+      "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
+    },
+    "otherVendors": [
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "스이도바시 (水道橋)",
+          "note": "도보 3분 · JR 주오소부선"
+        },
+        {
+          "name": "이다바시·코라쿠엔 (飯田橋)",
+          "note": "도보 10분 · 지하철 4개 노선"
+        },
+        {
+          "name": "아키하바라 (秋葉原)",
+          "note": "JR 3정거장 · 숙소 선택지 많음"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
+    "tags": [
+      "돔"
+    ]
   },
   {
     "id": "kopis-PF295528",
@@ -6785,6 +6785,42 @@ const FEED = [
     ]
   },
   {
+    "id": "kopis-PF298279",
+    "auto": true,
+    "sourceName": "KOPIS",
+    "kopisDetail": true,
+    "period": false,
+    "artist": "마룬5",
+    "tour": "내한공연",
+    "category": "visit",
+    "country": "대한민국",
+    "city": "경기",
+    "venue": "킨텍스",
+    "mapQuery": "킨텍스",
+    "dates": [
+      "2027-01-27"
+    ],
+    "doorsNote": "수요일(20:00)",
+    "ticketOpen": null,
+    "ticketStatus": "판매중",
+    "price": "EARLY ENTRY PACKAGE 350,000원, LOVE IS LIKE VIP PACKAGE 425,000원, 스탠딩 P 167,000원, 스탠딩 R 143,000원, 지정석 P 242,000원, 지정석 R 220,000원, 지정석 S 187,000원, 지정석 A 154,000원, 지정석 B 132,000원",
+    "vendor": {
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011315"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "images": [
+      "https://kopis.or.kr/upload/pfmPoster/PF_PF298279_260812_100446.gif"
+    ],
+    "source": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298279",
+    "tags": []
+  },
+  {
     "id": "td-2027-01-27-BrunoMarsTheRomantic",
     "auto": true,
     "sourceName": "도쿄돔 공식",
@@ -6843,42 +6879,6 @@ const FEED = [
     "tags": [
       "돔"
     ]
-  },
-  {
-    "id": "kopis-PF298279",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": true,
-    "period": false,
-    "artist": "마룬5",
-    "tour": "내한공연",
-    "category": "visit",
-    "country": "대한민국",
-    "city": "경기",
-    "venue": "킨텍스",
-    "mapQuery": "킨텍스",
-    "dates": [
-      "2027-01-27"
-    ],
-    "doorsNote": "수요일(20:00)",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "EARLY ENTRY PACKAGE 350,000원, LOVE IS LIKE VIP PACKAGE 425,000원, 스탠딩 P 167,000원, 스탠딩 R 143,000원, 지정석 P 242,000원, 지정석 R 220,000원, 지정석 S 187,000원, 지정석 A 154,000원, 지정석 B 132,000원",
-    "vendor": {
-      "name": "놀유니버스",
-      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011315"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF298279_260812_100446.gif"
-    ],
-    "source": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298279",
-    "tags": []
   },
   {
     "id": "td-2027-01-30-Maroon5",
