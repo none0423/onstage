@@ -61,7 +61,7 @@ Four files matter: `index.html` (static shell with fixed element IDs), `assets/a
 | Status badge text/tone, "공연 종료" | `statusOf()` / `daysToOpen()` / `isPast()` from `dates` + `ticketOpen` + today |
 | Card art panel gradient | `artOf(id)` — hash of `id` picks from the `ART` palette, so **changing an id changes the card's color** |
 | Country code in the mono footer (`JP`, `SG`) | `COUNTRY_CODE` map in app.js; add an entry when adding a country |
-| Flight search links + the suggested trip dates | `flightPlan()` — skipped for `country: "대한민국"` and for any `city` missing from the `AIRPORT` map; departs the day before the first show and returns the day after the last |
+| Flight search links + the suggested trip dates | `flightPlan()` — skipped only for `country: "대한민국"`; departs the day before the first show and returns the day after the last. `airportFor()` resolves the city case-insensitively against `AIRPORT`, which carries **both Korean and English keys** because KOPIS says 싱가포르 and Ticketmaster says `Singapore`, then falls back to `COUNTRY_AIRPORT` for entries whose city is unknown or a country name. Rendered on the card face, not inside the details toggle. |
 | Card artwork | `images[0]` renders as a poster on the right of the 16:9 panel over a blurred copy of itself; absent or failed images fall back to the `artOf(id)` gradient via an `onerror` that strips `.has-img` |
 | Lodging search links per area | `stayAreas()` from `stay.areas`, preferring the parenthesised local-language name (`스이도바시 (水道橋)` → searches `水道橋`) |
 | Venue map link | `mapLink()` from `mapQuery` (falls back to `venue` + `city`) |

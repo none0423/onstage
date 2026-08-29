@@ -21,6 +21,10 @@ const GENRE_KEYS = new Set(
   (new Function(readFileSync(join(root, "data/genres.js"), "utf8") + "; return GENRES;")() || [])
     .map(g => g.key));   // 'soon' 은 가상 필터라 데이터 값이 아니다
 /* app.js 의 AIRPORT 맵에 등록된 도시 — 해외 공연의 항공권 블록 생성 여부를 함께 검사 */
+const COUNTRIES = new Set(
+  [...(readFileSync(join(root, "assets/app.js"), "utf8")
+    .match(/const COUNTRY_AIRPORT = \{([\s\S]*?)\};/) || [, ""])[1]
+    .matchAll(/"([^"]+)":\s*"[A-Z]{3}"/g)].map(m => m[1]));
 const AIRPORTS = new Set(
   (readFileSync(join(root, "assets/app.js"), "utf8")
     .match(/const AIRPORT = \{([\s\S]*?)\};/) || [, ""])[1]
@@ -33,6 +37,7 @@ const AIRPORTS = new Set(
 const STATUS = ["예정", "판매중", "매진", "종료"];
 const errors = [], warns = [], ids = new Set();
 let noImage = 0;
+const noAirport = new Set();
 
 for (const [i, c] of CONCERTS.entries()) {
   const at = `[${i}] ${c.artist ?? "(artist 없음)"}`;
@@ -80,6 +85,7 @@ for (const [i, c] of CONCERTS.entries()) {
 
 if (!/^\d{4}-\d{2}-\d{2}$/.test(DATA_UPDATED || "")) errors.push("DATA_UPDATED 형식 오류 (YYYY-MM-DD)");
 /* 이미지는 자동 수집분에서 물려받을 수 있으므로 항목마다 경고하지 않고 한 줄로 요약한다 */
+if (noAirport.size) warns.push(`항공권 블록이 생성되지 않는 도시 ${noAirport.size}종 — ${[...noAirport].join(", ")} (assets/app.js 의 AIRPORT 에 추가하세요)`);
 if (noImage) warns.push(`images 없는 수동 공연 ${noImage}건 → 자동 수집분에 같은 공연이 있으면 포스터를 물려받고, 없으면 그라디언트로 표시됩니다`);
 
 /* ── 자동 수집분(data/feed.js)은 화면을 깨뜨리는 필드만 검사한다 ── */
@@ -105,6 +111,7 @@ if (existsSync(feedPath)) {
     if (c.ticketOpen && isNaN(new Date(c.ticketOpen))) errors.push(`${at}: ticketOpen 파싱 실패`);
     if (c.images && (!Array.isArray(c.images) || c.images.some(u => !/^https:\/\//.test(u))))
       errors.push(`${at}: images 는 https 주소 배열이어야 합니다`);
+    if (c.country !== "대한민국" && !AIRPORTS.has(c.city) && !COUNTRIES.has(c.country)) noAirport.add(`${c.city} (${c.country})`);
   }
 }
 

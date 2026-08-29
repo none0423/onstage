@@ -27,18 +27,42 @@ const COUNTRY_CODE = {
   "말레이시아": "MY", "베트남": "VN", "마카오": "MO"
 };
 
-/* 도시 → 취항 공항. 여기 없는 도시는 항공권 블록이 생성되지 않는다. */
+/* 도시 → 취항 공항.
+   소스마다 도시 표기가 다르다 — KOPIS 는 한글, Ticketmaster 는 영문("Singapore")으로 준다.
+   그래서 두 표기를 모두 넣고 대소문자를 무시하고 찾는다. */
 const HOME_AIRPORT = "ICN";
 const AIRPORT = {
-  "도쿄": "HND", "요코하마": "HND", "사이타마": "HND", "지바": "NRT",
-  "오사카": "KIX", "고베": "KIX", "교토": "KIX", "나고야": "NGO",
-  "후쿠오카": "FUK", "삿포로": "CTS", "오키나와": "OKA", "센다이": "SDJ", "히로시마": "HIJ",
-  "타이베이": "TPE", "가오슝": "KHH", "타이중": "RMQ",
-  "홍콩": "HKG", "마카오": "MFM", "싱가포르": "SIN",
-  "방콕": "BKK", "치앙마이": "CNX", "마닐라": "MNL", "자카르타": "CGK",
-  "쿠알라룸푸르": "KUL", "호치민": "SGN", "하노이": "HAN",
-  "상하이": "PVG", "베이징": "PEK", "타이페이": "TPE"
+  /* 일본 */
+  "도쿄": "HND", "Tokyo": "HND", "요코하마": "HND", "Yokohama": "HND",
+  "가나가와": "HND", "Kanagawa": "HND", "사이타마": "HND", "Saitama": "HND",
+  "지바": "NRT", "Chiba": "NRT",
+  "오사카": "KIX", "Osaka": "KIX", "고베": "KIX", "Kobe": "KIX", "교토": "KIX", "Kyoto": "KIX",
+  "나고야": "NGO", "Nagoya": "NGO", "후쿠오카": "FUK", "Fukuoka": "FUK",
+  "삿포로": "CTS", "Sapporo": "CTS", "오키나와": "OKA", "Okinawa": "OKA",
+  "센다이": "SDJ", "Sendai": "SDJ", "히로시마": "HIJ", "Hiroshima": "HIJ",
+  /* 중화권 */
+  "타이베이": "TPE", "타이페이": "TPE", "Taipei": "TPE",
+  "가오슝": "KHH", "Kaohsiung": "KHH", "타이중": "RMQ", "Taichung": "RMQ",
+  "홍콩": "HKG", "Hong Kong": "HKG", "마카오": "MFM", "Macau": "MFM",
+  "상하이": "PVG", "Shanghai": "PVG", "베이징": "PEK", "Beijing": "PEK",
+  /* 동남아 */
+  "싱가포르": "SIN", "Singapore": "SIN",
+  "방콕": "BKK", "Bangkok": "BKK", "치앙마이": "CNX", "Chiang Mai": "CNX",
+  "쿠알라룸푸르": "KUL", "Kuala Lumpur": "KUL",
+  "마닐라": "MNL", "Manila": "MNL", "자카르타": "CGK", "Jakarta": "CGK",
+  "호치민": "SGN", "Ho Chi Minh City": "SGN", "하노이": "HAN", "Hanoi": "HAN"
 };
+const AIRPORT_LOOKUP = new Map(Object.entries(AIRPORT).map(([k, v]) => [k.toLowerCase(), v]));
+
+/* 도시를 못 찾을 때 쓰는 대표 관문. 도시 정보가 없거나(KOPIS 해외 등록분처럼)
+   표에 없는 소도시일 때만 쓰인다. */
+const COUNTRY_AIRPORT = {
+  "일본": "HND", "싱가포르": "SIN", "홍콩": "HKG", "마카오": "MFM", "대만": "TPE",
+  "태국": "BKK", "말레이시아": "KUL", "필리핀": "MNL", "인도네시아": "CGK",
+  "베트남": "SGN", "중국": "PVG"
+};
+const airportFor = c =>
+  AIRPORT_LOOKUP.get(String(c.city || "").trim().toLowerCase()) || COUNTRY_AIRPORT[c.country] || null;
 
 /* ── 장르 판정 ───────────────────────────────
    순서: 데이터에 직접 적은 genre → 아티스트 표 → 제목 키워드 → Ticketmaster 장르 → 미분류.
@@ -178,7 +202,7 @@ function statusOf(c) {
 /** 공연 전날 출발 / 마지막 공연 다음 날 귀국을 기본 일정으로 잡는다 */
 function flightPlan(c) {
   if (c.country === "대한민국") return null;
-  const dest = AIRPORT[c.city];
+  const dest = airportFor(c);
   if (!dest) return null;
   const out = addDays(c.dates[0], -1);
   const back = addDays(c.dates[c.dates.length - 1], 1);
@@ -295,13 +319,6 @@ function cardHTML(c) {
   if (c.goods && c.goods.note) det.push(`<p><b>굿즈</b> ${esc(c.goods.note)}</p>`);
   if (c.tips) det.push(`<p><b>팁</b> ${esc(c.tips)}</p>`);
 
-  if (flight) det.push(`
-    <div class="det-blk">
-      <p class="det-h">✈ 항공 · ${HOME_AIRPORT} → ${esc(flight.dest)}</p>
-      <p class="det-note">${esc(mmdd(flight.out))} 출발 – ${esc(mmdd(flight.back))} 귀국 기준 (공연 전날 출발 / 마지막 공연 다음 날 귀국)</p>
-      ${linkRow(flight.links)}
-    </div>`);
-
   if (shots.length > 1) det.push(`
     <div class="det-blk">
       <p class="det-h">🖼 포스터</p>
@@ -330,9 +347,17 @@ function cardHTML(c) {
   if (c.source) det.push(`<p class="det-src">출처 <a href="${esc(c.source)}" target="_blank" rel="noopener">${esc(new URL(c.source).hostname)} ↗</a></p>`);
 
   const buyable = st.phase === "onsale" || st.phase === "soldout";
-  const trip = [];
-  if (flight) trip.push(`✈ ${HOME_AIRPORT} → ${esc(flight.dest)}`);
-  if (areas[0]) trip.push(`🏨 ${esc(areas[0].name)} ${esc(areas[0].note)}`);
+
+  /* 해외 공연은 노선·권장 일정·항공권 검색을 카드 앞면에 바로 보여 준다 */
+  const flightBox = flight ? `
+      <div class="ev-flight">
+        <div class="f-top">
+          <span class="f-route">✈ ${HOME_AIRPORT} → ${esc(flight.dest)}</span>
+          <span class="f-dates">${esc(mmdd(flight.out))} 출발 – ${esc(mmdd(flight.back))} 귀국</span>
+        </div>
+        <div class="links f-links">${flight.links.map(l =>
+          `<a href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)}</a>`).join("")}</div>
+      </div>` : "";
 
   return `
   <article class="ev" data-url="${esc(c.vendor.url)}">
@@ -353,7 +378,8 @@ function cardHTML(c) {
         <span>${esc(c.vendor.name)}</span>
         ${c.auto ? `<span class="sep">·</span><span class="auto">AUTO ${esc(c.sourceName || "")}</span>` : ""}
       </div>
-      ${trip.length ? `<p class="ev-trip">${trip.map(t => `<span>${t}</span>`).join("")}</p>` : ""}
+      ${flightBox}
+      ${areas[0] ? `<p class="ev-trip"><span>🏨 ${esc(areas[0].name)} ${esc(areas[0].note)}</span></p>` : ""}
       <details class="ev-more">
         <summary>항공 · 숙소 · 굿즈 상세</summary>
         <div class="ev-det">${det.join("")}</div>
@@ -407,7 +433,8 @@ function renderUpNext() {
     <div class="un-body">
       <span class="ev-badge ${st.tone}" style="position:static;align-self:flex-start">${esc(st.badge)}</span>
       <h3>${esc(next.artist)} · ${esc(next.city)}</h3>
-      <p>${esc(next.tour)} · ${esc(next.venue)}${f ? ` · ✈ ${HOME_AIRPORT} → ${esc(f.dest)}` : ""}</p>
+      <p>${esc(next.tour)} · ${esc(next.venue)}${f
+        ? ` · ✈ ${HOME_AIRPORT} → ${esc(f.dest)} ${esc(mmdd(f.out))}–${esc(mmdd(f.back))}` : ""}</p>
     </div>
     <div class="un-cta">
       <p>모든 공연 카드는<br>공식 예매처로 연결됩니다.</p>
