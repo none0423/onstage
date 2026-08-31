@@ -138,6 +138,24 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   /* 해외 아티스트의 내한 공연 판별.
      'WORLD TOUR' 는 국내 아티스트(PLAVE·ARTMS 등)도 흔히 쓰므로 넣지 않는다. */
   const IS_VISIT = /내한|IN SEOUL|IN KOREA/i;
+  /* KOPIS 해외 등록분은 공연장 이름이 지저분하게 온다.
+     "K-Arena Yokohama(K-아레나 요코하마) [일본]" → "K-아레나 요코하마"
+     "일본 요코하마 피아 아레나 MM"                → "요코하마 피아 아레나 MM" */
+  const CLEAN_TAIL = /\s*\[[^\]]*\]\s*$/;
+  const KO_PAREN = /^(.+?)\s*\(([^)]*[가-힣][^)]*)\)\s*$/;
+  function cleanVenue(v, country) {
+    let out = String(v || "").replace(CLEAN_TAIL, "").trim();
+    const m = out.match(KO_PAREN);
+    if (m) out = m[2].trim();
+    if (country) out = out.replace(new RegExp(`^${country}\\s+`), "").trim();
+    return out;
+  }
+  /* 도시가 국가명으로만 올 때 공연장 이름에서 도시를 찾아낸다 */
+  const JP_CITIES = ["도쿄", "오사카", "요코하마", "나고야", "후쿠오카", "삿포로", "고베", "사이타마", "가나가와", "지바", "교토"];
+  function cityFromVenue(venue, fallback) {
+    return JP_CITIES.find(c => venue.includes(c)) || fallback;
+  }
+
   /* KOPIS 는 국내 아티스트의 해외 공연도 등록한다 (area === "해외") */
   const OVERSEAS = { 일본: ["japan", "일본"], 대만: ["asia", "대만"], 홍콩: ["asia", "홍콩"], 태국: ["asia", "태국"],
                      싱가포르: ["asia", "싱가포르"], 마카오: ["asia", "마카오"], 필리핀: ["asia", "필리핀"],
@@ -230,13 +248,14 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       const dates = from === to ? [from] : [from, to];
 
       /* 해외 등록분은 제목의 [국가 …] 로 나라를 판별한다. 못 알아보면 버린다(오분류 방지). */
-      let category, country, city;
+      let category, country, city, overseas = false;
       if (r.area === "해외") {
         const hit = Object.keys(OVERSEAS).find(k => r.prfnm.includes(k) || (r.fcltynm || "").includes(k));
         if (!hit) continue;
         [category, country] = OVERSEAS[hit];
         const sub = r.prfnm.match(new RegExp(`\\[${hit}\\s+([^\\]]+)\\]`));
         city = (sub ? sub[1] : country).trim();
+        overseas = true;
       } else {
         category = IS_VISIT.test(r.prfnm) ? "visit" : "domestic";
         country = "대한민국";
@@ -246,11 +265,15 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
 
       out.push({
         id, auto: true, sourceName: "KOPIS", kopisDetail: detailed,
+        /* 해외 등록분은 그 공연장 공식 페이지보다 정보가 거칠다 — 중복 시 뒤로 밀린다 */
+        ...(overseas ? { kopisOverseas: true } : {}),
         period: dates.length > 1,          // 기간 공연 — 회차 수 미상
         artist, tour,
         category,
-        country, city, venue: r.fcltynm,
-        mapQuery: r.fcltynm,
+        country,
+        city: overseas ? cityFromVenue(cleanVenue(r.fcltynm, country), city) : city,
+        venue: overseas ? cleanVenue(r.fcltynm, country) : r.fcltynm,
+        mapQuery: overseas ? cleanVenue(r.fcltynm, country) : r.fcltynm,
         dates,
         doorsNote: doorsNote || "예매처 공지 참고",
         ticketOpen: null,
@@ -597,8 +620,9 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
      같은 소스 안에서는 절대 합치지 않는다. KOPIS 는 올림픽공원처럼 여러 홀을 한 이름으로
      주기 때문에, 공연장·날짜로 묶으면 같은 날 다른 공연이 지워진다(전유진/박지현 사례). */
   const srcOf = id => SOURCE_ORDER.find(n => id.startsWith(SOURCE_PREFIX[n])) || "?";
-  const rankOfId = id => {
-    const i = SOURCE_ORDER.indexOf(srcOf(id));
+  const dedupRank = c => {
+    if (c.kopisOverseas) return 90;               // 해외 등록분은 공연장 공식 페이지에 양보
+    const i = SOURCE_ORDER.indexOf(srcOf(c.id));
     return i < 0 ? 99 : i;
   };
   const norm = v => String(v || "").toLowerCase().replace(/[\s.\-_'"()\[\]]/g, "");
@@ -608,7 +632,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const claimed = new Map();                                  // 아티스트|날짜 → 선점한 소스
   const events = all
     .filter(c => c.dates?.length && c.dates[c.dates.length - 1] >= today)
-    .sort((a, b) => rankOfId(a.id) - rankOfId(b.id))          // 우선순위 높은 소스가 먼저 선점
+    .sort((a, b) => dedupRank(a) - dedupRank(b))          // 우선순위 높은 소스가 먼저 선점
     .filter(c => {
       if (seenId.has(c.id)) return false;
       const key = `${norm(c.artist)}|${c.dates[0]}`;

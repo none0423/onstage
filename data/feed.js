@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-08-31T15:30:03.969Z";
+const FEED_UPDATED = "2026-08-31T15:33:36.815Z";
 
 const FEED = [
   {
@@ -853,7 +853,7 @@ const FEED = [
     "id": "kopis-PF298758",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": true,
     "artist": "뮤즈온 페스티벌",
     "tour": "서울 공연",
@@ -866,13 +866,13 @@ const FEED = [
       "2026-09-09",
       "2026-09-13"
     ],
-    "doorsNote": "수요일 ~ 금요일(19:30), 토요일 ~ 일요일(17:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "전석무료",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "29CM",
-      "url": "https://ticket.29cm.co.kr/catalog/4128674"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%EB%AE%A4%EC%A6%88%EC%98%A8%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
     },
     "otherVendors": [],
     "goods": {
@@ -1091,43 +1091,6 @@ const FEED = [
     "tags": []
   },
   {
-    "id": "kopis-PF296501",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "TWS",
-    "tour": "TOUR, 24/7: FOR: YOU",
-    "category": "japan",
-    "country": "일본",
-    "city": "일본",
-    "venue": "K-Arena Yokohama(K-아레나 요코하마) [일본]",
-    "mapQuery": "K-Arena Yokohama(K-아레나 요코하마) [일본]",
-    "dates": [
-      "2026-09-12",
-      "2026-09-13"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=TWS%20TOUR%2C%2024%2F7%3A%20FOR%3A%20YOU%20%5B%EC%9D%BC%EB%B3%B8%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF296501_260721_103352.gif"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296501",
-    "tags": []
-  },
-  {
     "id": "kopis-PF294720",
     "auto": true,
     "sourceName": "KOPIS",
@@ -1238,6 +1201,64 @@ const FEED = [
     "tags": []
   },
   {
+    "id": "jp-kar-2026-09-12-TWS",
+    "auto": true,
+    "sourceName": "K-아레나 요코하마 공식",
+    "artist": "TWS",
+    "tour": "2026 TWS TOUR ‘24/7:FOR:YOU’ IN JAPAN",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "K-아레나 요코하마",
+    "mapQuery": "Kアリーナ横浜",
+    "dates": [
+      "2026-09-12",
+      "2026-09-13"
+    ],
+    "doorsNote": "OPEN 15:30 / START 17:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "이플러스 (e+)",
+      "url": "https://eplus.jp/sf/search?keyword=TWS"
+    },
+    "otherVendors": [
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "미나토미라이 (みなとみらい)",
+          "note": "도보 8분 · 야경 명소"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "도보 15분 · 공항버스 직결"
+        },
+        {
+          "name": "사쿠라기초 (桜木町)",
+          "note": "도보 10분 · JR 네기시선"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://k-arena.com/schedule/",
+    "tags": []
+  },
+  {
     "id": "tm-Z8ymWIMJlyZziZ7aAe",
     "auto": true,
     "sourceName": "Ticketmaster",
@@ -1315,7 +1336,7 @@ const FEED = [
     "id": "kopis-PF299197",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "김승주",
     "tour": "클럽투어: VC//VRS",
@@ -1327,13 +1348,13 @@ const FEED = [
     "dates": [
       "2026-09-13"
     ],
-    "doorsNote": "일요일(17:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "전석 66,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "예스24",
-      "url": "https://ticket.yes24.com/Perf/59528"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%EA%B9%80%EC%8A%B9%EC%A3%BC%20%ED%81%B4%EB%9F%BD%ED%88%AC%EC%96%B4%3A%20VC%2F%2FVRS%20%5B%EC%84%9C%EC%9A%B8%5D"
     },
     "otherVendors": [],
     "goods": {
@@ -1519,7 +1540,7 @@ const FEED = [
     "id": "kopis-PF298966",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": true,
     "artist": "TVT (THE VOLUNTEERS)",
     "tour": "CONCERT : 우리네 인생은 끝없는 서부영화. (Our Life Is A Constant Western Film)",
@@ -1532,13 +1553,13 @@ const FEED = [
       "2026-09-18",
       "2026-09-20"
     ],
-    "doorsNote": "금요일(20:00), 토요일(19:00), 일요일(18:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "스탠딩석 143,000원, R석 143,000원, S석 132,000원, 휠체어석 143,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "놀유니버스",
-      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26012100"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=TVT%20(THE%20VOLUNTEERS)%20CONCERT%20%3A%20%EC%9A%B0%EB%A6%AC%EB%84%A4%20%EC%9D%B8%EC%83%9D%EC%9D%80%20%EB%81%9D%EC%97%86%EB%8A%94%20%EC%84%9C%EB%B6%80%EC%98%81%ED%99%94.%20(Our%20Life%20Is%20A%20Constant%20Western%20Film)"
     },
     "otherVendors": [],
     "goods": {
@@ -1629,7 +1650,7 @@ const FEED = [
     "id": "kopis-PF299402",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": true,
     "artist": "ONEWE",
     "tour": "6th Live Concert: O! NEW E!volution Ⅵ",
@@ -1642,13 +1663,13 @@ const FEED = [
       "2026-09-19",
       "2026-09-20"
     ],
-    "doorsNote": "토요일(18:00), 일요일(17:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "스탠딩 143,000원, R석 143,000원, S석 121,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "멜론티켓",
-      "url": "https://ticket.melon.com/performance/index.htm?prodId=213796"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=ONEWE%206th%20Live%20Concert%3A%20O!%20NEW%20E!volution%20%E2%85%A5"
     },
     "otherVendors": [],
     "goods": {
@@ -1666,7 +1687,7 @@ const FEED = [
     "id": "kopis-PF299212",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "ifeye 1st APAC",
     "tour": "TOUR: If I",
@@ -1678,13 +1699,13 @@ const FEED = [
     "dates": [
       "2026-09-19"
     ],
-    "doorsNote": "토요일(19:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "전석 110,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "예스24",
-      "url": "https://ticket.yes24.com/Perf/59806"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=ifeye%201st%20APAC%20TOUR%3A%20If%20I%20%5B%EC%84%9C%EC%9A%B8%5D"
     },
     "otherVendors": [],
     "goods": {
@@ -2434,43 +2455,6 @@ const FEED = [
     "tags": []
   },
   {
-    "id": "kopis-PF297823",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "PLAVE",
-    "tour": "World Tour: KEEP IT MANIC",
-    "category": "japan",
-    "country": "일본",
-    "city": "가나가와",
-    "venue": "일본 요코하마 피아 아레나 MM",
-    "mapQuery": "일본 요코하마 피아 아레나 MM",
-    "dates": [
-      "2026-09-26",
-      "2026-09-27"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=PLAVE%20World%20Tour%3A%20KEEP%20IT%20MANIC%20%5B%EC%9D%BC%EB%B3%B8%20%EA%B0%80%EB%82%98%EA%B0%80%EC%99%80%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297823_260806_105207.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297823",
-    "tags": []
-  },
-  {
     "id": "kopis-PF295410",
     "auto": true,
     "sourceName": "KOPIS",
@@ -2673,6 +2657,44 @@ const FEED = [
     "tags": [
       "Pop"
     ]
+  },
+  {
+    "id": "kopis-PF297823",
+    "auto": true,
+    "sourceName": "KOPIS",
+    "kopisDetail": false,
+    "kopisOverseas": true,
+    "period": true,
+    "artist": "PLAVE",
+    "tour": "World Tour: KEEP IT MANIC",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 피아 아레나 MM",
+    "mapQuery": "요코하마 피아 아레나 MM",
+    "dates": [
+      "2026-09-26",
+      "2026-09-27"
+    ],
+    "doorsNote": "예매처 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "판매중",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=PLAVE%20World%20Tour%3A%20KEEP%20IT%20MANIC%20%5B%EC%9D%BC%EB%B3%B8%20%EA%B0%80%EB%82%98%EA%B0%80%EC%99%80%5D"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "images": [
+      "https://kopis.or.kr/upload/pfmPoster/PF_PF297823_260806_105207.jpg"
+    ],
+    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297823",
+    "tags": []
   },
   {
     "id": "jp-kar-2026-09-27-AKB48",
@@ -3251,7 +3273,7 @@ const FEED = [
     "id": "kopis-PF298986",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "CLICK-B, RE",
     "tour": "CLICK: 한여름밤의 꿈 VOL.2",
@@ -3263,24 +3285,15 @@ const FEED = [
     "dates": [
       "2026-10-09"
     ],
-    "doorsNote": "금요일(17:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "R석 149,000원, S석 139,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "놀유니버스",
-      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26012055"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=CLICK-B%2C%20RE%3A%20CLICK%3A%20%ED%95%9C%EC%97%AC%EB%A6%84%EB%B0%A4%EC%9D%98%20%EA%BF%88%20VOL.2%20%5B%EB%B6%80%EC%82%B0%20(%EC%95%B5%EC%BD%9C)%20%5D"
     },
-    "otherVendors": [
-      {
-        "name": "예스24",
-        "url": "https://ticket.yes24.com/Perf/59772"
-      },
-      {
-        "name": "네이버N예약",
-        "url": "https://booking.naver.com/booking/12/bizes/1719461"
-      }
-    ],
+    "otherVendors": [],
     "goods": {
       "note": "",
       "url": null
@@ -3446,7 +3459,7 @@ const FEED = [
     "id": "kopis-PF298950",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": true,
     "artist": "tripleS",
     "tour": "World Tour: ANDLESS",
@@ -3459,13 +3472,13 @@ const FEED = [
       "2026-10-10",
       "2026-10-11"
     ],
-    "doorsNote": "토요일 ~ 일요일(18:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "SSS석 165,000원, S석 30,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "NHN티켓링크",
-      "url": "http://www.ticketlink.co.kr/product/64906"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=tripleS%20World%20Tour%3A%20ANDLESS%20%5B%EC%84%9C%EC%9A%B8%5D"
     },
     "otherVendors": [],
     "goods": {
@@ -3592,7 +3605,7 @@ const FEED = [
     "id": "kopis-PF298971",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "하루",
     "tour": "첫 팬 콘서트: 오늘, 하루: 처음 들려주는 이야기",
@@ -3604,20 +3617,15 @@ const FEED = [
     "dates": [
       "2026-10-17"
     ],
-    "doorsNote": "토요일(17:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "전석 110,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "예스24",
-      "url": "https://ticket.yes24.com/Perf/59770"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%ED%95%98%EB%A3%A8%20%EC%B2%AB%20%ED%8C%AC%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20%EC%98%A4%EB%8A%98%2C%20%ED%95%98%EB%A3%A8%3A%20%EC%B2%98%EC%9D%8C%20%EB%93%A4%EB%A0%A4%EC%A3%BC%EB%8A%94%20%EC%9D%B4%EC%95%BC%EA%B8%B0%20%5B%EB%B6%80%EC%82%B0%5D"
     },
-    "otherVendors": [
-      {
-        "name": "네이버N예약",
-        "url": "https://booking.naver.com/booking/12/bizes/1719430"
-      }
-    ],
+    "otherVendors": [],
     "goods": {
       "note": "",
       "url": null
@@ -4143,7 +4151,7 @@ const FEED = [
     "id": "kopis-PF299464",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "THE MAIN VOCALS",
     "tour": "Season 1",
@@ -4155,13 +4163,13 @@ const FEED = [
     "dates": [
       "2026-10-23"
     ],
-    "doorsNote": "금요일(19:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "1층 R석 110,000원, 2층 A석 110,000원, 3층 B석 99,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "NHN티켓링크",
-      "url": "http://www.ticketlink.co.kr/product/65009"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=THE%20MAIN%20VOCALS%3A%20Season%201"
     },
     "otherVendors": [],
     "goods": {
@@ -6780,7 +6788,7 @@ const FEED = [
     "id": "kopis-PF298903",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "카와사키 타카야",
     "tour": "내한공연 KAWASAKI TAKAYA LIVE",
@@ -6792,13 +6800,13 @@ const FEED = [
     "dates": [
       "2026-12-20"
     ],
-    "doorsNote": "일요일(18:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "지정석 121,000원, 스탠딩 110,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "예스24",
-      "url": "https://ticket.yes24.com/Perf/59669"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%EC%B9%B4%EC%99%80%EC%82%AC%ED%82%A4%20%ED%83%80%EC%B9%B4%EC%95%BC%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0%20KAWASAKI%20TAKAYA%20LIVE%20%5B%EC%84%9C%EC%9A%B8%5D"
     },
     "otherVendors": [],
     "goods": {
@@ -6949,7 +6957,7 @@ const FEED = [
     "id": "kopis-PF298787",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": true,
     "artist": "원웨이 페스티벌",
     "tour": "경기 공연",
@@ -6962,13 +6970,13 @@ const FEED = [
       "2026-12-26",
       "2026-12-27"
     ],
-    "doorsNote": "토요일 ~ 일요일(12:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "슈퍼얼리버드 2일권 66,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "멜론티켓",
-      "url": "https://ticket.melon.com/performance/index.htm?prodId=213769"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%EC%9B%90%EC%9B%A8%EC%9D%B4%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
     },
     "otherVendors": [],
     "goods": {
@@ -7374,7 +7382,7 @@ const FEED = [
     "id": "kopis-PF299233",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "CUTIE STREET WINTER",
     "tour": "Live",
@@ -7386,13 +7394,13 @@ const FEED = [
     "dates": [
       "2027-01-23"
     ],
-    "doorsNote": "토요일(18:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "전석 135,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "멜론티켓",
-      "url": "https://ticket.melon.com/performance/index.htm?prodId=213705"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=CUTIE%20STREET%20WINTER%20Live"
     },
     "otherVendors": [],
     "goods": {
