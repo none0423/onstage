@@ -8,7 +8,8 @@
    ============================================================ */
 
 const UA = "onstage-collector/1.0 (personal concert dashboard; 10 users)";
-const MAX_SUBREQUESTS = 45;
+/* Workers 무료 플랜은 호출당 50개. 리다이렉트도 1개로 세므로 여유를 두고 40 에서 멈춘다. */
+const MAX_SUBREQUESTS = 40;
 
 /* 소스 우선순위 — 앞일수록 먼저 실행되어 요청 예산을 먼저 쓰고,
    같은 공연이 여러 소스에 있으면 앞쪽 소스의 데이터가 남는다. */
@@ -124,7 +125,9 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   }
 
   /* ── 1. KOPIS 오픈API (국내·내한) ───────────── */
-  const KOPIS = "https://www.kopis.or.kr/openApi/restful/pblprfr";
+  /* www 는 301 로 apex 로 넘긴다. Workers 는 리다이렉트 한 번도 서브리퀘스트로 세므로
+     호출마다 2개씩 소모돼 한도를 넘긴다. 반드시 apex 도메인을 직접 쓴다. */
+  const KOPIS = "https://kopis.or.kr/openApi/restful/pblprfr";
   /* 수집 범위 손잡이 — KOPIS 대중음악은 1년에 수백 건이라 공연장으로 거른다.
      넓히려면 키워드를 추가하고, 대형 공연만 보려면 앞쪽 몇 개만 남기면 된다. */
   const BIG_VENUE = new RegExp([
@@ -262,7 +265,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         goods: { note: "", url: null },
         tips: "",
         images: [normalizePoster(r.poster)].filter(Boolean),
-        source: `https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=${r.mt20id}`,
+        source: `https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=${r.mt20id}`,
         tags: []
       });
     }

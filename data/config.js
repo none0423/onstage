@@ -5,4 +5,4 @@
    예: const FEED_ENDPOINT = "https://onstage-collector.내계정.workers.dev";
    ============================================================ */
 
-const FEED_ENDPOINT = "";
+const FEED_ENDPOINT = "https://onstage-collector.onstage-collector.workers.dev";

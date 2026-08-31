@@ -15,7 +15,7 @@ crons = ["0 * * * *"]
 
 [[kv_namespaces]]
 binding = "FEED"
-id = "PUT_YOUR_KV_NAMESPACE_ID_HERE"
+id = "3105c0f911534eeb9e8ebe4094db90e5"
 
 [observability]
 enabled = true
