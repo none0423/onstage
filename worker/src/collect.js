@@ -13,11 +13,11 @@ const MAX_SUBREQUESTS = 40;
 
 /* 소스 우선순위 — 앞일수록 먼저 실행되어 요청 예산을 먼저 쓰고,
    같은 공연이 여러 소스에 있으면 앞쪽 소스의 데이터가 남는다. */
-const SOURCE_ORDER = ["kopis", "tokyodome", "ticketmaster"];
-const SOURCE_PREFIX = { kopis: "kopis-", tokyodome: "td-", ticketmaster: "tm-" };
+const SOURCE_ORDER = ["kopis", "jpvenues", "ticketmaster"];
+const SOURCE_PREFIX = { kopis: "kopis-", jpvenues: "jp-", ticketmaster: "tm-" };
 /* KOPIS 가 먼저 돌지만 뒤 소스가 굶지 않도록 요청을 남겨 둔다.
-   도쿄돔 1개 + Ticketmaster 최대 4개 + 여유 1개. */
-const RESERVED_FOR_LATER_SOURCES = 6;
+   일본 공연장 4곳 + Ticketmaster 최대 4개 + 여유 2개. 공연장을 늘리면 이 값도 올린다. */
+const RESERVED_FOR_LATER_SOURCES = 10;
 
 /* ── 공통 유틸 ───────────────────────────────── */
 const d2 = n => String(n).padStart(2, "0");
@@ -343,87 +343,231 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     return out;
   }
 
-  /* ── 3. 도쿄돔 공식 공연 일정 (요청 1회) ───── */
-  const TD_URL = "https://www.tokyo-dome.co.jp/dome/event/schedule.html";
-  const TD_STAY = [
-    { name: "스이도바시 (水道橋)", note: "도보 3분 · JR 주오소부선" },
-    { name: "이다바시·코라쿠엔 (飯田橋)", note: "도보 10분 · 지하철 4개 노선" },
-    { name: "아키하바라 (秋葉原)", note: "JR 3정거장 · 숙소 선택지 많음" }
-  ];
-  /* 도쿄돔은 대형 공연에 イベント 태그를 달기도 해서(예: BIGBANG) 둘 다 받고 제목으로 거른다 */
+  /* ── 3. 일본 주요 공연장 공식 일정 ──────────
+     공연장마다 HTML 이 달라 파서를 하나씩 둔다.
+     새 공연장을 추가하려면 JP_VENUES 에 항목 하나 + parse 함수 하나만 더하면 된다.
+     한 곳이 실패해도 나머지 공연장은 그대로 수집된다. */
+
+  const STAY_AREAS = {
+    tokyodome: [
+      { name: "스이도바시 (水道橋)", note: "도보 3분 · JR 주오소부선" },
+      { name: "이다바시·코라쿠엔 (飯田橋)", note: "도보 10분 · 지하철 4개 노선" },
+      { name: "아키하바라 (秋葉原)", note: "JR 3정거장 · 숙소 선택지 많음" }
+    ],
+    kyocera: [
+      { name: "돔마에 (ドーム前)", note: "도보 3분 · 한신 난바선" },
+      { name: "난바 (なんば)", note: "지하철 10분 · 심야 식당 많음" },
+      { name: "신사이바시 (心斎橋)", note: "지하철 12분 · 쇼핑 중심" }
+    ],
+    johall: [
+      { name: "오사카비즈니스파크 (大阪ビジネスパーク)", note: "도보 5분 · 지하철 나가호리선" },
+      { name: "교바시 (京橋)", note: "도보 15분 · JR·게이한 환승" },
+      { name: "우메다 (梅田)", note: "지하철 15분 · 오사카 중심" }
+    ],
+    karena: [
+      { name: "미나토미라이 (みなとみらい)", note: "도보 8분 · 야경 명소" },
+      { name: "요코하마역 (横浜駅)", note: "도보 15분 · 공항버스 직결" },
+      { name: "사쿠라기초 (桜木町)", note: "도보 10분 · JR 네기시선" }
+    ]
+  };
+
+  /* 공연이 아닌 행사를 제목으로 걸러낸다 */
+  const NOT_CONCERT = /WRESTLE|プロレス|野球|巨人|オリックス|バファローズ|TOURNAMENT|トーナメント|ゲーム|GAME|フェア|展示|ダーツ|見学|TOKYO DOME TOUR/i;
+
+  const d2s = s => s.replace(/[年月./]/g, "-").replace(/日/g, "").replace(/-+$/, "");
+
+  /** 같은 제목이 연달아 있으면 한 공연으로 묶는다 */
+  function mergeByTitle(rows) {
+    const map = new Map();
+    for (const r of rows) {
+      if (!r.title || !r.date || NOT_CONCERT.test(r.title)) continue;
+      const cur = map.get(r.title) || { ...r, dates: [] };
+      if (!cur.dates.includes(r.date)) cur.dates.push(r.date);
+      if (!cur.caption && r.caption) cur.caption = r.caption;
+      if (!cur.artist && r.artist) cur.artist = r.artist;
+      map.set(r.title, cur);
+    }
+    return [...map.values()].map(e => (e.dates.sort(), e));
+  }
+
+  /* 도쿄돔 — 월별 달력 표. 대형 공연에 イベント 태그를 달기도 해서 둘 다 받는다. */
   const TD_TAG = /c-txt-tag__item[^>]*>\s*(?:コンサート|イベント)/;
   const TD_MONTH = /^">(\d{4})年(\d{2})月/;
   const TD_DAY = /<span class="c-mod-calender__day">(\d{1,2})<\/span>/;
   const TD_LINK = /c-mod-calender__links[^>]*>\s*<a[^>]*>([\s\S]*?)<\/a>/;
   const TD_CAPTION = /<p class="c-txt-caption-01">([\s\S]*?)<\/p>/;
-  const NOT_CONCERT = /WRESTLE|プロレス|野球|巨人|TOURNAMENT|トーナメント|ゲーム|GAME|フェア|展示|ダーツ|TOKYO DOME TOUR/i;
 
-  function splitTitle(raw) {
-    const t = raw.replace(/^20\d\d\s+/, "").trim();
-    const jp = t.indexOf("「");                       // 「투어명」이면 그 앞이 아티스트
-    if (jp > 0) return { artist: t.slice(0, jp).trim(), tour: t.slice(jp).replace(/[「」]/g, "").trim() };
-    const i = t.search(/\s(?=(?:WORLD|DOME|ARENA|STADIUM|HALL|ASIA|JAPAN|LIVE|CONCERT|TOUR|ライブ|ツアー|公演))/i);
-    return i > 0 ? { artist: t.slice(0, i).trim(), tour: t.slice(i).trim() } : { artist: t, tour: "TOKYO DOME" };
-  }
-
-  async function tokyodome() {
-    const html = await get(TD_URL);
+  function parseTokyoDome(html) {
     const start = html.indexOf("c-ttl-set-calender");
     const end = html.lastIndexOf("</table>");
     if (start < 0 || end < 0) throw new Error("달력 영역을 찾지 못했습니다 (페이지 구조 변경?)");
-
-    const byTitle = new Map();
-    for (const section of html.slice(start, end).split("c-ttl-set-calender").slice(0)) {
+    const rows = [];
+    for (const section of html.slice(start, end).split("c-ttl-set-calender")) {
       const mm = section.match(TD_MONTH);
       if (!mm) continue;
       const [, yy, mo] = mm;
       for (const row of section.split('<tr class="c-mod-calender__item">').slice(1)) {
         const day = (row.match(TD_DAY) || [])[1];
         if (!day) continue;
-        const date = `${yy}-${mo}-${d2(day)}`;
         for (const block of row.split("c-mod-calender__detail-in").slice(1)) {
           if (!TD_TAG.test(block)) continue;
-          const title = decode((block.match(TD_LINK) || [])[1] || "");
-          if (!title || NOT_CONCERT.test(title)) continue;
-          const caption = decode((block.match(TD_CAPTION) || [])[1] || "");
-          const cur = byTitle.get(title) || { title, dates: [], caption };
-          if (!cur.dates.includes(date)) cur.dates.push(date);
-          if (!cur.caption && caption) cur.caption = caption;
-          byTitle.set(title, cur);
+          rows.push({
+            date: `${yy}-${mo}-${d2(day)}`,
+            title: decode((block.match(TD_LINK) || [])[1] || ""),
+            caption: decode((block.match(TD_CAPTION) || [])[1] || "")
+          });
         }
       }
     }
+    return mergeByTitle(rows);
+  }
 
-    const out = [...byTitle.values()].map(e => {
-      const { artist, tour } = splitTitle(e.title);
-      e.dates.sort();
-      return {
-        id: `td-${e.dates[0]}-${artist.replace(/[^\w가-힣ぁ-んァ-ヶ一-龠]/g, "").slice(0, 20) || "event"}`,
-        auto: true, sourceName: "도쿄돔 공식",
-        artist, tour,
-        category: "japan",
-        country: "일본", city: "도쿄", venue: "도쿄돔",
-        mapQuery: "東京ドーム",
-        dates: e.dates,
-        doorsNote: e.caption || "공식 공지 참고",
-        ticketOpen: null, ticketStatus: "예정",
-        price: "예매처 공지 참고",
-        vendor: { name: "이플러스 (e+)", url: `https://eplus.jp/sf/search?keyword=${encodeURIComponent(artist)}` },
-        otherVendors: [{ name: "티켓피아", url: "https://t.pia.jp/" }, { name: "로손티켓", url: "https://l-tike.com/" }],
-        goods: { note: "", url: null },
-        stay: { areas: TD_STAY },
-        images: [],            // 도쿄돔 달력 페이지에는 공연 이미지가 없다
-        tips: "",
-        source: TD_URL,
-        tags: ["돔"]
-      };
-    });
-    stats.tokyodome = { count: out.length };
+  /* 교세라돔 오사카 — 아티스트(h1)·투어명(h2)·분류(span)가 분리돼 있다 */
+  const KY_DATE = /id="event(\d{4}-\d{2}-\d{2})"/;
+  const KY_H1 = /<h1>([\s\S]*?)<\/h1>/;
+  const KY_H2 = /<h2>([\s\S]*?)<\/h2>/;
+  const KY_CAT = /<span>([^<]{1,12})<\/span>/;
+  const KY_OPEN = /開場時間[：:]\s*([0-9:～\-　 ]{4,20})/;
+
+  function parseKyocera(html) {
+    const rows = [];
+    for (const box of html.split('class="event-box').slice(1)) {
+      const date = (box.match(KY_DATE) || [])[1];
+      if (!date) continue;
+      const cat = decode((box.match(KY_CAT) || [])[1] || "");
+      if (!/コンサート|ライブ|イベント/.test(cat)) continue;
+      const artist = decode((box.match(KY_H1) || [])[1] || "");
+      const tour = decode((box.match(KY_H2) || [])[1] || "");
+      rows.push({ date, artist, title: tour || artist, caption: decode((box.match(KY_OPEN) || [])[1] || "") });
+    }
+    return mergeByTitle(rows);
+  }
+
+  /* 오사카성홀 — dt.event-genre(날짜+분류) + dt.event-ttl(제목) */
+  const JH_DATE = /<span class="date">\s*(\d{4}\/\d{1,2}\/\d{1,2})/;
+  const JH_GENRE = /<span class="bg">([^<]*)<\/span>/;
+  const JH_TITLE = /class="event-ttl"[^>]*>\s*(?:<a[^>]*>)?([\s\S]*?)(?:<\/a>)?\s*<\/dt>/;
+
+  function parseJoHall(html) {
+    const rows = [];
+    for (const blk of html.split('class="event-genre"').slice(1)) {
+      const dm = blk.match(JH_DATE);
+      if (!dm) continue;
+      if (!/音楽|芸能/.test(decode((blk.match(JH_GENRE) || [])[1] || ""))) continue;
+      const [y, m, d] = dm[1].split("/");
+      rows.push({
+        date: `${y}-${d2(m)}-${d2(d)}`,
+        title: decode((blk.match(JH_TITLE) || [])[1] || ""),
+        caption: ""
+      });
+    }
+    return mergeByTitle(rows);
+  }
+
+  /* K-아레나 요코하마 — 콘서트 전용 홀이라 분류 필터가 필요 없다 */
+  const KA_DATE = /schedule-list-item__date">\s*(\d{4})\.(\d{2})\.(\d{2})/;
+  const KA_TITLE = /schedule-list-item__title">([\s\S]*?)<\/h2>/;
+  const KA_ARTIST = /schedule-list-item__artist">([\s\S]*?)<\/p>/;
+  const KA_OPEN = /(OPEN[^<]{0,40})</;
+
+  function parseKArena(html) {
+    const rows = [];
+    for (const li of html.split('class="schedule-list-item"').slice(1)) {
+      const dm = li.match(KA_DATE);
+      if (!dm) continue;
+      rows.push({
+        date: `${dm[1]}-${dm[2]}-${dm[3]}`,
+        artist: decode((li.match(KA_ARTIST) || [])[1] || ""),
+        title: decode((li.match(KA_TITLE) || [])[1] || ""),
+        caption: decode((li.match(KA_OPEN) || [])[1] || "")
+      });
+    }
+    return mergeByTitle(rows);
+  }
+
+  const JP_VENUES = [
+    { key: "td",  venue: "도쿄돔",            city: "도쿄",     mapQuery: "東京ドーム",
+      url: "https://www.tokyo-dome.co.jp/dome/event/schedule.html", stay: STAY_AREAS.tokyodome, parse: parseTokyoDome },
+    /* 교세라돔은 한 달치만 보여주고 ?yearId=&monthId= 로 월을 넘긴다 */
+    { key: "kyo", venue: "교세라돔 오사카",     city: "오사카",   mapQuery: "京セラドーム大阪",
+      url: "https://www.kyoceradome-osaka.jp/schedule/",            stay: STAY_AREAS.kyocera,   parse: parseKyocera,
+      months: 4, monthUrl: (y, m) => `https://www.kyoceradome-osaka.jp/schedule/?yearId=${y}&monthId=${m}` },
+    /* 오사카성홀은 ?ym= 이 서버 응답을 바꾸지 않는다(월 전환이 JS). 당월치만 얻는다. */
+    { key: "joh", venue: "오사카성홀",         city: "오사카",   mapQuery: "大阪城ホール",
+      url: "https://www.osaka-johall.com/event/",                   stay: STAY_AREAS.johall,    parse: parseJoHall },
+    { key: "kar", venue: "K-아레나 요코하마",   city: "요코하마", mapQuery: "Kアリーナ横浜",
+      url: "https://k-arena.com/schedule/",                         stay: STAY_AREAS.karena,    parse: parseKArena }
+  ];
+
+  /** 제목만 있는 공연장에서 아티스트를 분리한다 */
+  function splitTitle(raw) {
+    const t = raw.replace(/^20\d\d\s+/, "").trim();
+    const jp = t.indexOf("「");
+    if (jp > 0) return { artist: t.slice(0, jp).trim(), tour: t.slice(jp).replace(/[「」]/g, "").trim() };
+    const i = t.search(/\s(?=(?:WORLD|DOME|ARENA|STADIUM|HALL|ASIA|JAPAN|LIVE|CONCERT|TOUR|ライブ|ツアー|公演))/i);
+    return i > 0 ? { artist: t.slice(0, i).trim(), tour: t.slice(i).trim() } : { artist: t, tour: "" };
+  }
+
+  async function jpvenues() {
+    const out = [];
+    const per = {};
+    for (const v of JP_VENUES) {
+      try {
+        /* 월 단위로만 보여 주는 곳은 몇 달치를 이어서 가져온다 */
+        let found;
+        if (v.monthUrl) {
+          const rows = [];
+          const now = new Date();
+          for (let i = 0; i < (v.months || 3); i++) {
+            const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+            rows.push(...v.parse(await get(v.monthUrl(d.getFullYear(), d.getMonth() + 1))));
+          }
+          /* 달을 걸쳐 같은 공연이 나뉘어 오므로 다시 합친다 */
+          const merged = new Map();
+          for (const r of rows) {
+            const cur = merged.get(r.title) || { ...r, dates: [] };
+            for (const dt of r.dates) if (!cur.dates.includes(dt)) cur.dates.push(dt);
+            merged.set(r.title, cur);
+          }
+          found = [...merged.values()].map(e => (e.dates.sort(), e));
+        } else {
+          found = v.parse(await get(v.url));
+        }
+        per[v.key] = found.length;
+        for (const e of found) {
+          const artist = e.artist || splitTitle(e.title).artist;
+          const tour = e.artist ? e.title : (splitTitle(e.title).tour || `${v.venue} 공연`);
+          out.push({
+            id: `jp-${v.key}-${e.dates[0]}-${artist.replace(/[^\w가-힣ぁ-んァ-ヶ一-龠]/g, "").slice(0, 20) || "event"}`,
+            auto: true, sourceName: `${v.venue} 공식`,
+            artist, tour,
+            category: "japan",
+            country: "일본", city: v.city, venue: v.venue, mapQuery: v.mapQuery,
+            dates: e.dates,
+            doorsNote: e.caption || "공식 공지 참고",
+            ticketOpen: null, ticketStatus: "예정",
+            price: "예매처 공지 참고",
+            vendor: { name: "이플러스 (e+)", url: `https://eplus.jp/sf/search?keyword=${encodeURIComponent(artist)}` },
+            otherVendors: [{ name: "티켓피아", url: "https://t.pia.jp/" }, { name: "로손티켓", url: "https://l-tike.com/" }],
+            goods: { note: "", url: null },
+            stay: { areas: v.stay },
+            images: [],            // 공연장 일정 페이지에는 공연 이미지가 없다
+            tips: "",
+            source: v.url,
+            tags: []
+          });
+        }
+      } catch (e) {
+        errors.push(`jpvenues/${v.key}: ${e.message}`);
+        log(`⚠️  ${v.venue} 실패: ${e.message}`);
+      }
+    }
+    stats.jpvenues = { count: out.length, ...per };
     return out;
   }
 
   /* ── 실행 · 병합 ────────────────────────────── */
-  const SOURCES = { kopis, tokyodome, ticketmaster };
+  const SOURCES = { kopis, jpvenues, ticketmaster };
   let all = [];
   for (const name of SOURCE_ORDER) {
     if (only && only !== name) continue;
