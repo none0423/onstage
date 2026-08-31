@@ -8,6 +8,10 @@
    ============================================================ */
 
 const UA = "onstage-collector/1.0 (personal concert dashboard; 10 users)";
+
+/* 취소·연기 공연은 제목에 표시가 붙는다. 공연 제목에만 적용한다
+   (팁이나 안내문에는 "무료 취소" 같은 무관한 표현이 들어갈 수 있다). */
+const CANCELLED = /공연\s?취소|취소\s?공연|\[\s?취소\s?\]|\(\s?취소\s?\)|중지|中止|延期|公演中止|払戻|CANCELL?ED|POSTPONED/i;
 /* Workers 무료 플랜은 호출당 50개. 리다이렉트도 1개로 세므로 여유를 두고 40 에서 멈춘다. */
 const MAX_SUBREQUESTS = 40;
 
@@ -205,6 +209,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       for (const b of blocks) {
         const r = flatParse(b);
         if (!r.mt20id || !r.prfnm || !r.prfpdfrom || !BIG_VENUE.test(r.fcltynm || "")) continue;
+        if (CANCELLED.test(r.prfnm)) continue;                                   // 취소·연기 공연 제외
         rows.push(r);
       }
       if (blocks.length < 100) break;
@@ -331,7 +336,10 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
           const [koCountry, koCity] = TM_KO[cc] || [cc, cc];
           const pr = ev.priceRanges?.[0];
           const st = ev.dates?.status?.code;
-          if (st === "cancelled") continue;
+          /* cancelled 는 취소, postponed 는 새 날짜가 정해지지 않아 기존 날짜가 무의미하다.
+             rescheduled 는 TM 이 새 날짜로 갱신해 주므로 그대로 둔다. */
+          if (st === "cancelled" || st === "postponed") continue;
+          if (CANCELLED.test(ev.name || "")) continue;
           /* TM 은 '아직 판매 시작 전' 도 offsale 로 준다. 오픈 시각이 미래면 예정으로 봐야
              '예매 마감' 으로 잘못 표시되지 않는다. */
           const openAt = ev.sales?.public?.startDateTime || null;
@@ -404,6 +412,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     const map = new Map();
     for (const r of rows) {
       if (!r.title || !r.date || NOT_CONCERT.test(r.title)) continue;
+      if (CANCELLED.test(r.title) || CANCELLED.test(r.artist || "")) continue;   // 취소·연기 공연 제외
       const cur = map.get(r.title) || { ...r, dates: [] };
       if (!cur.dates.includes(r.date)) cur.dates.push(r.date);
       if (!cur.caption && r.caption) cur.caption = r.caption;
