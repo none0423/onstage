@@ -1,6 +1,6 @@
 worker/.wrangler/
 worker/.dev.vars
-.env
+.env*
 .env.local
 tools/.debug/
 .DS_Store
