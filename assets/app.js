@@ -384,10 +384,10 @@ function cardHTML(c) {
            onerror="this.parentElement.classList.remove('has-img');this.remove()">` : "";
 
 
-  /* 가격을 모를 때는 '예매처 공지 참고' 같은 빈 문구 대신 어느 예매처를 봐야 하는지 말한다 */
+  /* 해외 공연은 어느 소스도 가격을 주지 않는다. 값이 있는 척하지 않도록
+     흐린 글씨로 예매처를 보라고만 적는다. */
   const price = priceOf(c);
-  const askPrice = `<span class="ev-noprice">가격 미정 · ${
-    esc((c.vendor && c.vendor.name) || "예매처")}에서 확인</span>`;
+  const askPrice = `<span class="ev-noprice">예매처 공지</span>`;
   const openLine =
     st.phase === "onsale"  ? (price ? esc(price) : askPrice)          // 상태는 배지에 이미 있다
     : st.phase === "upcoming" || st.phase === "today"
