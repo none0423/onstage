@@ -434,6 +434,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       if (!cur.dates.includes(r.date)) cur.dates.push(r.date);
       if (!cur.caption && r.caption) cur.caption = r.caption;
       if (!cur.artist && r.artist) cur.artist = r.artist;
+      if (!cur.price && r.price) cur.price = r.price;
       map.set(r.title, cur);
     }
     return [...map.values()].map(e => (e.dates.sort(), e));
@@ -496,6 +497,9 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const JH_DATE = /<span class="date">\s*(\d{4}\/\d{1,2}\/\d{1,2})/;
   const JH_GENRE = /<span class="bg">([^<]*)<\/span>/;
   const JH_TITLE = /class="event-ttl"[^>]*>\s*(?:<a[^>]*>)?([\s\S]*?)(?:<\/a>)?\s*<\/dt>/;
+/* 일본 공연장 4곳 중 가격을 싣는 곳은 오사카성홀뿐이다.
+   <span class="d-ttl">座席</span><span class="d-txt">…円</span> 형태로 온다. */
+  const JH_SEAT = /d-ttl">座席<\/span>\s*<span class="d-txt">([\s\S]*?)<\/span>/;
 
   function parseJoHall(html) {
     const rows = [];
@@ -504,10 +508,12 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       if (!dm) continue;
       if (!/音楽|芸能/.test(decode((blk.match(JH_GENRE) || [])[1] || ""))) continue;
       const [y, m, d] = dm[1].split("/");
+      const seat = decode((blk.match(JH_SEAT) || [])[1] || "").replace(/\s+/g, " ").trim();
       rows.push({
         date: `${y}-${d2(m)}-${d2(d)}`,
         title: decode((blk.match(JH_TITLE) || [])[1] || ""),
-        caption: ""
+        caption: "",
+        price: /円/.test(seat) ? seat : ""                                     // 가격이 아닌 좌석 설명은 버린다
       });
     }
     return mergeByTitle(rows);
@@ -595,7 +601,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
             dates: e.dates,
             doorsNote: e.caption || "공식 공지 참고",
             ticketOpen: null, ticketStatus: "예정",
-            price: "예매처 공지 참고",
+            price: e.price || "예매처 공지 참고",
             vendor: { name: "이플러스 (e+)", url: `https://eplus.jp/sf/search?keyword=${encodeURIComponent(artist)}` },
             otherVendors: [{ name: "티켓피아", url: "https://t.pia.jp/" }, { name: "로손티켓", url: "https://l-tike.com/" }],
             goods: { note: "", url: null },

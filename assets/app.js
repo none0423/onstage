@@ -198,6 +198,17 @@ function daysToShow(c) {
 function isPast(c) { return new Date(c.dates[c.dates.length - 1] + "T23:59:59") < new Date(); }
 
 /** 데이터의 ticketStatus(수동 오버라이드)가 우선, 없으면 날짜로 계산 */
+/* 소스가 가격을 주지 않을 때 수집기가 채워 넣는 자리표시자.
+   실제 값이 아니므로 '가격이 있다'고 취급하면 안 된다 — 해외 110여 건이 모두
+   이 문구라서, 그대로 두면 카드·표가 가격 정보를 가진 것처럼 보인다.
+   티켓마스터(SG·PH)는 API 자체에 가격이 없고, 일본 공연장 일정 페이지도
+   오사카성홀을 빼면 가격을 싣지 않는다. 예매처 크롤링은 하지 않는다. */
+const TBD_TEXT = /^\s*(?:(?:예매처|공식)\s*공지\s*참고|가격은?\s*예매처\s*(?:확인|문의)|미정|추후\s*공지)\s*$/;
+function priceOf(c) {
+  const p = String(c.price || "").trim();
+  return p && !TBD_TEXT.test(p) ? p : "";
+}
+
 function statusOf(c) {
   if (isPast(c)) return { badge: "공연 종료", tone: "done", phase: "past" };
   if (c.ticketStatus === "매진") return { badge: "매진", tone: "done", phase: "soldout" };
@@ -373,17 +384,23 @@ function cardHTML(c) {
            onerror="this.parentElement.classList.remove('has-img');this.remove()">` : "";
 
 
+  /* 가격을 모를 때는 '예매처 공지 참고' 같은 빈 문구 대신 어느 예매처를 봐야 하는지 말한다 */
+  const price = priceOf(c);
+  const askPrice = `<span class="ev-noprice">가격 미정 · ${
+    esc((c.vendor && c.vendor.name) || "예매처")}에서 확인</span>`;
   const openLine =
-    st.phase === "onsale"  ? esc(c.price || "가격은 예매처 확인")     // 상태는 배지에 이미 있다
+    st.phase === "onsale"  ? (price ? esc(price) : askPrice)          // 상태는 배지에 이미 있다
     : st.phase === "upcoming" || st.phase === "today"
       ? `티켓오픈 <b>${esc(fmtOpen(c.ticketOpen))}</b>`
-      : esc(c.price || "가격은 예매처 확인");        // 상태는 배지가 이미 말한다
+      : (price ? esc(price) : askPrice);            // 상태는 배지가 이미 말한다
 
   /* 상세 */
   const det = [];
-  if (c.price) det.push(`<p><b>가격</b> ${esc(c.price)}</p>`);
-  if (c.doorsNote) det.push(`<p><b>시간</b> ${esc(c.doorsNote)}</p>`);
-  if (c.goods && c.goods.note) det.push(`<p><b>굿즈</b> ${esc(c.goods.note)}</p>`);
+  const note = v => { const t = String(v || "").trim(); return t && !TBD_TEXT.test(t) ? t : ""; };
+  const doors = note(c.doorsNote), goods = note(c.goods && c.goods.note);
+  if (price) det.push(`<p><b>가격</b> ${esc(price)}</p>`);
+  if (doors) det.push(`<p><b>시간</b> ${esc(doors)}</p>`);
+  if (goods) det.push(`<p><b>굿즈</b> ${esc(goods)}</p>`);
   if (c.tips) det.push(`<p><b>팁</b> ${esc(c.tips)}</p>`);
 
   if (shots.length > 1) det.push(`
@@ -602,7 +619,7 @@ function renderCollect(list) {
         <td class="c-ven">${esc(c.venue)}<small>${esc(c.city)}</small></td>
         <td class="c-gen">${g ? `<span class="gtag">${esc(GENRE_LABEL[g])}</span>` : "—"}</td>
         <td class="c-open"><span class="st ${st.tone}">${esc(st.badge)}</span><small>${
-          c.ticketOpen ? esc(fmtOpen(c.ticketOpen)) : esc(c.price || "")}</small></td>
+          c.ticketOpen ? esc(fmtOpen(c.ticketOpen)) : esc(priceOf(c))}</small></td>
         <td class="c-ven">${esc(c.vendor.name)}${c.auto ? '<small class="auto-s">AUTO</small>' : ""}</td>
       </tr>`;
   }).join("");

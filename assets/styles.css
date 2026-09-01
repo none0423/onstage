@@ -356,6 +356,7 @@ h1,h2,h3,p{margin:0}
 .ctable td small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:2px;line-height:1.4}
 .ctable .c-date{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ctable .c-cty{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-2);white-space:nowrap}
+.ev-noprice{color:var(--ink-3)}
 .ctable .c-gen{white-space:nowrap}
 /* 긴 부제(공연명·가격 목록)는 감싸야 한다 — nowrap이면 표가 화면의 두 배까지 늘어난다 */
 .ctable .st{white-space:nowrap}

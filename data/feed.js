@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-09-01T09:01:35.095Z";
+const FEED_UPDATED = "2026-09-01T10:38:17.118Z";
 
 const FEED = [
   {
@@ -925,7 +925,7 @@ const FEED = [
     "doorsNote": "공식 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
+    "price": "全席指定（NAKAMA会員限定・記念品付き）10,500円 車イス席（NAKAMA会員限定・記念品付き）10,500円",
     "vendor": {
       "name": "이플러스 (e+)",
       "url": "https://eplus.jp/sf/search?keyword=BOYNEXTDOOR"
