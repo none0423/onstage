@@ -312,8 +312,15 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   }
 
   /* ── 2. Ticketmaster Discovery API (아시아) ── */
-  const TM_COUNTRIES = ["SG", "MY"];   // TM 운영국 중 아시아. JP·KR·TW·HK·TH 는 미운영
-  const TM_KO = { SG: ["싱가포르", "싱가포르"], MY: ["말레이시아", "쿠알라룸푸르"] };
+  /* Discovery API 로 국가별 건수를 실제 조회해 확인한 목록이다.
+     TW·HK·TH·ID·VN·JP·KR 은 0건 — Ticketmaster 가 운영하지 않는다.
+     MY 도 현재 0건이지만 요청 1개라 남겨 둔다. */
+  const TM_COUNTRIES = ["SG", "PH", "MY"];
+  const TM_KO = {
+    SG: ["싱가포르", "싱가포르"],
+    PH: ["필리핀", "마닐라"],
+    MY: ["말레이시아", "쿠알라룸푸르"]
+  };
 
   /* 가로형(16_9 → 3_2) 중 폭 640 이상을 우선해 최대 2장 */
   function pickTmImages(list) {

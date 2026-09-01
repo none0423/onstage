@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-09-01T08:25:55.404Z";
+const FEED_UPDATED = "2026-09-01T09:01:35.095Z";
 
 const FEED = [
   {
@@ -3197,6 +3197,44 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "tm-Z8ymWIMJlyZgcZ7aee",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "Moira Dela Torre",
+    "tour": "Moira: Where It All Started Concert",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "Pasay",
+    "venue": "SM Mall of Asia Arena",
+    "mapQuery": "SM Mall of Asia Arena Pasay",
+    "dates": [
+      "2026-10-04"
+    ],
+    "doorsNote": "20:00 시작",
+    "ticketOpen": "2026-08-04T04:00:00Z",
+    "ticketStatus": "판매중",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/239/ddde4044-87b1-444e-a51d-89d96e2c6239_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/239/ddde4044-87b1-444e-a51d-89d96e2c6239_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/26ph_moira/3811"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/26ph_moira/3811",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
+  },
+  {
     "id": "kopis-PF299753",
     "auto": true,
     "sourceName": "KOPIS",
@@ -4345,6 +4383,44 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "tm-Z8ymWIMJlyZgcZ7aF7",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "ONE OR EIGHT",
+    "tour": "ONE OR EIGHT Special SHOW CASE 2026 in ASIA -V8- Tour in Manila",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "마닐라",
+    "venue": "Samsung Hall",
+    "mapQuery": "Samsung Hall",
+    "dates": [
+      "2026-10-23"
+    ],
+    "doorsNote": "20:00 시작",
+    "ticketOpen": "2026-08-31T04:00:00Z",
+    "ticketStatus": "판매중",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/745/b74a7881-df5d-4080-8457-f748ba0db745_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/745/b74a7881-df5d-4080-8457-f748ba0db745_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/26ph_oneoreight/3873"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/26ph_oneoreight/3873",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
+  },
+  {
     "id": "kopis-PF299842",
     "auto": true,
     "sourceName": "KOPIS",
@@ -5380,6 +5456,44 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "tm-Z8ymWIMJlyZgcZ7AA6",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "Wave To Earth",
+    "tour": "wave to earth - the pieces tour",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "Pasay",
+    "venue": "SM Mall of Asia Arena",
+    "mapQuery": "SM Mall of Asia Arena Pasay",
+    "dates": [
+      "2026-11-15"
+    ],
+    "doorsNote": "00:00 시작",
+    "ticketOpen": "2026-05-26T04:00:00Z",
+    "ticketStatus": "판매중",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/834/37641215-ed2e-4ecb-b34a-1c837d74b834_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/834/37641215-ed2e-4ecb-b34a-1c837d74b834_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/26ph_wavetoearth/3446"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/26ph_wavetoearth/3446",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
+  },
+  {
     "id": "kopis-PF297787",
     "auto": true,
     "sourceName": "KOPIS",
@@ -6158,6 +6272,82 @@ const FEED = [
       "Pop"
     ],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "tm-Z8ymWIMJlyZgcZ7k7k",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "5 Seconds of Summer",
+    "tour": "5 SECONDS OF SUMMER: EVERYONE'S A STAR! WORLD TOUR",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "Pasay",
+    "venue": "SM Mall of Asia Arena",
+    "mapQuery": "SM Mall of Asia Arena Pasay",
+    "dates": [
+      "2026-11-29"
+    ],
+    "doorsNote": "00:00 시작",
+    "ticketOpen": "2026-06-23T04:00:00Z",
+    "ticketStatus": "판매중",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/ce2/922873d9-c41f-461b-9486-5c5adab78ce2_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/ce2/922873d9-c41f-461b-9486-5c5adab78ce2_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/26ph_5sos/3535"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/26ph_5sos/3535",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
+  },
+  {
+    "id": "tm-Z8ymWIMJlyZgcZ7kAA",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "5 Seconds of Summer",
+    "tour": "UPGRADE-BITE THE APPLE",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "Pasay",
+    "venue": "SM Mall of Asia Arena",
+    "mapQuery": "SM Mall of Asia Arena Pasay",
+    "dates": [
+      "2026-11-29"
+    ],
+    "doorsNote": "00:00 시작",
+    "ticketOpen": "2026-06-23T05:00:00Z",
+    "ticketStatus": "판매중",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/ce2/922873d9-c41f-461b-9486-5c5adab78ce2_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/ce2/922873d9-c41f-461b-9486-5c5adab78ce2_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/26ph_5sos/3544"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/26ph_5sos/3544",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
   },
   {
     "id": "jp-td-2026-12-01-ENHYPEN",
@@ -8044,6 +8234,44 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "tm-Z8ymWIMJlyZgcZ7aek",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "Maroon 5",
+    "tour": "Maroon 5 Asia 2027 Tour in Manila",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "Pasay",
+    "venue": "SM Mall of Asia Arena",
+    "mapQuery": "SM Mall of Asia Arena Pasay",
+    "dates": [
+      "2027-02-07"
+    ],
+    "doorsNote": "00:00 시작",
+    "ticketOpen": "2026-08-15T04:00:00Z",
+    "ticketStatus": "판매중",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/2ab/f42abc1a-368b-4c68-91f3-fa853004e2ab_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/2ab/f42abc1a-368b-4c68-91f3-fa853004e2ab_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/27ph_maroon5/3815"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/27ph_maroon5/3815",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
+  },
+  {
     "id": "jp-td-2027-02-10-XG",
     "auto": true,
     "sourceName": "도쿄돔 공식",
@@ -8354,6 +8582,44 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "tm-Z8ymWIMJlyZgcZ7aFd",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "BIGBANG",
+    "tour": "BIGBANG 2026-2027 WORLD TOUR < XX : COSMOS > IN MANILA",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "마닐라",
+    "venue": "SMDC Festival Grounds",
+    "mapQuery": "SMDC Festival Grounds",
+    "dates": [
+      "2027-02-20"
+    ],
+    "doorsNote": "00:00 시작",
+    "ticketOpen": "2026-09-17T02:00:00Z",
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/b72/65ea89f1-6d42-4904-a3e8-c05dd0b5ab72_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/b72/65ea89f1-6d42-4904-a3e8-c05dd0b5ab72_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/27ph_bigbang2027/3872"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/27ph_bigbang2027/3872",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
+  },
+  {
     "id": "tm-Z8ymWIMJlyZziZ7akv",
     "auto": true,
     "sourceName": "Ticketmaster",
@@ -8618,5 +8884,81 @@ const FEED = [
       "Pop"
     ],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "tm-Z8ymWIMJlyZgcZ7a66",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "Bruno Mars",
+    "tour": "Bruno Mars - The Romantic Tour",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "마닐라",
+    "venue": "Philippine Arena",
+    "mapQuery": "Philippine Arena",
+    "dates": [
+      "2027-05-15"
+    ],
+    "doorsNote": "00:00 시작",
+    "ticketOpen": "2026-09-14T04:00:00Z",
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/386/bdd143e5-4726-49af-9523-7927682c9386_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/386/bdd143e5-4726-49af-9523-7927682c9386_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/27ph_brunomars/3866"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/27ph_brunomars/3866",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
+  },
+  {
+    "id": "tm-Z8ymWIMJlyZgcZ7a6F",
+    "auto": true,
+    "sourceName": "Ticketmaster",
+    "artist": "Bruno Mars",
+    "tour": "Bruno Mars - The Romantic Tour",
+    "category": "asia",
+    "country": "필리핀",
+    "city": "마닐라",
+    "venue": "Philippine Arena",
+    "mapQuery": "Philippine Arena",
+    "dates": [
+      "2027-05-16"
+    ],
+    "doorsNote": "00:00 시작",
+    "ticketOpen": "2026-09-14T04:00:00Z",
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "images": [
+      "https://s1.ticketm.net/dam/a/386/bdd143e5-4726-49af-9523-7927682c9386_TABLET_LANDSCAPE_16_9.jpg",
+      "https://s1.ticketm.net/dam/a/386/bdd143e5-4726-49af-9523-7927682c9386_RETINA_LANDSCAPE_16_9.jpg"
+    ],
+    "vendor": {
+      "name": "Ticketmaster PH",
+      "url": "https://ticketmaster.ph/ticket/area/27ph_brunomars/3867"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "source": "https://ticketmaster.ph/ticket/area/27ph_brunomars/3867",
+    "tags": [
+      "Pop"
+    ],
+    "firstSeen": "2026-09-01T09:01:35.069Z"
   }
 ];
