@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-09-01T13:24:45.165Z";
+const FEED_UPDATED = "2026-09-01T13:37:11.174Z";
 
 const FEED = [
   {
@@ -37,11 +37,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%96%B0%E3%81%97%E3%81%84%E5%9C%B0%E5%9B%B3"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=%E6%96%B0%E3%81%97%E3%81%84%E5%9C%B0%E5%9B%B3"
       }
     ],
     "goods": {
@@ -100,11 +100,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
       }
     ],
     "goods": {
@@ -579,11 +579,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=DREAMS%20COME%20TRUE"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=DREAMS%20COME%20TRUE"
       }
     ],
     "goods": {
@@ -642,11 +642,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Byeon%20WooSeok"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Byeon%20WooSeok"
       }
     ],
     "goods": {
@@ -856,11 +856,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84"
       }
     ],
     "goods": {
@@ -957,11 +957,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BOYNEXTDOOR"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=BOYNEXTDOOR"
       }
     ],
     "goods": {
@@ -1283,11 +1283,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=TWS"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=TWS"
       }
     ],
     "goods": {
@@ -1534,11 +1534,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=INI"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=INI"
       }
     ],
     "goods": {
@@ -2081,17 +2081,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Stray%20Kids"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=9&cat=#event2026-09-19"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Stray%20Kids"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Stray%20Kids"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Stray%20Kids"
       }
     ],
     "goods": {
@@ -2150,11 +2154,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=FANTASTICS"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=FANTASTICS"
       }
     ],
     "goods": {
@@ -2326,11 +2330,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=SUPER%20BEAVER"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=SUPER%20BEAVER"
       }
     ],
     "goods": {
@@ -2379,17 +2383,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=BABYMONSTER"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=9&cat=#event2026-09-22"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BABYMONSTER"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BABYMONSTER"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=BABYMONSTER"
       }
     ],
     "goods": {
@@ -2448,11 +2456,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=EXILE%20THE%20SECOND"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=EXILE%20THE%20SECOND"
       }
     ],
     "goods": {
@@ -2699,11 +2707,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=AKB48"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=AKB48"
       }
     ],
     "goods": {
@@ -2838,11 +2846,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=AKB48"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=AKB48"
       }
     ],
     "goods": {
@@ -4605,17 +4613,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=10&cat=#event2026-10-24"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=YOASOBI"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=YOASOBI"
       }
     ],
     "goods": {
@@ -4786,11 +4798,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=MTV%20VMAJ%202026"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=MTV%20VMAJ%202026"
       }
     ],
     "goods": {
@@ -5085,11 +5097,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Stray%20Kids"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Stray%20Kids"
       }
     ],
     "goods": {
@@ -5362,17 +5374,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=INI"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=11&cat=#event2026-11-14"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=INI"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=INI"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=INI"
       }
     ],
     "goods": {
@@ -5685,17 +5701,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=MAMA%20AWARDS"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=11&cat=#event2026-11-20"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=MAMA%20AWARDS"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=MAMA%20AWARDS"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=MAMA%20AWARDS"
       }
     ],
     "goods": {
@@ -5980,11 +6000,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E8%B6%85%E7%89%B9%E6%80%A5"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=%E8%B6%85%E7%89%B9%E6%80%A5"
       }
     ],
     "goods": {
@@ -6072,17 +6092,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=BIGBANG"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=11&cat=#event2026-11-27"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BIGBANG"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BIGBANG"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=BIGBANG"
       }
     ],
     "goods": {
@@ -6443,11 +6467,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=ENHYPEN"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=ENHYPEN"
       }
     ],
     "goods": {
@@ -6495,17 +6519,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Number_i"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=12&cat=#event2026-12-02"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Number_i"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Number_i"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Number_i"
       }
     ],
     "goods": {
@@ -6827,11 +6855,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=YOASOBI"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=YOASOBI"
       }
     ],
     "goods": {
@@ -6880,17 +6908,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=EXILE"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=12&cat=#event2026-12-05"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=EXILE"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=EXILE"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=EXILE"
       }
     ],
     "goods": {
@@ -7023,11 +7055,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Number_i"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Number_i"
       }
     ],
     "goods": {
@@ -7077,17 +7109,21 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=%E8%97%A4%E4%BA%95%E9%A2%A8"
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=12&cat=#event2026-12-10"
     },
     "otherVendors": [
       {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E8%97%A4%E4%BA%95%E9%A2%A8"
+      },
+      {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E8%97%A4%E4%BA%95%E9%A2%A8"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=%E8%97%A4%E4%BA%95%E9%A2%A8"
       }
     ],
     "goods": {
@@ -7226,11 +7262,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BIGBANG%202026"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=BIGBANG%202026"
       }
     ],
     "goods": {
@@ -7327,11 +7363,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Fujii%20Kaze"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Fujii%20Kaze"
       }
     ],
     "goods": {
@@ -7429,11 +7465,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Snow%20Man"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Snow%20Man"
       }
     ],
     "goods": {
@@ -7868,11 +7904,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BE%3AFIRST"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=BE%3AFIRST"
       }
     ],
     "goods": {
@@ -8119,11 +8155,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Bruno%20Mars%20-%20The%20Romantic"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Bruno%20Mars%20-%20The%20Romantic"
       }
     ],
     "goods": {
@@ -8183,11 +8219,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Maroon%205"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Maroon%205"
       }
     ],
     "goods": {
@@ -8245,11 +8281,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Da-iCE%20DAY"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=Da-iCE%20DAY"
       }
     ],
     "goods": {
@@ -8308,11 +8344,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BUMP%20OF%20CHICKEN"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=BUMP%20OF%20CHICKEN"
       }
     ],
     "goods": {
@@ -8408,11 +8444,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=XG"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=XG"
       }
     ],
     "goods": {
@@ -8470,11 +8506,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=XG"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=XG"
       }
     ],
     "goods": {
@@ -8571,11 +8607,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=TOKYO%20SPACESHIP%202027"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=TOKYO%20SPACESHIP%202027"
       }
     ],
     "goods": {
@@ -8634,11 +8670,11 @@ const FEED = [
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=King%20Gnu"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/"
+        "url": "https://l-tike.com/search/?keyword=King%20Gnu"
       }
     ],
     "goods": {

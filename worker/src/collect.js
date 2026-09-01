@@ -492,7 +492,12 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       if (!/コンサート|ライブ|イベント/.test(cat)) continue;
       const artist = decode((box.match(KY_H1) || [])[1] || "");
       const tour = decode((box.match(KY_H2) || [])[1] || "");
-      rows.push({ date, artist, title: tour || artist, caption: decode((box.match(KY_OPEN) || [])[1] || "") });
+      /* 교세라돔은 공연별 외부 링크를 달지 않지만, 일정 페이지 자체에 날짜 앵커가 있다.
+         그 앵커로 보내면 최소한 '이 공연'의 안내로 정확히 떨어진다. */
+      const [ky, km] = date.split("-");
+      const link = `https://www.kyoceradome-osaka.jp/schedule/?yearId=${ky}&monthId=${Number(km)}&cat=#event${date}`;
+      rows.push({ date, artist, title: tour || artist, link,
+                  caption: decode((box.match(KY_OPEN) || [])[1] || "") });
     }
     return mergeByTitle(rows);
   }
@@ -612,7 +617,15 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         for (const e of found) {
           const artist = e.artist || splitTitle(e.title).artist;
           const tour = e.artist ? e.title : (splitTitle(e.title).tour || `${v.venue} 공연`);
-          const eplus = `https://eplus.jp/sf/search?keyword=${encodeURIComponent(searchKeyword(artist))}`;
+          /* 일본은 공연마다 취급 예매처가 갈린다(e+ · ぴあ · ローソン). 한 곳만 걸어 두면
+             그 예매처가 안 파는 공연은 검색 결과가 비어 막다른 길이 된다. 셋 다 검색으로 건다.
+             URL 형식은 각 사이트의 검색 폼에서 확인했다. */
+          const kw = encodeURIComponent(searchKeyword(artist));
+          const eplus = `https://eplus.jp/sf/search?keyword=${kw}`;
+          const jpSearches = [
+            { name: "티켓피아", url: `https://t.pia.jp/pia/search_all.do?kw=${kw}` },
+            { name: "로손티켓", url: `https://l-tike.com/search/?keyword=${kw}` }
+          ];
           out.push({
             id: `jp-${v.key}-${e.dates[0]}-${artist.replace(/[^\w가-힣ぁ-んァ-ヶ一-龠]/g, "").slice(0, 20) || "event"}`,
             auto: true, sourceName: `${v.venue} 공식`,
@@ -630,8 +643,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
               : { name: "이플러스 (e+)", url: eplus },
             otherVendors: [
               ...(e.link ? [{ name: "이플러스 (e+)", url: eplus }] : []),
-              { name: "티켓피아", url: "https://t.pia.jp/" },
-              { name: "로손티켓", url: "https://l-tike.com/" }
+              ...jpSearches
             ],
             goods: { note: "", url: null },
             stay: { areas: v.stay },
