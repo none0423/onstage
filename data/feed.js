@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-08-31T17:06:21.624Z";
+const FEED_UPDATED = "2026-09-01T08:09:40.919Z";
 
 const FEED = [
   {
@@ -853,7 +853,7 @@ const FEED = [
     "id": "kopis-PF298758",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": true,
     "artist": "뮤즈온 페스티벌",
     "tour": "서울 공연",
@@ -866,13 +866,13 @@ const FEED = [
       "2026-09-09",
       "2026-09-13"
     ],
-    "doorsNote": "수요일 ~ 금요일(19:30), 토요일 ~ 일요일(17:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "전석무료",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "29CM",
-      "url": "https://ticket.29cm.co.kr/catalog/4128674"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%EB%AE%A4%EC%A6%88%EC%98%A8%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
     },
     "otherVendors": [],
     "goods": {
@@ -986,8 +986,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": false,
     "period": true,
-    "artist": "존박",
-    "tour": "콘서트: BREAK!",
+    "artist": "존박 콘서트: BREAK!",
+    "tour": "서울 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "서울",
@@ -2423,8 +2423,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": true,
     "period": true,
-    "artist": "Redoor 단독콘서트",
-    "tour": "Memory",
+    "artist": "Redoor",
+    "tour": "단독콘서트: Memory",
     "category": "domestic",
     "country": "대한민국",
     "city": "서울",
@@ -3146,6 +3146,10 @@ const FEED = [
     },
     "otherVendors": [
       {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1725278"
+      },
+      {
         "name": "2TM(우리은행)",
         "url": "https://www.2tm.co.kr/ticket/10663"
       }
@@ -3167,8 +3171,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": false,
     "period": false,
-    "artist": "힙합",
-    "tour": "콘서트, ASMBL CRSH: SEOUL",
+    "artist": "힙합 콘서트, ASMBL CRSH: SEOUL",
+    "tour": "서울 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "서울",
@@ -3616,8 +3620,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": true,
     "period": false,
-    "artist": "하루",
-    "tour": "첫 팬 콘서트: 오늘, 하루: 처음 들려주는 이야기",
+    "artist": "하루 첫 팬 콘서트: 오늘, 하루: 처음 들려주는 이야기",
+    "tour": "부산 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "부산",
@@ -3766,8 +3770,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": false,
     "period": false,
-    "artist": "NOL",
-    "tour": "FESTIVAL: DAY 1, SUPER LIVE STAGE",
+    "artist": "NOL FESTIVAL: DAY 1, SUPER LIVE STAGE",
+    "tour": "경기 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "경기",
@@ -3802,8 +3806,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": false,
     "period": false,
-    "artist": "NOL",
-    "tour": "FESTIVAL: DAY 1, K-POP STAGE",
+    "artist": "NOL FESTIVAL: DAY 1, K-POP STAGE",
+    "tour": "경기 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "경기",
@@ -3838,8 +3842,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": false,
     "period": false,
-    "artist": "NOL",
-    "tour": "FESTIVAL: DAY 1, EDM STAGE",
+    "artist": "NOL FESTIVAL: DAY 1, EDM STAGE",
+    "tour": "경기 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "경기",
@@ -3948,8 +3952,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": false,
     "period": false,
-    "artist": "NOL",
-    "tour": "FESTIVAL: DAY 2, SUPER LIVE STAGE",
+    "artist": "NOL FESTIVAL: DAY 2, SUPER LIVE STAGE",
+    "tour": "경기 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "경기",
@@ -3984,8 +3988,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": false,
     "period": false,
-    "artist": "NOL",
-    "tour": "FESTIVAL: DAY 2, K-POP STAGE",
+    "artist": "NOL FESTIVAL: DAY 2, K-POP STAGE",
+    "tour": "경기 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "경기",
@@ -4235,13 +4239,50 @@ const FEED = [
     ]
   },
   {
+    "id": "kopis-PF299842",
+    "auto": true,
+    "sourceName": "KOPIS",
+    "kopisDetail": true,
+    "period": true,
+    "artist": "소수빈",
+    "tour": "단독공연: 늘 그래왔던 것처럼 앞으로도",
+    "category": "domestic",
+    "country": "대한민국",
+    "city": "서울",
+    "venue": "올림픽공원",
+    "mapQuery": "올림픽공원",
+    "dates": [
+      "2026-10-24",
+      "2026-10-25"
+    ],
+    "doorsNote": "토요일(18:00), 일요일(17:00)",
+    "ticketOpen": null,
+    "ticketStatus": "판매중",
+    "price": "전석 132,000원",
+    "vendor": {
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26012327"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "images": [
+      "https://kopis.or.kr/upload/pfmPoster/PF_PF299842_260901_135312.gif"
+    ],
+    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299842",
+    "tags": []
+  },
+  {
     "id": "kopis-PF299310",
     "auto": true,
     "sourceName": "KOPIS",
     "kopisDetail": true,
     "period": false,
-    "artist": "스카 페스티벌 10주년 기념공연 SKA",
-    "tour": "FESTIVAL: Super-Swag",
+    "artist": "스카 페스티벌 10주년 기념공연 SKA FESTIVAL: Super-Swag",
+    "tour": "서울 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "서울",
@@ -4574,8 +4615,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": true,
     "period": false,
-    "artist": "EverBlue",
-    "tour": "Festival 에버블루 페스티벌",
+    "artist": "EverBlue Festival 에버블루 페스티벌",
+    "tour": "대구 공연",
     "category": "domestic",
     "country": "대한민국",
     "city": "대구",
@@ -4818,6 +4859,42 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
+    "tags": []
+  },
+  {
+    "id": "kopis-PF299827",
+    "auto": true,
+    "sourceName": "KOPIS",
+    "kopisDetail": true,
+    "period": false,
+    "artist": "AKANE YONEZAWA, Black Pasta",
+    "tour": "TOUR",
+    "category": "domestic",
+    "country": "대한민국",
+    "city": "서울",
+    "venue": "예스24 원더로크홀",
+    "mapQuery": "예스24 원더로크홀",
+    "dates": [
+      "2026-11-07"
+    ],
+    "doorsNote": "토요일(18:00)",
+    "ticketOpen": null,
+    "ticketStatus": "판매중",
+    "price": "VIP석 160,000원, GA석 110,000원",
+    "vendor": {
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59781"
+    },
+    "otherVendors": [],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "images": [
+      "https://kopis.or.kr/upload/pfmPoster/PF_PF299827_260901_131413.jpg"
+    ],
+    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299827",
     "tags": []
   },
   {
@@ -6461,8 +6538,8 @@ const FEED = [
     "sourceName": "KOPIS",
     "kopisDetail": true,
     "period": false,
-    "artist": "슬로우다이브 내한",
-    "tour": "공연",
+    "artist": "슬로우다이브",
+    "tour": "내한 공연",
     "category": "visit",
     "country": "대한민국",
     "city": "서울",
@@ -6645,6 +6722,47 @@ const FEED = [
     "tags": []
   },
   {
+    "id": "kopis-PF299848",
+    "auto": true,
+    "sourceName": "KOPIS",
+    "kopisDetail": true,
+    "period": false,
+    "artist": "홈커밍스",
+    "tour": "내한 공연: You are you, even if no one fill in about you.",
+    "category": "visit",
+    "country": "대한민국",
+    "city": "서울",
+    "venue": "무신사 개러지 (구. 왓챠홀)",
+    "mapQuery": "무신사 개러지 (구. 왓챠홀)",
+    "dates": [
+      "2026-12-13"
+    ],
+    "doorsNote": "일요일(17:00)",
+    "ticketOpen": null,
+    "ticketStatus": "판매중",
+    "price": "전석 스탠딩 88,000원",
+    "vendor": {
+      "name": "멜론티켓",
+      "url": "https://ticket.melon.com/performance/index.htm?prodId=213806"
+    },
+    "otherVendors": [
+      {
+        "name": "29CM",
+        "url": "https://ticket.29cm.co.kr/catalog/4173556"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "tips": "",
+    "images": [
+      "https://kopis.or.kr/upload/pfmPoster/PF_PF299848_260901_141354.png"
+    ],
+    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299848",
+    "tags": []
+  },
+  {
     "id": "jp-td-2026-12-13-BIGBANG2026",
     "auto": true,
     "sourceName": "도쿄돔 공식",
@@ -6802,7 +6920,7 @@ const FEED = [
     "id": "kopis-PF298903",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": false,
     "artist": "카와사키 타카야",
     "tour": "내한공연 KAWASAKI TAKAYA LIVE",
@@ -6814,13 +6932,13 @@ const FEED = [
     "dates": [
       "2026-12-20"
     ],
-    "doorsNote": "일요일(18:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "지정석 121,000원, 스탠딩 110,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "예스24",
-      "url": "https://ticket.yes24.com/Perf/59669"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%EC%B9%B4%EC%99%80%EC%82%AC%ED%82%A4%20%ED%83%80%EC%B9%B4%EC%95%BC%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0%20KAWASAKI%20TAKAYA%20LIVE%20%5B%EC%84%9C%EC%9A%B8%5D"
     },
     "otherVendors": [],
     "goods": {
@@ -6971,7 +7089,7 @@ const FEED = [
     "id": "kopis-PF298787",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": true,
+    "kopisDetail": false,
     "period": true,
     "artist": "원웨이 페스티벌",
     "tour": "경기 공연",
@@ -6984,13 +7102,13 @@ const FEED = [
       "2026-12-26",
       "2026-12-27"
     ],
-    "doorsNote": "토요일 ~ 일요일(12:00)",
+    "doorsNote": "예매처 공지 참고",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "슈퍼얼리버드 2일권 66,000원",
+    "price": "예매처 공지 참고",
     "vendor": {
-      "name": "멜론티켓",
-      "url": "https://ticket.melon.com/performance/index.htm?prodId=213769"
+      "name": "NOL 티켓",
+      "url": "https://tickets.interpark.com/search?keyword=%EC%9B%90%EC%9B%A8%EC%9D%B4%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
     },
     "otherVendors": [],
     "goods": {

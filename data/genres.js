@@ -73,7 +73,7 @@ const ARTIST_GENRE = {
   "SPYAIR": "rock", "ONEWE": "rock", "FTISLAND": "rock", "엔플라잉": "rock",
   "Touche Amore": "rock", "잔다리": "rock", "KANA-BOON": "rock",
   "THE VOLUNTEERS": "rock", "슬로우다이브": "rock", "Slowdive": "rock",
-  "Redoor": "rock", "리도어": "rock",
+  "Redoor": "rock", "리도어": "rock", "홈커밍스": "rock", "Homecomings": "rock",
   "APF": "rock",                    /* Sunny Day Service 내한을 APF 가 주최 — 아티스트명이 주최사로 파싱됨 */
   "Sunny Day Service": "rock", "S,LO,W SERIES": "rock",
 
@@ -88,7 +88,7 @@ const ARTIST_GENRE = {
   "김건모": "ballad", "김장훈": "ballad", "조관우": "ballad", "박효신": "ballad",
   "이수": "ballad", "규현": "ballad", "김범수": "ballad", "이승기": "ballad",
   "스테이지 네임": "ballad", "정승환": "ballad", "김필": "ballad", "홍이삭": "ballad",
-  "더 스카웃": "ballad", "10CM": "ballad",
+  "더 스카웃": "ballad", "10CM": "ballad", "소수빈": "ballad",
   "THE MAIN VOCALS": "ballad",      /* 보컬리스트 프리미엄 라이브 */
 
   /* ── 트로트 ────────────────────────── */
@@ -101,12 +101,14 @@ const ARTIST_GENRE = {
 /* 대응표에 없을 때 공연 제목에서 잡아내는 규칙 (앞에서부터 먼저 맞는 것) */
 const GENRE_KEYWORDS = [
   ["etc",      /어워즈|AWARDS|시상식|가요제|VMAJ|\bMAMA\b|뮤직어워드/i],
-  ["festival", /페스티벌|페스타|FESTIVAL|\bFES\b|\bFEST\b|\bFESTA\b/i],
+  /* 구체적인 장르를 먼저 본다. '대구 힙합 페스티벌' 은 페스티벌보다 힙합이 쓸모 있다. */
   ["kpop",     /K-?POP|케이팝/i],
   ["trot",     /트로트|미스터트롯|미스트롯/i],
   ["hiphop",   /힙합|HIPHOP|HIP-?HOP|\bRAP\b|\bR&B\b/i],
-  ["rock",     /밴드|\bBAND\b|\bROCK\b|\bPUNK\b|메탈|\bMETAL\b/i],
-  ["etc",      /클래식|오케스트라|필하모닉|재즈|\bJAZZ\b|국악/i]
+  ["rock",     /밴드|\bBAND\b|\bROCK\b|\bPUNK\b|메탈|\bMETAL\b|스카\b|\bSKA\b/i],
+  ["etc",      /클래식|오케스트라|필하모닉|재즈|\bJAZZ\b|국악/i],
+  /* 장르를 못 잡은 행사만 페스티벌로 */
+  ["festival", /페스티벌|페스타|FESTIVAL|\bFES\b|\bFEST\b|\bFESTA\b/i]
 ];
 
 /* Ticketmaster classifications.genre → 우리 분류.

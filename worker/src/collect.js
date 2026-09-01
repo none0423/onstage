@@ -166,13 +166,20 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
                      말레이시아: ["asia", "말레이시아"], 인도네시아: ["asia", "인도네시아"], 베트남: ["asia", "베트남"] };
   /* 공연 제목을 아티스트 / 투어명으로 나눈다: "쏜애플 콘서트: 나의 세기 [부산]" → 쏜애플 / 콘서트: 나의 세기 */
   const TRAILING_REGION = /\s*\[[^\]]*\]\s*$/;
-  const SHOW_KIND = /\s(?=(?:단독\s?공연|전국투어|클럽\s?투어|월드투어|아시아\s?투어|팬\s?콘서트|팬미팅|내한공연|콘서트|리사이틀|공연|FAN\s?CONCERT|FANCON|CONCERT|WORLD\s?TOUR|ASIA\s?TOUR|TOUR|LIVE|SHOW|FESTIVAL))/i;
+  /* FESTIVAL 은 넣지 않는다 — "NOL FESTIVAL" 처럼 행사 이름 자체에 들어가는 경우가 많아
+     여기서 자르면 아티스트가 "NOL" 로 남는다. 페스티벌은 제목 전체가 행사명이다. */
+  const SHOW_KIND = /\s(?=(?:단독\s?공연|단독\s?콘서트|전국투어|클럽\s?투어|월드투어|아시아\s?투어|팬\s?콘서트|팬미팅|내한공연|콘서트|리사이틀|공연|FAN\s?CONCERT|FANCON|CONCERT|WORLD\s?TOUR|ASIA\s?TOUR|TOUR|LIVE|SHOW))/i;
   const TRAILING_ORDINAL = /\s+\d+\s*(?:st|nd|rd|th)?$/i;
   /* 아티스트명 뒤에 붙는 수식어 ("자라 라슨 첫 단독" → "자라 라슨"). 떼어낸 말은 투어명 앞으로 옮긴다. */
-  const TRAILING_MODIFIER = /\s+(첫\s*번째|첫|단독|솔로|앵콜|앙코르|ENCORE|SOLO|ASIA|WORLD|ARENA|DOME|STADIUM|JAPAN|GLOBAL)$/i;
+  const TRAILING_MODIFIER = /\s+(첫\s*번째|첫|단독|솔로|내한|앵콜|앙코르|ENCORE|SOLO|ASIA|WORLD|ARENA|DOME|STADIUM|JAPAN|GLOBAL)$/i;
+
+  const IS_FESTIVAL = /FESTIVAL|FESTA|페스티벌|페스타/i;
 
   function splitKopisTitle(raw, city) {
     const t = raw.replace(TRAILING_REGION, "").trim();
+    /* 페스티벌은 제목 전체가 행사 이름이다. 아무 데서나 자르면
+       "NOL FESTIVAL: DAY 1, SUPER" / "LIVE STAGE" 처럼 엉뚱하게 쪼개진다. */
+    if (IS_FESTIVAL.test(t)) return { artist: t, tour: `${city} 공연` };
     let artist = t, tour = "";
     const i = t.search(SHOW_KIND);
     if (i > 0) { artist = t.slice(0, i).trim(); tour = t.slice(i).trim(); }
@@ -188,6 +195,9 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       artist = artist.slice(0, m.index).trim();
     }
     if (moved.length) tour = `${moved.join(" ")} ${tour}`.trim();
+    /* "힙합 콘서트, …" 처럼 앞부분이 아티스트가 아닌 경우가 있다.
+       2자 이하로 잘렸으면 잘못 자른 것으로 보고 제목을 그대로 쓴다. */
+    if (artist.replace(/\s/g, "").length <= 2) return { artist: t, tour: `${city} 공연` };
     return { artist: artist || t, tour: tour || `${city} 공연` };
   }
   /* KOPIS 상세의 relates 에서 고를 예매처 우선순위 (앞일수록 우선) */
