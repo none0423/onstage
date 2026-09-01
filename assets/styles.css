@@ -210,6 +210,18 @@ h1,h2,h3,p{margin:0}
   .guide-grid{grid-template-columns:1fr 1fr}
   .sticky-note{position:static;display:inline-block;margin-top:32px;transform:rotate(-2deg)}
 }
+/* 카드 앞면에 항공 블록이 있으므로 상세의 사본은 넓은 화면에서 숨긴다 */
+.det-flight{display:none}
+.det-route{font-size:12.5px;color:var(--ink-2);margin:2px 0 8px}
+
+.more-btn{
+  display:none;width:100%;padding:16px;margin:-64px 0 80px;
+  background:var(--paper-2);border:1px solid var(--line);cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink);
+}
+.more-btn:hover{background:var(--lime)}
+.collect-toggle{display:none}
+
 @media (max-width:760px){
   .wrap{padding:0 20px}
   .nav-in{height:62px;gap:14px}
@@ -402,4 +414,43 @@ h1,h2,h3,p{margin:0}
 .grid-hint{
   font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3);
   margin:-8px 0 12px;
+}
+
+/* ── 모바일 압축 카드 ────────────────────────────────
+   반드시 파일 끝에 둔다. .ev-flight 같은 규칙이 위쪽 '항공·숙소' 절에서
+   같은 명시도로 다시 선언되므로, 미디어쿼리가 앞에 있으면 덮인다.
+   카드 한 장이 604px(화면의 0.74배)라 222장이면 144화면이 됐다.
+   포스터·중복 문구·CTA 를 걷어 내고, 빠지는 항공 정보는 상세 토글로 옮긴다. */
+@media (max-width:760px){
+  .grid{margin-bottom:0}
+
+  .ev-art{display:block;aspect-ratio:auto;min-height:0;padding:13px 16px 9px}
+  .ev-art .ev-poster,.ev-art .ev-blur{display:none}
+  .ev-badge,.ev-genre{position:static;display:inline-block;vertical-align:middle}
+  .ev-genre{margin-left:6px}
+  .ev-tour{display:none}
+  .ev-name{font-size:19px;line-height:1.25;margin:5px 0 0;-webkit-line-clamp:2}
+
+  .ev-body{padding:9px 16px 13px}
+  .ev-title{display:none}                    /* 아티스트·도시 — 위 제목과 겹친다 */
+  .ev-sub{font-size:12.5px;margin:0}
+  .ev-open{font-size:13px;margin:3px 0 0}
+  .ev-foot{margin-top:7px;padding-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ev-foot .auto,.ev-foot .auto+.sep,.ev-foot .sep:nth-of-type(2){display:none}
+  .ev-flight{display:none}                   /* 상세 안의 .det-flight 로 대체 */
+  .ev-trip{display:none}
+  .ev-cta{display:none}                      /* 카드 전체가 이미 예매처로 간다 */
+  .ev-more{margin-top:7px}
+  .det-flight{display:block}
+
+  .more-btn{display:block;margin:0 0 60px}
+
+  /* 모아보기 표는 모바일에서 24화면 분량이라 접어 둔다 */
+  .collect-toggle{
+    display:block;width:100%;padding:14px;margin-bottom:20px;
+    background:var(--paper-2);border:1px solid var(--line);cursor:pointer;
+    font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink);
+  }
+  .collect-body{display:none}
+  .collect.open .collect-body{display:block}
 }

@@ -120,6 +120,13 @@ const MS_DAY = 86400000;
 
 const state = { cat: "all", genre: "all", status: "all", q: "", sort: "mix", hidePast: true };
 
+/* 모바일은 카드 한 장이 화면의 3/4을 먹어 222장이면 144화면이 된다.
+   좁은 화면에서만 목록을 잘라 그리고 '더 보기'로 이어 붙인다. */
+const MOBILE_Q = "(max-width:760px)";
+const PAGE_SIZE = 20;
+let shownCount = PAGE_SIZE;
+let lastFilterSig = null;
+
 /* ── 수동 데이터(concerts.js) + 자동 수집 병합 ──────────
    자동 수집분은 두 곳에서 온다.
      1) data/feed.js  — 저장소에 들어 있는 예비 데이터 (오프라인에서도 동작)
@@ -422,6 +429,14 @@ function cardHTML(c) {
       </ul>
     </div>`);
 
+  /* 좁은 화면에서는 카드 앞면의 항공 블록을 감추므로, 같은 내용을 상세에도 담아 둔다.
+     넓은 화면에서는 이 블록이 CSS 로 숨겨진다(앞면에 이미 있다). */
+  if (flight) det.push(`<div class="det-blk det-flight">
+      <p class="det-h">✈ 항공</p>
+      <p class="det-route">${HOME_AIRPORT} → ${esc(flight.dest)} · ${esc(mmdd(flight.out))} 출발 – ${esc(mmdd(flight.back))} 귀국</p>
+      ${linkRow(flight.links.map(l => ({ t: l.t, u: l.u })))}
+    </div>`);
+
   const more = [
     ...(c.otherVendors || []).map(v => ({ t: `${v.name} ↗`, u: v.url })),
     ...(c.goods && c.goods.url ? [{ t: "굿즈 스토어 ↗", u: c.goods.url }] : []),
@@ -643,9 +658,23 @@ function renderActiveFilters() {
 function render() {
   renderChips();
   const list = visibleList();
-  document.getElementById("grid").innerHTML = list.map(cardHTML).join("");
+  const mobile = matchMedia(MOBILE_Q).matches;
+
+  /* 필터가 바뀌면 '더 보기'로 늘려 둔 만큼을 처음으로 되돌린다.
+     limit 자체는 서명에서 빼야 한다 — 넣으면 더 보기를 누를 때마다 초기화된다. */
+  const sig = [state.cat, state.genre, state.status, state.q, state.sort, state.hidePast].join("|");
+  if (sig !== lastFilterSig) { shownCount = PAGE_SIZE; lastFilterSig = sig; }
+
+  const shown = mobile ? list.slice(0, shownCount) : list;
+  document.getElementById("grid").innerHTML = shown.map(cardHTML).join("");
   document.getElementById("empty").hidden = list.length > 0;
   document.getElementById("result-count").textContent = `${list.length}건`;
+
+  const moreBtn = document.getElementById("more");
+  const rest = list.length - shown.length;
+  moreBtn.hidden = rest <= 0;
+  if (rest > 0) moreBtn.textContent = `더 보기 (${rest}건 남음)`;
+
   renderCollect(list);
   renderActiveFilters();
 }
@@ -673,6 +702,22 @@ document.getElementById("genres").addEventListener("click", e => {
 document.getElementById("search").addEventListener("input", e => { state.q = e.target.value; render(); });
 document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
 document.getElementById("hide-past").addEventListener("change", e => { state.hidePast = e.target.checked; render(); });
+
+/* 더 보기 — 좁은 화면에서만 나타난다. 누른 자리를 유지해야 하므로 스크롤은 건드리지 않는다. */
+document.getElementById("more").addEventListener("click", () => {
+  shownCount += PAGE_SIZE;                    // 필터 서명이 그대로라 render 가 되돌리지 않는다
+  render();
+});
+
+/* 모아보기 표는 모바일에서 24화면 분량이라 접어 둔다 */
+document.getElementById("collect-toggle").addEventListener("click", e => {
+  const open = document.getElementById("collect").classList.toggle("open");
+  e.currentTarget.setAttribute("aria-expanded", String(open));
+  e.currentTarget.textContent = open ? "표 접기" : "표 펼치기";
+});
+
+/* 화면 폭이 모바일 경계를 넘나들면 목록을 다시 그린다(자르기 여부가 달라진다) */
+matchMedia(MOBILE_Q).addEventListener("change", () => { shownCount = PAGE_SIZE; render(); });
 
 /* 카드·임박 목록 클릭 → 예매처로 이동 (내부 링크/토글 클릭은 제외) */
 function openVendor(e) {
