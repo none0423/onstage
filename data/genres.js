@@ -62,6 +62,7 @@ const ARTIST_GENRE = {
   "Henry Moodie": "pop", "레이첼 야마가타": "pop", "Rachael Yamagata": "pop",
   "Jason Mraz": "pop", "제이슨 므라즈": "pop", "Firdhaus": "pop", "Song Dongye": "pop",
   "Sienna Spiro": "pop", "시에나 스파이로": "pop",
+  "Jay Chou": "pop", "저우제룬": "pop",   /* 만다린 팝 — 자동 조회가 pop rap 태그로 힙합에 넣었다 */
 
   /* ── 록·밴드 ───────────────────────── */
   "SUPER BEAVER": "rock", "King Gnu": "rock", "BUMP OF CHICKEN": "rock",

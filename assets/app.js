@@ -87,6 +87,11 @@ for (const [name, g] of Object.entries(typeof ARTIST_GENRE !== "undefined" ? ART
 }
 GENRE_LONG.sort((a, b) => b[0].length - a[0].length);      // 긴 이름부터 확인
 
+/* MusicBrainz 자동 조회 결과 (data/artists.js). 손으로 쓴 표 다음 순위로 쓴다. */
+const AUTO_INFO = new Map(Object.entries(typeof ARTIST_INFO !== "undefined" ? ARTIST_INFO : {})
+  .map(([k, v]) => [gnorm(k), v]));
+const autoInfoOf = c => AUTO_INFO.get(gnorm(c.artist)) || null;
+
 function genreOf(c) {
   if (c.genre) return c.genre;
   const full = gnorm(c.artist);
@@ -98,6 +103,8 @@ function genreOf(c) {
     const g = GENRE_SHORT.get(gnorm(w));
     if (g) return g;
   }
+  const auto = autoInfoOf(c);
+  if (auto?.genre) return auto.genre;
   const text = `${c.artist} ${c.tour} ${(c.tags || []).join(" ")}`;
   for (const [g, re] of (typeof GENRE_KEYWORDS !== "undefined" ? GENRE_KEYWORDS : [])) if (re.test(text)) return g;
   for (const t of c.tags || []) {
@@ -261,6 +268,8 @@ const looksForeignName = a => KANA.test(a) || (HAN.test(a) && !HANGUL.test(a));
 
 function categoryOf(c) {
   if (c.category !== "domestic") return c.category;       // 해외 개최·이미 내한으로 잡힌 건 그대로
+  const auto = autoInfoOf(c);
+  if (auto?.country) return auto.country === "KR" ? "domestic" : "visit";   // 국적이 가장 확실하다
   if (FOREIGN_GENRE.has(genreOf(c))) return "visit";
   if (looksForeignName(c.artist)) return "visit";
   const a = gnorm(c.artist);

@@ -1,0 +1,64 @@
+# 아티스트 국적·장르 자동 조회 — 주 1회
+# MusicBrainz 는 무료 공개 DB 이고 키가 필요 없다. 퍼블릭 저장소라 Actions 는 무제한 무료.
+name: Update artist info
+
+on:
+  schedule:
+    - cron: "20 3 * * 1"     # 매주 월요일
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: artists
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # 사이트가 실제로 보여 주는 최신 목록을 대상으로 조회한다
+      - name: 최신 수집분 내려받기
+        run: |
+          curl -sS --max-time 60 https://onstage-collector.onstage-collector.workers.dev/feed.json \
+            | node -e "
+              let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{
+                const d=JSON.parse(s);
+                require('fs').writeFileSync('data/feed.js',
+                  '/* 자동 생성 */\nconst FEED_UPDATED = '+JSON.stringify(d.updated)+';\n\nconst FEED = '+JSON.stringify(d.events,null,2)+';\n');
+              });" || echo "피드를 못 받아 저장소 사본으로 진행합니다"
+
+      - name: 아티스트 정보 조회
+        env:
+          MAX_LOOKUPS: 60
+        run: node tools/artists.mjs
+
+      - name: 데이터 검사
+        run: node tools/check.mjs
+
+      - name: 변경분 커밋
+        run: |
+          git checkout -- data/feed.js 2>/dev/null || true   # 피드는 Worker 가 관리한다
+          if [ -n "$(git status --porcelain data/artists.js)" ]; then
+            git config user.name  "onstage-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/artists.js
+            git commit -m "chore(artists): 아티스트 국적·장르 자동 갱신 $(date -u +'%Y-%m-%d')"
+            git push
+          else
+            echo "변경 없음"
+          fi
+
+  deploy:
+    needs: update
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
