@@ -644,13 +644,18 @@ document.getElementById("grid").addEventListener("click", openVendor);
 document.getElementById("briefing-list").addEventListener("click", openVendor);
 document.getElementById("ctable-body").addEventListener("click", openVendor);
 
+/* 푸터에 수집 주기와 마지막 갱신 시각을 작게 표시한다. */
 function paintFeedLabel() {
-  const el = document.getElementById("feed-updated");
+  const el = document.getElementById("sync-info");
   if (!el) return;
-  if (!FEED_LIST.length || !FEED_AT) { el.textContent = ""; return; }
+  if (!FEED_LIST.length || !FEED_AT) {
+    el.textContent = "공연 정보는 매시 정각 자동으로 수집됩니다.";
+    return;
+  }
   const d = new Date(FEED_AT);
-  el.textContent = `${FEED_LIVE ? "LIVE" : "AUTO"} ${d2(d.getMonth() + 1)}.${d2(d.getDate())} `
-    + `${d2(d.getHours())}:${d2(d.getMinutes())} 수집 ${FEED_LIST.length}건`;
+  const when = `${d2(d.getMonth() + 1)}.${d2(d.getDate())} ${d2(d.getHours())}:${d2(d.getMinutes())}`;
+  el.textContent = `공연 정보는 매시 정각 자동으로 수집됩니다 · `
+    + `${FEED_LIVE ? "마지막 갱신" : "저장된 데이터"} ${when} · ${FEED_LIST.length}건`;
 }
 
 function repaint() {

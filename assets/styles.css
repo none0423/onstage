@@ -362,3 +362,10 @@ h1,h2,h3,p{margin:0}
 .ctable tr.c-month td span{float:right;font-family:var(--mono);font-size:11px;font-weight:400;opacity:.7}
 
 @media (max-width:760px){ .collect-lead{margin-top:0} }
+
+/* 푸터의 수집 주기 표시.
+   .foot p 가 font-size 를 잡고 있어 클래스 하나로는 이기지 못한다 — 선택자를 하나 더 붙인다. */
+.foot .foot-sync{
+  margin-top:10px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3);
+}
