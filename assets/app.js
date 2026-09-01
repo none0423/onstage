@@ -103,7 +103,7 @@ const DAY = ["일", "월", "화", "수", "목", "금", "토"];
 const DAY_EN = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 const MS_DAY = 86400000;
 
-const state = { cat: "all", genre: "all", q: "", sort: "open", hidePast: true };
+const state = { cat: "all", genre: "all", q: "", sort: "mix", hidePast: true };
 
 /* ── 수동 데이터(concerts.js) + 자동 수집 병합 ──────────
    자동 수집분은 두 곳에서 온다.
@@ -271,7 +271,31 @@ function visibleList() {
     date:   (a, b) => a.dates[0].localeCompare(b.dates[0]),
     artist: (a, b) => a.artist.localeCompare(b.artist, "ko")
   };
+  if (state.sort === "mix") return interleaveByCountry(list.sort(sorters.date));
   return list.sort(sorters[state.sort]);
+}
+
+/** 나라를 번갈아 가며 한 건씩 뽑는다.
+    한 나라 공연이 몰려 나오지 않고 싱가포르 → 한국 → 일본 → … 순으로 섞인다.
+    나라 안에서는 들어온 순서(날짜순)를 그대로 유지하고,
+    가장 이른 공연이 있는 나라가 먼저 오도록 회전 순서를 정한다. */
+function interleaveByCountry(sortedByDate) {
+  const groups = new Map();
+  for (const c of sortedByDate) {
+    const k = c.country || "기타";
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k).push(c);
+  }
+  const queues = [...groups.values()].sort((a, b) => a[0].dates[0].localeCompare(b[0].dates[0]));
+  const out = [];
+  for (let round = 0; out.length < sortedByDate.length; round++) {
+    let moved = false;
+    for (const q of queues) {
+      if (round < q.length) { out.push(q[round]); moved = true; }
+    }
+    if (!moved) break;                       // 안전장치 — 무한 루프 방지
+  }
+  return out;
 }
 
 /* ── 렌더링 ─────────────────────────────────── */

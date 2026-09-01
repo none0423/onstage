@@ -58,6 +58,8 @@ Four files matter: `index.html` (static shell with fixed element IDs), `assets/a
 
 **Asset URLs carry a `?v=` version and `init()` is failure-isolated.** GitHub Pages serves HTML with a short TTL but assets with a longer one, so a deploy can pair *new* HTML with a browser's *cached* `app.js`. That combination once blanked the whole page: the stale script touched an element the new HTML no longer had, `init()` threw on its first line, and `render()` never ran. Bump the `?v=` string in `index.html` whenever `app.js`/`styles.css` change alongside markup, and keep every `init()` step wrapped in `step()` so one broken piece can never stop the grid from rendering.
 
+**The default sort interleaves countries.** `mix` (the default) sorts by date, groups by `country`, then round-robins one show per country per round — so a 싱가포르 show, then a 한국 show, then a 일본 show, rather than a run of one country. Rotation order is set by whichever country has the earliest show, and each country keeps its internal date order. A country with a single distant show still claims a slot in round one; that is intended, not a bug. `open`/`date`/`artist` remain available and are plain comparators.
+
 **Rendering** is a full re-render: `render()` rebuilds `#grid` and `#tabs` from `innerHTML`, driven by the module-level `state` object (`cat`, `q`, `sort`, `hidePast`). Every event handler mutates `state` then calls `render()`. `renderUpNext()` and `renderSummary()` run once at init. All interpolated data goes through `esc()`.
 
 **Authored vs. derived data** — this split is the main thing to understand before editing `data/concerts.js`:
