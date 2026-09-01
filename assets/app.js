@@ -9,11 +9,12 @@ const CATEGORIES = [
 ];
 
 /* 상태는 지역과 다른 축이라 칩 줄을 따로 둔다. 카테고리와 배타적이지 않다. */
+/* 서로 배타적인 것만 둔다. '곧 오픈' 은 '오픈 예정' 의 부분집합이라 둘을 함께 두면
+   숫자가 겹쳐 보인다. 실제로 쓰는 건 '곧 오픈' 쪽이므로 그것만 남겼다. */
 const STATES = [
-  { key: "all",      label: "전체" },
-  { key: "soon",     label: "티켓 오픈 임박" },
-  { key: "onsale",   label: "예매 진행 중" },
-  { key: "upcoming", label: "오픈 예정" }
+  { key: "all",    label: "전체" },
+  { key: "soon",   label: "곧 오픈 (14일)" },
+  { key: "onsale", label: "예매 진행 중" }
 ];
 
 /* 카드 상단 아트 패널 팔레트 — id 해시로 결정되어 항상 같은 공연은 같은 색 */
@@ -252,7 +253,6 @@ function matchState(c, st) {
   if (st === "soon") return isSoon(c);
   const p = statusOf(c).phase;
   if (st === "onsale") return p === "onsale";
-  if (st === "upcoming") return p === "upcoming" || p === "today";
   return true;
 }
 
@@ -343,10 +343,10 @@ function cardHTML(c) {
 
 
   const openLine =
-    st.phase === "onsale"  ? `<span class="on">예매 진행 중</span> · ${esc(c.price || "가격 미정")}`
+    st.phase === "onsale"  ? esc(c.price || "가격은 예매처 확인")     // 상태는 배지에 이미 있다
     : st.phase === "upcoming" || st.phase === "today"
       ? `티켓오픈 <b>${esc(fmtOpen(c.ticketOpen))}</b>`
-      : `${esc(st.badge)} · ${esc(c.price || "가격 미정")}`;
+      : esc(c.price || "가격은 예매처 확인");        // 상태는 배지가 이미 말한다
 
   /* 상세 */
   const det = [];
@@ -488,12 +488,16 @@ function renderUpNext() {
 function renderSummary() {
   const live = EVENTS.filter(c => !isPast(c));
   const set = (id, v) => document.getElementById(id).textContent = v;
-  /* firstSeen 은 수집기가 처음 본 시각. 기능 도입 전 항목은 null 이라 세지 않는다. */
+  /* 지표는 '시간·규모' 축만 담는다. 지역·장르·상태는 칩이 이미 보여 주므로
+     같은 숫자를 두 곳에 두지 않는다. */
   const weekAgo = Date.now() - 7 * MS_DAY;
+  const thisMonth = new Date().toISOString().slice(0, 7);
   set("sum-new", live.filter(c => c.firstSeen && new Date(c.firstSeen).getTime() >= weekAgo).length);
-  set("sum-week", live.filter(c => { const d = daysToOpen(c); return d !== null && d > 0 && d <= 7; }).length);
-  set("sum-onsale", live.filter(c => statusOf(c).phase === "onsale").length);
-  set("sum-total", live.filter(c => daysToShow(c) <= 30).length);   // 30일 내 공연
+  const d = new Date(); d.setMonth(d.getMonth() + 1);
+  const nextMonth = d.toISOString().slice(0, 7);
+  set("sum-month", live.filter(c => nextDate(c).slice(0, 7) === thisMonth).length);
+  set("sum-next", live.filter(c => nextDate(c).slice(0, 7) === nextMonth).length);
+  set("sum-total", live.length);
 
   /* 오픈 임박 건이 있으면 그것을, 없으면 가장 가까운 공연 카운트다운을 보여준다 */
   /* 같은 아티스트가 같은 시각에 여러 회차를 열면 목록에서는 한 줄로 묶는다 */

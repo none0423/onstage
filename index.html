@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%23ff4e8b'/></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/styles.css?v=20260901f">
+<link rel="stylesheet" href="assets/styles.css?v=20260902b">
 </head>
 <body>
 
@@ -17,7 +17,6 @@
     <a class="logo" href="#top">ON<span class="logo-dot"></span>STAGE</a>
     <nav class="nav-links">
       <a href="#find" class="on">공연 찾기</a>
-      <a href="#soon">오픈 임박</a>
       <a href="#collect">모아보기</a>
       <a href="#guide">원정 가이드</a>
     </nav>
@@ -47,9 +46,9 @@
   <!-- ══ 요약 지표 ══ -->
   <section class="wrap stats" aria-label="오늘의 요약">
     <div class="stat stat-hot"><span class="stat-k">이번 주 신규 등록</span><b id="sum-new">0</b><i>건</i></div>
-    <div class="stat"><span class="stat-k">7일 내 오픈</span><b id="sum-week">0</b><i>건</i></div>
-    <div class="stat"><span class="stat-k">예매 진행 중</span><b id="sum-onsale">0</b><i>건</i></div>
-    <div class="stat"><span class="stat-k">30일 내 공연</span><b id="sum-total">0</b><i>건</i></div>
+    <div class="stat"><span class="stat-k">이번 달 공연</span><b id="sum-month">0</b><i>건</i></div>
+    <div class="stat"><span class="stat-k">다음 달 공연</span><b id="sum-next">0</b><i>건</i></div>
+    <div class="stat"><span class="stat-k">등록된 공연</span><b id="sum-total">0</b><i>건</i></div>
   </section>
 
   <!-- ══ 검색 / 필터 ══ -->
@@ -61,7 +60,7 @@
       </div>
       <select id="sort" aria-label="정렬 기준">
         <option value="mix">정렬 · 국가별 번갈아</option>
-        <option value="open">정렬 · 티켓 오픈 임박순</option>
+        <option value="open">정렬 · 오픈 빠른 순</option>
         <option value="date">정렬 · 공연 날짜순</option>
         <option value="artist">정렬 · 아티스트순</option>
       </select>
@@ -114,7 +113,7 @@
       <h2>공연 정보 모아보기</h2>
       <span class="mono-label" id="collect-count"></span>
     </div>
-    <p class="collect-lead">지금 걸려 있는 필터에 해당하는 공연을 달별로 묶어 한눈에 봅니다. 줄을 누르면 예매처로 이동합니다.</p>
+    <p class="collect-lead">위 카드와 같은 목록을 달별로 묶어 표로 정리했습니다. 필터를 바꾸면 함께 바뀌고, 줄을 누르면 예매처로 이동합니다.</p>
 
     <div class="months" id="months"></div>
 
@@ -171,10 +170,10 @@
   </div>
 </footer>
 
-<script src="data/config.js?v=20260901f"></script>
-<script src="data/genres.js?v=20260901f"></script>
-<script src="data/concerts.js?v=20260901f"></script>
-<script src="data/feed.js?v=20260901f"></script>
-<script src="assets/app.js?v=20260901f"></script>
+<script src="data/config.js?v=20260902b"></script>
+<script src="data/genres.js?v=20260902b"></script>
+<script src="data/concerts.js?v=20260902b"></script>
+<script src="data/feed.js?v=20260902b"></script>
+<script src="assets/app.js?v=20260902b"></script>
 </body>
 </html>
