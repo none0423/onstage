@@ -5,8 +5,15 @@ const CATEGORIES = [
   { key: "visit",    label: "내한 공연" },
   { key: "japan",    label: "일본" },
   { key: "asia",     label: "아시아" },
-  { key: "domestic", label: "국내" },
-  { key: "soon",     label: "티켓 오픈 임박" }   // 카테고리가 아닌 가상 필터(14일 이내 오픈)
+  { key: "domestic", label: "국내" }
+];
+
+/* 상태는 지역과 다른 축이라 칩 줄을 따로 둔다. 카테고리와 배타적이지 않다. */
+const STATES = [
+  { key: "all",      label: "전체" },
+  { key: "soon",     label: "티켓 오픈 임박" },
+  { key: "onsale",   label: "예매 진행 중" },
+  { key: "upcoming", label: "오픈 예정" }
 ];
 
 /* 카드 상단 아트 패널 팔레트 — id 해시로 결정되어 항상 같은 공연은 같은 색 */
@@ -103,7 +110,7 @@ const DAY = ["일", "월", "화", "수", "목", "금", "토"];
 const DAY_EN = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 const MS_DAY = 86400000;
 
-const state = { cat: "all", genre: "all", q: "", sort: "mix", hidePast: true };
+const state = { cat: "all", genre: "all", status: "all", q: "", sort: "mix", hidePast: true };
 
 /* ── 수동 데이터(concerts.js) + 자동 수집 병합 ──────────
    자동 수집분은 두 곳에서 온다.
@@ -238,10 +245,15 @@ const mapLink = c => `https://www.google.com/maps/search/${encodeURIComponent(c.
 /* ── 필터 / 정렬 ─────────────────────────────── */
 const isSoon = c => { const d = daysToOpen(c); return !isPast(c) && d !== null && d >= 0 && d <= 14; };
 
-function matchCat(c, cat) {
-  if (cat === "all") return true;
-  if (cat === "soon") return isSoon(c);
-  return c.category === cat;
+const matchCat = (c, cat) => cat === "all" || c.category === cat;
+
+function matchState(c, st) {
+  if (st === "all") return true;
+  if (st === "soon") return isSoon(c);
+  const p = statusOf(c).phase;
+  if (st === "onsale") return p === "onsale";
+  if (st === "upcoming") return p === "upcoming" || p === "today";
+  return true;
 }
 
 const matchGenre = (c, g) => g === "all" || (g === "none" ? !genreOf(c) : genreOf(c) === g);
@@ -255,7 +267,7 @@ function matchSearch(c, q) {
 function visibleList() {
   let list = EVENTS.slice();
   if (state.hidePast) list = list.filter(c => !isPast(c));
-  list = list.filter(c => matchCat(c, state.cat) && matchGenre(c, state.genre));
+  list = list.filter(c => matchCat(c, state.cat) && matchGenre(c, state.genre) && matchState(c, state.status));
   if (state.q.trim()) {
     const q = state.q.trim().toLowerCase();
     list = list.filter(c => matchSearch(c, q));
@@ -420,14 +432,14 @@ function renderChips() {
   if (state.q.trim()) { const q = state.q.trim().toLowerCase(); base = base.filter(c => matchSearch(c, q)); }
 
   /* 각 축의 개수는 다른 축의 필터를 적용한 뒤 센다 (교차 필터 시 0건 칩을 누르는 일이 없도록) */
-  const forCat = base.filter(c => matchGenre(c, state.genre));
+  const forCat = base.filter(c => matchGenre(c, state.genre) && matchState(c, state.status));
   document.getElementById("tabs").innerHTML = CATEGORIES.map(k => {
     const n = forCat.filter(c => matchCat(c, k.key)).length;
     return `<button class="chip" role="tab" data-cat="${k.key}" aria-selected="${state.cat === k.key}">
       ${k.label}<span class="n">${n}</span></button>`;
   }).join("");
 
-  const forGenre = base.filter(c => matchCat(c, state.cat));
+  const forGenre = base.filter(c => matchCat(c, state.cat) && matchState(c, state.status));
   const chip = (key, label) => {
     const n = forGenre.filter(c => matchGenre(c, key)).length;
     return n === 0 && key !== "all" && key !== state.genre ? ""
@@ -437,6 +449,13 @@ function renderChips() {
   const list = (typeof GENRES !== "undefined" ? GENRES : []);
   document.getElementById("genres").innerHTML =
     chip("all", "전체") + list.map(g => chip(g.key, g.label)).join("") + chip("none", "미분류");
+
+  const forState = base.filter(c => matchCat(c, state.cat) && matchGenre(c, state.genre));
+  document.getElementById("states").innerHTML = STATES.map(k => {
+    const n = forState.filter(c => matchState(c, k.key)).length;
+    return `<button class="chip" role="tab" data-state="${k.key}" aria-selected="${state.status === k.key}">
+      ${k.label}<span class="n">${n}</span></button>`;
+  }).join("");
 }
 
 function renderUpNext() {
@@ -469,7 +488,9 @@ function renderUpNext() {
 function renderSummary() {
   const live = EVENTS.filter(c => !isPast(c));
   const set = (id, v) => document.getElementById(id).textContent = v;
-  set("sum-today", live.filter(c => daysToOpen(c) === 0).length);
+  /* firstSeen 은 수집기가 처음 본 시각. 기능 도입 전 항목은 null 이라 세지 않는다. */
+  const weekAgo = Date.now() - 7 * MS_DAY;
+  set("sum-new", live.filter(c => c.firstSeen && new Date(c.firstSeen).getTime() >= weekAgo).length);
   set("sum-week", live.filter(c => { const d = daysToOpen(c); return d !== null && d > 0 && d <= 7; }).length);
   set("sum-onsale", live.filter(c => statusOf(c).phase === "onsale").length);
   set("sum-total", live.filter(c => daysToShow(c) <= 30).length);   // 30일 내 공연
@@ -565,6 +586,10 @@ function render() {
 document.getElementById("tabs").addEventListener("click", e => {
   const b = e.target.closest(".chip");
   if (b) { state.cat = b.dataset.cat; render(); }
+});
+document.getElementById("states").addEventListener("click", e => {
+  const b = e.target.closest(".chip");
+  if (b) { state.status = b.dataset.state; render(); }
 });
 document.getElementById("genres").addEventListener("click", e => {
   const b = e.target.closest(".chip");

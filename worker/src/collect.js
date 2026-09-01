@@ -646,6 +646,12 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   };
   const norm = v => String(v || "").toLowerCase().replace(/[\s.\-_'"()\[\]]/g, "");
 
+  /* 처음 수집된 시각을 기록해 '신규 등록' 지표에 쓴다.
+     이 기능이 생기기 전부터 있던 항목은 시점을 알 수 없으므로 null 로 두고 세지 않는다.
+     그래야 배포 첫 주에 전부 신규로 잡히는 일이 없다. */
+  const nowISO = new Date().toISOString();
+  const stamp = c => ({ ...c, firstSeen: prevById.has(c.id) ? (prevById.get(c.id).firstSeen ?? null) : nowISO });
+
   const today = todayISO();
   const seenId = new Set();
   const claimed = new Map();                                  // 아티스트|날짜 → 선점한 소스
@@ -661,6 +667,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       seenId.add(c.id);
       return true;
     })
+    .map(stamp)
     .sort((a, b) => a.dates[0].localeCompare(b.dates[0]));
 
   stats.subrequests = used;

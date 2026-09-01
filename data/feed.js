@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-09-01T08:09:40.919Z";
+const FEED_UPDATED = "2026-09-01T08:14:51.304Z";
 
 const FEED = [
   {
@@ -63,7 +63,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.osaka-johall.com/event/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-02-桑田佳祐",
@@ -121,7 +122,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299385",
@@ -162,7 +164,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299385_260826_105939.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299385",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297480",
@@ -199,7 +202,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297480_260803_112708.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297480",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297035",
@@ -236,13 +240,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297035_260727_143817.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297035",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297841",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "너드커넥션",
     "tour": "클럽 투어: 파도의 고점 FINAL",
@@ -254,13 +259,13 @@ const FEED = [
     "dates": [
       "2026-09-05"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(19:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "1층 스탠딩석 99,000원, 1,2,3층 지정 좌석 110,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%84%88%EB%93%9C%EC%BB%A4%EB%84%A5%EC%85%98%20%ED%81%B4%EB%9F%BD%20%ED%88%AC%EC%96%B4%3A%20%ED%8C%8C%EB%8F%84%EC%9D%98%20%EA%B3%A0%EC%A0%90%20FINAL%20%5B%EC%84%9C%EC%9A%B8%5D"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011369"
     },
     "otherVendors": [],
     "goods": {
@@ -272,7 +277,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297841_260806_113632.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297841",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297113",
@@ -308,7 +314,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297113_260728_111447.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297113",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297019",
@@ -345,7 +352,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297019_260727_140228.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297019",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296912",
@@ -381,7 +389,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296912_260724_141909.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296912",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296682",
@@ -418,7 +427,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296682_260722_150801.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296682",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294882",
@@ -454,7 +464,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294882_260629_163027.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294882",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294108",
@@ -490,7 +501,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294108_260619_112255.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294108",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF292700",
@@ -526,7 +538,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF292700_260601_152115.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF292700",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-joh-2026-09-05-DREAMSCOMETRUE",
@@ -584,7 +597,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.osaka-johall.com/event/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-05-ByeonWooSeok",
@@ -642,7 +656,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7F71",
@@ -679,7 +694,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_gmmtvfanday/3739",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7FAv",
@@ -716,7 +732,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_gmmtvfanday/3740",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297303",
@@ -752,7 +769,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297303_260730_134709.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297303",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7F7a",
@@ -789,7 +807,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_lykn/3738",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-08-星街すいせい",
@@ -847,13 +866,14 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298758",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": true,
     "artist": "뮤즈온 페스티벌",
     "tour": "서울 공연",
@@ -866,13 +886,13 @@ const FEED = [
       "2026-09-09",
       "2026-09-13"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "수요일 ~ 금요일(19:30), 토요일 ~ 일요일(17:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "전석무료",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%AE%A4%EC%A6%88%EC%98%A8%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
+      "name": "29CM",
+      "url": "https://ticket.29cm.co.kr/catalog/4128674"
     },
     "otherVendors": [],
     "goods": {
@@ -884,7 +904,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298758_260818_161206.png"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298758",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-joh-2026-09-09-BOYNEXTDOOR",
@@ -942,13 +963,14 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.osaka-johall.com/event/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298650",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "@WANDERLOCH with THE SOLUTIONS X 87dance",
     "tour": "서울 공연",
@@ -960,13 +982,13 @@ const FEED = [
     "dates": [
       "2026-09-11"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "금요일(20:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "스탠딩 77,000원, 지정석 77,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%40WANDERLOCH%20with%20THE%20SOLUTIONS%20X%2087dance"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59673"
     },
     "otherVendors": [],
     "goods": {
@@ -978,7 +1000,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298650_260818_115820.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298650",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297575",
@@ -1015,13 +1038,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297575_260803_171003.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297575",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298483",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "하이 하이 배드맨",
     "tour": "서울 공연",
@@ -1033,15 +1057,20 @@ const FEED = [
     "dates": [
       "2026-09-12"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(18:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "전석 66,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%ED%95%98%EC%9D%B4%20%ED%95%98%EC%9D%B4%20%EB%B0%B0%EB%93%9C%EB%A7%A8"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59603"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "멜론티켓",
+        "url": "https://ticket.melon.com/performance/index.htm?prodId=213713"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -1051,7 +1080,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298483_260813_155007.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298483",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297716",
@@ -1088,7 +1118,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297716_260805_111221.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297716",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294720",
@@ -1124,7 +1155,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294720_260626_144208.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294720",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294050",
@@ -1161,7 +1193,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294050_260618_151754.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294050",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF289985",
@@ -1198,7 +1231,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF289985_260423_113526.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF289985",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-12-TWS",
@@ -1256,7 +1290,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aAe",
@@ -1293,7 +1328,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_vibes/3841",
     "tags": [
       "Dance"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Aa6",
@@ -1330,7 +1366,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_firdhaus/3486",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299197",
@@ -1366,7 +1403,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299197_260824_132209.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299197",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF293209",
@@ -1402,7 +1440,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF293209_260609_112907.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293209",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ76v1",
@@ -1439,7 +1478,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_songdongye/3609",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-09-16-INI5THANNIVERSARY",
@@ -1497,7 +1537,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kda",
@@ -1534,7 +1575,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_hillsong/3528",
     "tags": [
       "Religious"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298966",
@@ -1571,7 +1613,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298966_260820_135721.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298966",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296563",
@@ -1608,7 +1651,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296563_260722_101226.png"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296563",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296122",
@@ -1644,7 +1688,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296122_260715_112708.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296122",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299402",
@@ -1681,7 +1726,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299402_260826_122025.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299402",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299212",
@@ -1717,7 +1763,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299212_260824_135011.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299212",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299075",
@@ -1758,13 +1805,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299075_260821_134234.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299075",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298265",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": true,
     "artist": "김용빈",
     "tour": "콘서트: 세레나데",
@@ -1777,15 +1825,20 @@ const FEED = [
       "2026-09-19",
       "2026-09-20"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일 ~ 일요일(17:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "Seat SR 165,000원, Seat R 143,000원, Seat S 132,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EA%B9%80%EC%9A%A9%EB%B9%88%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20%EC%84%B8%EB%A0%88%EB%82%98%EB%8D%B0"
+      "name": "NHN티켓링크",
+      "url": "http://www.ticketlink.co.kr/product/64771"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1713909"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -1795,13 +1848,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298265_260811_151532.png"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298265",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297931",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "더팩트 뮤직 어워즈 (THE FACT MUSIC AWARDS)",
     "tour": "부산 공연",
@@ -1813,13 +1867,13 @@ const FEED = [
     "dates": [
       "2026-09-19"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(18:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "R석 99,000원, S석 49,000원, A석 19,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%8D%94%ED%8C%A9%ED%8A%B8%20%EB%AE%A4%EC%A7%81%20%EC%96%B4%EC%9B%8C%EC%A6%88%20(THE%20FACT%20MUSIC%20AWARDS)%20%5B%EB%B6%80%EC%82%B0%5D"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59564"
     },
     "otherVendors": [],
     "goods": {
@@ -1831,7 +1885,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297931_260807_113401.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297931",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297756",
@@ -1868,7 +1923,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297756_260805_134108.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297756",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296718",
@@ -1905,7 +1961,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296718_260723_112546.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296718",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296499",
@@ -1941,7 +1998,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296499_260721_103228.png"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296499",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF287093",
@@ -1978,7 +2036,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF287093_260313_172418.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF287093",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-09-19-StrayKids",
@@ -2036,7 +2095,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-19-FANTASTICS世界佐藤大樹澤本夏輝",
@@ -2094,7 +2154,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kd1",
@@ -2131,7 +2192,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_shiningstars/3529",
     "tags": [
       "Ballads/Romantic"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294649",
@@ -2167,7 +2229,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294649_260625_150842.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294649",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7AAF",
@@ -2204,7 +2267,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_jiale/3447",
     "tags": [
       "Ballads/Romantic"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-09-22-SUPERBEAVER",
@@ -2262,7 +2326,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-09-22-BABYMONSTER",
@@ -2320,7 +2385,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-22-EXILETHESECONDDOBERM",
@@ -2378,7 +2444,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aeF",
@@ -2415,7 +2482,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_all4one/3817",
     "tags": [
       "Ballads/Romantic"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299727",
@@ -2452,7 +2520,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299727_260831_135139.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299727",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF295410",
@@ -2489,7 +2558,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF295410_260706_143211.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295410",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294960",
@@ -2525,7 +2595,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294960_260630_134909.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294960",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF293136",
@@ -2562,7 +2633,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF293136_260608_154813.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293136",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-26-AKB48",
@@ -2619,7 +2691,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Av7",
@@ -2656,13 +2729,14 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_empat/3403",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297823",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "kopisOverseas": true,
     "period": true,
     "artist": "PLAVE",
@@ -2676,13 +2750,13 @@ const FEED = [
       "2026-09-26",
       "2026-09-27"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(18:00), 일요일(16:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "전석 169,600원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=PLAVE%20World%20Tour%3A%20KEEP%20IT%20MANIC%20%5B%EC%9D%BC%EB%B3%B8%20%EA%B0%80%EB%82%98%EA%B0%80%EC%99%80%5D"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011288"
     },
     "otherVendors": [],
     "goods": {
@@ -2694,7 +2768,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297823_260806_105207.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297823",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kar-2026-09-27-AKB48",
@@ -2751,7 +2826,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://k-arena.com/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kAd",
@@ -2788,7 +2864,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_henrymoodie/3542",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Ade",
@@ -2825,13 +2902,14 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_theweeknd/3421",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298230",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": true,
     "artist": "&TEAM",
     "tour": "CONCERT TOUR: BLAZE THE WAY",
@@ -2844,13 +2922,13 @@ const FEED = [
       "2026-10-03",
       "2026-10-04"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(18:00), 일요일(17:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "M&G석 253,000원, SOUND CHECK석 220,000원, 일반석 165,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%26TEAM%20CONCERT%20TOUR%3A%20BLAZE%20THE%20WAY%20%5B%EC%84%9C%EC%9A%B8%20(%EC%95%B5%EC%BD%9C)%20%5D"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011092"
     },
     "otherVendors": [],
     "goods": {
@@ -2862,7 +2940,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298230_260811_133611.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298230",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297045",
@@ -2898,7 +2977,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297045_260727_145817.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297045",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF292945",
@@ -2935,7 +3015,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF292945_260605_101827.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF292945",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF288377",
@@ -2971,7 +3052,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF288377_260331_133834.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF288377",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kA7",
@@ -3008,7 +3090,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_itzy/3543",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Add",
@@ -3045,7 +3128,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_theweeknd/3422",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296475",
@@ -3081,7 +3165,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296475_260720_174200.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296475",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF293346",
@@ -3118,7 +3203,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF293346_260610_165851.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293346",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299753",
@@ -3163,13 +3249,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299753_260831_144921.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299753",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298494",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "힙합 콘서트, ASMBL CRSH: SEOUL",
     "tour": "서울 공연",
@@ -3181,15 +3268,24 @@ const FEED = [
     "dates": [
       "2026-10-05"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "월요일(18:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "스탠딩석 110,000원, R석 80,000원, S석 50,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%ED%9E%99%ED%95%A9%20%EC%BD%98%EC%84%9C%ED%8A%B8%2C%20ASMBL%20CRSH%3A%20SEOUL"
+      "name": "NHN티켓링크",
+      "url": "http://www.ticketlink.co.kr/product/64755"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1712067"
+      },
+      {
+        "name": "2TM(우리은행)",
+        "url": "https://www.2tm.co.kr/ticket/10621"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -3199,7 +3295,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298494_260813_162955.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298494",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF292331",
@@ -3235,7 +3332,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF292331_260527_130919.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF292331",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299306",
@@ -3271,7 +3369,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299306_260825_110332.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299306",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298986",
@@ -3316,13 +3415,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298986_260820_143043.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298986",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297875",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": true,
     "artist": "AKMU",
     "tour": "CONCERT: 소문의 낙원 (Paradise of Rumors)",
@@ -3335,13 +3435,13 @@ const FEED = [
       "2026-10-09",
       "2026-10-11"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "금요일(18:00), 토요일(17:00), 일요일(16:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "VIP석 176,000원, R석 165,000원, 스탠딩석(만 12세 이상) 176,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=AKMU%20CONCERT%3A%20%EC%86%8C%EB%AC%B8%EC%9D%98%20%EB%82%99%EC%9B%90%20(Paradise%20of%20Rumors)"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59418"
     },
     "otherVendors": [],
     "goods": {
@@ -3353,7 +3453,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297875_260806_135017.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297875",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF292543",
@@ -3389,7 +3490,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF292543_260529_172146.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF292543",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299654",
@@ -3430,7 +3532,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299654_260828_144449.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299654",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299371",
@@ -3466,7 +3569,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299371_260826_102156.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299371",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298950",
@@ -3503,7 +3607,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298950_260820_132246.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298950",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299563",
@@ -3539,13 +3644,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299563_260827_155224.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299563",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298424",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "Shi Shi, The Taste Of…",
     "tour": "World Tour",
@@ -3557,13 +3663,13 @@ const FEED = [
     "dates": [
       "2026-10-11"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "일요일(18:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "VIP석 77,000원, 1층 지정석 66,000원, 2층 지정석 55,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=Shi%20Shi%2C%20The%20Taste%20Of%E2%80%A6%20World%20Tour%20%5B%EC%84%9C%EC%9A%B8%5D"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59681"
     },
     "otherVendors": [],
     "goods": {
@@ -3575,7 +3681,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298424_260813_132720.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298424",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Adv",
@@ -3612,7 +3719,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_sj83z/3420",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298971",
@@ -3653,13 +3761,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298971_260820_140434.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298971",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297855",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "장윤정 라이브",
     "tour": "콘서트: THE MASTER",
@@ -3671,15 +3780,24 @@ const FEED = [
     "dates": [
       "2026-10-17"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(14:00,18:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "VIP석 143,000원, R석 132,000원, S석 121,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%9E%A5%EC%9C%A4%EC%A0%95%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20THE%20MASTER%20%5B%EB%B6%80%EC%82%B0%5D"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011121"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "예스24",
+        "url": "https://ticket.yes24.com/Perf/59486"
+      },
+      {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1712299"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -3689,7 +3807,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297855_260806_130841.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297855",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296665",
@@ -3726,7 +3845,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296665_260722_143755.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296665",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296199",
@@ -3762,7 +3882,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296199_260716_101219.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296199",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF295656",
@@ -3798,7 +3919,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF295656_260708_151724.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295656",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF295653",
@@ -3834,7 +3956,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF295653_260708_151216.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295653",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF295650",
@@ -3870,7 +3993,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF295650_260708_150722.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295650",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7FAF",
@@ -3907,7 +4031,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_plave/3747",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7adv",
@@ -3944,7 +4069,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_rockofages26/3820",
     "tags": [
       "Dance/Electronic"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF295661",
@@ -3980,7 +4106,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF295661_260708_152555.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295661",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF295657",
@@ -4016,7 +4143,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF295657_260708_152132.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295657",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294975",
@@ -4052,7 +4180,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294975_260701_100956.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294975",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7FFA",
@@ -4089,7 +4218,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_nct127/3774",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Fke",
@@ -4126,7 +4256,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_bigbang2026/3751",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7ak1",
@@ -4163,7 +4294,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_oneoreight/3859",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299464",
@@ -4199,7 +4331,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299464_260827_104645.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299464",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7ae6",
@@ -4236,7 +4369,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_qiufengze/3816",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299842",
@@ -4273,7 +4407,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299842_260901_135312.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299842",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299310",
@@ -4309,7 +4444,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299310_260825_111501.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299310",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF293095",
@@ -4346,7 +4482,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF293095_260608_143024.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293095",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-10-24-YOASOBI",
@@ -4404,7 +4541,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7k1v",
@@ -4441,7 +4579,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_bobbychen/3590",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Aee",
@@ -4478,7 +4617,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_bini/3411",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296524",
@@ -4514,7 +4654,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296524_260721_112323.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296524",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-10-29-MTVVMAJ2026",
@@ -4571,13 +4712,14 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298096",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "칸호 야쿠시지",
     "tour": "첫 내한공연, 10주년 월드투어: Circle of Harmony",
@@ -4589,15 +4731,20 @@ const FEED = [
     "dates": [
       "2026-10-30"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "금요일(19:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "스탠딩 99,000원, 지정석 99,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%B9%B8%ED%98%B8%20%EC%95%BC%EC%BF%A0%EC%8B%9C%EC%A7%80%20%EC%B2%AB%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0%2C%2010%EC%A3%BC%EB%85%84%20%EC%9B%94%EB%93%9C%ED%88%AC%EC%96%B4%3A%20Circle%20of%20Harmony"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011665"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "예스24",
+        "url": "https://ticket.yes24.com/Perf/59642"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -4607,7 +4754,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298096_260810_141117.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298096",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299469",
@@ -4652,7 +4800,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299469_260828_104613.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299469",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kaF",
@@ -4689,7 +4838,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_bensonboone/3587",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Fk1",
@@ -4726,7 +4876,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_yungkai/3759",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ777v",
@@ -4763,7 +4914,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_lany/3330",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299607",
@@ -4800,7 +4952,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299607_260828_130100.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299607",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-11-06-StrayKids",
@@ -4859,7 +5012,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299827",
@@ -4895,7 +5049,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299827_260901_131413.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299827",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296308",
@@ -4931,7 +5086,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296308_260720_110352.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296308",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aA7",
@@ -4968,7 +5124,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_williamso/3843",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z7r9jZ1A7OUP6",
@@ -5005,7 +5162,8 @@ const FEED = [
     "source": "https://www.ticketmaster.com/event/Z7r9jZ1A7OUP6",
     "tags": [
       "Alternative"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296425",
@@ -5041,7 +5199,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296425_260720_154149.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296425",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF291507",
@@ -5077,7 +5236,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF291507_260515_134504.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF291507",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-11-14-INI",
@@ -5135,7 +5295,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aA6",
@@ -5172,7 +5333,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_lucy/3846",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7akk",
@@ -5209,7 +5371,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_youngcaptain/3855",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aA1",
@@ -5246,13 +5409,14 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_songs3/3849",
     "tags": [
       "Ballads/Romantic"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297787",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "영 카이",
     "tour": "첫 내한공연",
@@ -5264,13 +5428,13 @@ const FEED = [
     "dates": [
       "2026-11-16"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "월요일(20:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "VIP MEET & GREET PACKAGE 224,000원, 스탠딩 99,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%98%81%20%EC%B9%B4%EC%9D%B4%20%EC%B2%AB%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011170"
     },
     "otherVendors": [],
     "goods": {
@@ -5282,7 +5446,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297787_260805_151705.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297787",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7717",
@@ -5319,7 +5484,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_5sos/3393",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF290915",
@@ -5355,7 +5521,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF290915_260508_113002.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF290915",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-11-20-MAMAAWARDS",
@@ -5413,7 +5580,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7AdF",
@@ -5450,7 +5618,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_wavetoearth/3427",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297573",
@@ -5486,7 +5655,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297573_260803_165506.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297573",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297380",
@@ -5522,7 +5692,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297380_260731_130159.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297380",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ77Fk",
@@ -5559,7 +5730,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_joji/3375",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ77F6",
@@ -5596,7 +5768,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_joji/3376",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7k1k",
@@ -5633,7 +5806,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_khalid/3595",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-11-25-超特急",
@@ -5691,7 +5865,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ77vd",
@@ -5728,7 +5903,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_gunsnroses/3302",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-11-27-BIGBANG",
@@ -5787,13 +5963,14 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298491",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "이승철 40주년",
     "tour": "콘서트: THE VOICE: LEE SEUNG CHUL",
@@ -5805,15 +5982,20 @@ const FEED = [
     "dates": [
       "2026-11-28"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(16:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "FS석 198,000원, VIP석 187,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%9D%B4%EC%8A%B9%EC%B2%A0%2040%EC%A3%BC%EB%85%84%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20THE%20VOICE%3A%20LEE%20SEUNG%20CHUL%20%5B%EB%8C%80%EA%B5%AC%5D"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59664"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1716107"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -5823,7 +6005,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298491_260813_160812.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298491",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297133",
@@ -5859,7 +6042,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297133_260728_131659.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297133",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aev",
@@ -5896,7 +6080,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_lsf/3810",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Akd",
@@ -5933,7 +6118,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_babymonster/3452",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Aak",
@@ -5970,7 +6156,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_babymonster/3485",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kak",
@@ -6007,7 +6194,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_fkj/3585",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-12-01-ENHYPEN",
@@ -6065,7 +6253,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-12-02-Number_i",
@@ -6122,7 +6311,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ76dv",
@@ -6159,13 +6349,14 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_qotsa/3620",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298542",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "APF",
     "tour": "CONCERTS PRESENTS, Sunny Day Service TOUR in SEOUL",
@@ -6177,15 +6368,20 @@ const FEED = [
     "dates": [
       "2026-12-03"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "목요일(20:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "전석 88,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=APF%20CONCERTS%20PRESENTS%2C%20Sunny%20Day%20Service%20TOUR%20in%20SEOUL"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011116"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "29CM",
+        "url": "https://ticket.29cm.co.kr/catalog/4109064"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -6195,7 +6391,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298542_260814_131523.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298542",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7k7v",
@@ -6232,7 +6429,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_5sos/3530",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297746",
@@ -6269,13 +6467,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297746_260805_132158.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297746",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298220",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "KANA-BOON, CRITICAL HIT PARADE",
     "tour": "Asian Adventure",
@@ -6287,13 +6486,13 @@ const FEED = [
     "dates": [
       "2026-12-05"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(18:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "스탠딩 138,000원, 지정석 138,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=KANA-BOON%2C%20CRITICAL%20HIT%20PARADE%3A%20Asian%20Adventure"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59553"
     },
     "otherVendors": [],
     "goods": {
@@ -6305,7 +6504,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298220_260811_131418.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298220",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF297519",
@@ -6342,7 +6542,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF297519_260803_134855.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297519",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF296039",
@@ -6378,7 +6579,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF296039_260714_111653.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296039",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-12-05-YOASOBI",
@@ -6436,7 +6638,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-12-05-EXILE",
@@ -6494,7 +6697,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF295528",
@@ -6530,7 +6734,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF295528_260707_141435.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295528",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299778",
@@ -6566,7 +6771,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299778_260831_160438.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299778",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-12-09-Number_i",
@@ -6624,7 +6830,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-kyo-2026-12-10-藤井風",
@@ -6683,13 +6890,14 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298469",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "이승철 40주년",
     "tour": "콘서트, THE VOICE: LEE SEUNG CHUL",
@@ -6701,15 +6909,24 @@ const FEED = [
     "dates": [
       "2026-12-12"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(16:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "FS석 198,000원, VIP석 187,000원, R석 165,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%9D%B4%EC%8A%B9%EC%B2%A0%2040%EC%A3%BC%EB%85%84%20%EC%BD%98%EC%84%9C%ED%8A%B8%2C%20THE%20VOICE%3A%20LEE%20SEUNG%20CHUL%20%5B%EC%9D%B8%EC%B2%9C%5D"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011556"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "예스24",
+        "url": "https://ticket.yes24.com/Perf/59665"
+      },
+      {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1716119"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -6719,7 +6936,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298469_260813_151004.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298469",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299848",
@@ -6760,7 +6978,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299848_260901_141354.png"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299848",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-12-13-BIGBANG2026",
@@ -6819,7 +7038,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7FA6",
@@ -6856,7 +7076,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/26sg_brb/3746",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-12-19-FujiiKaze",
@@ -6914,13 +7135,14 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298903",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "카와사키 타카야",
     "tour": "내한공연 KAWASAKI TAKAYA LIVE",
@@ -6932,13 +7154,13 @@ const FEED = [
     "dates": [
       "2026-12-20"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "일요일(18:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "지정석 121,000원, 스탠딩 110,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%B9%B4%EC%99%80%EC%82%AC%ED%82%A4%20%ED%83%80%EC%B9%B4%EC%95%BC%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0%20KAWASAKI%20TAKAYA%20LIVE%20%5B%EC%84%9C%EC%9A%B8%5D"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59669"
     },
     "otherVendors": [],
     "goods": {
@@ -6950,7 +7172,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298903_260820_103019.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298903",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2026-12-23-SnowMan",
@@ -7010,13 +7233,14 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298473",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "이승철 40주년",
     "tour": "콘서트: THE VOICE: LEE SEUNG CHUL",
@@ -7028,15 +7252,20 @@ const FEED = [
     "dates": [
       "2026-12-24"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "목요일(19:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "FS석 198,000원, VIP석 187,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%9D%B4%EC%8A%B9%EC%B2%A0%2040%EC%A3%BC%EB%85%84%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20THE%20VOICE%3A%20LEE%20SEUNG%20CHUL%20%5B%EB%B6%80%EC%82%B0%5D"
+      "name": "예스24",
+      "url": "https://ticket.yes24.com/Perf/59666"
     },
-    "otherVendors": [],
+    "otherVendors": [
+      {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1716126"
+      }
+    ],
     "goods": {
       "note": "",
       "url": null
@@ -7046,13 +7275,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298473_260813_151514.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298473",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298256",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": true,
     "artist": "대구 힙합 페스티벌",
     "tour": "대구 공연",
@@ -7065,13 +7295,13 @@ const FEED = [
       "2026-12-25",
       "2026-12-26"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일(12:00), HOL(12:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "양일권 200,000원, DAY1 109,000원, DAY2 109,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%8C%80%EA%B5%AC%20%ED%9E%99%ED%95%A9%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
+      "name": "멜론티켓",
+      "url": "https://ticket.melon.com/performance/index.htm?prodId=213665"
     },
     "otherVendors": [],
     "goods": {
@@ -7083,13 +7313,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298256_260811_144755.png"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298256",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298787",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": true,
     "artist": "원웨이 페스티벌",
     "tour": "경기 공연",
@@ -7102,13 +7333,13 @@ const FEED = [
       "2026-12-26",
       "2026-12-27"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "토요일 ~ 일요일(12:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "슈퍼얼리버드 2일권 66,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%9B%90%EC%9B%A8%EC%9D%B4%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
+      "name": "멜론티켓",
+      "url": "https://ticket.melon.com/performance/index.htm?prodId=213769"
     },
     "otherVendors": [],
     "goods": {
@@ -7120,13 +7351,14 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298787_260819_101528.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298787",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298249",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "무명전설",
     "tour": "전국투어 콘서트",
@@ -7138,13 +7370,13 @@ const FEED = [
     "dates": [
       "2026-12-31"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "목요일(15:00,19:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "R석 154,000원, S석 143,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%AC%B4%EB%AA%85%EC%A0%84%EC%84%A4%20%EC%A0%84%EA%B5%AD%ED%88%AC%EC%96%B4%20%EC%BD%98%EC%84%9C%ED%8A%B8%20%5B%EB%B6%80%EC%82%B0%20(%EC%95%B5%EC%BD%9C)%20%5D"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011605"
     },
     "otherVendors": [],
     "goods": {
@@ -7156,7 +7388,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298249_260811_142226.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298249",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7F7F",
@@ -7193,7 +7426,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_ericmoo/3737",
     "tags": [
       "Ballads/Romantic"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294000",
@@ -7229,7 +7463,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294000_260617_170101.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294000",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Avk",
@@ -7266,7 +7501,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_jaychou/3405",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF294073",
@@ -7302,7 +7538,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF294073_260618_162911.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294073",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Av6",
@@ -7339,7 +7576,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_jaychou/3406",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7AvF",
@@ -7376,7 +7614,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_jaychou/3407",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-01-11-BEFIRST5thAnniversar",
@@ -7434,7 +7673,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kdk",
@@ -7471,7 +7711,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_siennaspiro/3525",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7A7v",
@@ -7508,7 +7749,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_westlife/3430",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF299233",
@@ -7544,7 +7786,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF299233_260824_143416.jpg"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299233",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aAA",
@@ -7581,13 +7824,14 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_youngk/3844",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "kopis-PF298279",
     "auto": true,
     "sourceName": "KOPIS",
-    "kopisDetail": false,
+    "kopisDetail": true,
     "period": false,
     "artist": "마룬5",
     "tour": "내한공연",
@@ -7599,13 +7843,13 @@ const FEED = [
     "dates": [
       "2027-01-27"
     ],
-    "doorsNote": "예매처 공지 참고",
+    "doorsNote": "수요일(20:00)",
     "ticketOpen": null,
     "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
+    "price": "EARLY ENTRY PACKAGE 350,000원, LOVE IS LIKE VIP PACKAGE 425,000원, 스탠딩 P 167,000원, 스탠딩 R 143,000원, 지정석 P 242,000원, 지정석 R 220,000원, 지정석 S 187,000원, 지정석 A 154,000원, 지정석 B 132,000원",
     "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%A7%88%EB%A3%AC5%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0"
+      "name": "놀유니버스",
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26011315"
     },
     "otherVendors": [],
     "goods": {
@@ -7617,7 +7861,8 @@ const FEED = [
       "https://kopis.or.kr/upload/pfmPoster/PF_PF298279_260812_100446.gif"
     ],
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298279",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-01-27-BrunoMarsTheRomantic",
@@ -7675,7 +7920,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-01-30-Maroon5",
@@ -7734,7 +7980,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-02-04-DaiCEDAY",
@@ -7791,7 +8038,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-02-06-BUMPOFCHICKEN",
@@ -7849,7 +8097,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-02-10-XG",
@@ -7906,7 +8155,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-02-11-XG",
@@ -7963,7 +8213,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7FFd",
@@ -8000,7 +8251,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_maroon5/3772",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-02-13-TOKYOSPACESHIP2027",
@@ -8058,7 +8310,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "jp-td-2027-02-17-KingGnu10thAnniversa",
@@ -8116,7 +8369,8 @@ const FEED = [
     "images": [],
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
-    "tags": []
+    "tags": [],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aAd",
@@ -8153,7 +8407,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_yoasobi/3842",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7akv",
@@ -8190,7 +8445,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_straykids/3850",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7ake",
@@ -8227,7 +8483,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_straykids/3851",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ76ek",
@@ -8264,7 +8521,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_enhypen/3615",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7a6v",
@@ -8301,7 +8559,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_brunomars/3860",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7a6e",
@@ -8338,7 +8597,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_brunomars/3861",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7a6d",
@@ -8375,7 +8635,8 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_brunomars/3862",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7a67",
@@ -8412,6 +8673,7 @@ const FEED = [
     "source": "https://ticketmaster.sg/ticket/area/27sg_brunomars/3863",
     "tags": [
       "Pop"
-    ]
+    ],
+    "firstSeen": null
   }
 ];
