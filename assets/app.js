@@ -551,7 +551,9 @@ async function refreshLiveFeed() {
 
 /* ── 초기화 ─────────────────────────────────── */
 (function init() {
-  document.getElementById("data-updated").textContent = DATA_UPDATED.replace(/-/g, ".");
+  /* 히어로의 갱신 표시는 숨겨져 있을 수 있다 — 없으면 건너뛴다 */
+  const du = document.getElementById("data-updated");
+  if (du) du.textContent = DATA_UPDATED.replace(/-/g, ".");
   paintFeedLabel();
   renderUpNext();
   renderSummary();
