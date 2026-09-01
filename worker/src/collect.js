@@ -435,6 +435,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       if (!cur.caption && r.caption) cur.caption = r.caption;
       if (!cur.artist && r.artist) cur.artist = r.artist;
       if (!cur.price && r.price) cur.price = r.price;
+      if (!cur.link && r.link) cur.link = r.link;
       map.set(r.title, cur);
     }
     return [...map.values()].map(e => (e.dates.sort(), e));
@@ -445,6 +446,8 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const TD_MONTH = /^">(\d{4})年(\d{2})月/;
   const TD_DAY = /<span class="c-mod-calender__day">(\d{1,2})<\/span>/;
   const TD_LINK = /c-mod-calender__links[^>]*>\s*<a[^>]*>([\s\S]*?)<\/a>/;
+/* 공연 제목에 붙은 <a> 는 그 공연의 공식 페이지다 — 아티스트명 검색보다 훨씬 정확하다 */
+  const TD_HREF = /c-mod-calender__links[^>]*>\s*<a[^>]*href="(https?:\/\/[^"]+)"/;
   const TD_CAPTION = /<p class="c-txt-caption-01">([\s\S]*?)<\/p>/;
 
   function parseTokyoDome(html) {
@@ -464,7 +467,8 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
           rows.push({
             date: `${yy}-${mo}-${d2(day)}`,
             title: decode((block.match(TD_LINK) || [])[1] || ""),
-            caption: decode((block.match(TD_CAPTION) || [])[1] || "")
+            caption: decode((block.match(TD_CAPTION) || [])[1] || ""),
+            link: decode((block.match(TD_HREF) || [])[1] || "").replace(/#.*$/, "")
           });
         }
       }
@@ -500,6 +504,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
 /* 일본 공연장 4곳 중 가격을 싣는 곳은 오사카성홀뿐이다.
    <span class="d-ttl">座席</span><span class="d-txt">…円</span> 형태로 온다. */
   const JH_SEAT = /d-ttl">座席<\/span>\s*<span class="d-txt">([\s\S]*?)<\/span>/;
+  const JH_HREF = /href="(https?:\/\/(?!www\.osaka-johall\.com)[^"]+)"/;
 
   function parseJoHall(html) {
     const rows = [];
@@ -513,7 +518,8 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         date: `${y}-${d2(m)}-${d2(d)}`,
         title: decode((blk.match(JH_TITLE) || [])[1] || ""),
         caption: "",
-        price: /円/.test(seat) ? seat : ""                                     // 가격이 아닌 좌석 설명은 버린다
+        price: /円/.test(seat) ? seat : "",                                    // 가격이 아닌 좌석 설명은 버린다
+        link: (blk.match(JH_HREF) || [])[1] || ""
       });
     }
     return mergeByTitle(rows);
@@ -524,6 +530,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const KA_TITLE = /schedule-list-item__title">([\s\S]*?)<\/h2>/;
   const KA_ARTIST = /schedule-list-item__artist">([\s\S]*?)<\/p>/;
   const KA_OPEN = /(OPEN[^<]{0,40})</;
+  const KA_HREF = /href="(https:\/\/k-arena\.com\/schedule\/[^"]+)"/;
 
   function parseKArena(html) {
     const rows = [];
@@ -534,7 +541,8 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         date: `${dm[1]}-${dm[2]}-${dm[3]}`,
         artist: decode((li.match(KA_ARTIST) || [])[1] || ""),
         title: decode((li.match(KA_TITLE) || [])[1] || ""),
-        caption: decode((li.match(KA_OPEN) || [])[1] || "")
+        caption: decode((li.match(KA_OPEN) || [])[1] || ""),
+        link: (li.match(KA_HREF) || [])[1] || ""
       });
     }
     return mergeByTitle(rows);
@@ -553,6 +561,18 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     { key: "kar", venue: "K-아레나 요코하마",   city: "요코하마", mapQuery: "Kアリーナ横浜",
       url: "https://k-arena.com/schedule/",                         stay: STAY_AREAS.karena,    parse: parseKArena }
   ];
+
+  /** e+ 검색은 이름이 정확해야 걸린다. 멤버 나열·기념 문구·합동 라인업을 떼어 낸다.
+      (예: 'FANTASTICS (世界・佐藤大樹…)' → 'FANTASTICS', 'INI 5TH ANNIVERSARY' → 'INI') */
+  function searchKeyword(name) {
+    const t = String(name || "")
+      .split(/\s*\/\s*/)[0]                                  // 합동 공연은 첫 팀만
+      .replace(/[（(][^）)]*[）)]\s*$/, "")                     // 뒤에 붙은 멤버 나열
+      .replace(/\s+\d+(?:ST|ND|RD|TH)\s+ANNIVERSARY.*$/i, "")
+      .replace(/\.{3}\s*and\s+more$/i, "")
+      .trim();
+    return t || String(name || "");
+  }
 
   /** 제목만 있는 공연장에서 아티스트를 분리한다 */
   function splitTitle(raw) {
@@ -592,6 +612,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         for (const e of found) {
           const artist = e.artist || splitTitle(e.title).artist;
           const tour = e.artist ? e.title : (splitTitle(e.title).tour || `${v.venue} 공연`);
+          const eplus = `https://eplus.jp/sf/search?keyword=${encodeURIComponent(searchKeyword(artist))}`;
           out.push({
             id: `jp-${v.key}-${e.dates[0]}-${artist.replace(/[^\w가-힣ぁ-んァ-ヶ一-龠]/g, "").slice(0, 20) || "event"}`,
             auto: true, sourceName: `${v.venue} 공식`,
@@ -602,8 +623,16 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
             doorsNote: e.caption || "공식 공지 참고",
             ticketOpen: null, ticketStatus: "예정",
             price: e.price || "예매처 공지 참고",
-            vendor: { name: "이플러스 (e+)", url: `https://eplus.jp/sf/search?keyword=${encodeURIComponent(artist)}` },
-            otherVendors: [{ name: "티켓피아", url: "https://t.pia.jp/" }, { name: "로손티켓", url: "https://l-tike.com/" }],
+            /* 공연장이 그 공연의 공식 페이지를 알려 주면 그리로 보낸다. 아티스트명으로 e+ 를
+               검색시키면 동명 공연이나 빈 결과가 나와 공연과 링크가 어긋난다. */
+            vendor: e.link
+              ? { name: "공식 공연 페이지", url: e.link }
+              : { name: "이플러스 (e+)", url: eplus },
+            otherVendors: [
+              ...(e.link ? [{ name: "이플러스 (e+)", url: eplus }] : []),
+              { name: "티켓피아", url: "https://t.pia.jp/" },
+              { name: "로손티켓", url: "https://l-tike.com/" }
+            ],
             goods: { note: "", url: null },
             stay: { areas: v.stay },
             images: [],            // 공연장 일정 페이지에는 공연 이미지가 없다

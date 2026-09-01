@@ -4,7 +4,7 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-09-01T10:38:17.118Z";
+const FEED_UPDATED = "2026-09-01T13:24:45.165Z";
 
 const FEED = [
   {
@@ -27,10 +27,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=%E6%96%B0%E3%81%97%E3%81%84%E5%9C%B0%E5%9B%B3(%E7%A8%B2%E5%9E%A3%E5%90%BE%E9%83%8E%20%E8%8D%89%E5%BD%85%20%E5%89%9B%20%E9%A6%99%E5%8F%96%E6%85%8E%E5%90%BE)"
+      "name": "공식 공연 페이지",
+      "url": "https://www.yumebanchi.jp/event/50388/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E6%96%B0%E3%81%97%E3%81%84%E5%9C%B0%E5%9B%B3"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -86,10 +90,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260902-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -561,10 +569,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=DREAMS%20COME%20TRUE"
+      "name": "공식 공연 페이지",
+      "url": "https://www.yumebanchi.jp/event/38500/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=DREAMS%20COME%20TRUE"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -620,10 +632,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Byeon%20WooSeok"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260905-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Byeon%20WooSeok"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -830,10 +846,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260908-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -927,10 +947,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "全席指定（NAKAMA会員限定・記念品付き）10,500円 車イス席（NAKAMA会員限定・記念品付き）10,500円",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=BOYNEXTDOOR"
+      "name": "공식 공연 페이지",
+      "url": "https://kyodo-osaka.co.jp/search/detail/12952"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BOYNEXTDOOR"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -1249,10 +1273,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=TWS"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260912-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=TWS"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -1496,10 +1524,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=INI%205TH%20ANNIVERSARY"
+      "name": "공식 공연 페이지",
+      "url": "https://ini-official.com/feature/2026_dome_tour"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=INI"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -2108,10 +2140,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=FANTASTICS%20(%E4%B8%96%E7%95%8C%E3%83%BB%E4%BD%90%E8%97%A4%E5%A4%A7%E6%A8%B9%E3%83%BB%E6%BE%A4%E6%9C%AC%E5%A4%8F%E8%BC%9D%E3%83%BB%E7%80%AC%E5%8F%A3%E9%BB%8E%E5%BC%A5%E3%83%BB%E5%A0%80%E5%A4%8F%E5%96%9C%E3%83%BB%E6%9C%A8%E6%9D%91%E6%85%A7%E4%BA%BA%E3%83%BB%E5%85%AB%E6%9C%A8%E5%8B%87%E5%BE%81%E3%83%BB%E4%B8%AD%E5%B3%B6%E9%A2%AF%E5%A4%AA)"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260919-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=FANTASTICS"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -2280,10 +2316,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=SUPER%20BEAVER"
+      "name": "공식 공연 페이지",
+      "url": "https://sp.super-beaver.com/feature/dometour2026"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=SUPER%20BEAVER"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -2398,10 +2438,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=EXILE%20THE%20SECOND%20%2F%20DOBERMAN%20INFINITY%20%2F%20THE%20RAMPAGE%20%2F%20FANTASTICS%20%2F%20BALLISTIK%20BOYZ%20%2F%20PSYCHIC%20FEVER...and%20more"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260922-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=EXILE%20THE%20SECOND"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -2645,10 +2689,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=AKB48"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260926-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=AKB48"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -2780,10 +2828,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=AKB48"
+      "name": "공식 공연 페이지",
+      "url": "https://k-arena.com/schedule/20260927-1/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=AKB48"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -4724,10 +4776,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=MTV%20VMAJ%202026"
+      "name": "공식 공연 페이지",
+      "url": "https://www.mtvjapan.com/event/vmaj/2026/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=MTV%20VMAJ%202026"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -5019,10 +5075,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Stray%20Kids"
+      "name": "공식 공연 페이지",
+      "url": "https://www.straykidsjapan.com/runitjapan/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Stray%20Kids"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -5910,10 +5970,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=%E8%B6%85%E7%89%B9%E6%80%A5"
+      "name": "공식 공연 페이지",
+      "url": "https://bullettrain.jp/BT-1125-tokyo-dome/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E8%B6%85%E7%89%B9%E6%80%A5"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -6369,10 +6433,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=ENHYPEN"
+      "name": "공식 공연 페이지",
+      "url": "https://www.hybejapan-concert.com/statics/enhypen_blood_saga"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=ENHYPEN"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -6749,10 +6817,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
+      "name": "공식 공연 페이지",
+      "url": "https://www.yoasobi-music.jp/live/54776"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -6941,10 +7013,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Number_i"
+      "name": "공식 공연 페이지",
+      "url": "https://tobe-official.jp/artists/number_i/news/2318?page=1"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Number_i"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -7140,10 +7216,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=BIGBANG%202026"
+      "name": "공식 공연 페이지",
+      "url": "https://ygex.jp/bigbang/20th-anniv/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BIGBANG%202026"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -7237,10 +7317,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Fujii%20Kaze"
+      "name": "공식 공연 페이지",
+      "url": "https://hehn.fujiikaze.com/pwt/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Fujii%20Kaze"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -7335,10 +7419,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Snow%20Man"
+      "name": "공식 공연 페이지",
+      "url": "https://starto.jp/s/p/live/10578"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Snow%20Man"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -7770,10 +7858,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=BE%3AFIRST%205th%20Anniversary"
+      "name": "공식 공연 페이지",
+      "url": "https://befirst.tokyo/tour/dometour2027/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BE%3AFIRST"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8017,10 +8109,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Bruno%20Mars%20-%20The%20Romantic"
+      "name": "공식 공연 페이지",
+      "url": "https://www.livenationhip.co.jp/all-events/bruno-mars-tickets-ae147754"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Bruno%20Mars%20-%20The%20Romantic"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8077,10 +8173,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Maroon%205"
+      "name": "공식 공연 페이지",
+      "url": "https://www.livenationhip.co.jp/all-events/maroon-5-tickets-ae618"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Maroon%205"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8135,10 +8235,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=Da-iCE%20DAY"
+      "name": "공식 공연 페이지",
+      "url": "https://da-ice.jp/schedule/tour.php?id=1003011&fdate=2027-02-04&ldate=2027-02-14"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Da-iCE%20DAY"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8194,10 +8298,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=BUMP%20OF%20CHICKEN"
+      "name": "공식 공연 페이지",
+      "url": "https://www.bumpofchicken.com/live_information/2799"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BUMP%20OF%20CHICKEN"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8290,10 +8398,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=XG"
+      "name": "공식 공연 페이지",
+      "url": "https://xgalx.com/xg/news/detail.php?id=1134940"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=XG"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8348,10 +8460,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=XG"
+      "name": "공식 공연 페이지",
+      "url": "https://xgalx.com/xg/news/detail.php?id=1134940"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=XG"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8445,10 +8561,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=TOKYO%20SPACESHIP%202027"
+      "name": "공식 공연 페이지",
+      "url": "https://www.event-td.com/tokyospaceship/"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=TOKYO%20SPACESHIP%202027"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
@@ -8504,10 +8624,14 @@ const FEED = [
     "ticketStatus": "예정",
     "price": "예매처 공지 참고",
     "vendor": {
-      "name": "이플러스 (e+)",
-      "url": "https://eplus.jp/sf/search?keyword=King%20Gnu%2010th%20Anniversary%20Opening"
+      "name": "공식 공연 페이지",
+      "url": "https://kinggnu.jp/live/in.html?55547"
     },
     "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=King%20Gnu"
+      },
       {
         "name": "티켓피아",
         "url": "https://t.pia.jp/"
