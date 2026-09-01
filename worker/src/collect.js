@@ -168,7 +168,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const TRAILING_REGION = /\s*\[[^\]]*\]\s*$/;
   /* FESTIVAL 은 넣지 않는다 — "NOL FESTIVAL" 처럼 행사 이름 자체에 들어가는 경우가 많아
      여기서 자르면 아티스트가 "NOL" 로 남는다. 페스티벌은 제목 전체가 행사명이다. */
-  const SHOW_KIND = /\s(?=(?:단독\s?공연|단독\s?콘서트|전국투어|클럽\s?투어|월드투어|아시아\s?투어|팬\s?콘서트|팬미팅|내한공연|콘서트|리사이틀|공연|FAN\s?CONCERT|FANCON|CONCERT|WORLD\s?TOUR|ASIA\s?TOUR|TOUR|LIVE|SHOW))/i;
+  const SHOW_KIND = /\s(?=(?:단독\s?공연|단독\s?콘서트|전국투어|클럽\s?투어|월드\s?투어|아시아\s?투어|팬\s?콘서트|팬미팅|내한공연|콘서트|리사이틀|공연|FAN\s?CONCERT|FANCON|CONCERT|WORLD\s?TOUR|ASIA\s?TOUR|TOUR|LIVE|SHOW))/i;
   const TRAILING_ORDINAL = /\s+\d+\s*(?:st|nd|rd|th)?$/i;
   /* 아티스트명 뒤에 붙는 수식어 ("자라 라슨 첫 단독" → "자라 라슨"). 떼어낸 말은 투어명 앞으로 옮긴다. */
   const TRAILING_MODIFIER = /\s+(첫\s*번째|첫|단독|솔로|내한|앵콜|앙코르|ENCORE|SOLO|ASIA|WORLD|ARENA|DOME|STADIUM|JAPAN|GLOBAL)$/i;

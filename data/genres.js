@@ -98,6 +98,20 @@ const ARTIST_GENRE = {
   "장윤정": "trot", "홍진영": "trot"
 };
 
+/* ============================================================
+   해외 아티스트 — 국내 공연을 '내한'으로 분류하는 데 쓴다.
+
+   KOPIS 는 제목에 '내한' 이 없으면 해외 아티스트인지 알려주지 않는다.
+   J-POP·팝 장르는 해외 아티스트에게만 붙이므로 그것만으로 판별되고,
+   록·힙합처럼 국내외가 섞이는 장르만 여기에 따로 적는다.
+   ============================================================ */
+const FOREIGN_ARTISTS = [
+  "SPYAIR", "KANA-BOON", "Sunny Day Service", "Homecomings", "홈커밍스",
+  "Touche Amore", "Slowdive", "슬로우다이브", "Paul Gilbert", "폴 길버트",
+  "Ezra Collective", "에즈라 콜렉티브", "Morgenshtern", "모르겐슈테른",
+  "AKASAKI", "AKANE YONEZAWA", "칸호 야쿠시지", "Shi Shi"
+];
+
 /* 대응표에 없을 때 공연 제목에서 잡아내는 규칙 (앞에서부터 먼저 맞는 것) */
 const GENRE_KEYWORDS = [
   ["etc",      /어워즈|AWARDS|시상식|가요제|VMAJ|\bMAMA\b|뮤직어워드/i],

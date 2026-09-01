@@ -246,7 +246,21 @@ const mapLink = c => `https://www.google.com/maps/search/${encodeURIComponent(c.
 /* ── 필터 / 정렬 ─────────────────────────────── */
 const isSoon = c => { const d = daysToOpen(c); return !isPast(c) && d !== null && d >= 0 && d <= 14; };
 
-const matchCat = (c, cat) => cat === "all" || c.category === cat;
+/* 국내에서 열리는 공연의 내한 여부는 장르 표가 수집기보다 정확하다.
+   KOPIS 제목에 '내한' 이 없으면 수집 단계에서는 판별할 방법이 없어
+   해외 아티스트가 '국내' 로 들어온다. 여기서 바로잡는다. */
+const FOREIGN_GENRE = new Set(["jpop", "pop"]);          // 이 두 장르는 해외 아티스트에만 붙인다
+const FOREIGN_SET = new Set((typeof FOREIGN_ARTISTS !== "undefined" ? FOREIGN_ARTISTS : []).map(gnorm));
+
+function categoryOf(c) {
+  if (c.category !== "domestic") return c.category;       // 해외 개최·이미 내한으로 잡힌 건 그대로
+  if (FOREIGN_GENRE.has(genreOf(c))) return "visit";
+  const a = gnorm(c.artist);
+  for (const f of FOREIGN_SET) if (f.length >= 3 && a.includes(f)) return "visit";
+  return "domestic";
+}
+
+const matchCat = (c, cat) => cat === "all" || categoryOf(c) === cat;
 
 function matchState(c, st) {
   if (st === "all") return true;
