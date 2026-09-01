@@ -252,9 +252,17 @@ const isSoon = c => { const d = daysToOpen(c); return !isPast(c) && d !== null &
 const FOREIGN_GENRE = new Set(["jpop", "pop"]);          // 이 두 장르는 해외 아티스트에만 붙인다
 const FOREIGN_SET = new Set((typeof FOREIGN_ARTISTS !== "undefined" ? FOREIGN_ARTISTS : []).map(gnorm));
 
+/* 이름에 가나가 있으면 일본 아티스트다. 한자만 있고 한글이 없는 경우도 국외로 본다.
+   표에 없는 새 아티스트도 이 규칙만으로 내한으로 잡히므로 손댈 일이 줄어든다. */
+const KANA = /[\u3040-\u309f\u30a0-\u30ff]/;          // 히라가나·가타카나
+const HAN = /[\u4e00-\u9fff]/;                          // 한자
+const HANGUL = /[가-힣]/;
+const looksForeignName = a => KANA.test(a) || (HAN.test(a) && !HANGUL.test(a));
+
 function categoryOf(c) {
   if (c.category !== "domestic") return c.category;       // 해외 개최·이미 내한으로 잡힌 건 그대로
   if (FOREIGN_GENRE.has(genreOf(c))) return "visit";
+  if (looksForeignName(c.artist)) return "visit";
   const a = gnorm(c.artist);
   for (const f of FOREIGN_SET) if (f.length >= 3 && a.includes(f)) return "visit";
   return "domestic";
