@@ -26,6 +26,9 @@ const GENRES = [
 ];
 
 const ARTIST_GENRE = {
+  /* ── 기타 (음악 장르로 나누기 어려운 행사) ─ */
+  "Byeon WooSeok": "etc", "변우석": "etc",      /* 배우 팬미팅 */
+
   /* ── K-POP ─────────────────────────── */
   "BIGBANG": "kpop", "IVE": "kpop", "ITZY": "kpop", "ENHYPEN": "kpop",
   "Stray Kids": "kpop", "BABYMONSTER": "kpop", "ARTMS": "kpop", "PLAVE": "kpop",
@@ -35,6 +38,7 @@ const ARTIST_GENRE = {
   "ONE OR EIGHT": "kpop", "씨야": "kpop", "INFINITE": "kpop", "MAMAMOO": "kpop",
   "tripleS": "kpop", "izna": "kpop", "AKMU": "kpop", "악동뮤지션": "kpop",
   "CLICK-B": "kpop", "KATSEYE": "kpop", "OMEGA X": "kpop", "EXO": "kpop",
+  "BOYNEXTDOOR": "kpop",
 
   /* ── J-POP ─────────────────────────── */
   "YOASOBI": "jpop", "Vaundy": "jpop", "바운디": "jpop",
@@ -42,6 +46,11 @@ const ARTIST_GENRE = {
   "Snow Man": "jpop", "INI": "jpop", "Number_i": "jpop", "BE:FIRST": "jpop",
   "back number": "jpop", "백넘버": "jpop", "Da-iCE": "jpop", "超特急": "jpop",
   "야마다 료스케": "jpop", "TAKUYA KIMURA": "jpop", "오시오 코타로": "jpop",
+  "新しい地図": "jpop", "桑田佳祐": "jpop", "광자": "jpop",
+  "DREAMS COME TRUE": "jpop", "星街すいせい": "jpop", "호시마치 스이세이": "jpop",
+  "FANTASTICS": "jpop", "EXILE": "jpop", "AKB48": "jpop", "&TEAM": "jpop",
+  "ano": "jpop", "카와사키 타카야": "jpop", "CUTIE STREET": "jpop",
+  "IDOL1ST": "jpop", "나카지마 켄토": "jpop",   /* Sexy Zone 출신 */
   "YUURI": "jpop", "優里": "jpop", "JUJU": "jpop", "斉藤和義": "jpop", "사이토 카즈요시": "jpop",
 
   /* ── 팝 ────────────────────────────── */
@@ -52,6 +61,7 @@ const ARTIST_GENRE = {
   "Jane Zhang": "pop", "The Click Five": "pop", "yung kai": "pop", "영 카이": "pop",
   "Henry Moodie": "pop", "레이첼 야마가타": "pop", "Rachael Yamagata": "pop",
   "Jason Mraz": "pop", "제이슨 므라즈": "pop", "Firdhaus": "pop", "Song Dongye": "pop",
+  "Sienna Spiro": "pop", "시에나 스파이로": "pop",
 
   /* ── 록·밴드 ───────────────────────── */
   "SUPER BEAVER": "rock", "King Gnu": "rock", "BUMP OF CHICKEN": "rock",
@@ -62,6 +72,10 @@ const ARTIST_GENRE = {
   "CNBLUE": "rock", "씨엔블루": "rock", "Silica Gel": "rock", "실리카겔": "rock",
   "SPYAIR": "rock", "ONEWE": "rock", "FTISLAND": "rock", "엔플라잉": "rock",
   "Touche Amore": "rock", "잔다리": "rock", "KANA-BOON": "rock",
+  "THE VOLUNTEERS": "rock", "슬로우다이브": "rock", "Slowdive": "rock",
+  "Redoor": "rock", "리도어": "rock",
+  "APF": "rock",                    /* Sunny Day Service 내한을 APF 가 주최 — 아티스트명이 주최사로 파싱됨 */
+  "Sunny Day Service": "rock", "S,LO,W SERIES": "rock",
 
   /* ── 힙합·R&B ──────────────────────── */
   "Post Malone": "hiphop", "포스트 말론": "hiphop", "MC몽": "hiphop",
@@ -73,6 +87,9 @@ const ARTIST_GENRE = {
   "이승철": "ballad", "엠씨더맥스": "ballad", "성시경": "ballad",
   "김건모": "ballad", "김장훈": "ballad", "조관우": "ballad", "박효신": "ballad",
   "이수": "ballad", "규현": "ballad", "김범수": "ballad", "이승기": "ballad",
+  "스테이지 네임": "ballad", "정승환": "ballad", "김필": "ballad", "홍이삭": "ballad",
+  "더 스카웃": "ballad", "10CM": "ballad",
+  "THE MAIN VOCALS": "ballad",      /* 보컬리스트 프리미엄 라이브 */
 
   /* ── 트로트 ────────────────────────── */
   "전유진": "trot", "박지현": "trot", "임영웅": "trot", "영탁": "trot",
