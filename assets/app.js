@@ -550,13 +550,21 @@ async function refreshLiveFeed() {
 }
 
 /* ── 초기화 ─────────────────────────────────── */
+/* 초기화 단계를 각각 감싼다. 한 조각이 실패해도 공연 목록은 반드시 그려야 한다.
+   배포 직후 브라우저가 이전 버전 스크립트를 캐시한 채 새 HTML 을 받으면
+   사라진 요소를 건드리다 초기화가 통째로 멈추는 일이 실제로 있었다. */
+function step(name, fn) {
+  try { fn(); } catch (e) { console.warn(`init:${name} 건너뜀 —`, e.message); }
+}
+
 (function init() {
-  /* 히어로의 갱신 표시는 숨겨져 있을 수 있다 — 없으면 건너뛴다 */
-  const du = document.getElementById("data-updated");
-  if (du) du.textContent = DATA_UPDATED.replace(/-/g, ".");
-  paintFeedLabel();
-  renderUpNext();
-  renderSummary();
-  render();
-  refreshLiveFeed();
+  step("header", () => {
+    const du = document.getElementById("data-updated");   // 숨겨져 있을 수 있다
+    if (du) du.textContent = DATA_UPDATED.replace(/-/g, ".");
+    paintFeedLabel();
+  });
+  step("upnext", renderUpNext);
+  step("summary", renderSummary);
+  step("grid", render);
+  step("liveFeed", refreshLiveFeed);
 })();

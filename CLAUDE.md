@@ -56,6 +56,8 @@ Four files matter: `index.html` (static shell with fixed element IDs), `assets/a
 
 **Each collector source is independent.** A source that throws is recorded in `errors` and its *previous* entries are carried over, so one broken parser can't wipe a category; an all-sources failure leaves KV (and `data/feed.js`) untouched rather than publishing an empty feed.
 
+**Asset URLs carry a `?v=` version and `init()` is failure-isolated.** GitHub Pages serves HTML with a short TTL but assets with a longer one, so a deploy can pair *new* HTML with a browser's *cached* `app.js`. That combination once blanked the whole page: the stale script touched an element the new HTML no longer had, `init()` threw on its first line, and `render()` never ran. Bump the `?v=` string in `index.html` whenever `app.js`/`styles.css` change alongside markup, and keep every `init()` step wrapped in `step()` so one broken piece can never stop the grid from rendering.
+
 **Rendering** is a full re-render: `render()` rebuilds `#grid` and `#tabs` from `innerHTML`, driven by the module-level `state` object (`cat`, `q`, `sort`, `hidePast`). Every event handler mutates `state` then calls `render()`. `renderUpNext()` and `renderSummary()` run once at init. All interpolated data goes through `esc()`.
 
 **Authored vs. derived data** — this split is the main thing to understand before editing `data/concerts.js`:
