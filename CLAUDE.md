@@ -60,6 +60,8 @@ Four files matter: `index.html` (static shell with fixed element IDs), `assets/a
 
 **The default sort interleaves countries.** `mix` (the default) sorts by date, groups by `country`, then round-robins one show per country per round — so a 싱가포르 show, then a 한국 show, then a 일본 show, rather than a run of one country. Rotation order is set by whichever country has the earliest show, and each country keeps its internal date order. A country with a single distant show still claims a slot in round one; that is intended, not a bug. `open`/`date`/`artist` remain available and are plain comparators.
 
+**`renderCollect()` is a second view of the same list, not a second data source.** The 공연 정보 모아보기 section re-renders from whatever `visibleList()` already returned, sorted by date and grouped under month header rows, plus a month-distribution bar. It adds no fetch and no new field — changing filters updates both the card grid and the table in one `render()` pass.
+
 **Rendering** is a full re-render: `render()` rebuilds `#grid` and `#tabs` from `innerHTML`, driven by the module-level `state` object (`cat`, `q`, `sort`, `hidePast`). Every event handler mutates `state` then calls `render()`. `renderUpNext()` and `renderSummary()` run once at init. All interpolated data goes through `esc()`.
 
 **Authored vs. derived data** — this split is the main thing to understand before editing `data/concerts.js`:

@@ -508,12 +508,57 @@ function renderSummary() {
     </li>`).join("");
 }
 
+/* ── 공연 정보 모아보기 ─────────────────────
+   같은 필터 결과를 달별로 묶어 표로 보여 준다. 카드보다 훨씬 촘촘해서
+   전체를 훑거나 특정 달에 뭐가 있는지 볼 때 쓴다. 새로 받아오는 데이터는 없다. */
+const ymOf = c => nextDate(c).slice(0, 7);
+const ymLabel = ym => `${+ym.slice(0, 4)}년 ${+ym.slice(5, 7)}월`;
+
+function renderCollect(list) {
+  const rows = list.slice().sort((a, b) => nextDate(a).localeCompare(nextDate(b)));
+  document.getElementById("collect-count").textContent = `${rows.length} EVENTS`;
+  document.getElementById("collect-empty").hidden = rows.length > 0;
+
+  /* 달별 분포 막대 */
+  const byMonth = new Map();
+  rows.forEach(c => byMonth.set(ymOf(c), (byMonth.get(ymOf(c)) || 0) + 1));
+  const max = Math.max(1, ...byMonth.values());
+  document.getElementById("months").innerHTML = [...byMonth.entries()].map(([ym, n]) => `
+    <a class="mchip" href="#m-${ym}">
+      <span class="m-l">${ymLabel(ym)}</span>
+      <span class="m-bar"><i style="height:${Math.max(8, Math.round(n / max * 100))}%"></i></span>
+      <span class="m-n">${n}</span>
+    </a>`).join("");
+
+  /* 표 — 달이 바뀌는 지점에 구분 행을 넣는다 */
+  let cur = "";
+  document.getElementById("ctable-body").innerHTML = rows.map(c => {
+    const ym = ymOf(c);
+    const head = ym === cur ? "" : (cur = ym,
+      `<tr class="c-month" id="m-${ym}"><td colspan="7">${ymLabel(ym)}<span>${byMonth.get(ym)}건</span></td></tr>`);
+    const st = statusOf(c);
+    const g = genreOf(c);
+    return head + `
+      <tr data-url="${esc(c.vendor.url)}">
+        <td class="c-date">${esc(fmtDateRange(c.dates, c.period))}</td>
+        <td class="c-cty">${esc(code(c))}</td>
+        <td><b>${esc(c.artist)}</b><small>${esc(c.tour)}</small></td>
+        <td class="c-ven">${esc(c.venue)}<small>${esc(c.city)}</small></td>
+        <td class="c-gen">${g ? `<span class="gtag">${esc(GENRE_LABEL[g])}</span>` : "—"}</td>
+        <td class="c-open"><span class="st ${st.tone}">${esc(st.badge)}</span><small>${
+          c.ticketOpen ? esc(fmtOpen(c.ticketOpen)) : esc(c.price || "")}</small></td>
+        <td class="c-ven">${esc(c.vendor.name)}${c.auto ? '<small class="auto-s">AUTO</small>' : ""}</td>
+      </tr>`;
+  }).join("");
+}
+
 function render() {
   renderChips();
   const list = visibleList();
   document.getElementById("grid").innerHTML = list.map(cardHTML).join("");
   document.getElementById("empty").hidden = list.length > 0;
   document.getElementById("result-count").textContent = `${list.length} EVENTS`;
+  renderCollect(list);
 }
 
 /* ── 이벤트 ─────────────────────────────────── */
@@ -537,6 +582,7 @@ function openVendor(e) {
 }
 document.getElementById("grid").addEventListener("click", openVendor);
 document.getElementById("briefing-list").addEventListener("click", openVendor);
+document.getElementById("ctable-body").addEventListener("click", openVendor);
 
 function paintFeedLabel() {
   const el = document.getElementById("feed-updated");

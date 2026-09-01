@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%23ff4e8b'/></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/styles.css?v=20260901b">
+<link rel="stylesheet" href="assets/styles.css?v=20260901c">
 </head>
 <body>
 
@@ -18,6 +18,7 @@
     <nav class="nav-links">
       <a href="#find" class="on">공연 찾기</a>
       <a href="#soon">오픈 임박</a>
+      <a href="#collect">모아보기</a>
       <a href="#guide">원정 가이드</a>
     </nav>
     <a class="btn-lime" href="#soon">오픈 임박 <span>↗</span></a>
@@ -102,6 +103,35 @@
     <p class="empty" id="empty" hidden>조건에 맞는 공연이 없습니다.</p>
   </section>
 
+  <!-- ══ 공연 정보 모아보기 ══ -->
+  <section class="wrap collect" id="collect">
+    <div class="sec-head">
+      <h2>공연 정보 모아보기</h2>
+      <span class="mono-label" id="collect-count"></span>
+    </div>
+    <p class="collect-lead">지금 걸려 있는 필터에 해당하는 공연을 달별로 묶어 한눈에 봅니다. 줄을 누르면 예매처로 이동합니다.</p>
+
+    <div class="months" id="months"></div>
+
+    <div class="tablewrap">
+      <table class="ctable">
+        <thead>
+          <tr>
+            <th class="c-date">날짜</th>
+            <th class="c-cty">국가</th>
+            <th>아티스트 · 공연</th>
+            <th class="c-ven">공연장 · 도시</th>
+            <th class="c-gen">장르</th>
+            <th class="c-open">티켓오픈</th>
+            <th class="c-ven">예매처</th>
+          </tr>
+        </thead>
+        <tbody id="ctable-body"></tbody>
+      </table>
+    </div>
+    <p class="empty" id="collect-empty" hidden>조건에 맞는 공연이 없습니다.</p>
+  </section>
+
   <!-- ══ 원정 가이드 ══ -->
   <section class="guide" id="guide">
     <div class="wrap">
@@ -136,10 +166,10 @@
   </div>
 </footer>
 
-<script src="data/config.js?v=20260901b"></script>
-<script src="data/genres.js?v=20260901b"></script>
-<script src="data/concerts.js?v=20260901b"></script>
-<script src="data/feed.js?v=20260901b"></script>
-<script src="assets/app.js?v=20260901b"></script>
+<script src="data/config.js?v=20260901c"></script>
+<script src="data/genres.js?v=20260901c"></script>
+<script src="data/concerts.js?v=20260901c"></script>
+<script src="data/feed.js?v=20260901c"></script>
+<script src="assets/app.js?v=20260901c"></script>
 </body>
 </html>
