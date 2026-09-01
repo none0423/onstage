@@ -572,7 +572,7 @@ const ymLabel = ym => `${+ym.slice(0, 4)}년 ${+ym.slice(5, 7)}월`;
 
 function renderCollect(list) {
   const rows = list.slice().sort((a, b) => nextDate(a).localeCompare(nextDate(b)));
-  document.getElementById("collect-count").textContent = `${rows.length} EVENTS`;
+  document.getElementById("collect-count").textContent = `${rows.length}건`;
   document.getElementById("collect-empty").hidden = rows.length > 0;
 
   /* 달별 분포 막대 */
@@ -608,19 +608,42 @@ function renderCollect(list) {
   }).join("");
 }
 
+/* 어떤 필터가 걸려 있는지 한 줄로 보여 주고, 한 번에 풀 수 있게 한다.
+   축이 셋이라 결과가 왜 적은지 모르는 일이 생긴다. */
+function renderActiveFilters() {
+  const el = document.getElementById("active-filters");
+  if (!el) return;
+  const parts = [];
+  if (state.cat !== "all") parts.push(`지역 ${(CATEGORIES.find(c => c.key === state.cat) || {}).label}`);
+  if (state.genre !== "all") parts.push(`장르 ${state.genre === "none" ? "미분류" : GENRE_LABEL[state.genre]}`);
+  if (state.status !== "all") parts.push(`상태 ${(STATES.find(s => s.key === state.status) || {}).label}`);
+  if (state.q.trim()) parts.push(`검색 "${esc(state.q.trim())}"`);
+  if (!parts.length) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `적용 중 — ${parts.join(" · ")} <button type="button" id="clear-filters">모두 해제</button>`;
+}
+
 function render() {
   renderChips();
   const list = visibleList();
   document.getElementById("grid").innerHTML = list.map(cardHTML).join("");
   document.getElementById("empty").hidden = list.length > 0;
-  document.getElementById("result-count").textContent = `${list.length} EVENTS`;
+  document.getElementById("result-count").textContent = `${list.length}건`;
   renderCollect(list);
+  renderActiveFilters();
 }
 
 /* ── 이벤트 ─────────────────────────────────── */
 document.getElementById("tabs").addEventListener("click", e => {
   const b = e.target.closest(".chip");
   if (b) { state.cat = b.dataset.cat; render(); }
+});
+document.getElementById("active-filters").addEventListener("click", e => {
+  if (!e.target.closest("#clear-filters")) return;
+  state.cat = state.genre = state.status = "all";
+  state.q = "";
+  document.getElementById("search").value = "";
+  render();
 });
 document.getElementById("states").addEventListener("click", e => {
   const b = e.target.closest(".chip");

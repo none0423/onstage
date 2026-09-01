@@ -31,8 +31,8 @@ h1,h2,h3,p{margin:0}
 /* ── NAV ───────────────────────────── */
 .nav{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:50}
 .nav-in{display:flex;align-items:center;gap:28px;height:72px}
-.logo{font-weight:800;font-size:19px;letter-spacing:.06em;display:flex;align-items:center;gap:9px}
-.logo-dot{width:7px;height:7px;border-radius:50%;background:var(--pink);display:inline-block;transform:translateY(-6px)}
+.logo{font-weight:800;font-size:23px;letter-spacing:.06em;display:flex;align-items:center;gap:10px}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);display:inline-block;transform:translateY(-6px)}
 .nav-links{display:flex;gap:26px;margin-left:auto;font-size:14.5px;font-weight:600}
 .nav-links a{padding-bottom:2px;border-bottom:2px solid transparent;color:var(--ink-2)}
 .nav-links a:hover{color:var(--ink)}
@@ -45,7 +45,7 @@ h1,h2,h3,p{margin:0}
 .btn-lime:hover{background:var(--ink);color:var(--lime)}
 
 /* ── HERO ──────────────────────────── */
-.hero{padding:74px 32px 46px;position:relative}
+.hero{padding:56px 32px 40px;position:relative}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase;margin-bottom:22px}
 .hero-h1{
   font-size:clamp(42px,6.6vw,86px);font-weight:800;line-height:1.06;
@@ -196,7 +196,7 @@ h1,h2,h3,p{margin:0}
 /* ── 푸터 ──────────────────────────── */
 .foot{border-top:1px solid var(--line);padding:34px 0 60px}
 .foot-in{display:flex;gap:40px;flex-wrap:wrap}
-.logo-sm{font-size:15px;flex:none}
+.logo-sm{font-size:17px;flex:none}
 .foot p{font-size:12.5px;color:var(--ink-3);line-height:1.8}
 
 /* ── 반응형 ────────────────────────── */
@@ -368,4 +368,24 @@ h1,h2,h3,p{margin:0}
 .foot .foot-sync{
   margin-top:10px;
   font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3);
+}
+
+/* ── 적용 중인 필터 요약 ─────────────── */
+.active-filters{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin:14px 0 0;padding:9px 14px;background:var(--accent-soft);
+  border-left:3px solid var(--accent);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:var(--ink-2);
+}
+.active-filters button{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;
+  border:1px solid var(--accent);background:none;color:var(--accent);
+  padding:3px 9px;cursor:pointer;transition:.12s;
+}
+.active-filters button:hover{background:var(--accent);color:#fff}
+
+/* 카드가 클릭 가능하다는 안내 */
+.grid-hint{
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3);
+  margin:-8px 0 12px;
 }
