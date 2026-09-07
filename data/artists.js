@@ -244,5 +244,77 @@ const ARTIST_INFO = {
   "TOKYO SPACESHIP 2027": {
     "country": null,
     "genre": null
+  },
+  "하이 하이 배드맨": {
+    "country": null,
+    "genre": null
+  },
+  "씨야 20주년 전국 투어": {
+    "country": null,
+    "genre": null
+  },
+  "サカナクション": {
+    "country": "JP",
+    "genre": "rock"
+  },
+  "HANA": {
+    "country": null,
+    "genre": null
+  },
+  "KB 조이올팍 페스티벌": {
+    "country": null,
+    "genre": null
+  },
+  "더팩트 뮤직 어워즈 (THE FACT MUSIC AWARDS)": {
+    "country": null,
+    "genre": null
+  },
+  "산들 단독 콘서트: 바람결": {
+    "country": null,
+    "genre": null
+  },
+  "최유리": {
+    "country": null,
+    "genre": null
+  },
+  "울림콘서트, 10월항쟁 80주년 헌정콘서트": {
+    "country": null,
+    "genre": null
+  },
+  "Moira Dela Torre": {
+    "country": "PH",
+    "genre": "ballad"
+  },
+  "POW": {
+    "country": null,
+    "genre": null
+  },
+  "NOL FESTIVAL: DAY 1, SUPER LIVE STAGE": {
+    "country": null,
+    "genre": null
+  },
+  "최항석과 부기몬스터": {
+    "country": null,
+    "genre": null
+  },
+  "WONDERLIVET (원더리벳)": {
+    "country": null,
+    "genre": null
+  },
+  "ELLEGARDEN, Bad For Education": {
+    "country": null,
+    "genre": null
+  },
+  "펜트하우스": {
+    "country": null,
+    "genre": null
+  },
+  "Rain Tree": {
+    "country": "JP",
+    "genre": null
+  },
+  "Carpenters Reborn": {
+    "country": null,
+    "genre": null
   }
 };
