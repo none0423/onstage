@@ -316,5 +316,89 @@ const ARTIST_INFO = {
   "Carpenters Reborn": {
     "country": null,
     "genre": null
+  },
+  "松田聖子": {
+    "country": "JP",
+    "genre": "jpop"
+  },
+  "GADORO": {
+    "country": "JP",
+    "genre": null
+  },
+  "ZASSO.2026 ～アメ村えれふぁんと15周年～": {
+    "country": null,
+    "genre": null
+  },
+  "LIVE": {
+    "country": "US",
+    "genre": "rock"
+  },
+  "JX TOUR CONCERT: CORE": {
+    "country": null,
+    "genre": null
+  },
+  "JUNE": {
+    "country": null,
+    "genre": null
+  },
+  "PENTAGON 10th Anniversary": {
+    "country": null,
+    "genre": null
+  },
+  "HIGHLIGHT FAN CON": {
+    "country": null,
+    "genre": null
+  },
+  "TAKASE TOYA": {
+    "country": null,
+    "genre": null
+  },
+  "데이먼스 이어": {
+    "country": "KR",
+    "genre": null
+  },
+  "심규선": {
+    "country": "KR",
+    "genre": null
+  },
+  "브로콜리너마저의 전국 인디 교류 투어": {
+    "country": null,
+    "genre": null
+  },
+  "FLOW NARUTO THE ROCK": {
+    "country": null,
+    "genre": null
+  },
+  "이창섭": {
+    "country": "KR",
+    "genre": null
+  },
+  "김재환": {
+    "country": "KR",
+    "genre": "kpop"
+  },
+  "Awesome Stage, N.Flying x Hi-Fi Un!corn": {
+    "country": null,
+    "genre": null
+  },
+  "김필 콘서트: JOURNEY": {
+    "country": null,
+    "genre": null
+  },
+  "藤井風 ピアノリサイタル": {
+    "country": null,
+    "genre": null
+  },
+  "Mahiru": {
+    "country": null,
+    "genre": null
+  },
+  "Yesung": {
+    "country": "KR",
+    "genre": "kpop"
+  },
+  "ZAZEN BOYS MATSURI SESSION": {
+    "country": null,
+    "genre": null
   }
 };
