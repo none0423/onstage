@@ -20,8 +20,9 @@ const MAX_SUBREQUESTS = 40;
 const SOURCE_ORDER = ["kopis", "jpvenues", "ticketmaster"];
 const SOURCE_PREFIX = { kopis: "kopis-", jpvenues: "jp-", ticketmaster: "tm-" };
 /* KOPIS 가 먼저 돌지만 뒤 소스가 굶지 않도록 요청을 남겨 둔다.
-   일본 공연장 4곳 + Ticketmaster 최대 4개 + 여유 2개. 공연장을 늘리면 이 값도 올린다. */
-const RESERVED_FOR_LATER_SOURCES = 10;
+   일본 공연장 8곳 = 18요청(도쿄돔 1 · 교세라 4 · 오사카성홀 1 · K아레나 1 · 요코하마 4 · 사이타마 4 · 반텔린 1 · 후쿠오카 2)
+   + Ticketmaster 3 + 여유 2. 공연장을 늘리면 이 값도 올린다. */
+const RESERVED_FOR_LATER_SOURCES = 23;
 
 /* ── 공통 유틸 ───────────────────────────────── */
 const d2 = n => String(n).padStart(2, "0");
@@ -420,6 +421,26 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       { name: "미나토미라이 (みなとみらい)", note: "도보 8분 · 야경 명소" },
       { name: "요코하마역 (横浜駅)", note: "도보 15분 · 공항버스 직결" },
       { name: "사쿠라기초 (桜木町)", note: "도보 10분 · JR 네기시선" }
+    ],
+    yokoarena: [
+      { name: "신요코하마 (新横浜)", note: "도보 5분 · 신칸센 정차역" },
+      { name: "요코하마역 (横浜駅)", note: "JR 요코하마선 2역 · 공항버스 직결" },
+      { name: "기쿠나 (菊名)", note: "1역 · 도큐 도요코선 환승" }
+    ],
+    saitama: [
+      { name: "사이타마신토신 (さいたま新都心)", note: "도보 3분 · JR 게이힌토호쿠선" },
+      { name: "오미야 (大宮)", note: "1역 · 신칸센 정차역, 숙소 많음" },
+      { name: "이케부쿠로 (池袋)", note: "JR 쇼난신주쿠라인 30분" }
+    ],
+    vantelin: [
+      { name: "나고야돔마에야다 (ナゴヤドーム前矢田)", note: "도보 5분 · 지하철 메이조선" },
+      { name: "사카에 (栄)", note: "지하철 15분 · 번화가" },
+      { name: "나고야역 (名古屋駅)", note: "지하철 25분 · 신칸센·공항 직결" }
+    ],
+    paypaydome: [
+      { name: "도진마치 (唐人町)", note: "도보 15분 · 지하철 공항선" },
+      { name: "텐진 (天神)", note: "지하철 10분 · 번화가, 셔틀버스" },
+      { name: "하카타 (博多)", note: "지하철 15분 · 신칸센·공항 직결" }
     ]
   };
 
@@ -557,6 +578,96 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     return mergeByTitle(rows);
   }
 
+  /* 요코하마 아레나 — 표를 같은 사이트의 JSON(/event/YYYYMM?_format=json)으로 채운다.
+     HTML 에는 표가 비어 있고, JSON 이 아티스트·날짜·개연 시각·공식 URL 을 그대로 준다.
+     category 1 = 콘서트. 2 는 패션쇼·TV 이벤트, 3 식전, 5 체험, 6 물판, 7 기타(실측). */
+  function parseYokohama(text) {
+    let arr;
+    try { arr = JSON.parse(text); } catch { throw new Error("JSON 이 아닙니다 (엔드포인트 변경?)"); }
+    if (!Array.isArray(arr)) throw new Error("배열이 아닙니다 (응답 형식 변경?)");
+    const rows = [];
+    for (const o of arr) {
+      if (String(o.category) !== "1" || !/^\d{4}-\d{2}-\d{2}$/.test(o.date1 || "")) continue;
+      const artist = decode(o.artist || "");
+      const title = decode(o.title || "") || artist;
+      const start = Array.isArray(o.ev_start) && o.ev_start[0] ? `개연 ${o.ev_start[0]}` : "";
+      const link = /^https?:\/\//.test(o.url || "") ? o.url
+        : (o.path ? `https://www.yokohama-arena.co.jp${o.path}` : "");
+      rows.push({ date: o.date1, artist, title, caption: start, link });
+    }
+    return mergeByTitle(rows);
+  }
+
+  /* GMO아리나 사이타마(구 사이타마 슈퍼아레나) — <li id=eventN class="concert-show …">.
+     클래스에 keyaki-plaza·toiro 가 붙으면 야외 광장·부속 홀 행사라 뺀다(길거리 라이브·재즈데이).
+     2026-01-13 ~ 2027-03-31 은 대규모 개수로 휴관이라 그동안 0건이 정상이다. */
+  const SA_DATE = /<dl class="date">\s*<dt>[^<]*<\/dt>\s*<dd>\s*(\d{4})\/(\d{1,2})\/(\d{1,2})[^<]*?(?:～\s*(\d{4})\/(\d{1,2})\/(\d{1,2}))?/;
+  const SA_TITLE = /<h3><a[^>]*>([\s\S]*?)<\/a><\/h3>/;
+  const SA_LINK = /class="photo">\s*<a href="(https?:\/\/(?!www\.saitama-arena\.co\.jp)[^"]+)"/;
+  function parseSaitama(html) {
+    const rows = [];
+    for (const li of html.split(/<li id=event\d+ class="/).slice(1)) {
+      const cls = li.slice(0, li.indexOf('"'));
+      if (!/\bconcert-show\b/.test(cls) || /keyaki-plaza|toiro/.test(cls)) continue;
+      const dm = li.match(SA_DATE);
+      if (!dm) continue;
+      const title = decode((li.match(SA_TITLE) || [])[1] || "");
+      const link = (li.match(SA_LINK) || [])[1] || "";
+      const from = `${dm[1]}-${d2(dm[2])}-${d2(dm[3])}`;
+      rows.push({ date: from, title, caption: "", link });
+      if (dm[4]) {
+        const to = `${dm[4]}-${d2(dm[5])}-${d2(dm[6])}`;
+        if (to !== from) rows.push({ date: to, title, caption: "", link });
+      }
+    }
+    return mergeByTitle(rows);
+  }
+
+  /* 반텔린돔 나고야 — 3년치 달력이 한 페이지(≈630KB)에 있다.
+     <div id="tabs-N" class="events"> 가 첫 연도 1월부터의 월 연번이고, 첫 연도는 class="tabYear" 에 있다.
+     행의 아이콘 번호가 종류: 1 프로야구, 2 콘서트, 3 스포츠, 8 기타(실측). 2 만 남긴다. */
+  const VD_BASE_YEAR = /class="tabYear"[^>]*>\s*(20\d\d)年/;
+  const VD_TAB = /<div id="tabs-(\d+)" class="events">/;
+  const VD_ROW = /width:45px">(\d{1,2})\/(\d{1,2})<br>[\s\S]*?<p class="eventname"><img src='\.\.\/icon\/icon(\d)\.png'[^>]*>\s*(?:<a href="([^"]*)"[^>]*>)?([^<]*)/g;
+  function parseVantelin(html) {
+    const by = html.match(VD_BASE_YEAR);
+    if (!by) throw new Error("연도 탭을 찾지 못했습니다 (페이지 구조 변경?)");
+    const base = +by[1];
+    const rows = [];
+    const parts = html.split(VD_TAB);                 // [앞, N, 본문, N, 본문, …]
+    for (let i = 1; i < parts.length; i += 2) {
+      const n = +parts[i], body = parts[i + 1];
+      const y = base + Math.floor(n / 12), mo = (n % 12) + 1;
+      VD_ROW.lastIndex = 0;
+      let m;
+      while ((m = VD_ROW.exec(body))) {
+        const [, mm, dd, icon, url, title] = m;
+        if (icon !== "2" || +mm !== mo) continue;
+        rows.push({ date: `${y}-${d2(mm)}-${d2(dd)}`, title: decode(title), caption: "", link: decode(url || "") });
+      }
+    }
+    return mergeByTitle(rows);
+  }
+
+  /* 미즈호 PayPay돔 후쿠오카 — 연 단위 페이지(/stadium/event_schedule/YYYY/).
+     <dt>2026/12/26（土）</dt> 뒤 표의 イベント 행에 제목과 공식 링크가 있다.
+     야구 외 행사가 전부 실리므로(취업 박람회·마라톤·필드 무료 개방) 콘서트 단어가 있는 것만 남긴다. */
+  const FD_ROW = /<dt>(20\d\d)\/(\d{1,2})\/(\d{1,2})（[\s\S]*?<th>イベント<\/th>\s*<td>(?:<a href="([^"]*)"[^>]*>)?\s*(?:<span>)?([^<]*)/g;
+  const FD_CONCERT = /LIVE|TOUR|FES\b|MUSIC|ROCK|CONCERT|SHOT|ANISAMA|CIRCUS|PRESENTS|SMTOWN|ライブ|ツアー|コンサート|公演/i;
+  const FD_NOT = /就職|EXPO|無料開放|マラソン|サッカー|うまいもん|Pet博|MATCH|トヨタ|フィールド|野球/i;
+  function parseFukuoka(html) {
+    const rows = [];
+    FD_ROW.lastIndex = 0;
+    let m;
+    while ((m = FD_ROW.exec(html))) {
+      const [, y, mo, d, url, raw] = m;
+      const title = decode(raw);
+      if (!FD_CONCERT.test(title) || FD_NOT.test(title)) continue;
+      rows.push({ date: `${y}-${d2(mo)}-${d2(d)}`, title, caption: "", link: decode(url || "") });
+    }
+    return mergeByTitle(rows);
+  }
+
   const JP_VENUES = [
     { key: "td",  venue: "도쿄돔",            city: "도쿄",     mapQuery: "東京ドーム",
       url: "https://www.tokyo-dome.co.jp/dome/event/schedule.html", stay: STAY_AREAS.tokyodome, parse: parseTokyoDome },
@@ -568,7 +679,25 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     { key: "joh", venue: "오사카성홀",         city: "오사카",   mapQuery: "大阪城ホール",
       url: "https://www.osaka-johall.com/event/",                   stay: STAY_AREAS.johall,    parse: parseJoHall },
     { key: "kar", venue: "K-아레나 요코하마",   city: "요코하마", mapQuery: "Kアリーナ横浜",
-      url: "https://k-arena.com/schedule/",                         stay: STAY_AREAS.karena,    parse: parseKArena }
+      url: "https://k-arena.com/schedule/",                         stay: STAY_AREAS.karena,    parse: parseKArena },
+    /* 요코하마 아레나는 월별 JSON. 한 달에 요청 하나 */
+    { key: "yka", venue: "요코하마 아레나",     city: "요코하마", mapQuery: "横浜アリーナ",
+      url: "https://www.yokohama-arena.co.jp/event/",              stay: STAY_AREAS.yokoarena, parse: parseYokohama,
+      months: 4, monthUrl: (y, m) => `https://www.yokohama-arena.co.jp/event/${y}${d2(m)}?_format=json` },
+    /* GMO아리나 사이타마는 월별 페이지. 이벤트 없는 달은 404 라 첫 페이지(/schedule/ = 당월)만 필수 */
+    { key: "ssa", venue: "GMO아리나 사이타마",   city: "사이타마", mapQuery: "さいたまスーパーアリーナ",
+      url: "https://www.saitama-arena.co.jp/schedule/",             stay: STAY_AREAS.saitama,   parse: parseSaitama,
+      pages: now => ["https://www.saitama-arena.co.jp/schedule/", ...[1, 2, 3].map(i => {
+        const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+        return `https://www.saitama-arena.co.jp/schedule/${d.getFullYear()}/${d2(d.getMonth() + 1)}/`;
+      })] },
+    /* 반텔린돔은 3년치가 한 페이지 */
+    { key: "vdn", venue: "반텔린돔 나고야",     city: "나고야",   mapQuery: "バンテリンドーム ナゴヤ",
+      url: "https://www.nagoya-dome.co.jp/enjoy/index.php",        stay: STAY_AREAS.vantelin,  parse: parseVantelin },
+    /* 미즈호PayPay돔은 연 단위. 다음 해 페이지는 아직 없으면 404 */
+    { key: "fuk", venue: "미즈호PayPay돔 후쿠오카", city: "후쿠오카", mapQuery: "みずほPayPayドーム福岡",
+      url: "https://www.softbankhawks.co.jp/stadium/event_schedule/", stay: STAY_AREAS.paypaydome, parse: parseFukuoka,
+      pages: now => [now.getFullYear(), now.getFullYear() + 1].map(y => `https://www.softbankhawks.co.jp/stadium/event_schedule/${y}/`) }
   ];
 
   /** e+ 검색은 이름이 정확해야 걸린다. 멤버 나열·기념 문구·합동 라인업을 떼어 낸다.
@@ -586,16 +715,26 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   /** 제목만 있는 공연장에서 아티스트를 분리한다 */
   /* 'LIVE「君と歩いた青春2026」' 처럼 앞 단어가 공연 종류일 뿐이면 그건 아티스트가 아니다.
      이런 합동·기획 공연은 공연명 자체를 아티스트 자리에 쓴다. */
-  const GENERIC_ARTIST = /^(?:LIVE|CONCERT|TOUR|FES(?:TIVAL)?|SHOW|EVENT|ライブ|コンサート|公演|イベント|フェス)$/i;
+  const GENERIC_ARTIST = /^(?:LIVE|CONCERT|TOUR|FES(?:TIVAL)?|SHOW|EVENT|ライブ|コンサート|(?:日本|来日|単独|追加)?公演|イベント|フェス)$/i;
   function splitTitle(raw) {
     const t = raw.replace(/^20\d\d\s+/, "").trim();
     const jp = t.indexOf("「");
     if (jp > 0) {
       const head = t.slice(0, jp).trim(), body = t.slice(jp).replace(/[「」]/g, "").trim();
-      return GENERIC_ARTIST.test(head) ? { artist: body, tour: "" } : { artist: head, tour: body };
+      /* '日本公演「Number_i LIVE TOUR No.III」' — 괄호 안을 다시 나눠 Number_i 를 얻는다 */
+      if (GENERIC_ARTIST.test(head)) return splitTitle(body);
+      return { artist: head, tour: body };
     }
+    /* 'Bruno Mars - The Romantic Tour in Japan' — 대시 구분자가 있으면 그게 가장 확실한 경계다 */
+    const dash = t.match(/^(.+?\S)\s+[-–—]\s+(\S.+)$/);
+    if (dash && dash[1].length <= 40) return { artist: dash[1], tour: dash[2] };
     const i = t.search(/\s(?=(?:WORLD|DOME|ARENA|STADIUM|HALL|ASIA|JAPAN|LIVE|CONCERT|TOUR|ライブ|ツアー|公演))/i);
-    return i > 0 ? { artist: t.slice(0, i).trim(), tour: t.slice(i).trim() } : { artist: t, tour: "" };
+    if (i <= 0) return { artist: t, tour: "" };
+    let artist = t.slice(0, i).trim(), tour = t.slice(i).trim();
+    /* 'BIGBANG 2026 WORLD TOUR' — 연도는 아티스트가 아니라 투어 이름의 일부다 */
+    const yr = artist.match(/^(.*\S)\s+(20\d\d)$/);
+    if (yr) { artist = yr[1]; tour = `${yr[2]} ${tour}`; }
+    return { artist, tour };
   }
 
   async function jpvenues() {
@@ -603,26 +742,37 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     const per = {};
     for (const v of JP_VENUES) {
       try {
-        /* 월 단위로만 보여 주는 곳은 몇 달치를 이어서 가져온다 */
-        let found;
-        if (v.monthUrl) {
-          const rows = [];
-          const now = new Date();
-          for (let i = 0; i < (v.months || 3); i++) {
-            const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
-            rows.push(...v.parse(await get(v.monthUrl(d.getFullYear(), d.getMonth() + 1))));
+        /* 가져올 페이지 목록. 한 페이지에 다 있는 곳은 url 하나, 월 단위인 곳은 monthUrl 로
+           몇 달치, 연 단위인 곳은 pages() 로 직접 나열한다. */
+        const now = new Date();
+        let urls;
+        if (v.pages) urls = v.pages(now);
+        else if (v.monthUrl) urls = Array.from({ length: v.months || 3 }, (_, i) => {
+          const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+          return v.monthUrl(d.getFullYear(), d.getMonth() + 1);
+        });
+        else urls = [v.url];
+
+        /* 첫 페이지는 반드시 있어야 한다. 그 뒤 페이지는 '아직 없는 달·해'라 404 가 정상인 곳이
+           있으므로(GMO아리나 사이타마·미즈호PayPay돔) 실패해도 그 페이지만 건너뛴다. */
+        const rows = [];
+        for (let i = 0; i < urls.length; i++) {
+          try {
+            rows.push(...v.parse(await get(urls[i])));
+          } catch (e) {
+            if (i === 0 || used >= MAX_SUBREQUESTS) throw e;
+            log(`   ${v.venue} 부가 페이지 건너뜀: ${e.message.slice(0, 80)}`);
           }
-          /* 달을 걸쳐 같은 공연이 나뉘어 오므로 다시 합친다 */
-          const merged = new Map();
-          for (const r of rows) {
-            const cur = merged.get(r.title) || { ...r, dates: [] };
-            for (const dt of r.dates) if (!cur.dates.includes(dt)) cur.dates.push(dt);
-            merged.set(r.title, cur);
-          }
-          found = [...merged.values()].map(e => (e.dates.sort(), e));
-        } else {
-          found = v.parse(await get(v.url));
         }
+        /* 달·해를 걸쳐 같은 공연이 나뉘어 오므로 다시 합친다 */
+        const merged = new Map();
+        for (const r of rows) {
+          const cur = merged.get(r.title) || { ...r, dates: [] };
+          for (const dt of r.dates) if (!cur.dates.includes(dt)) cur.dates.push(dt);
+          if (!cur.link && r.link) cur.link = r.link;
+          merged.set(r.title, cur);
+        }
+        const found = [...merged.values()].map(e => (e.dates.sort(), e));
         per[v.key] = found.length;
         for (const e of found) {
           const artist = e.artist || splitTitle(e.title).artist;
@@ -751,7 +901,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     const peak = Math.max(prev.peak || 0, count || 0);
     health[key] = { count: failed ? (prev.count ?? null) : count, zero, fail, peak, at: nowISO };
     if (fail >= 3) warnings.push(`${label}: ${fail}회 연속 실패`);
-    if (zero >= 3) warnings.push(`${label}: ${zero}회 연속 0건`);
+    if (zero >= 3 && peak > 0) warnings.push(`${label}: ${zero}회 연속 0건 (이전 최고 ${peak}건)`);   // 한 번도 안 나온 곳은 신규·휴관일 수 있다
     /* 이전 최고치의 절반 아래로 떨어지면 부분 파싱 실패일 가능성이 크다 */
     if (!failed && peak >= 6 && count < peak / 2) warnings.push(`${label}: ${count}건 (최고 ${peak}건의 절반 미만)`);
   };

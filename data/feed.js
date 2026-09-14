@@ -4,1506 +4,9 @@
    갱신: node tools/collect.mjs
    손으로 관리하는 공연은 data/concerts.js 에 넣으면 이 파일보다 우선합니다. */
 
-const FEED_UPDATED = "2026-09-01T13:37:11.174Z";
+const FEED_UPDATED = "2026-09-14T09:33:21.394Z";
 
 const FEED = [
-  {
-    "id": "jp-joh-2026-09-01-新しい地図稲垣吾郎草彅剛香取慎吾",
-    "auto": true,
-    "sourceName": "오사카성홀 공식",
-    "artist": "新しい地図(稲垣吾郎 草彅 剛 香取慎吾)",
-    "tour": "오사카성홀 공연",
-    "category": "japan",
-    "country": "일본",
-    "city": "오사카",
-    "venue": "오사카성홀",
-    "mapQuery": "大阪城ホール",
-    "dates": [
-      "2026-09-01",
-      "2026-09-02"
-    ],
-    "doorsNote": "공식 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "공식 공연 페이지",
-      "url": "https://www.yumebanchi.jp/event/50388/"
-    },
-    "otherVendors": [
-      {
-        "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=%E6%96%B0%E3%81%97%E3%81%84%E5%9C%B0%E5%9B%B3"
-      },
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%96%B0%E3%81%97%E3%81%84%E5%9C%B0%E5%9B%B3"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=%E6%96%B0%E3%81%97%E3%81%84%E5%9C%B0%E5%9B%B3"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
-          "note": "도보 5분 · 지하철 나가호리선"
-        },
-        {
-          "name": "교바시 (京橋)",
-          "note": "도보 15분 · JR·게이한 환승"
-        },
-        {
-          "name": "우메다 (梅田)",
-          "note": "지하철 15분 · 오사카 중심"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://www.osaka-johall.com/event/",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "jp-kar-2026-09-02-桑田佳祐",
-    "auto": true,
-    "sourceName": "K-아레나 요코하마 공식",
-    "artist": "桑田佳祐",
-    "tour": "桑田佳祐 夏祭りツアー 2026 supported by カンロ",
-    "category": "japan",
-    "country": "일본",
-    "city": "요코하마",
-    "venue": "K-아레나 요코하마",
-    "mapQuery": "Kアリーナ横浜",
-    "dates": [
-      "2026-09-02",
-      "2026-09-03"
-    ],
-    "doorsNote": "OPEN 17:00 / START 18:30",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "공식 공연 페이지",
-      "url": "https://k-arena.com/schedule/20260902-1/"
-    },
-    "otherVendors": [
-      {
-        "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
-      },
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "미나토미라이 (みなとみらい)",
-          "note": "도보 8분 · 야경 명소"
-        },
-        {
-          "name": "요코하마역 (横浜駅)",
-          "note": "도보 15분 · 공항버스 직결"
-        },
-        {
-          "name": "사쿠라기초 (桜木町)",
-          "note": "도보 10분 · JR 네기시선"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://k-arena.com/schedule/",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF299385",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": true,
-    "period": false,
-    "artist": "HIPHOPPLAYA",
-    "tour": "SHOW VOL.63",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "예스24 원더로크홀",
-    "mapQuery": "예스24 원더로크홀",
-    "dates": [
-      "2026-09-04"
-    ],
-    "doorsNote": "금요일(20:00)",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "전석 49,000원",
-    "vendor": {
-      "name": "예스24",
-      "url": "https://ticket.yes24.com/Perf/59877"
-    },
-    "otherVendors": [
-      {
-        "name": "KREAM",
-        "url": "https://kream.co.kr/products/1056714"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF299385_260826_105939.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299385",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297480",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "DONGHAE 1ST",
-    "tour": "SOLO ENCORE CONCERT: ALIVE",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "올림픽공원",
-    "mapQuery": "올림픽공원",
-    "dates": [
-      "2026-09-04",
-      "2026-09-06"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=DONGHAE%201ST%20SOLO%20ENCORE%20CONCERT%3A%20ALIVE%20%5B%EC%84%9C%EC%9A%B8%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297480_260803_112708.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297480",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297035",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "잔다리 페스타",
-    "tour": "서울 공연",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "무신사 개러지 (구. 왓챠홀)",
-    "mapQuery": "무신사 개러지 (구. 왓챠홀)",
-    "dates": [
-      "2026-09-04",
-      "2026-09-06"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%9E%94%EB%8B%A4%EB%A6%AC%20%ED%8E%98%EC%8A%A4%ED%83%80"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297035_260727_143817.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297035",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297841",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "너드커넥션",
-    "tour": "클럽 투어: 파도의 고점 FINAL",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "명화라이브홀",
-    "mapQuery": "명화라이브홀",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%84%88%EB%93%9C%EC%BB%A4%EB%84%A5%EC%85%98%20%ED%81%B4%EB%9F%BD%20%ED%88%AC%EC%96%B4%3A%20%ED%8C%8C%EB%8F%84%EC%9D%98%20%EA%B3%A0%EC%A0%90%20FINAL%20%5B%EC%84%9C%EC%9A%B8%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297841_260806_113632.gif"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297841",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297113",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "스테이지 네임",
-    "tour": "정승환, 김필, 홍이삭 (Stage Name: Jung Seung Hwan, Kim Feel, Hong Isaac)",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "부산",
-    "venue": "벡스코 (BEXCO)",
-    "mapQuery": "벡스코 (BEXCO)",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%A7%80%20%EB%84%A4%EC%9E%84%3A%20%EC%A0%95%EC%8A%B9%ED%99%98%2C%20%EA%B9%80%ED%95%84%2C%20%ED%99%8D%EC%9D%B4%EC%82%AD%20(Stage%20Name%3A%20Jung%20Seung%20Hwan%2C%20Kim%20Feel%2C%20Hong%20Isaac)%20%5B%EB%B6%80%EC%82%B0%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297113_260728_111447.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297113",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297019",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "성시경 with friends",
-    "tour": "자, 오늘은",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "올림픽공원",
-    "mapQuery": "올림픽공원",
-    "dates": [
-      "2026-09-05",
-      "2026-09-06"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%84%B1%EC%8B%9C%EA%B2%BD%20with%20friends%3A%20%EC%9E%90%2C%20%EC%98%A4%EB%8A%98%EC%9D%80"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297019_260727_140228.gif"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297019",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF296912",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "TETRAPOD",
-    "tour": "Intermingle",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "예스24 원더로크홀",
-    "mapQuery": "예스24 원더로크홀",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=TETRAPOD%3A%20Intermingle"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF296912_260724_141909.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296912",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF296682",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "ARTMS",
-    "tour": "World Tour: Art of BLUE BLOOD",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "예스24 라이브홀 (구. 악스코리아)",
-    "mapQuery": "예스24 라이브홀 (구. 악스코리아)",
-    "dates": [
-      "2026-09-05",
-      "2026-09-06"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=ARTMS%20World%20Tour%3A%20Art%20of%20BLUE%20BLOOD%20%5B%EC%84%9C%EC%9A%B8%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF296682_260722_150801.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296682",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF294882",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "더 스카웃",
-    "tour": "다시 태어나는 별, 이승철 그리고 다시 태어난 별들",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "블루스퀘어",
-    "mapQuery": "블루스퀘어",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%8D%94%20%EC%8A%A4%EC%B9%B4%EC%9B%83%3A%20%EB%8B%A4%EC%8B%9C%20%ED%83%9C%EC%96%B4%EB%82%98%EB%8A%94%20%EB%B3%84%2C%20%EC%9D%B4%EC%8A%B9%EC%B2%A0%20%EA%B7%B8%EB%A6%AC%EA%B3%A0%20%EB%8B%A4%EC%8B%9C%20%ED%83%9C%EC%96%B4%EB%82%9C%20%EB%B3%84%EB%93%A4"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF294882_260629_163027.gif"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294882",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF294108",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "씨야 20주년 전국 투어",
-    "tour": "콘서트: THE FAN",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "부산",
-    "venue": "KBS홀 [부산]",
-    "mapQuery": "KBS홀 [부산]",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%94%A8%EC%95%BC%2020%EC%A3%BC%EB%85%84%20%EC%A0%84%EA%B5%AD%20%ED%88%AC%EC%96%B4%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20THE%20FAN%20%5B%EB%B6%80%EC%82%B0%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF294108_260619_112255.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294108",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF292700",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "SPYAIR JUST LIKE THIS",
-    "tour": "경기 공연",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "경기",
-    "venue": "킨텍스",
-    "mapQuery": "킨텍스",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=SPYAIR%20JUST%20LIKE%20THIS%20%5B%EA%B3%A0%EC%96%91%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF292700_260601_152115.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF292700",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "jp-joh-2026-09-05-DREAMSCOMETRUE",
-    "auto": true,
-    "sourceName": "오사카성홀 공식",
-    "artist": "DREAMS COME TRUE",
-    "tour": "오사카성홀 공연",
-    "category": "japan",
-    "country": "일본",
-    "city": "오사카",
-    "venue": "오사카성홀",
-    "mapQuery": "大阪城ホール",
-    "dates": [
-      "2026-09-05",
-      "2026-09-06"
-    ],
-    "doorsNote": "공식 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "공식 공연 페이지",
-      "url": "https://www.yumebanchi.jp/event/38500/"
-    },
-    "otherVendors": [
-      {
-        "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=DREAMS%20COME%20TRUE"
-      },
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=DREAMS%20COME%20TRUE"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=DREAMS%20COME%20TRUE"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
-          "note": "도보 5분 · 지하철 나가호리선"
-        },
-        {
-          "name": "교바시 (京橋)",
-          "note": "도보 15분 · JR·게이한 환승"
-        },
-        {
-          "name": "우메다 (梅田)",
-          "note": "지하철 15분 · 오사카 중심"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://www.osaka-johall.com/event/",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "jp-kar-2026-09-05-ByeonWooSeok",
-    "auto": true,
-    "sourceName": "K-아레나 요코하마 공식",
-    "artist": "Byeon WooSeok",
-    "tour": "2026 ByeonWooSeok Asia Fanmeeting Tour in Yokohama 〈The Secret Library〉",
-    "category": "japan",
-    "country": "일본",
-    "city": "요코하마",
-    "venue": "K-아레나 요코하마",
-    "mapQuery": "Kアリーナ横浜",
-    "dates": [
-      "2026-09-05",
-      "2026-09-06"
-    ],
-    "doorsNote": "OPEN 17:00 / START 18:30",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "공식 공연 페이지",
-      "url": "https://k-arena.com/schedule/20260905-1/"
-    },
-    "otherVendors": [
-      {
-        "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=Byeon%20WooSeok"
-      },
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=Byeon%20WooSeok"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=Byeon%20WooSeok"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "미나토미라이 (みなとみらい)",
-          "note": "도보 8분 · 야경 명소"
-        },
-        {
-          "name": "요코하마역 (横浜駅)",
-          "note": "도보 15분 · 공항버스 직결"
-        },
-        {
-          "name": "사쿠라기초 (桜木町)",
-          "note": "도보 10분 · JR 네기시선"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://k-arena.com/schedule/",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "tm-Z8ymWIMJlyZziZ7F71",
-    "auto": true,
-    "sourceName": "Ticketmaster",
-    "artist": "GMMTV FANDAY",
-    "tour": "ForceBook Tomafox",
-    "category": "asia",
-    "country": "싱가포르",
-    "city": "Singapore",
-    "venue": "The Theatre at Mediacorp",
-    "mapQuery": "The Theatre at Mediacorp Singapore",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "14:30 시작",
-    "ticketOpen": "2026-07-25T02:00:00Z",
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "images": [
-      "https://s1.ticketm.net/dam/c/732/d37f3fa7-208f-4c54-a2d6-cdc280c19732_106281_TABLET_LANDSCAPE_16_9.jpg",
-      "https://s1.ticketm.net/dam/c/732/d37f3fa7-208f-4c54-a2d6-cdc280c19732_106281_RETINA_LANDSCAPE_16_9.jpg"
-    ],
-    "vendor": {
-      "name": "Ticketmaster SG",
-      "url": "https://ticketmaster.sg/ticket/area/26sg_gmmtvfanday/3739"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "source": "https://ticketmaster.sg/ticket/area/26sg_gmmtvfanday/3739",
-    "tags": [
-      "Pop"
-    ],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "tm-Z8ymWIMJlyZziZ7FAv",
-    "auto": true,
-    "sourceName": "Ticketmaster",
-    "artist": "GMMTV FANDAY",
-    "tour": "TayNew Polcasan",
-    "category": "asia",
-    "country": "싱가포르",
-    "city": "Singapore",
-    "venue": "The Theatre at Mediacorp",
-    "mapQuery": "The Theatre at Mediacorp Singapore",
-    "dates": [
-      "2026-09-05"
-    ],
-    "doorsNote": "19:30 시작",
-    "ticketOpen": "2026-07-25T02:00:00Z",
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "images": [
-      "https://s1.ticketm.net/dam/c/732/d37f3fa7-208f-4c54-a2d6-cdc280c19732_106281_TABLET_LANDSCAPE_16_9.jpg",
-      "https://s1.ticketm.net/dam/c/732/d37f3fa7-208f-4c54-a2d6-cdc280c19732_106281_RETINA_LANDSCAPE_16_9.jpg"
-    ],
-    "vendor": {
-      "name": "Ticketmaster SG",
-      "url": "https://ticketmaster.sg/ticket/area/26sg_gmmtvfanday/3740"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "source": "https://ticketmaster.sg/ticket/area/26sg_gmmtvfanday/3740",
-    "tags": [
-      "Pop"
-    ],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297303",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "Spot the GIG by Wanderloch, James Alyn & pami",
-    "tour": "서울 공연",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "예스24 원더로크홀",
-    "mapQuery": "예스24 원더로크홀",
-    "dates": [
-      "2026-09-06"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=Spot%20the%20GIG%20by%20Wanderloch%2C%20James%20Alyn%20%26%20pami"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297303_260730_134709.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297303",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "tm-Z8ymWIMJlyZziZ7F7a",
-    "auto": true,
-    "sourceName": "Ticketmaster",
-    "artist": "LYKN",
-    "tour": "LYKN DUSK & DAWN WORLD TOUR  2026 AT SINGAPORE",
-    "category": "asia",
-    "country": "싱가포르",
-    "city": "Singapore",
-    "venue": "The Theatre at Mediacorp",
-    "mapQuery": "The Theatre at Mediacorp Singapore",
-    "dates": [
-      "2026-09-06"
-    ],
-    "doorsNote": "18:30 시작",
-    "ticketOpen": "2026-07-24T04:00:00Z",
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "images": [
-      "https://s1.ticketm.net/dam/a/4f3/b3fde42b-9ec4-4a98-babe-163a8c41a4f3_TABLET_LANDSCAPE_16_9.jpg",
-      "https://s1.ticketm.net/dam/a/4f3/b3fde42b-9ec4-4a98-babe-163a8c41a4f3_RETINA_LANDSCAPE_16_9.jpg"
-    ],
-    "vendor": {
-      "name": "Ticketmaster SG",
-      "url": "https://ticketmaster.sg/ticket/area/26sg_lykn/3738"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "source": "https://ticketmaster.sg/ticket/area/26sg_lykn/3738",
-    "tags": [
-      "Pop"
-    ],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "jp-kar-2026-09-08-星街すいせい",
-    "auto": true,
-    "sourceName": "K-아레나 요코하마 공식",
-    "artist": "星街すいせい",
-    "tour": "HOSHIMACHI SUISEI ARENA TOUR 2026 Once Upon a Stellar",
-    "category": "japan",
-    "country": "일본",
-    "city": "요코하마",
-    "venue": "K-아레나 요코하마",
-    "mapQuery": "Kアリーナ横浜",
-    "dates": [
-      "2026-09-08",
-      "2026-09-09"
-    ],
-    "doorsNote": "OPEN 17:30 / START 19:00",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "공식 공연 페이지",
-      "url": "https://k-arena.com/schedule/20260908-1/"
-    },
-    "otherVendors": [
-      {
-        "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84"
-      },
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "미나토미라이 (みなとみらい)",
-          "note": "도보 8분 · 야경 명소"
-        },
-        {
-          "name": "요코하마역 (横浜駅)",
-          "note": "도보 15분 · 공항버스 직결"
-        },
-        {
-          "name": "사쿠라기초 (桜木町)",
-          "note": "도보 10분 · JR 네기시선"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://k-arena.com/schedule/",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF298758",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "뮤즈온 페스티벌",
-    "tour": "서울 공연",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "무신사 개러지 (구. 왓챠홀)",
-    "mapQuery": "무신사 개러지 (구. 왓챠홀)",
-    "dates": [
-      "2026-09-09",
-      "2026-09-13"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EB%AE%A4%EC%A6%88%EC%98%A8%20%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF298758_260818_161206.png"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298758",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "jp-joh-2026-09-09-BOYNEXTDOOR",
-    "auto": true,
-    "sourceName": "오사카성홀 공식",
-    "artist": "BOYNEXTDOOR",
-    "tour": "오사카성홀 공연",
-    "category": "japan",
-    "country": "일본",
-    "city": "오사카",
-    "venue": "오사카성홀",
-    "mapQuery": "大阪城ホール",
-    "dates": [
-      "2026-09-09",
-      "2026-09-10"
-    ],
-    "doorsNote": "공식 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "全席指定（NAKAMA会員限定・記念品付き）10,500円 車イス席（NAKAMA会員限定・記念品付き）10,500円",
-    "vendor": {
-      "name": "공식 공연 페이지",
-      "url": "https://kyodo-osaka.co.jp/search/detail/12952"
-    },
-    "otherVendors": [
-      {
-        "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=BOYNEXTDOOR"
-      },
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=BOYNEXTDOOR"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=BOYNEXTDOOR"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
-          "note": "도보 5분 · 지하철 나가호리선"
-        },
-        {
-          "name": "교바시 (京橋)",
-          "note": "도보 15분 · JR·게이한 환승"
-        },
-        {
-          "name": "우메다 (梅田)",
-          "note": "지하철 15분 · 오사카 중심"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://www.osaka-johall.com/event/",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF298650",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "@WANDERLOCH with THE SOLUTIONS X 87dance",
-    "tour": "서울 공연",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "예스24 원더로크홀",
-    "mapQuery": "예스24 원더로크홀",
-    "dates": [
-      "2026-09-11"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%40WANDERLOCH%20with%20THE%20SOLUTIONS%20X%2087dance"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF298650_260818_115820.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298650",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297575",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "존박 콘서트: BREAK!",
-    "tour": "서울 공연",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "블루스퀘어",
-    "mapQuery": "블루스퀘어",
-    "dates": [
-      "2026-09-11",
-      "2026-09-13"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%A1%B4%EB%B0%95%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20BREAK!"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297575_260803_171003.gif"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297575",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF298483",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "하이 하이 배드맨",
-    "tour": "서울 공연",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "예스24 원더로크홀",
-    "mapQuery": "예스24 원더로크홀",
-    "dates": [
-      "2026-09-12"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%ED%95%98%EC%9D%B4%20%ED%95%98%EC%9D%B4%20%EB%B0%B0%EB%93%9C%EB%A7%A8"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF298483_260813_155007.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298483",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF297716",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "CNBLUE",
-    "tour": "LIVE: 3LOGY",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "부산",
-    "venue": "벡스코 (BEXCO)",
-    "mapQuery": "벡스코 (BEXCO)",
-    "dates": [
-      "2026-09-12",
-      "2026-09-13"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=CNBLUE%20LIVE%3A%203LOGY%20%5B%EB%B6%80%EC%82%B0%20(%EC%95%B5%EC%BD%9C)%20%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF297716_260805_111221.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297716",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF294720",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "씨야 20주년 전국 투어",
-    "tour": "콘서트: THE FAN",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "대구",
-    "venue": "엑스코(exco)",
-    "mapQuery": "엑스코(exco)",
-    "dates": [
-      "2026-09-12"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%94%A8%EC%95%BC%2020%EC%A3%BC%EB%85%84%20%EC%A0%84%EA%B5%AD%20%ED%88%AC%EC%96%B4%20%EC%BD%98%EC%84%9C%ED%8A%B8%3A%20THE%20FAN%20%5B%EB%8C%80%EA%B5%AC%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF294720_260626_144208.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294720",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF294050",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "PLAVE",
-    "tour": "World Tour: KEEP IT MANIC",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "인천",
-    "venue": "인천문학경기장",
-    "mapQuery": "인천문학경기장",
-    "dates": [
-      "2026-09-12",
-      "2026-09-13"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=PLAVE%20World%20Tour%3A%20KEEP%20IT%20MANIC%20%5B%EC%9D%B8%EC%B2%9C%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF294050_260618_151754.gif"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294050",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF289985",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": true,
-    "artist": "back number",
-    "tour": "내한공연: Grateful Yesterdays Tour",
-    "category": "visit",
-    "country": "대한민국",
-    "city": "경기",
-    "venue": "킨텍스",
-    "mapQuery": "킨텍스",
-    "dates": [
-      "2026-09-12",
-      "2026-09-13"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=back%20number%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0%3A%20Grateful%20Yesterdays%20Tour%20%5B%EC%84%9C%EC%9A%B8%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF289985_260423_113526.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF289985",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "jp-kar-2026-09-12-TWS",
-    "auto": true,
-    "sourceName": "K-아레나 요코하마 공식",
-    "artist": "TWS",
-    "tour": "2026 TWS TOUR ‘24/7:FOR:YOU’ IN JAPAN",
-    "category": "japan",
-    "country": "일본",
-    "city": "요코하마",
-    "venue": "K-아레나 요코하마",
-    "mapQuery": "Kアリーナ横浜",
-    "dates": [
-      "2026-09-12",
-      "2026-09-13"
-    ],
-    "doorsNote": "OPEN 15:30 / START 17:00",
-    "ticketOpen": null,
-    "ticketStatus": "예정",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "공식 공연 페이지",
-      "url": "https://k-arena.com/schedule/20260912-1/"
-    },
-    "otherVendors": [
-      {
-        "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=TWS"
-      },
-      {
-        "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=TWS"
-      },
-      {
-        "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=TWS"
-      }
-    ],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "stay": {
-      "areas": [
-        {
-          "name": "미나토미라이 (みなとみらい)",
-          "note": "도보 8분 · 야경 명소"
-        },
-        {
-          "name": "요코하마역 (横浜駅)",
-          "note": "도보 15분 · 공항버스 직결"
-        },
-        {
-          "name": "사쿠라기초 (桜木町)",
-          "note": "도보 10분 · JR 네기시선"
-        }
-      ]
-    },
-    "images": [],
-    "tips": "",
-    "source": "https://k-arena.com/schedule/",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "tm-Z8ymWIMJlyZziZ7aAe",
-    "auto": true,
-    "sourceName": "Ticketmaster",
-    "artist": "VIBES",
-    "tour": "VIBES",
-    "category": "asia",
-    "country": "싱가포르",
-    "city": "Singapore",
-    "venue": "Gardens By The Bay - Flower Field Hall",
-    "mapQuery": "Gardens By The Bay - Flower Field Hall Singapore",
-    "dates": [
-      "2026-09-12"
-    ],
-    "doorsNote": "19:20 시작",
-    "ticketOpen": "2026-08-12T04:00:00Z",
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "images": [
-      "https://s1.ticketm.net/dam/c/ab4/6367448e-7474-4650-bd2d-02a8f7166ab4_106161_TABLET_LANDSCAPE_16_9.jpg",
-      "https://s1.ticketm.net/dam/c/ab4/6367448e-7474-4650-bd2d-02a8f7166ab4_106161_RETINA_LANDSCAPE_16_9.jpg"
-    ],
-    "vendor": {
-      "name": "Ticketmaster SG",
-      "url": "https://ticketmaster.sg/ticket/area/26sg_vibes/3841"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "source": "https://ticketmaster.sg/ticket/area/26sg_vibes/3841",
-    "tags": [
-      "Dance"
-    ],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "tm-Z8ymWIMJlyZziZ7Aa6",
-    "auto": true,
-    "sourceName": "Ticketmaster",
-    "artist": "Firdhaus",
-    "tour": "菲道爾《地球是平的》巡迴演唱會 2026 / Firdhaus < Flat Earth Theory > Concert Tour 2026",
-    "category": "asia",
-    "country": "싱가포르",
-    "city": "Singapore",
-    "venue": "Singapore Indoor Stadium",
-    "mapQuery": "Singapore Indoor Stadium Singapore",
-    "dates": [
-      "2026-09-12"
-    ],
-    "doorsNote": "20:00 시작",
-    "ticketOpen": "2026-06-13T04:00:00Z",
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "images": [
-      "https://s1.ticketm.net/dam/c/4f2/0109888a-61b5-4525-8432-b026ef04f4f2_105631_TABLET_LANDSCAPE_16_9.jpg",
-      "https://s1.ticketm.net/dam/c/4f2/0109888a-61b5-4525-8432-b026ef04f4f2_105631_RETINA_LANDSCAPE_16_9.jpg"
-    ],
-    "vendor": {
-      "name": "Ticketmaster SG",
-      "url": "https://ticketmaster.sg/ticket/area/26sg_firdhaus/3486"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "source": "https://ticketmaster.sg/ticket/area/26sg_firdhaus/3486",
-    "tags": [
-      "Pop"
-    ],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF299197",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": true,
-    "period": false,
-    "artist": "김승주",
-    "tour": "클럽투어: VC//VRS",
-    "category": "domestic",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "예스24 원더로크홀",
-    "mapQuery": "예스24 원더로크홀",
-    "dates": [
-      "2026-09-13"
-    ],
-    "doorsNote": "일요일(17:00)",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "전석 66,000원",
-    "vendor": {
-      "name": "예스24",
-      "url": "https://ticket.yes24.com/Perf/59528"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF299197_260824_132209.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299197",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "kopis-PF293209",
-    "auto": true,
-    "sourceName": "KOPIS",
-    "kopisDetail": false,
-    "period": false,
-    "artist": "야마다 료스케",
-    "tour": "내한공연 (Ryosuke Yamada Asia Tour) : Red.Y",
-    "category": "visit",
-    "country": "대한민국",
-    "city": "서울",
-    "venue": "장충체육관",
-    "mapQuery": "장충체육관",
-    "dates": [
-      "2026-09-13"
-    ],
-    "doorsNote": "예매처 공지 참고",
-    "ticketOpen": null,
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "vendor": {
-      "name": "NOL 티켓",
-      "url": "https://tickets.interpark.com/search?keyword=%EC%95%BC%EB%A7%88%EB%8B%A4%20%EB%A3%8C%EC%8A%A4%EC%BC%80%20%EB%82%B4%ED%95%9C%EA%B3%B5%EC%97%B0%20(Ryosuke%20Yamada%20Asia%20Tour)%20%3A%20Red.Y%20%5B%EC%84%9C%EC%9A%B8%5D"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "images": [
-      "https://kopis.or.kr/upload/pfmPoster/PF_PF293209_260609_112907.jpg"
-    ],
-    "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293209",
-    "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
-  {
-    "id": "tm-Z8ymWIMJlyZziZ76v1",
-    "auto": true,
-    "sourceName": "Ticketmaster",
-    "artist": "Song Dongye",
-    "tour": "宋冬野 “再想想” 世界巡演2026 新加坡站 Song Dongye “Take Another Moment” World Tour 2026 in Singapore",
-    "category": "asia",
-    "country": "싱가포르",
-    "city": "Singapore",
-    "venue": "Esplanade Theatre Studio",
-    "mapQuery": "Esplanade Theatre Studio Singapore",
-    "dates": [
-      "2026-09-13"
-    ],
-    "doorsNote": "20:00 시작",
-    "ticketOpen": "2026-07-16T06:00:00Z",
-    "ticketStatus": "판매중",
-    "price": "예매처 공지 참고",
-    "images": [
-      "https://s1.ticketm.net/dam/a/3a8/1245f48e-b669-4832-871f-a2308160c3a8_TABLET_LANDSCAPE_16_9.jpg",
-      "https://s1.ticketm.net/dam/a/3a8/1245f48e-b669-4832-871f-a2308160c3a8_RETINA_LANDSCAPE_16_9.jpg"
-    ],
-    "vendor": {
-      "name": "Ticketmaster SG",
-      "url": "https://ticketmaster.sg/ticket/area/26sg_songdongye/3609"
-    },
-    "otherVendors": [],
-    "goods": {
-      "note": "",
-      "url": null
-    },
-    "tips": "",
-    "source": "https://ticketmaster.sg/ticket/area/26sg_songdongye/3609",
-    "tags": [
-      "Pop"
-    ],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
-  },
   {
     "id": "jp-td-2026-09-16-INI5THANNIVERSARY",
     "auto": true,
@@ -1566,6 +69,69 @@ const FEED = [
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-joh-2026-09-16-HANA",
+    "auto": true,
+    "sourceName": "오사카성홀 공식",
+    "artist": "HANA",
+    "tour": "오사카성홀 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "오사카",
+    "venue": "오사카성홀",
+    "mapQuery": "大阪城ホール",
+    "dates": [
+      "2026-09-16",
+      "2026-09-17"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.sound-c.co.jp/schedule/detail/10254/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=HANA"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=HANA"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=HANA"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
+          "note": "도보 5분 · 지하철 나가호리선"
+        },
+        {
+          "name": "교바시 (京橋)",
+          "note": "도보 15분 · JR·게이한 환승"
+        },
+        {
+          "name": "우메다 (梅田)",
+          "note": "지하철 15분 · 오사카 중심"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.osaka-johall.com/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7kda",
@@ -2125,6 +691,69 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-joh-2026-09-19-松田聖子",
+    "auto": true,
+    "sourceName": "오사카성홀 공식",
+    "artist": "松田聖子",
+    "tour": "오사카성홀 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "오사카",
+    "venue": "오사카성홀",
+    "mapQuery": "大阪城ホール",
+    "dates": [
+      "2026-09-19",
+      "2026-09-20"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://kyodo-osaka.co.jp/search/detail/13371"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E6%9D%BE%E7%94%B0%E8%81%96%E5%AD%90"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%9D%BE%E7%94%B0%E8%81%96%E5%AD%90"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=%E6%9D%BE%E7%94%B0%E8%81%96%E5%AD%90"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
+          "note": "도보 5분 · 지하철 나가호리선"
+        },
+        {
+          "name": "교바시 (京橋)",
+          "note": "도보 15분 · JR·게이한 환승"
+        },
+        {
+          "name": "우메다 (梅田)",
+          "note": "지하철 15분 · 오사카 중심"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.osaka-johall.com/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "jp-kar-2026-09-19-FANTASTICS世界佐藤大樹澤本夏輝",
     "auto": true,
     "sourceName": "K-아레나 요코하마 공식",
@@ -2301,6 +930,68 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-joh-2026-09-21-GADORO",
+    "auto": true,
+    "sourceName": "오사카성홀 공식",
+    "artist": "GADORO",
+    "tour": "오사카성홀 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "오사카",
+    "venue": "오사카성홀",
+    "mapQuery": "大阪城ホール",
+    "dates": [
+      "2026-09-21"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://kyodo-osaka.co.jp/search/detail/13192"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=GADORO"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=GADORO"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=GADORO"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
+          "note": "도보 5분 · 지하철 나가호리선"
+        },
+        {
+          "name": "교바시 (京橋)",
+          "note": "도보 15분 · JR·게이한 환승"
+        },
+        {
+          "name": "우메다 (梅田)",
+          "note": "지하철 15분 · 오사카 중심"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.osaka-johall.com/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "jp-td-2026-09-22-SUPERBEAVER",
     "auto": true,
     "sourceName": "도쿄돔 공식",
@@ -2427,6 +1118,68 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-joh-2026-09-22-ZASSO2026アメ村えれふぁんと15",
+    "auto": true,
+    "sourceName": "오사카성홀 공식",
+    "artist": "ZASSO.2026 ～アメ村えれふぁんと15周年～",
+    "tour": "오사카성홀 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "오사카",
+    "venue": "오사카성홀",
+    "mapQuery": "大阪城ホール",
+    "dates": [
+      "2026-09-22"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://kyodo-osaka.co.jp/search/detail/12752"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=ZASSO.2026%20%EF%BD%9E%E3%82%A2%E3%83%A1%E6%9D%91%E3%81%88%E3%82%8C%E3%81%B5%E3%81%81%E3%82%93%E3%81%A815%E5%91%A8%E5%B9%B4%EF%BD%9E"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=ZASSO.2026%20%EF%BD%9E%E3%82%A2%E3%83%A1%E6%9D%91%E3%81%88%E3%82%8C%E3%81%B5%E3%81%81%E3%82%93%E3%81%A815%E5%91%A8%E5%B9%B4%EF%BD%9E"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=ZASSO.2026%20%EF%BD%9E%E3%82%A2%E3%83%A1%E6%9D%91%E3%81%88%E3%82%8C%E3%81%B5%E3%81%81%E3%82%93%E3%81%A815%E5%91%A8%E5%B9%B4%EF%BD%9E"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
+          "note": "도보 5분 · 지하철 나가호리선"
+        },
+        {
+          "name": "교바시 (京橋)",
+          "note": "도보 15분 · JR·게이한 환승"
+        },
+        {
+          "name": "우메다 (梅田)",
+          "note": "지하철 15분 · 오사카 중심"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.osaka-johall.com/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "jp-kar-2026-09-22-EXILETHESECONDDOBERM",
     "auto": true,
     "sourceName": "K-아레나 요코하마 공식",
@@ -2526,6 +1279,130 @@ const FEED = [
       "Ballads/Romantic"
     ],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-joh-2026-09-23-君と歩いた青春2026",
+    "auto": true,
+    "sourceName": "오사카성홀 공식",
+    "artist": "君と歩いた青春2026",
+    "tour": "오사카성홀 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "오사카",
+    "venue": "오사카성홀",
+    "mapQuery": "大阪城ホール",
+    "dates": [
+      "2026-09-23"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "指定席 10,890円",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://kyodo-osaka.co.jp/search/detail/13250"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E5%90%9B%E3%81%A8%E6%AD%A9%E3%81%84%E3%81%9F%E9%9D%92%E6%98%A52026"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E5%90%9B%E3%81%A8%E6%AD%A9%E3%81%84%E3%81%9F%E9%9D%92%E6%98%A52026"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=%E5%90%9B%E3%81%A8%E6%AD%A9%E3%81%84%E3%81%9F%E9%9D%92%E6%98%A52026"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "오사카비즈니스파크 (大阪ビジネスパーク)",
+          "note": "도보 5분 · 지하철 나가호리선"
+        },
+        {
+          "name": "교바시 (京橋)",
+          "note": "도보 15분 · JR·게이한 환승"
+        },
+        {
+          "name": "우메다 (梅田)",
+          "note": "지하철 15분 · 오사카 중심"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.osaka-johall.com/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
+    "id": "jp-yka-2026-09-23-CUTIESTREET",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "CUTIE STREET",
+    "tour": "CUTIE STREET JAPAN ARENA TOUR 2026 -AUTUMN-",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-09-23"
+    ],
+    "doorsNote": "개연 17:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://cutiestreet.asobisystem.com/feature/autumntour"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=CUTIE%20STREET"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=CUTIE%20STREET"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=CUTIE%20STREET"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "kopis-PF299727",
@@ -2739,6 +1616,69 @@ const FEED = [
     "source": "https://k-arena.com/schedule/",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-09-26-DREAMSCOMETRUE",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "DREAMS COME TRUE",
+    "tour": "DREAMS COME TRUE CONCERT TOUR 2026 THE BLACK ◯ ALBUM",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-09-26",
+      "2026-09-27"
+    ],
+    "doorsNote": "개연 17:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.red-hot.ne.jp/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=DREAMS%20COME%20TRUE"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=DREAMS%20COME%20TRUE"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=DREAMS%20COME%20TRUE"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Av7",
@@ -3378,6 +2318,70 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-yka-2026-10-06-NEWS",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "NEWS",
+    "tour": "NEWS LIVE TOUR 2026 /// KMK",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08"
+    ],
+    "doorsNote": "개연 18:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://starto.jp/s/p/live/10507?ima=1238&ct=concert"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=NEWS"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=NEWS"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=NEWS"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "kopis-PF292331",
     "auto": true,
     "sourceName": "KOPIS",
@@ -3688,6 +2692,70 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298950",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-10-10-HeySayJUMP",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "Hey! Say! JUMP",
+    "tour": "JUMPdate!",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-10-10",
+      "2026-10-11",
+      "2026-10-12"
+    ],
+    "doorsNote": "개연 17:30",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://starto.jp/s/p/live/10575?ima=3848&artist=15"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Hey!%20Say!%20JUMP"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Hey!%20Say!%20JUMP"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Hey!%20Say!%20JUMP"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "kopis-PF299563",
@@ -4657,6 +3725,68 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-fuk-2026-10-24-StrayKids",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "Stray Kids",
+    "tour": "World Tour <RUN IT JAPAN>",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2026-10-24"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.straykidsjapan.com/info/archive/?584436"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Stray%20Kids"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Stray%20Kids"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Stray%20Kids"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "tm-Z8ymWIMJlyZziZ7k1v",
     "auto": true,
     "sourceName": "Ticketmaster",
@@ -4693,6 +3823,68 @@ const FEED = [
       "Pop"
     ],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-10-25-withMAMOSTAR",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "with MAMO～STAR～",
+    "tour": "요코하마 아레나 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-10-25"
+    ],
+    "doorsNote": "개연 16:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://event.1242.com/events/miyanomamoru/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=with%20MAMO%EF%BD%9ESTAR%EF%BD%9E"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=with%20MAMO%EF%BD%9ESTAR%EF%BD%9E"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=with%20MAMO%EF%BD%9ESTAR%EF%BD%9E"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Aee",
@@ -4915,6 +4107,69 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-yka-2026-10-31-UKNOW東方神起",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "U-KNOW (東方神起)",
+    "tour": "U-KNOW PROJECT 26 : SCENE ♯1 – EDIT",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-10-31",
+      "2026-11-01"
+    ],
+    "doorsNote": "개연 18:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://toho-jp.net/news/detail.php?id=1134229"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=U-KNOW"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=U-KNOW"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=U-KNOW"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "tm-Z8ymWIMJlyZziZ7kaF",
     "auto": true,
     "sourceName": "Ticketmaster",
@@ -4951,6 +4206,68 @@ const FEED = [
       "Pop"
     ],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-11-03-iRis",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "i☆Ris",
+    "tour": "i☆Ris 14th Anniversary Live",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-11-03"
+    ],
+    "doorsNote": "개연 18:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://iris.dive2ent.com/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=i%E2%98%86Ris"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=i%E2%98%86Ris"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=i%E2%98%86Ris"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Fk1",
@@ -5131,6 +4448,70 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-yka-2026-11-06-バズリズム",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "バズリズム",
+    "tour": "LIVE 2026 supported by 日本郵政",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-11-06",
+      "2026-11-07",
+      "2026-11-08"
+    ],
+    "doorsNote": "개연 17:00(予定)",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://buzzrhythm.live/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E3%83%90%E3%82%BA%E3%83%AA%E3%82%BA%E3%83%A0"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E3%83%90%E3%82%BA%E3%83%AA%E3%82%BA%E3%83%A0"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=%E3%83%90%E3%82%BA%E3%83%AA%E3%82%BA%E3%83%A0"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "kopis-PF299827",
     "auto": true,
     "sourceName": "KOPIS",
@@ -5203,6 +4584,69 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF296308",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-vdn-2026-11-07-YOASOBI",
+    "auto": true,
+    "sourceName": "반텔린돔 나고야 공식",
+    "artist": "YOASOBI",
+    "tour": "ASIA 10-CITY DOME & STADIUM TOUR 2026-2027 “超惑星”",
+    "category": "japan",
+    "country": "일본",
+    "city": "나고야",
+    "venue": "반텔린돔 나고야",
+    "mapQuery": "バンテリンドーム ナゴヤ",
+    "dates": [
+      "2026-11-07",
+      "2026-11-08"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.yoasobi-music.jp/live/54776"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=YOASOBI"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=YOASOBI"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "나고야돔마에야다 (ナゴヤドーム前矢田)",
+          "note": "도보 5분 · 지하철 메이조선"
+        },
+        {
+          "name": "사카에 (栄)",
+          "note": "지하철 15분 · 번화가"
+        },
+        {
+          "name": "나고야역 (名古屋駅)",
+          "note": "지하철 25분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.nagoya-dome.co.jp/enjoy/index.php",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aA7",
@@ -5416,6 +4860,195 @@ const FEED = [
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-11-14-aiko",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "aiko",
+    "tour": "aiko Live Tour「Love Like Pop vol.26」",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-11-14",
+      "2026-11-15"
+    ],
+    "doorsNote": "개연 17:30",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "http://aiko.com/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=aiko"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=aiko"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=aiko"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
+    "id": "jp-vdn-2026-11-14-LoveLiveSeries15thAn",
+    "auto": true,
+    "sourceName": "반텔린돔 나고야 공식",
+    "artist": "LoveLive! Series 15th Anniversary ラブライブ！フェス",
+    "tour": "반텔린돔 나고야 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "나고야",
+    "venue": "반텔린돔 나고야",
+    "mapQuery": "バンテリンドーム ナゴヤ",
+    "dates": [
+      "2026-11-14",
+      "2026-11-15"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.lovelive-anime.jp/special/live/live_detail.php?p=15th_lovelivefest"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=LoveLive!%20Series"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=LoveLive!%20Series"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=LoveLive!%20Series"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "나고야돔마에야다 (ナゴヤドーム前矢田)",
+          "note": "도보 5분 · 지하철 메이조선"
+        },
+        {
+          "name": "사카에 (栄)",
+          "note": "지하철 15분 · 번화가"
+        },
+        {
+          "name": "나고야역 (名古屋駅)",
+          "note": "지하철 25분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.nagoya-dome.co.jp/enjoy/index.php",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
+    "id": "jp-fuk-2026-11-14-Prema",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "Prema",
+    "tour": "World Tour",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2026-11-14",
+      "2026-11-15"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://hehn.fujiikaze.com/pwt/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Prema"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Prema"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Prema"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aA6",
@@ -5682,6 +5315,69 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-td-2026-11-20-藤井風ピアノリサイタル",
+    "auto": true,
+    "sourceName": "도쿄돔 공식",
+    "artist": "藤井風 ピアノリサイタル",
+    "tour": "도쿄돔 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "도쿄",
+    "venue": "도쿄돔",
+    "mapQuery": "東京ドーム",
+    "dates": [
+      "2026-11-20",
+      "2026-11-21"
+    ],
+    "doorsNote": "開場 17:00／開演 19:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://hehn.fujiikaze.com/fpr/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E8%97%A4%E4%BA%95%E9%A2%A8%20%E3%83%94%E3%82%A2%E3%83%8E%E3%83%AA%E3%82%B5%E3%82%A4%E3%82%BF%E3%83%AB"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E8%97%A4%E4%BA%95%E9%A2%A8%20%E3%83%94%E3%82%A2%E3%83%8E%E3%83%AA%E3%82%B5%E3%82%A4%E3%82%BF%E3%83%AB"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=%E8%97%A4%E4%BA%95%E9%A2%A8%20%E3%83%94%E3%82%A2%E3%83%8E%E3%83%AA%E3%82%B5%E3%82%A4%E3%82%BF%E3%83%AB"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "스이도바시 (水道橋)",
+          "note": "도보 3분 · JR 주오소부선"
+        },
+        {
+          "name": "이다바시·코라쿠엔 (飯田橋)",
+          "note": "도보 10분 · 지하철 4개 노선"
+        },
+        {
+          "name": "아키하바라 (秋葉原)",
+          "note": "JR 3정거장 · 숙소 선택지 많음"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "jp-kyo-2026-11-20-MAMAAWARDS",
     "auto": true,
     "sourceName": "교세라돔 오사카 공식",
@@ -5743,6 +5439,69 @@ const FEED = [
     "source": "https://www.kyoceradome-osaka.jp/schedule/",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-11-20-東武鉄道presentsANIMAXMU",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "東武鉄道 presents ANIMAX MUSIX 2026 supported by Lemino",
+    "tour": "요코하마 아레나 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-11-20",
+      "2026-11-21"
+    ],
+    "doorsNote": "개연 18:30",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.animax.co.jp/events/animaxmusix/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93%20presents%20ANIMAX%20MUSIX%202026%20supported%20by%20Lemino"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93%20presents%20ANIMAX%20MUSIX%202026%20supported%20by%20Lemino"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93%20presents%20ANIMAX%20MUSIX%202026%20supported%20by%20Lemino"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7AdF",
@@ -6072,11 +5831,76 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-vdn-2026-11-26-SnowMan",
+    "auto": true,
+    "sourceName": "반텔린돔 나고야 공식",
+    "artist": "Snow Man",
+    "tour": "DOME TOUR 2026-2027 ALL SUITE",
+    "category": "japan",
+    "country": "일본",
+    "city": "나고야",
+    "venue": "반텔린돔 나고야",
+    "mapQuery": "バンテリンドーム ナゴヤ",
+    "dates": [
+      "2026-11-26",
+      "2026-11-27",
+      "2026-11-28",
+      "2026-11-29"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://starto.jp/s/p/live/10578"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Snow%20Man"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Snow%20Man"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Snow%20Man"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "나고야돔마에야다 (ナゴヤドーム前矢田)",
+          "note": "도보 5분 · 지하철 메이조선"
+        },
+        {
+          "name": "사카에 (栄)",
+          "note": "지하철 15분 · 번화가"
+        },
+        {
+          "name": "나고야역 (名古屋駅)",
+          "note": "지하철 25분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.nagoya-dome.co.jp/enjoy/index.php",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "jp-kyo-2026-11-27-BIGBANG",
     "auto": true,
     "sourceName": "교세라돔 오사카 공식",
     "artist": "BIGBANG",
-    "tour": "BIGBANG 2026 WORLD TOUR",
+    "tour": "BIGBANG 2026-2027 WORLD TOUR IN JAPAN",
     "category": "japan",
     "country": "일본",
     "city": "오사카",
@@ -6208,6 +6032,132 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297133",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-11-28-LArcenCiel",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "L'Arc～en～Ciel",
+    "tour": "L'Arc-en-Ciel 35th L'Anniversary TOUR",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-11-28",
+      "2026-11-29"
+    ],
+    "doorsNote": "개연 17:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.larc-en-ciel.com/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=L'Arc%EF%BD%9Een%EF%BD%9ECiel"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=L'Arc%EF%BD%9Een%EF%BD%9ECiel"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=L'Arc%EF%BD%9Een%EF%BD%9ECiel"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
+    "id": "jp-fuk-2026-11-28-YOASOBI",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "YOASOBI",
+    "tour": "ASIA 10-CITY DOME & STADIUM TOUR 2026-2027",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2026-11-28",
+      "2026-11-29"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.yoasobi-music.jp/live/54776"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=YOASOBI"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=YOASOBI"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=YOASOBI"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aev",
@@ -6563,6 +6513,69 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-yka-2026-12-02-MrChildren",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "Mr.Children",
+    "tour": "Mr.Children Tour 2026 “Saturday in the park”",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-12-02",
+      "2026-12-03"
+    ],
+    "doorsNote": "개연 18:30",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.mrchildren.jp/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Mr.Children"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Mr.Children"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Mr.Children"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "tm-Z8ymWIMJlyZziZ76dv",
     "auto": true,
     "sourceName": "Ticketmaster",
@@ -6712,6 +6725,70 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF297746",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-fuk-2026-12-04-SnowMan",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "Snow Man",
+    "tour": "DOME TOUR",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2026-12-04",
+      "2026-12-05",
+      "2026-12-06"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://starto.jp/s/p/live/10578"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Snow%20Man"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Snow%20Man"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Snow%20Man"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "kopis-PF298220",
@@ -6952,6 +7029,132 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-yka-2026-12-05-緑黄色社会",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "緑黄色社会",
+    "tour": "緑黄色社会 ARENA TOUR 2026 \"あたまご\"",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-12-05",
+      "2026-12-06"
+    ],
+    "doorsNote": "개연 18:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.yokohama-arena.co.jp/event/detail/%E7%B7%91%E9%BB%84%E8%89%B2%E7%A4%BE%E4%BC%9A-arena-tour-2026-%E3%81%82%E3%81%9F%E3%81%BE%E3%81%94"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E7%B7%91%E9%BB%84%E8%89%B2%E7%A4%BE%E4%BC%9A"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E7%B7%91%E9%BB%84%E8%89%B2%E7%A4%BE%E4%BC%9A"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=%E7%B7%91%E9%BB%84%E8%89%B2%E7%A4%BE%E4%BC%9A"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
+    "id": "jp-vdn-2026-12-05-BIGBANG",
+    "auto": true,
+    "sourceName": "반텔린돔 나고야 공식",
+    "artist": "BIGBANG",
+    "tour": "2026 WORLD TOUR IN JAPAN",
+    "category": "japan",
+    "country": "일본",
+    "city": "나고야",
+    "venue": "반텔린돔 나고야",
+    "mapQuery": "バンテリンドーム ナゴヤ",
+    "dates": [
+      "2026-12-05",
+      "2026-12-06"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://ygex.jp/bigbang/20th-anniv/live/tour.php?id=1003005&fdate=2026-12-05&ldate=2026-12-06"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BIGBANG"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BIGBANG"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=BIGBANG"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "나고야돔마에야다 (ナゴヤドーム前矢田)",
+          "note": "도보 5분 · 지하철 메이조선"
+        },
+        {
+          "name": "사카에 (栄)",
+          "note": "지하철 15분 · 번화가"
+        },
+        {
+          "name": "나고야역 (名古屋駅)",
+          "note": "지하철 25분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.nagoya-dome.co.jp/enjoy/index.php",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:32:41.937Z"
+  },
+  {
     "id": "kopis-PF295528",
     "auto": true,
     "sourceName": "KOPIS",
@@ -6987,6 +7190,68 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295528",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-12-07-MCTYSON",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "MC TYSON",
+    "tour": "“BAYSIDE STORY” in YOKOHAMA ARENA",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-12-07"
+    ],
+    "doorsNote": "개연 18:30",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.creativeman.co.jp/event/mc-tyson/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=MC%20TYSON"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=MC%20TYSON"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=MC%20TYSON"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "kopis-PF299778",
@@ -7232,11 +7497,11 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
-    "id": "jp-td-2026-12-13-BIGBANG2026",
+    "id": "jp-td-2026-12-13-BIGBANG",
     "auto": true,
     "sourceName": "도쿄돔 공식",
-    "artist": "BIGBANG 2026",
-    "tour": "WORLD TOUR IN JAPAN",
+    "artist": "BIGBANG",
+    "tour": "2026 WORLD TOUR IN JAPAN",
     "category": "japan",
     "country": "일본",
     "city": "도쿄",
@@ -7258,15 +7523,15 @@ const FEED = [
     "otherVendors": [
       {
         "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=BIGBANG%202026"
+        "url": "https://eplus.jp/sf/search?keyword=BIGBANG"
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=BIGBANG%202026"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BIGBANG"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=BIGBANG%202026"
+        "url": "https://l-tike.com/search/?keyword=BIGBANG"
       }
     ],
     "goods": {
@@ -7293,7 +7558,7 @@ const FEED = [
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
     "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
+    "firstSeen": "2026-09-14T09:32:41.937Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7FA6",
@@ -7397,6 +7662,69 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-kyo-2026-12-19-LESSERAFIM",
+    "auto": true,
+    "sourceName": "교세라돔 오사카 공식",
+    "artist": "LE SSERAFIM",
+    "tour": "2026 LE SSERAFIM TOUR ‘PUREFLOW’ IN KYOCERA DOME OSAKA",
+    "category": "japan",
+    "country": "일본",
+    "city": "오사카",
+    "venue": "교세라돔 오사카",
+    "mapQuery": "京セラドーム大阪",
+    "dates": [
+      "2026-12-19",
+      "2026-12-20"
+    ],
+    "doorsNote": "15:00～",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.kyoceradome-osaka.jp/schedule/?yearId=2026&monthId=12&cat=#event2026-12-19"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=LE%20SSERAFIM"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=LE%20SSERAFIM"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=LE%20SSERAFIM"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "돔마에 (ドーム前)",
+          "note": "도보 3분 · 한신 난바선"
+        },
+        {
+          "name": "난바 (なんば)",
+          "note": "지하철 10분 · 심야 식당 많음"
+        },
+        {
+          "name": "신사이바시 (心斎橋)",
+          "note": "지하철 12분 · 쇼핑 중심"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.kyoceradome-osaka.jp/schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "kopis-PF298903",
     "auto": true,
     "sourceName": "KOPIS",
@@ -7432,6 +7760,130 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298903",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-yka-2026-12-20-UVERworld",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "UVERworld",
+    "tour": "UVERworld LIVE “危ない” TOUR 2026",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-12-20"
+    ],
+    "doorsNote": "개연 16:00",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.uverworld.jp/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=UVERworld"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=UVERworld"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=UVERworld"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
+    "id": "jp-yka-2026-12-21-UVERworld",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "UVERworld",
+    "tour": "UVERworld LIVE “危ない” TOUR 2026 ～TAKUYA∞ 生誕祭～",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-12-21"
+    ],
+    "doorsNote": "개연 18:30",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.uverworld.jp/"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=UVERworld"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=UVERworld"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=UVERworld"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "jp-td-2026-12-23-SnowMan",
@@ -7612,6 +8064,196 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-vdn-2026-12-26-ENHYPEN",
+    "auto": true,
+    "sourceName": "반텔린돔 나고야 공식",
+    "artist": "ENHYPEN",
+    "tour": "WORLD TOUR 'BLOOD SAGA' IN JAPAN",
+    "category": "japan",
+    "country": "일본",
+    "city": "나고야",
+    "venue": "반텔린돔 나고야",
+    "mapQuery": "バンテリンドーム ナゴヤ",
+    "dates": [
+      "2026-12-26",
+      "2026-12-27"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.hybejapan-concert.com/statics/enhypen_blood_saga"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=ENHYPEN"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=ENHYPEN"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=ENHYPEN"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "나고야돔마에야다 (ナゴヤドーム前矢田)",
+          "note": "도보 5분 · 지하철 메이조선"
+        },
+        {
+          "name": "사카에 (栄)",
+          "note": "지하철 15분 · 번화가"
+        },
+        {
+          "name": "나고야역 (名古屋駅)",
+          "note": "지하철 25분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.nagoya-dome.co.jp/enjoy/index.php",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
+    "id": "jp-fuk-2026-12-26-BIGBANG",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "BIGBANG",
+    "tour": "2026 WORLD TOUR",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2026-12-26",
+      "2026-12-27"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://ygex.jp/bigbang/20th-anniv/#live"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BIGBANG"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BIGBANG"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=BIGBANG"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:32:41.937Z"
+  },
+  {
+    "id": "jp-yka-2026-12-28-桑田佳祐",
+    "auto": true,
+    "sourceName": "요코하마 아레나 공식",
+    "artist": "桑田佳祐",
+    "tour": "桑田佳祐 夏祭りツアー 2026 supported by カンロ",
+    "category": "japan",
+    "country": "일본",
+    "city": "요코하마",
+    "venue": "요코하마 아레나",
+    "mapQuery": "横浜アリーナ",
+    "dates": [
+      "2026-12-28",
+      "2026-12-30",
+      "2026-12-31"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://southernallstars.jp/feature/kuwata2026live"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=%E6%A1%91%E7%94%B0%E4%BD%B3%E7%A5%90"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "신요코하마 (新横浜)",
+          "note": "도보 5분 · 신칸센 정차역"
+        },
+        {
+          "name": "요코하마역 (横浜駅)",
+          "note": "JR 요코하마선 2역 · 공항버스 직결"
+        },
+        {
+          "name": "기쿠나 (菊名)",
+          "note": "1역 · 도큐 도요코선 환승"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.yokohama-arena.co.jp/event/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "kopis-PF298249",
     "auto": true,
     "sourceName": "KOPIS",
@@ -7685,6 +8327,69 @@ const FEED = [
       "Ballads/Romantic"
     ],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-vdn-2027-01-04-BrunoMars",
+    "auto": true,
+    "sourceName": "반텔린돔 나고야 공식",
+    "artist": "Bruno Mars",
+    "tour": "The Romantic Tour in Japan",
+    "category": "japan",
+    "country": "일본",
+    "city": "나고야",
+    "venue": "반텔린돔 나고야",
+    "mapQuery": "バンテリンドーム ナゴヤ",
+    "dates": [
+      "2027-01-04",
+      "2027-01-05"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.livenationhip.co.jp/all-events/bruno-mars-tickets-ae147754"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Bruno%20Mars"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Bruno%20Mars"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Bruno%20Mars"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "나고야돔마에야다 (ナゴヤドーム前矢田)",
+          "note": "도보 5분 · 지하철 메이조선"
+        },
+        {
+          "name": "사카에 (栄)",
+          "note": "지하철 15분 · 번화가"
+        },
+        {
+          "name": "나고야역 (名古屋駅)",
+          "note": "지하철 25분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.nagoya-dome.co.jp/enjoy/index.php",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:33:21.382Z"
   },
   {
     "id": "kopis-PF294000",
@@ -7797,6 +8502,70 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF294073",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-vdn-2027-01-09-Number_i",
+    "auto": true,
+    "sourceName": "반텔린돔 나고야 공식",
+    "artist": "Number_i",
+    "tour": "LIVE TOUR No.III",
+    "category": "japan",
+    "country": "일본",
+    "city": "나고야",
+    "venue": "반텔린돔 나고야",
+    "mapQuery": "バンテリンドーム ナゴヤ",
+    "dates": [
+      "2027-01-09",
+      "2027-01-10",
+      "2027-01-11"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://tobe-official.jp/artists/number_i/concert/364"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Number_i"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Number_i"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Number_i"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "나고야돔마에야다 (ナゴヤドーム前矢田)",
+          "note": "도보 5분 · 지하철 메이조선"
+        },
+        {
+          "name": "사카에 (栄)",
+          "note": "지하철 15분 · 번화가"
+        },
+        {
+          "name": "나고야역 (名古屋駅)",
+          "note": "지하철 25분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.nagoya-dome.co.jp/enjoy/index.php",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7Av6",
@@ -7976,6 +8745,69 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-fuk-2027-01-16-Number_i",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "Number_i",
+    "tour": "LIVE TOUR No.III",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2027-01-16",
+      "2027-01-17"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://tobe-official.jp/artists/number_i/news/2318"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Number_i"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Number_i"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Number_i"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:32:41.937Z"
+  },
+  {
     "id": "tm-Z8ymWIMJlyZziZ7A7v",
     "auto": true,
     "sourceName": "Ticketmaster",
@@ -8049,6 +8881,69 @@ const FEED = [
     "source": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299233",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-fuk-2027-01-23-BrunoMarsTheRomantic",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "Bruno Mars The Romantic",
+    "tour": "Tour in Japan",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2027-01-23",
+      "2027-01-24"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://www.livenationhip.co.jp/all-events/bruno-mars-tickets-ae147754"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=Bruno%20Mars%20The%20Romantic"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Bruno%20Mars%20The%20Romantic"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=Bruno%20Mars%20The%20Romantic"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ7aAA",
@@ -8126,11 +9021,11 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
-    "id": "jp-td-2027-01-27-BrunoMarsTheRomantic",
+    "id": "jp-td-2027-01-27-BrunoMars",
     "auto": true,
     "sourceName": "도쿄돔 공식",
-    "artist": "Bruno Mars - The Romantic",
-    "tour": "Tour in Japan",
+    "artist": "Bruno Mars",
+    "tour": "The Romantic Tour in Japan",
     "category": "japan",
     "country": "일본",
     "city": "도쿄",
@@ -8151,15 +9046,15 @@ const FEED = [
     "otherVendors": [
       {
         "name": "이플러스 (e+)",
-        "url": "https://eplus.jp/sf/search?keyword=Bruno%20Mars%20-%20The%20Romantic"
+        "url": "https://eplus.jp/sf/search?keyword=Bruno%20Mars"
       },
       {
         "name": "티켓피아",
-        "url": "https://t.pia.jp/pia/search_all.do?kw=Bruno%20Mars%20-%20The%20Romantic"
+        "url": "https://t.pia.jp/pia/search_all.do?kw=Bruno%20Mars"
       },
       {
         "name": "로손티켓",
-        "url": "https://l-tike.com/search/?keyword=Bruno%20Mars%20-%20The%20Romantic"
+        "url": "https://l-tike.com/search/?keyword=Bruno%20Mars"
       }
     ],
     "goods": {
@@ -8186,7 +9081,7 @@ const FEED = [
     "tips": "",
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
     "tags": [],
-    "firstSeen": "2026-09-01T08:25:55.377Z"
+    "firstSeen": "2026-09-14T09:33:21.382Z"
   },
   {
     "id": "jp-td-2027-01-30-Maroon5",
@@ -8251,6 +9146,69 @@ const FEED = [
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-fuk-2027-01-30-FUKUOKAMUSICFES2027s",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "FUKUOKA MUSIC FES.2027 supported by Trunk",
+    "tour": "미즈호PayPay돔 후쿠오카 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2027-01-30",
+      "2027-01-31"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://fukuokamusic-fes.com/2026/index.html"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=FUKUOKA%20MUSIC%20FES.2027%20supported%20by%20Trunk"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=FUKUOKA%20MUSIC%20FES.2027%20supported%20by%20Trunk"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=FUKUOKA%20MUSIC%20FES.2027%20supported%20by%20Trunk"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "jp-td-2027-02-04-DaiCEDAY",
@@ -8376,6 +9334,69 @@ const FEED = [
     "source": "https://www.tokyo-dome.co.jp/dome/event/schedule.html",
     "tags": [],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-fuk-2027-02-06-ENHYPEN",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "ENHYPEN",
+    "tour": "WORLD TOUR 'BLOOD SAGA' IN JAPAN",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2027-02-06",
+      "2027-02-07"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://enhypen-jp.weverse.io/news/932a12458df2"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=ENHYPEN"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=ENHYPEN"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=ENHYPEN"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZgcZ7aek",
@@ -8641,6 +9662,69 @@ const FEED = [
     "firstSeen": "2026-09-01T08:25:55.377Z"
   },
   {
+    "id": "jp-fuk-2027-02-13-BEFIRST5thAnniversar",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "BE:FIRST 5th Anniversary",
+    "tour": "DOME TOUR 2027",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2027-02-13",
+      "2027-02-14"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://befirst.tokyo/tour/dometour2027/#ticket"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=BE%3AFIRST"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=BE%3AFIRST"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=BE%3AFIRST"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
+  },
+  {
     "id": "jp-td-2027-02-17-KingGnu10thAnniversa",
     "auto": true,
     "sourceName": "도쿄돔 공식",
@@ -8854,6 +9938,69 @@ const FEED = [
       "Pop"
     ],
     "firstSeen": "2026-09-01T08:25:55.377Z"
+  },
+  {
+    "id": "jp-fuk-2027-03-13-ANISAMAFUKUOKA2027",
+    "auto": true,
+    "sourceName": "미즈호PayPay돔 후쿠오카 공식",
+    "artist": "ANISAMA FUKUOKA 2027",
+    "tour": "미즈호PayPay돔 후쿠오카 공연",
+    "category": "japan",
+    "country": "일본",
+    "city": "후쿠오카",
+    "venue": "미즈호PayPay돔 후쿠오카",
+    "mapQuery": "みずほPayPayドーム福岡",
+    "dates": [
+      "2027-03-13",
+      "2027-03-14"
+    ],
+    "doorsNote": "공식 공지 참고",
+    "ticketOpen": null,
+    "ticketStatus": "예정",
+    "price": "예매처 공지 참고",
+    "vendor": {
+      "name": "공식 공연 페이지",
+      "url": "https://anisama.tv/2026/index.html"
+    },
+    "otherVendors": [
+      {
+        "name": "이플러스 (e+)",
+        "url": "https://eplus.jp/sf/search?keyword=ANISAMA%20FUKUOKA%202027"
+      },
+      {
+        "name": "티켓피아",
+        "url": "https://t.pia.jp/pia/search_all.do?kw=ANISAMA%20FUKUOKA%202027"
+      },
+      {
+        "name": "로손티켓",
+        "url": "https://l-tike.com/search/?keyword=ANISAMA%20FUKUOKA%202027"
+      }
+    ],
+    "goods": {
+      "note": "",
+      "url": null
+    },
+    "stay": {
+      "areas": [
+        {
+          "name": "도진마치 (唐人町)",
+          "note": "도보 15분 · 지하철 공항선"
+        },
+        {
+          "name": "텐진 (天神)",
+          "note": "지하철 10분 · 번화가, 셔틀버스"
+        },
+        {
+          "name": "하카타 (博多)",
+          "note": "지하철 15분 · 신칸센·공항 직결"
+        }
+      ]
+    },
+    "images": [],
+    "tips": "",
+    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
+    "tags": [],
+    "firstSeen": "2026-09-14T09:31:46.043Z"
   },
   {
     "id": "tm-Z8ymWIMJlyZziZ76ek",

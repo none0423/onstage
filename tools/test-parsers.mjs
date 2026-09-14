@@ -24,14 +24,20 @@ const FIX = name => readFileSync(join(HERE, "fixtures", name), "utf8");
    1년 뒤에도 같은 결과가 나온다. */
 const FIXTURE_DATE = "2026-09-14";
 
-/* 공연장별 최소 건수 — 픽스처를 뜬 시점의 실제 건수보다 조금 낮게 잡는다 */
-const MIN = { td: 15, kar: 8, joh: 2, kyo: 2 };
+/* 공연장별 최소 건수 — 픽스처를 뜬 시점의 실제 건수보다 조금 낮게 잡는다.
+   월·연 단위 공연장은 같은 픽스처가 반복 반환돼 병합되므로 한 페이지 분량이 기준이다.
+   ssa 는 2027-03 까지 개수 휴관이라 0 이 정상 — 파서가 죽지 않는 것만 본다. */
+const MIN = { td: 15, kar: 8, joh: 2, kyo: 2, yka: 3, ssa: 0, vdn: 5, fuk: 8 };
 
 const ROUTES = [
   [/tokyo-dome\.co\.jp/, "tokyodome.html"],
   [/k-arena\.com/, "karena.html"],
   [/osaka-johall\.com/, "johall.html"],
-  [/kyoceradome-osaka\.jp/, "kyocera.html"]
+  [/kyoceradome-osaka\.jp/, "kyocera.html"],
+  [/yokohama-arena\.co\.jp/, "yokohama.json"],
+  [/saitama-arena\.co\.jp/, "saitama.html"],
+  [/nagoya-dome\.co\.jp/, "vantelin.html"],
+  [/softbankhawks\.co\.jp/, "paypaydome.html"]
 ];
 
 /* 네트워크 대신 픽스처를 돌려준다. 모르는 URL 은 실패시켜 테스트가 밖으로 나가지 않게 한다. */
@@ -78,6 +84,18 @@ else ok("전 항목 공연별 공식 페이지 연결");
 /* 5. 제목 분리 — 일반명사가 아티스트로 남으면 안 된다 */
 const generic = events.filter(e => /^(?:LIVE|CONCERT|TOUR|ライブ|公演)$/i.test(e.artist.trim()));
 if (generic.length) fail(`일반명사 아티스트: ${generic.map(e => e.id).join(", ")}`); else ok("일반명사 아티스트 없음");
+
+/* 5-b. 제목 분리 — 실제로 빗나갔던 사례들이 다시 깨지지 않는지 */
+const byArtist = new Map(events.map(e => [e.artist, e]));
+const expectArtist = [
+  ["Number_i", "日本公演「Number_i LIVE TOUR No.III」→ Number_i (후쿠오카)"],
+  ["BIGBANG", "BIGBANG 2026 WORLD TOUR → BIGBANG (연도는 투어명으로)"],
+  ["Bruno Mars", "Bruno Mars - The Romantic Tour → 대시 앞이 아티스트"],
+  ["君と歩いた青春2026", "LIVE「君と歩いた青春2026」→ 공연명이 아티스트 (오사카성홀)"]
+];
+for (const [name, why] of expectArtist) {
+  if (byArtist.has(name)) ok(`제목 분리: ${why}`); else fail(`제목 분리 회귀: ${why} — '${name}' 이 없음`);
+}
 
 /* 6. 수집기 자체 경고는 여기선 0이어야 한다(이전 상태 없이 한 번 돈 것이므로) */
 if (warnings.length) fail(`경고: ${warnings.join(" / ")}`); else ok("수집기 경고 없음");
