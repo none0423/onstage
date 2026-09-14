@@ -12,14 +12,15 @@ There is no package manager, no build step, no test framework, and no dependenci
 
 ```bash
 open index.html                          # run the site (works over file://, no server needed)
-node tools/check.mjs                     # the only check — validates both data files, exits 1 on error
+node tools/check.mjs                     # validates both data files, exits 1 on error
+node tools/test-parsers.mjs              # runs the four Japanese venue parsers against saved pages in tools/fixtures/
 node tools/collect.mjs                   # run the collector locally (writes data/feed.js)
 node tools/collect.mjs --only=tokyodome  # one source
 cd worker && npx wrangler deploy         # deploy the cron Worker
 cd worker && npx wrangler tail           # live Worker logs
 ```
 
-`tools/check.mjs` runs in the deploy workflow. Run it after any edit to `data/concerts.js`.
+`tools/check.mjs` and `tools/test-parsers.mjs` both run in the deploy workflow. Run `check.mjs` after any edit to `data/concerts.js`, and `test-parsers.mjs` after touching any parser in `worker/src/collect.js`.
 Collection needs `KOPIS_KEY` / `TICKETMASTER_KEY` (env locally, Wrangler secrets in the Worker); without them those sources are skipped with a warning rather than failing, and Tokyo Dome still collects. Deployment and key setup are documented in `SETUP.md`.
 
 ## Hard constraints
@@ -57,6 +58,8 @@ Four files matter: `index.html` (static shell with fixed element IDs), `assets/a
 **Cancelled shows are dropped, not shown.** Sources signal cancellation differently: Ticketmaster has `dates.status.code` (`cancelled` and `postponed` are both dropped — a postponed show's old date is meaningless; `rescheduled` is kept because TM moves the date), KOPIS has no cancelled state at all and simply stops returning the performance, and venue pages append a marker to the title. The shared `CANCELLED` regex therefore matches title markers (`[취소]`, `공연취소`, `中止`, `延期`, `CANCELLED`, `POSTPONED`) and is applied **only to titles** — a bare `취소` does not match, because tip and guidance text legitimately contains phrases like "무료 취소 조건".
 
 **Each collector source is independent.** A source that throws is recorded in `errors` and its *previous* entries are carried over, so one broken parser can't wipe a category; an all-sources failure leaves KV (and `data/feed.js`) untouched rather than publishing an empty feed.
+
+**Failures are watched, because carry-over hides them.** The carry-over above means a dead parser shows *stale* data, not *missing* data, and nothing on the page says so. `collectAll()` therefore returns `health` (per source and per Japanese venue: last count, consecutive-zero streak, consecutive-failure streak, all-time peak) and `warnings` (3 consecutive failures, 3 consecutive zero-count runs, a count below half the peak, or an artist name that is a generic word like `LIVE`). `worker/src/index.js` stores both in the KV `status` record and feeds the previous `health` back in, so streaks survive across runs. `.github/workflows/watch.yml` reads `/status` every six hours and fails — which makes GitHub email the owner — when the last run is over three hours old, `ok` is false, or `errors`/`warnings` is non-empty. That is the only alerting there is; it costs nothing and it caught a real KOPIS 522 on its first dry run. Two caveats: GitHub disables scheduled workflows in a public repo after 60 days without commits (the weekly `artists.yml` commit usually keeps it alive), and the watch has no way to reach you other than that email. `tools/test-parsers.mjs` is the other half — it replays saved venue pages (`tools/fixtures/`) through the real collector with `today` pinned to `FIXTURE_DATE`, so a parser edit that breaks an existing page fails in the deploy workflow instead of in production. Refresh the fixtures and `FIXTURE_DATE` together.
 
 **Asset URLs carry a `?v=` version and `init()` is failure-isolated.** GitHub Pages serves HTML with a short TTL but assets with a longer one, so a deploy can pair *new* HTML with a browser's *cached* `app.js`. That combination once blanked the whole page: the stale script touched an element the new HTML no longer had, `init()` threw on its first line, and `render()` never ran. Bump the `?v=` string in `index.html` whenever `app.js`/`styles.css` change alongside markup, and keep every `init()` step wrapped in `step()` so one broken piece can never stop the grid from rendering.
 

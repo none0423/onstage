@@ -44,7 +44,7 @@ function loadPrevious() {
 }
 
 console.log(`ON STAGE 수집 · ${new Date().toISOString()}`);
-const { events, stats, errors } = await collectAll({
+const { events, stats, errors, warnings } = await collectAll({
   keys: { kopis: process.env.KOPIS_KEY, ticketmaster: process.env.TICKETMASTER_KEY },
   previous: loadPrevious(),
   only,
@@ -52,6 +52,7 @@ const { events, stats, errors } = await collectAll({
 });
 
 errors.forEach(e => console.log("⚠️ ", e));
+warnings.forEach(w => console.log("🔶 경고:", w));
 console.log(" 통계", JSON.stringify(stats));
 
 if (!events.length && errors.length) {

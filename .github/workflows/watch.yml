@@ -1,0 +1,59 @@
+# 수집 감시 — Worker 의 /status 를 읽어 문제가 있으면 워크플로를 실패시킨다.
+# GitHub 는 예약 워크플로가 실패하면 저장소 소유자에게 이메일을 보내므로,
+# 별도 알림 서비스 없이(비용 0원) 수집 중단을 알 수 있다.
+#
+# 실패 조건
+#   · 마지막 수집이 3시간 넘게 없음  (크론이 멈췄거나 Worker 가 죽음)
+#   · ok 가 true 가 아님             (전 소스 실패 → 이전 데이터 유지 중)
+#   · errors 가 비어 있지 않음        (한 소스라도 실패)
+#   · warnings 가 비어 있지 않음      (연속 0건·급감·일반명사 아티스트 등 파서 이상)
+#
+# 주의: 공개 저장소의 예약 워크플로는 60일간 커밋이 없으면 GitHub 가 자동으로 끈다.
+#       매주 도는 artists.yml 이 커밋을 남기는 동안은 괜찮지만, 그것도 변경이 없으면
+#       커밋하지 않는다. Actions 탭에 "disabled" 표시가 뜨면 Enable 을 눌러 다시 켠다.
+
+name: Watch collector
+
+on:
+  schedule:
+    - cron: "30 */6 * * *"     # 6시간마다 (UTC 00:30 · 06:30 · 12:30 · 18:30)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: /status 점검
+        env:
+          STATUS_URL: https://onstage-collector.onstage-collector.workers.dev/status
+        run: |
+          set -euo pipefail
+          BODY=$(curl -sS --max-time 30 "$STATUS_URL")
+          echo "$BODY" | node -e '
+            let s = ""; process.stdin.on("data", d => s += d).on("end", () => {
+              const st = JSON.parse(s);
+              const problems = [];
+              const ageMin = st.at ? Math.round((Date.now() - new Date(st.at)) / 60000) : Infinity;
+              if (ageMin > 180) problems.push(`마지막 수집이 ${isFinite(ageMin) ? ageMin + "분" : "기록 없음"} 전 — 크론이 멈췄을 수 있음`);
+              if (st.ok !== true) problems.push(`ok=${st.ok} — 전 소스 실패, 이전 데이터 ${st.kept ?? "?"}건 유지 중`);
+              for (const e of st.errors || []) problems.push(`오류: ${e}`);
+              for (const w of st.warnings || []) problems.push(`경고: ${w}`);
+
+              console.log(`마지막 수집: ${st.at} (${ageMin}분 전) · ${st.count ?? st.kept ?? "?"}건 · 서브리퀘스트 ${st.stats?.subrequests ?? "?"}`);
+              if (st.health) for (const [k, h] of Object.entries(st.health))
+                console.log(`  ${k.padEnd(14)} ${String(h.count ?? "-").padStart(4)}건  연속0건:${h.zero}  연속실패:${h.fail}  최고:${h.peak}`);
+
+              if (problems.length) {
+                console.log("\n" + problems.map(p => "❌ " + p).join("\n"));
+                console.log("\n확인: https://onstage-collector.onstage-collector.workers.dev/status");
+                process.exit(1);
+              }
+              console.log("\n✅ 수집 정상");
+            });'

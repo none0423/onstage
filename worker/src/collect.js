@@ -99,7 +99,9 @@ function normalizePoster(url) {
 }
 
 /* ── 수집 본체 ───────────────────────────────── */
-export async function collectAll({ keys = {}, previous = [], only = null, log = () => {} } = {}) {
+/* health: 이전 실행이 남긴 소스별 건강 상태(연속 0건·연속 실패 횟수). 파서가 조용히 죽는 걸 잡는다.
+   today:  테스트가 고정 날짜를 넣기 위한 훅. 실전에서는 비워 둔다. */
+export async function collectAll({ keys = {}, previous = [], only = null, log = () => {}, health: prevHealth = {}, today: todayOverride = null } = {}) {
   const prevById = new Map(previous.map(c => [c.id, c]));
   const stats = {};
   const errors = [];
@@ -213,7 +215,9 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     const rows = [];
 
     for (let page = 1; page <= 6; page++) {
-      const xml = await get(`${KOPIS}?service=${keys.kopis}&stdate=${stdate}&eddate=${eddate}&cpage=${page}&rows=100&shcate=CCCD`);
+      /* 목록도 간헐적으로 522 를 낸다(2026-09-14 실측). 한 페이지가 죽으면 그 시간의
+         국내 수집이 통째로 이월되므로 한 번은 다시 시도한다. */
+      const xml = await get(`${KOPIS}?service=${keys.kopis}&stdate=${stdate}&eddate=${eddate}&cpage=${page}&rows=100&shcate=CCCD`, { retry: 1 });
       const blocks = slices(xml, "db");
       if (!blocks.length) break;
       for (const b of blocks) {
@@ -580,10 +584,16 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   }
 
   /** 제목만 있는 공연장에서 아티스트를 분리한다 */
+  /* 'LIVE「君と歩いた青春2026」' 처럼 앞 단어가 공연 종류일 뿐이면 그건 아티스트가 아니다.
+     이런 합동·기획 공연은 공연명 자체를 아티스트 자리에 쓴다. */
+  const GENERIC_ARTIST = /^(?:LIVE|CONCERT|TOUR|FES(?:TIVAL)?|SHOW|EVENT|ライブ|コンサート|公演|イベント|フェス)$/i;
   function splitTitle(raw) {
     const t = raw.replace(/^20\d\d\s+/, "").trim();
     const jp = t.indexOf("「");
-    if (jp > 0) return { artist: t.slice(0, jp).trim(), tour: t.slice(jp).replace(/[「」]/g, "").trim() };
+    if (jp > 0) {
+      const head = t.slice(0, jp).trim(), body = t.slice(jp).replace(/[「」]/g, "").trim();
+      return GENERIC_ARTIST.test(head) ? { artist: body, tour: "" } : { artist: head, tour: body };
+    }
     const i = t.search(/\s(?=(?:WORLD|DOME|ARENA|STADIUM|HALL|ASIA|JAPAN|LIVE|CONCERT|TOUR|ライブ|ツアー|公演))/i);
     return i > 0 ? { artist: t.slice(0, i).trim(), tour: t.slice(i).trim() } : { artist: t, tour: "" };
   }
@@ -706,7 +716,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const nowISO = new Date().toISOString();
   const stamp = c => ({ ...c, firstSeen: prevById.has(c.id) ? (prevById.get(c.id).firstSeen ?? null) : nowISO });
 
-  const today = todayISO();
+  const today = todayOverride || todayISO();
   const seenId = new Set();
   const claimed = new Map();                                  // 아티스트|날짜 → 선점한 소스
   const events = all
@@ -725,5 +735,37 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     .sort((a, b) => a.dates[0].localeCompare(b.dates[0]));
 
   stats.subrequests = used;
-  return { events, stats, errors };
+
+  /* ── 소스 건강 상태 ──────────────────────────────
+     소스가 통째로 실패하면 이전 결과가 이월되므로 화면만 봐서는 모른다.
+     공연장 페이지가 리뉴얼돼 파서가 0건을 내거나, 절반만 파싱되는 경우도 같다.
+     단위(소스·공연장)별로 연속 0건·연속 실패를 세고, 문턱을 넘으면 warnings 에 적는다.
+     이 값은 KV 의 status 에 저장돼 다음 실행으로 넘어오고, 감시 워크플로가 읽는다. */
+  const health = {};
+  const warnings = [];
+  const failedSources = new Set(errors.map(e => e.split(":")[0].split("/")[0]));
+  const unit = (key, label, count, failed) => {
+    const prev = prevHealth[key] || {};
+    const zero = failed ? (prev.zero || 0) : (count === 0 ? (prev.zero || 0) + 1 : 0);
+    const fail = failed ? (prev.fail || 0) + 1 : 0;
+    const peak = Math.max(prev.peak || 0, count || 0);
+    health[key] = { count: failed ? (prev.count ?? null) : count, zero, fail, peak, at: nowISO };
+    if (fail >= 3) warnings.push(`${label}: ${fail}회 연속 실패`);
+    if (zero >= 3) warnings.push(`${label}: ${zero}회 연속 0건`);
+    /* 이전 최고치의 절반 아래로 떨어지면 부분 파싱 실패일 가능성이 크다 */
+    if (!failed && peak >= 6 && count < peak / 2) warnings.push(`${label}: ${count}건 (최고 ${peak}건의 절반 미만)`);
+  };
+  if (!only || only === "kopis") unit("kopis", "KOPIS", stats.kopis?.count ?? 0, failedSources.has("kopis") || !stats.kopis);
+  if (!only || only === "ticketmaster") unit("ticketmaster", "Ticketmaster", stats.ticketmaster?.count ?? 0, failedSources.has("ticketmaster") || !stats.ticketmaster);
+  if (!only || only === "jpvenues") {
+    const jpFailed = new Set(errors.filter(e => e.startsWith("jpvenues/")).map(e => e.slice(9).split(":")[0]));
+    for (const v of JP_VENUES) unit(`jp-${v.key}`, v.venue, stats.jpvenues?.[v.key] ?? 0, jpFailed.has(v.key));
+  }
+  /* 제목 분리가 빗나가 'LIVE' 같은 일반명사가 아티스트로 남은 항목 */
+  const generic = events.filter(c => GENERIC_ARTIST.test(String(c.artist || "").trim()));
+  if (generic.length) warnings.push(`아티스트명이 일반명사인 항목 ${generic.length}건: ${generic.slice(0, 3).map(c => c.id).join(", ")}`);
+  /* 이전 상태의 다른 단위는 그대로 보존한다(--only 로 일부만 돌렸을 때) */
+  for (const k of Object.keys(prevHealth)) if (!(k in health)) health[k] = prevHealth[k];
+
+  return { events, stats, errors, health, warnings };
 }

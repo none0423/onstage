@@ -29,6 +29,8 @@ jobs:
           node-version: 22
       - name: 데이터 형식 검사
         run: node tools/check.mjs
+      - name: 파서 회귀 테스트
+        run: node tools/test-parsers.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
