@@ -17,12 +17,15 @@ const MAX_SUBREQUESTS = 40;
 
 /* 소스 우선순위 — 앞일수록 먼저 실행되어 요청 예산을 먼저 쓰고,
    같은 공연이 여러 소스에 있으면 앞쪽 소스의 데이터가 남는다. */
-const SOURCE_ORDER = ["kopis", "jpvenues", "ticketmaster"];
-const SOURCE_PREFIX = { kopis: "kopis-", jpvenues: "jp-", ticketmaster: "tm-" };
+const SOURCE_ORDER = ["kopis", "jpvenues", "ticketmaster", "livenation"];
+const SOURCE_PREFIX = { kopis: "kopis-", jpvenues: "jp-", ticketmaster: "tm-", livenation: "ln-" };
 /* KOPIS 가 먼저 돌지만 뒤 소스가 굶지 않도록 요청을 남겨 둔다.
    일본 공연장 8곳 = 18요청(도쿄돔 1 · 교세라 4 · 오사카성홀 1 · K아레나 1 · 요코하마 4 · 사이타마 4 · 반텔린 1 · 후쿠오카 2)
-   + Ticketmaster 3 + 여유 2. 공연장을 늘리면 이 값도 올린다. */
-const RESERVED_FOR_LATER_SOURCES = 23;
+   + Ticketmaster 3 + Live Nation Korea 3(홈 1 + 상세 2) + 여유 2. 공연장을 늘리면 이 값도 올린다. */
+const RESERVED_FOR_LATER_SOURCES = 26;
+/* Live Nation Korea 상세 페이지는 실행당 이 개수만 새로 읽는다. 15개 안팎이라 5시간이면 한 바퀴 돈다. */
+const LN_DETAILS_PER_RUN = 2;                 // 상세 한 장 파싱이 ≈0.9ms(CPU) — 10ms 예산을 생각해 둘로 제한
+const LN_REFRESH_MS = 24 * 3600 * 1000;
 
 /* ── 공통 유틸 ───────────────────────────────── */
 const d2 = n => String(n).padStart(2, "0");
@@ -102,7 +105,10 @@ function normalizePoster(url) {
 /* ── 수집 본체 ───────────────────────────────── */
 /* health: 이전 실행이 남긴 소스별 건강 상태(연속 0건·연속 실패 횟수). 파서가 조용히 죽는 걸 잡는다.
    today:  테스트가 고정 날짜를 넣기 위한 훅. 실전에서는 비워 둔다. */
-export async function collectAll({ keys = {}, previous = [], only = null, log = () => {}, health: prevHealth = {}, today: todayOverride = null } = {}) {
+/* state: 소스가 실행 사이에 기억해야 할 작은 것들(예: Live Nation 상세 페이지를 마지막으로 읽은 시각).
+   health 처럼 status 에 실려 다음 실행으로 넘어온다. */
+export async function collectAll({ keys = {}, previous = [], only = null, log = () => {}, health: prevHealth = {}, state: prevState = {}, today: todayOverride = null } = {}) {
+  const state = { ...prevState };
   const prevById = new Map(previous.map(c => [c.id, c]));
   const stats = {};
   const errors = [];
@@ -822,8 +828,152 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     return out;
   }
 
+  /* ── Live Nation Korea — 내한 공연의 티켓 오픈 시각 ────────────────
+     KOPIS 는 오픈 시각을 아예 주지 않고(34개 필드 전부 확인), 예매처 RSS 는 모두 죽었다.
+     Live Nation Korea 는 예매처가 아니라 프로모터라 제약에 걸리지 않고, robots.txt 도 공연 페이지를 허용한다.
+     아티스트 페이지(Next.js RSC 페이로드)에 월드투어 전 회차가 있고, 회차마다 tickets[] 에
+     typeId(2 일반예매 · 13/266/363 선예매 · 74 VIP) · validFromUtc(판매 시작) · ticketUrl(실제 상품 페이지)이 있다.
+     한국 회차만 고른다(venue.country === "South Korea").
+
+     KOPIS 항목과의 조인 키는 예매 상품 번호다 — 인터파크 GoodsCode 와 NOL 상품번호가 같은 번호다(8/8 실측).
+     이름은 못 쓴다(KOPIS 는 '벤슨 분', LN 은 'Benson Boone'). 번호가 아직 없으면 공연장+날짜로 맞춘다. */
+  const LN_HOME = "https://www.livenation.kr/";
+  const LN_SLUG = /href="\/([a-z0-9-]+-tickets-adp\d+)"/g;
+  const LN_CHUNK = /self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)/g;
+  const LN_EVENT_SPLIT = /\{"id":"\d+","allTicketStatus":/;
+  const LN_TICKET_SPLIT = /\{"id":\d+,"currencySymbol"/;
+  const LN_PRESALE = new Set([13, 266, 363]);
+  const pick1 = (src, key) => { const m = src.match(new RegExp(`"${key}":"((?:[^"\\\\]|\\\\.)*)"`)); return m ? JSON.parse(`"${m[1]}"`) : ""; };
+  const pickN = (src, key) => { const m = src.match(new RegExp(`"${key}":(-?\\d+)`)); return m ? +m[1] : null; };
+  /* "2026-08-28T02:00:00Z" → "2026-08-28T11:00:00+09:00" (사이트의 ticketOpen 형식) */
+  const toKST = iso => {
+    const d = new Date(iso); if (isNaN(d)) return null;
+    const k = new Date(d.getTime() + 9 * 3600 * 1000);
+    return `${k.getUTCFullYear()}-${d2(k.getUTCMonth() + 1)}-${d2(k.getUTCDate())}T${d2(k.getUTCHours())}:${d2(k.getUTCMinutes())}:00+09:00`;
+  };
+  const LN_CITY = [[/KINTEX|킨텍스|고양/i, "고양"], [/인천|Incheon/i, "인천"], [/부산|Busan/i, "부산"]];
+  const lnCity = (venue, city) => (LN_CITY.find(([re]) => re.test(venue)) || [])[1] || ({ Seoul: "서울", Incheon: "인천", Busan: "부산" }[city] || city || "서울");
+  const vendorNameOf = url =>
+    /nol\.yanolja/.test(url) ? "NOL 티켓" : /interpark/.test(url) ? "인터파크" : /ticketlink/.test(url) ? "티켓링크"
+    : /yes24/.test(url) ? "예스24" : /melon/.test(url) ? "멜론티켓" : /29cm/.test(url) ? "29CM" : "예매처";
+  /** 예매 URL 에서 상품 번호를 뽑는다 — KOPIS 와 LN 을 잇는 키 */
+  const productIdOf = url => {
+    const m = String(url || "").match(/GoodsCode=(\d+)|\/goods\/(\d+)|\/products\/(\d+)|ticketlink\.co\.kr\/product\/(\d+)/i);
+    return m ? (m[1] || m[2] || m[3] || m[4]) : null;
+  };
+
+  function parseLiveNation(html, slug) {
+    /* RSC 청크를 이어 붙이면 JSON 문자열이 된다. 전체를 JSON.parse 하지 않고
+       회차 객체 경계로 잘라 정규식으로 필요한 것만 뽑는다(10ms CPU 예산). */
+    if (!html.includes("South Korea")) return [];                     // 한국 회차가 없으면 디코드할 이유가 없다
+    let blob = "";
+    LN_CHUNK.lastIndex = 0;
+    let m;
+    while ((m = LN_CHUNK.exec(html))) {
+      if (!m[1].includes("allTicketStatus") && !m[1].includes('attraction')) continue;   // 회차 데이터가 없는 청크(라우팅·CSS)는 건너뜀
+      try { blob += JSON.parse(`"${m[1]}"`); } catch { /* 깨진 청크는 건너뜀 */ }
+    }
+    if (!blob.includes('"attraction"')) throw new Error("attraction 페이로드가 없습니다 (페이지 구조 변경?)");
+    const out = [];
+    const seenDates = new Set();                      // RSC 페이로드에는 같은 회차가 두 번 실린다
+    for (const part of blob.split(LN_EVENT_SPLIT).slice(1)) {
+      const venueAt = part.indexOf('"venue":{');
+      if (venueAt < 0) continue;
+      const venueBlk = part.slice(venueAt, part.indexOf("}", venueAt) + 1);
+      if (pick1(venueBlk, "country") !== "South Korea") continue;
+      const date = pick1(part, "eventDate").slice(0, 10);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || seenDates.has(date)) continue;
+      seenDates.add(date);
+      const lineupAt = part.indexOf('"lineup":[');
+      const artist = lineupAt >= 0 ? pick1(part.slice(lineupAt, lineupAt + 600), "name") : "";
+      const nameAt = part.indexOf('"promoter"');                          // 회차 이름은 promoter 바로 뒤에 온다
+      const title = nameAt >= 0 ? pick1(part.slice(nameAt, nameAt + 400), "name") : "";
+      const tickets = [];
+      const tAt = part.indexOf('"tickets":[');
+      const tEnd = part.indexOf('"mainEventInformation"', tAt);
+      const tBlk = tAt >= 0 ? part.slice(tAt, tEnd > tAt ? tEnd : undefined) : "";
+      for (const t of tBlk.split(LN_TICKET_SPLIT).slice(1)) {
+        const typeId = pickN(t, "typeId"), from = pick1(t, "validFromUtc");
+        if (typeId == null || !from) continue;
+        tickets.push({ typeId, status: pickN(t, "ticketStatus"), url: pick1(t, "ticketUrl"), from, label: pick1(t, "displayLabel") });
+      }
+      const general = tickets.filter(t => t.typeId === 2).sort((a, b) => a.from.localeCompare(b.from));
+      const presales = tickets.filter(t => LN_PRESALE.has(t.typeId)).sort((a, b) => a.from.localeCompare(b.from));
+      const buy = general.find(t => t.url) || tickets.find(t => t.url);
+      out.push({
+        slug, date, artist, title,
+        venue: pick1(venueBlk, "name"), city: lnCity(pick1(venueBlk, "name"), pick1(venueBlk, "city")),
+        image: pick1(part, "image"),
+        ticketOpen: general[0] ? toKST(general[0].from) : null,
+        presales: presales.map(t => ({ at: toKST(t.from), label: t.label || "선예매" })),
+        buyUrl: buy ? buy.url : "",
+        otherUrls: [...new Set(tickets.map(t => t.url).filter(u => u && u !== (buy && buy.url)))]
+      });
+    }
+    return out;
+  }
+
+  async function livenation() {
+    const home = await get(LN_HOME);
+    LN_SLUG.lastIndex = 0;
+    const slugs = [];
+    let m;
+    while ((m = LN_SLUG.exec(home))) if (!slugs.includes(m[1])) slugs.push(m[1]);
+    if (!slugs.length) throw new Error("홈에서 공연 링크를 찾지 못했습니다 (페이지 구조 변경?)");
+
+    const seen = state.livenation || {};
+    const nowMs = Date.now();
+    /* 처음 보는 공연이 먼저, 그다음 오래 안 읽은 순. 실행당 LN_DETAILS_PER_RUN 개까지만. */
+    const todo = slugs
+      .filter(sl => !seen[sl] || nowMs - Date.parse(seen[sl]) > LN_REFRESH_MS)
+      .sort((a, b) => (seen[a] ? Date.parse(seen[a]) : 0) - (seen[b] ? Date.parse(seen[b]) : 0))
+      .slice(0, LN_DETAILS_PER_RUN);
+
+    const fresh = [];
+    const fetched = new Set();
+    for (const sl of todo) {
+      if (used >= MAX_SUBREQUESTS - 1) break;
+      try {
+        fresh.push(...parseLiveNation(await get(`${LN_HOME}${sl}`), sl));
+        fetched.add(sl);
+        seen[sl] = new Date().toISOString();
+      } catch (e) { log(`⚠️  Live Nation ${sl}: ${e.message}`); }
+    }
+    /* 홈에서 사라진 공연은 기억도 지운다 — 다시 나타나면 새로 읽는다 */
+    for (const sl of Object.keys(seen)) if (!slugs.includes(sl)) delete seen[sl];
+    state.livenation = seen;
+
+    const out = fresh.map(e => ({
+      id: `ln-${e.slug}-${e.date}`,
+      auto: true, sourceName: "Live Nation Korea", lnSlug: e.slug,
+      artist: e.artist || e.title, tour: e.title,
+      category: "visit",
+      country: "대한민국", city: e.city, venue: e.venue,
+      dates: [e.date],
+      doorsNote: "",
+      ticketOpen: e.ticketOpen, ticketStatus: null,
+      price: "예매처 공지 참고",
+      vendor: e.buyUrl ? { name: vendorNameOf(e.buyUrl), url: e.buyUrl } : { name: "Live Nation Korea", url: `${LN_HOME}${e.slug}` },
+      otherVendors: [
+        ...e.otherUrls.map(u => ({ name: vendorNameOf(u), url: u })),
+        ...(e.buyUrl ? [{ name: "Live Nation Korea 공연 페이지", url: `${LN_HOME}${e.slug}` }] : [])
+      ],
+      presales: e.presales,
+      tips: e.presales.length ? e.presales.map(p => `${p.label} ${p.at.slice(5, 16).replace("T", " ")}`).join(" · ") : "",
+      goods: { note: "", url: null },
+      stay: { areas: [] },
+      images: /^https:\/\//.test(e.image) ? [e.image] : [],
+      source: `${LN_HOME}${e.slug}`,
+      tags: []
+    }));
+    /* 이번에 안 읽은 공연은 이전 결과를 그대로 둔다(홈에 아직 있는 것만) */
+    const carried = previous.filter(c => c.id.startsWith("ln-") && c.lnSlug && slugs.includes(c.lnSlug) && !fetched.has(c.lnSlug));
+    stats.livenation = { count: out.length + carried.length, slugs: slugs.length, fetched: fetched.size, kr: out.length };
+    return [...out, ...carried];
+  }
+
   /* ── 실행 · 병합 ────────────────────────────── */
-  const SOURCES = { kopis, jpvenues, ticketmaster };
+  const SOURCES = { kopis, jpvenues, ticketmaster, livenation };
   let all = [];
   for (const name of SOURCE_ORDER) {
     if (only && only !== name) continue;
@@ -884,6 +1034,42 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     .map(stamp)
     .sort((a, b) => a.dates[0].localeCompare(b.dates[0]));
 
+  /* ── Live Nation 보강 ──────────────────────────────
+     같은 내한 공연이 KOPIS(한글 표기, 오픈 시각 없음)와 LN(영문, 오픈 시각·상품 URL 있음) 양쪽에 있으면
+     이름으로는 못 잇는다. 예매 상품 번호로 잇고, 없으면 공연장+날짜로 잇는다.
+     이어지면 KOPIS 항목에 오픈 시각·선예매·상품 URL·이미지를 채우고 LN 항목은 뺀다. 못 이으면 LN 항목이 그대로 남는다. */
+  const normVenue = v => norm(v).replace(/kintex/g, "킨텍스").replace(/\(.*?\)|hall\d+|홀\d+|\d+홀/g, "");
+  const lnList = events.filter(c => c.id.startsWith("ln-"));
+  const enriched = new Set();
+  if (lnList.length) {
+    const byPid = new Map(), byVenueDate = new Map();
+    for (const c of events) {
+      if (c.id.startsWith("ln-") || c.country !== "대한민국") continue;
+      for (const u of [c.vendor?.url, ...(c.otherVendors || []).map(v => v.url)]) { const id = productIdOf(u); if (id) byPid.set(id, c); }
+      for (const dt of c.dates) byVenueDate.set(`${normVenue(c.venue)}|${dt}`, c);
+      if (c.dates.length === 2 && c.period) {            // KOPIS 기간형은 사이 날짜도 같은 공연이다
+        for (let d = new Date(c.dates[0] + "T00:00:00Z"); d.toISOString().slice(0, 10) <= c.dates[1]; d.setUTCDate(d.getUTCDate() + 1))
+          byVenueDate.set(`${normVenue(c.venue)}|${d.toISOString().slice(0, 10)}`, c);
+      }
+    }
+    for (const L of lnList) {
+      const pids = [L.vendor?.url, ...(L.otherVendors || []).map(v => v.url)].map(productIdOf).filter(Boolean);
+      const target = pids.map(id => byPid.get(id)).find(Boolean) || byVenueDate.get(`${normVenue(L.venue)}|${L.dates[0]}`);
+      if (!target) continue;
+      if (!target.ticketOpen && L.ticketOpen) target.ticketOpen = L.ticketOpen;
+      if (L.presales?.length) { target.presales = L.presales; if (!target.tips) target.tips = L.tips; }
+      /* KOPIS 예매 링크가 검색 URL 이면 LN 의 상품 페이지가 낫다 */
+      if (productIdOf(L.vendor?.url) && /search/.test(target.vendor?.url || "")) target.vendor = L.vendor;
+      const have = new Set([target.vendor?.url, ...(target.otherVendors || []).map(v => v.url)]);
+      target.otherVendors = [...(target.otherVendors || []), ...(L.otherVendors || []).filter(v => !have.has(v.url))];
+      if (!(target.images || []).length && L.images?.length) target.images = L.images;
+      target.lnSlug = L.lnSlug;
+      enriched.add(L.id);
+    }
+  }
+  const finalEvents = enriched.size ? events.filter(c => !enriched.has(c.id)) : events;
+  if (stats.livenation) stats.livenation.enriched = enriched.size;
+
   stats.subrequests = used;
 
   /* ── 소스 건강 상태 ──────────────────────────────
@@ -907,15 +1093,16 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   };
   if (!only || only === "kopis") unit("kopis", "KOPIS", stats.kopis?.count ?? 0, failedSources.has("kopis") || !stats.kopis);
   if (!only || only === "ticketmaster") unit("ticketmaster", "Ticketmaster", stats.ticketmaster?.count ?? 0, failedSources.has("ticketmaster") || !stats.ticketmaster);
+  if (!only || only === "livenation") unit("livenation", "Live Nation Korea", stats.livenation?.count ?? 0, failedSources.has("livenation") || !stats.livenation);
   if (!only || only === "jpvenues") {
     const jpFailed = new Set(errors.filter(e => e.startsWith("jpvenues/")).map(e => e.slice(9).split(":")[0]));
     for (const v of JP_VENUES) unit(`jp-${v.key}`, v.venue, stats.jpvenues?.[v.key] ?? 0, jpFailed.has(v.key));
   }
   /* 제목 분리가 빗나가 'LIVE' 같은 일반명사가 아티스트로 남은 항목 */
-  const generic = events.filter(c => GENERIC_ARTIST.test(String(c.artist || "").trim()));
+  const generic = finalEvents.filter(c => GENERIC_ARTIST.test(String(c.artist || "").trim()));
   if (generic.length) warnings.push(`아티스트명이 일반명사인 항목 ${generic.length}건: ${generic.slice(0, 3).map(c => c.id).join(", ")}`);
   /* 이전 상태의 다른 단위는 그대로 보존한다(--only 로 일부만 돌렸을 때) */
   for (const k of Object.keys(prevHealth)) if (!(k in health)) health[k] = prevHealth[k];
 
-  return { events, stats, errors, health, warnings };
+  return { events: finalEvents, stats, errors, health, warnings, state };
 }

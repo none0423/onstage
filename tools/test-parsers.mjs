@@ -49,6 +49,36 @@ globalThis.fetch = async url => {
 
 const { events, stats, errors, warnings } = await collectAll({ only: "jpvenues", today: FIXTURE_DATE });
 
+/* ── Live Nation Korea: 홈 → 상세 2장, KOPIS 항목과의 조인까지 ──
+   홈 픽스처에는 15개 공연이 있지만 상세 픽스처는 두 장뿐이라, 모르는 슬러그는 404 로 돌려
+   '실패해도 나머지는 산다'는 경로도 함께 지난다. */
+const LN_ROUTES = [
+  [/livenation\.kr\/?$/, "livenation-home.html"],
+  [/livenation\.kr\/slowdive-/, "livenation-slowdive.html"],
+  [/livenation\.kr\/yung-kai-/, "livenation-yungkai.html"]
+];
+const lnFetch = async url => {
+  const hit = LN_ROUTES.find(([re]) => re.test(String(url)));
+  if (!hit) return new Response("not in fixtures: " + url, { status: 404 });
+  return new Response(FIX(hit[1]), { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
+};
+/* KOPIS 가 이미 가진 슬로우다이브(한글 표기, 오픈 시각 없음) — 상품 번호 26012276 으로 이어져야 한다 */
+const fakeKopis = {
+  id: "kopis-PF299778", auto: true, artist: "슬로우다이브", tour: "내한공연", category: "visit",
+  country: "대한민국", city: "서울", venue: "KBS스포츠월드(아레나)", dates: ["2026-12-08"],
+  ticketOpen: null, price: "예매처 공지 참고",
+  vendor: { name: "놀유니버스", url: "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26012276" },
+  otherVendors: [], images: [], source: "https://kopis.or.kr/", tags: []
+};
+const realFetch = globalThis.fetch;
+globalThis.fetch = lnFetch;
+/* 처음 보는 슬러그 우선이라 알파벳순으로 앞선 것들이 먼저 잡힌다 → state 로 슬로우다이브·영 카이만 '안 읽은 것'으로 남긴다 */
+const seenAll = {};
+for (const sl of FIX("livenation-home.html").matchAll(/href="\/([a-z0-9-]+-tickets-adp\d+)"/g))
+  if (!/^(slowdive|yung-kai)-/.test(sl[1])) seenAll[sl[1]] = new Date().toISOString();
+const ln = await collectAll({ only: "livenation", today: FIXTURE_DATE, previous: [fakeKopis], state: { livenation: seenAll } });
+globalThis.fetch = realFetch;
+
 let failed = 0;
 const fail = m => { failed++; console.log("❌", m); };
 const ok = m => console.log("✅", m);
@@ -96,6 +126,23 @@ const expectArtist = [
 for (const [name, why] of expectArtist) {
   if (byArtist.has(name)) ok(`제목 분리: ${why}`); else fail(`제목 분리 회귀: ${why} — '${name}' 이 없음`);
 }
+
+/* 7. Live Nation Korea — 파싱과 KOPIS 조인 */
+if (ln.errors.length) fail(`Live Nation 오류: ${ln.errors.join(" / ")}`);
+const lnStat = ln.stats.livenation || {};
+if (lnStat.slugs !== 15) fail(`LN 홈 슬러그 ${lnStat.slugs} (기대 15)`); else ok("LN 홈: 공연 15개");
+if (lnStat.fetched !== 2) fail(`LN 상세 ${lnStat.fetched}장 읽음 (기대 2)`); else ok("LN 상세: 실행당 2장");
+const yung = ln.events.find(e => e.id.startsWith("ln-yung-kai-"));
+if (!yung) fail("LN: yung kai 서울 회차가 없음");
+else if (yung.ticketOpen !== "2026-09-15T12:00:00+09:00") fail(`LN: yung kai 오픈 시각 ${yung.ticketOpen} (기대 2026-09-15T12:00:00+09:00 — UTC 03:00 → KST)`);
+else ok(`LN: yung kai 11-16 명화 라이브홀 · 오픈 ${yung.ticketOpen.slice(5, 16)}`);
+const slow = ln.events.find(e => e.id === "kopis-PF299778");
+if (!slow) fail("LN 조인: KOPIS 슬로우다이브 항목이 사라짐");
+else if (slow.ticketOpen !== "2026-08-28T11:00:00+09:00") fail(`LN 조인: KOPIS 슬로우다이브에 오픈 시각이 안 채워짐 (${slow.ticketOpen})`);
+else if (ln.events.some(e => e.id.startsWith("ln-slowdive-"))) fail("LN 조인: 이어진 뒤에도 LN 슬로우다이브 항목이 남아 중복");
+else if (!slow.images?.length) fail("LN 조인: 이미지가 안 채워짐");
+else ok("LN 조인: 상품 번호 26012276 으로 KOPIS 슬로우다이브에 오픈 시각·이미지 채움, LN 항목 제거");
+if (lnStat.enriched !== 1) fail(`LN 보강 수 ${lnStat.enriched} (기대 1)`);
 
 /* 6. 수집기 자체 경고는 여기선 0이어야 한다(이전 상태 없이 한 번 돈 것이므로) */
 if (warnings.length) fail(`경고: ${warnings.join(" / ")}`); else ok("수집기 경고 없음");
