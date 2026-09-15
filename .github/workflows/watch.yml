@@ -40,6 +40,7 @@ jobs:
           # Worker 가 잠깐 안 닿는 것도 일시 오류일 수 있어 한 번 더 시도한다
           BODY=$(curl -sS --max-time 30 "$STATUS_URL" || (sleep 20 && curl -sS --max-time 30 "$STATUS_URL"))
           echo "$BODY" | node -e '
+            process.stdin.setEncoding("utf8");   /* 청크 경계에서 한글이 쪼개져 깨지지 않도록 */
             let s = ""; process.stdin.on("data", d => s += d).on("end", () => {
               const st = JSON.parse(s);
               const problems = [], notes = [];
