@@ -921,29 +921,36 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     while ((m = LN_SLUG.exec(home))) if (!slugs.includes(m[1])) slugs.push(m[1]);
     if (!slugs.length) throw new Error("홈에서 공연 링크를 찾지 못했습니다 (페이지 구조 변경?)");
 
-    const seen = state.livenation || {};
+    /* 슬러그별 기억: { at: 마지막으로 읽은 시각, kr: 파싱한 한국 회차 }.
+       파싱 결과를 여기 두는 이유 — KOPIS 항목에 보강하고 나면 LN 항목은 피드에서 빠지는데,
+       KOPIS 는 매 실행 API 로 항목을 새로 만들어 보강분(ticketOpen)이 사라진다.
+       그래서 LN 회차를 상태에 보관하고 매 실행 다시 내보내 보강을 매번 다시 건다.
+       (초기 버전은 시각 문자열만 저장했다 — 그 형식은 '아직 안 읽음'으로 취급해 다시 읽는다.) */
+    const seen = {};
+    for (const [sl, rec] of Object.entries(state.livenation || {}))
+      if (rec && typeof rec === "object" && Array.isArray(rec.kr)) seen[sl] = rec;
     const nowMs = Date.now();
+    const readAt = sl => (seen[sl] ? Date.parse(seen[sl].at) || 0 : 0);
     /* 처음 보는 공연이 먼저, 그다음 오래 안 읽은 순. 실행당 LN_DETAILS_PER_RUN 개까지만. */
     const todo = slugs
-      .filter(sl => !seen[sl] || nowMs - Date.parse(seen[sl]) > LN_REFRESH_MS)
-      .sort((a, b) => (seen[a] ? Date.parse(seen[a]) : 0) - (seen[b] ? Date.parse(seen[b]) : 0))
+      .filter(sl => !seen[sl] || nowMs - readAt(sl) > LN_REFRESH_MS)
+      .sort((a, b) => readAt(a) - readAt(b))
       .slice(0, LN_DETAILS_PER_RUN);
 
-    const fresh = [];
     const fetched = new Set();
     for (const sl of todo) {
       if (used >= MAX_SUBREQUESTS - 1) break;
       try {
-        fresh.push(...parseLiveNation(await get(`${LN_HOME}${sl}`), sl));
+        seen[sl] = { at: new Date().toISOString(), kr: parseLiveNation(await get(`${LN_HOME}${sl}`), sl) };
         fetched.add(sl);
-        seen[sl] = new Date().toISOString();
       } catch (e) { log(`⚠️  Live Nation ${sl}: ${e.message}`); }
     }
     /* 홈에서 사라진 공연은 기억도 지운다 — 다시 나타나면 새로 읽는다 */
     for (const sl of Object.keys(seen)) if (!slugs.includes(sl)) delete seen[sl];
     state.livenation = seen;
 
-    const out = fresh.map(e => ({
+    const remembered = Object.values(seen).flatMap(rec => rec.kr);
+    const out = remembered.map(e => ({
       id: `ln-${e.slug}-${e.date}`,
       auto: true, sourceName: "Live Nation Korea", lnSlug: e.slug,
       artist: e.artist || e.title, tour: e.title,
@@ -966,10 +973,8 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       source: `${LN_HOME}${e.slug}`,
       tags: []
     }));
-    /* 이번에 안 읽은 공연은 이전 결과를 그대로 둔다(홈에 아직 있는 것만) */
-    const carried = previous.filter(c => c.id.startsWith("ln-") && c.lnSlug && slugs.includes(c.lnSlug) && !fetched.has(c.lnSlug));
-    stats.livenation = { count: out.length + carried.length, slugs: slugs.length, fetched: fetched.size, kr: out.length };
-    return [...out, ...carried];
+    stats.livenation = { count: out.length, slugs: slugs.length, fetched: fetched.size, remembered: Object.keys(seen).length };
+    return out;
   }
 
   /* ── 실행 · 병합 ────────────────────────────── */

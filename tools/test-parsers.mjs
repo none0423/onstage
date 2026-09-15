@@ -75,8 +75,12 @@ globalThis.fetch = lnFetch;
 /* 처음 보는 슬러그 우선이라 알파벳순으로 앞선 것들이 먼저 잡힌다 → state 로 슬로우다이브·영 카이만 '안 읽은 것'으로 남긴다 */
 const seenAll = {};
 for (const sl of FIX("livenation-home.html").matchAll(/href="\/([a-z0-9-]+-tickets-adp\d+)"/g))
-  if (!/^(slowdive|yung-kai)-/.test(sl[1])) seenAll[sl[1]] = new Date().toISOString();
+  if (!/^(slowdive|yung-kai)-/.test(sl[1])) seenAll[sl[1]] = { at: new Date().toISOString(), kr: [] };
 const ln = await collectAll({ only: "livenation", today: FIXTURE_DATE, previous: [fakeKopis], state: { livenation: seenAll } });
+/* 두 번째 실행 — 아무것도 새로 읽지 않는다. KOPIS 는 실전처럼 '캐시에서 일부만 복사한' 새 객체로 다시 들어온다.
+   상태에 보관한 LN 회차가 다시 나와 보강이 다시 걸려야 한다(이게 한 번 사라졌던 버그). */
+const kopisRebuilt = { ...fakeKopis, ticketOpen: null, images: [], lnSlug: undefined };
+const ln2 = await collectAll({ only: "livenation", today: FIXTURE_DATE, previous: [kopisRebuilt, ...ln.events.filter(e => e.id.startsWith("ln-"))], state: ln.state });
 globalThis.fetch = realFetch;
 
 let failed = 0;
@@ -143,6 +147,12 @@ else if (ln.events.some(e => e.id.startsWith("ln-slowdive-"))) fail("LN 조인: 
 else if (!slow.images?.length) fail("LN 조인: 이미지가 안 채워짐");
 else ok("LN 조인: 상품 번호 26012276 으로 KOPIS 슬로우다이브에 오픈 시각·이미지 채움, LN 항목 제거");
 if (lnStat.enriched !== 1) fail(`LN 보강 수 ${lnStat.enriched} (기대 1)`);
+const st2 = ln2.stats.livenation || {};
+const slow2 = ln2.events.find(e => e.id === "kopis-PF299778");
+if (st2.fetched !== 0) fail(`LN 2회차: 새로 읽은 상세 ${st2.fetched}장 (기대 0 — 24h 안이면 다시 읽지 않는다)`);
+else if (!slow2 || slow2.ticketOpen !== "2026-08-28T11:00:00+09:00") fail(`LN 2회차: 보강이 유지되지 않음 (${slow2?.ticketOpen}) — 상태에 보관한 회차가 다시 나와야 한다`);
+else if (!ln2.events.some(e => e.id.startsWith("ln-yung-kai-"))) fail("LN 2회차: 상태에 보관한 yung kai 항목이 사라짐");
+else ok("LN 2회차: 새 요청 0 · 상태에서 다시 내보내 KOPIS 보강 유지 · yung kai 유지");
 
 /* 6. 수집기 자체 경고는 여기선 0이어야 한다(이전 상태 없이 한 번 돈 것이므로) */
 if (warnings.length) fail(`경고: ${warnings.join(" / ")}`); else ok("수집기 경고 없음");
