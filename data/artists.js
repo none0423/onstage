@@ -400,5 +400,93 @@ const ARTIST_INFO = {
   "ZAZEN BOYS MATSURI SESSION": {
     "country": null,
     "genre": null
+  },
+  "Josh Cullen": {
+    "country": "PH",
+    "genre": "hiphop"
+  },
+  "DOH KYUNG SOO": {
+    "country": null,
+    "genre": null
+  },
+  "nafla instinct": {
+    "country": null,
+    "genre": null
+  },
+  "윤수일 BAND": {
+    "country": null,
+    "genre": null
+  },
+  "재즈, 이야기를 노래하다": {
+    "country": null,
+    "genre": null
+  },
+  "NEXZ": {
+    "country": "JP",
+    "genre": "kpop"
+  },
+  "ILLIT": {
+    "country": null,
+    "genre": null
+  },
+  "Zephanie": {
+    "country": "PH",
+    "genre": null
+  },
+  "82MAJOR": {
+    "country": "KR",
+    "genre": "kpop"
+  },
+  "ONEW": {
+    "country": "KR",
+    "genre": "kpop"
+  },
+  "KWON JIN AH": {
+    "country": null,
+    "genre": null
+  },
+  "Baby Dolls": {
+    "country": null,
+    "genre": null
+  },
+  "로이킴": {
+    "country": "KR",
+    "genre": null
+  },
+  "김수희": {
+    "country": null,
+    "genre": null
+  },
+  "조항조": {
+    "country": "KR",
+    "genre": null
+  },
+  "GUMMY": {
+    "country": null,
+    "genre": null
+  },
+  "Malcolm Todd": {
+    "country": "US",
+    "genre": "hiphop"
+  },
+  "정승환 10주년": {
+    "country": null,
+    "genre": null
+  },
+  "베니싱스": {
+    "country": null,
+    "genre": null
+  },
+  "Doh Kyung-soo": {
+    "country": null,
+    "genre": null
+  },
+  "Freya Skye": {
+    "country": "GB",
+    "genre": "pop"
+  },
+  "milet": {
+    "country": null,
+    "genre": null
   }
 };
