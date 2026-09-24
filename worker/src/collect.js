@@ -1093,8 +1093,13 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     health[key] = { count: failed ? (prev.count ?? null) : count, zero, fail, peak, at: nowISO };
     if (fail >= 3) warnings.push(`${label}: ${fail}회 연속 실패`);
     if (zero >= 3 && peak > 0) warnings.push(`${label}: ${zero}회 연속 0건 (이전 최고 ${peak}건)`);   // 한 번도 안 나온 곳은 신규·휴관일 수 있다
-    /* 이전 최고치의 절반 아래로 떨어지면 부분 파싱 실패일 가능성이 크다 */
-    if (!failed && peak >= 6 && count < peak / 2) warnings.push(`${label}: ${count}건 (최고 ${peak}건의 절반 미만)`);
+    /* 한 실행 만에 절반 아래로 떨어지면 부분 파싱 실패일 가능성이 크다.
+       기준은 '직전 실행'이지 '역대 최고'가 아니다 — 당월치만 보여 주는 공연장(오사카성홀)은
+       달이 흐르며 지난 공연이 하나씩 빠져 자연히 줄고, 최고치와 비교하면 매시 오탐이 난다
+       (2026-09-23~24 에 이걸로 실패 메일이 6번 갔다). 파서가 깨지면 한 번에 뚝 떨어진다. */
+    const was = prev.count;
+    if (!failed && typeof was === "number" && was >= 6 && count < was / 2)
+      warnings.push(`${label}: ${was}건 → ${count}건 (한 실행 만에 절반 미만)`);
   };
   if (!only || only === "kopis") unit("kopis", "KOPIS", stats.kopis?.count ?? 0, failedSources.has("kopis") || !stats.kopis);
   if (!only || only === "ticketmaster") unit("ticketmaster", "Ticketmaster", stats.ticketmaster?.count ?? 0, failedSources.has("ticketmaster") || !stats.ticketmaster);
