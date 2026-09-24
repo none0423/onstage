@@ -11,7 +11,8 @@ const UA = "onstage-collector/1.0 (personal concert dashboard; 10 users)";
 
 /* 취소·연기 공연은 제목에 표시가 붙는다. 공연 제목에만 적용한다
    (팁이나 안내문에는 "무료 취소" 같은 무관한 표현이 들어갈 수 있다). */
-const CANCELLED = /공연\s?취소|취소\s?공연|\[\s?취소\s?\]|\(\s?취소\s?\)|중지|中止|延期|公演中止|払戻|CANCELL?ED|POSTPONED/i;
+/* 제목에만 적용한다. 맨 '연기'는 넣지 않는다 — 배우의 연기와 구분되지 않는다. */
+const CANCELLED = /공연\s?취소|취소\s?공연|\[\s?취소\s?\]|\(\s?취소\s?\)|공연\s?연기|\[\s?연기\s?\]|순연|중지|中止|延期|公演中止|払戻|CANCELL?ED|POSTPONED/i;
 /* Workers 무료 플랜은 호출당 50개. 리다이렉트도 1개로 세므로 여유를 두고 40 에서 멈춘다. */
 const MAX_SUBREQUESTS = 40;
 
@@ -840,7 +841,12 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   const LN_HOME = "https://www.livenation.kr/";
   const LN_SLUG = /href="\/([a-z0-9-]+-tickets-adp\d+)"/g;
   const LN_CHUNK = /self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)/g;
-  const LN_EVENT_SPLIT = /\{"id":"\d+","allTicketStatus":/;
+  const LN_EVENT_SPLIT = /\{"id":"\d+","allTicketStatus":(\d+)/;
+  /* 회차 상태. 1 = 판매(정상), 6 = TBC — 사이트가 날짜 자리에 'TBC' 를 찍는 연기 상태다
+     (2026-09-25 Post Malone 고양 10/02 로 확인). 연기된 공연은 옛 날짜가 의미 없으므로
+     티켓마스터의 postponed 와 같은 규칙으로 버린다. 취소 상태 코드는 아직 실물을 못 봤다 —
+     취소되면 보통 페이지에서 회차가 통째로 사라지고, 그건 24시간 갱신이 지운다. */
+  const LN_DROP_STATUS = new Set([6]);
   const LN_TICKET_SPLIT = /\{"id":\d+,"currencySymbol"/;
   const LN_PRESALE = new Set([13, 266, 363]);
   const pick1 = (src, key) => { const m = src.match(new RegExp(`"${key}":"((?:[^"\\\\]|\\\\.)*)"`)); return m ? JSON.parse(`"${m[1]}"`) : ""; };
@@ -876,7 +882,10 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     if (!blob.includes('"attraction"')) throw new Error("attraction 페이로드가 없습니다 (페이지 구조 변경?)");
     const out = [];
     const seenDates = new Set();                      // RSC 페이로드에는 같은 회차가 두 번 실린다
-    for (const part of blob.split(LN_EVENT_SPLIT).slice(1)) {
+    const chunks = blob.split(LN_EVENT_SPLIT);        // [앞, 상태, 본문, 상태, 본문, …]
+    for (let i = 1; i < chunks.length; i += 2) {
+      const status = +chunks[i], part = chunks[i + 1] || "";
+      if (LN_DROP_STATUS.has(status)) continue;       // 연기 — 날짜가 무의미하다
       const venueAt = part.indexOf('"venue":{');
       if (venueAt < 0) continue;
       const venueBlk = part.slice(venueAt, part.indexOf("}", venueAt) + 1);

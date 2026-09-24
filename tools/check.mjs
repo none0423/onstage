@@ -62,6 +62,9 @@ for (const [i, c] of CONCERTS.entries()) {
   if (c.vendor && !/^https?:\/\//.test(c.vendor.url || "")) errors.push(`${at}: vendor.url 이 http(s) 주소가 아닙니다`);
   for (const v of c.otherVendors || [])
     if (!/^https?:\/\//.test(v.url || "")) errors.push(`${at}: otherVendors '${v.name}' url 오류`);
+  /* 취소·연기 표기는 사이트에서 그 공연을 숨긴다. 의도한 것인지 알려 준다. */
+  if (/공연\s?취소|취소\s?공연|\[\s?취소\s?\]|\(\s?취소\s?\)|공연\s?연기|\[\s?연기\s?\]|순연|中止|延期|CANCELL?ED|POSTPONED/i.test(`${c.artist || ""} ${c.tour || ""}`) || c.cancelled === true)
+    warns.push(`${at}: 취소·연기로 표시되어 사이트에 나오지 않습니다`);
   if (!c.mapQuery) warns.push(`${at}: mapQuery 없음 → '${c.venue} ${c.city}' 로 숙소 검색`);
   if (c.stay) {
     if (!Array.isArray(c.stay.areas) || !c.stay.areas.length)

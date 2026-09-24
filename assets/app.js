@@ -136,19 +136,26 @@ let FEED_LIST = typeof FEED !== "undefined" ? FEED : [];
 let FEED_AT = typeof FEED_UPDATED !== "undefined" ? FEED_UPDATED : null;
 let FEED_LIVE = false;
 
+/* 취소·연기 표기. 수집기의 CANCELLED 과 같은 규칙이며, 제목(artist·tour)에만 적용한다 —
+   팁 본문에는 '무료 취소 조건' 같은 무관한 표현이 정상적으로 들어간다.
+   자동 수집분은 수집 단계에서 이미 걸러지지만, 손으로 쓴 concerts.js 는 거치는 곳이 없어
+   여기서 한 번 더 본다. 공연이 취소되면 그 줄에 [취소] 를 붙이기만 하면 사라진다. */
+const CANCELLED_TEXT = /공연\s?취소|취소\s?공연|\[\s?취소\s?\]|\(\s?취소\s?\)|공연\s?연기|\[\s?연기\s?\]|순연|중지|中止|延期|公演中止|CANCELL?ED|POSTPONED/i;
+const isCancelled = c => CANCELLED_TEXT.test(`${c.artist || ""} ${c.tour || ""}`) || c.cancelled === true;
+
 function mergeEvents(feed) {
   const norm = s => String(s).toLowerCase().replace(/[\s.\-_'"()\[\]]/g, "");
   /* 아티스트 표기가 달라도(후지이 카제 / Fujii Kaze) 같은 공연장·같은 날이면 같은 공연 */
   const keys = c => [`a:${norm(c.artist)}|${c.dates[0]}`, `v:${norm(c.venue)}|${c.dates[0]}`];
   const ids = new Set(CONCERTS.map(c => c.id));
   const seen = new Set(CONCERTS.flatMap(keys));
-  const valid = feed.filter(c => c && c.dates?.length && c.vendor?.url);
+  const valid = feed.filter(c => c && c.dates?.length && c.vendor?.url && !isCancelled(c));
 
   /* 중복으로 가려진 자동 항목에 포스터가 있으면 수동 항목이 물려받는다.
      손으로 쓴 공연이 이미지 없이 남는 걸 막는다. */
   const byKey = new Map();
   for (const c of valid) for (const k of keys(c)) if (!byKey.has(k)) byKey.set(k, c);
-  const manual = CONCERTS.map(c => {
+  const manual = CONCERTS.filter(c => !isCancelled(c)).map(c => {
     if (c.images?.length) return c;
     const donor = keys(c).map(k => byKey.get(k)).find(x => x?.images?.length);
     return donor ? { ...c, images: donor.images } : c;
