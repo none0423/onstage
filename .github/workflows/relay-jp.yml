@@ -1,0 +1,48 @@
+# 중계 수집 — Cloudflare 대역에서 막힌 일본 공연장을 러너가 대신 읽어 저장소에 올린다.
+# Worker 는 GitHub Pages 에 올라간 data/relay/*.json 을 한 번 읽는다.
+#
+# 왜: 미즈호PayPay돔(softbankhawks.co.jp)이 Worker 에서만 403 이다.
+#     집 회선에서는 같은 UA 로 200 이고 브라우저형 헤더를 갖춰도 Worker 는 여전히 403 이라
+#     IP 대역 차단으로 보인다. 러너 IP 는 막히지 않는지가 이 워크플로의 전제이며,
+#     막혀 있으면 이 워크플로가 실패해 바로 드러난다.
+#
+# 6시간마다 도는 이유: 공연장 일정은 그렇게 자주 바뀌지 않고, 커밋이 잦으면
+# Pages 배포가 계속 돌아 의미 없이 시끄럽다. Worker 는 72시간이 지나야 '묵었다'고 본다.
+
+name: Relay JP venues
+
+on:
+  schedule:
+    - cron: "10 */6 * * *"     # UTC 00:10 · 06:10 · 12:10 · 18:10
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: relay-jp
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 공연장 페이지 수집
+        run: node tools/relay.mjs
+      - name: 변경분 커밋
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain data/relay)" ]; then
+            echo "변경 없음 — 커밋하지 않습니다."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/relay
+          git commit -m "chore(relay): 일본 공연장 중계 수집 $(date -u +%Y-%m-%d\ %H:%M)Z"
+          git push

@@ -108,7 +108,7 @@ function normalizePoster(url) {
    today:  테스트가 고정 날짜를 넣기 위한 훅. 실전에서는 비워 둔다. */
 /* state: 소스가 실행 사이에 기억해야 할 작은 것들(예: Live Nation 상세 페이지를 마지막으로 읽은 시각).
    health 처럼 status 에 실려 다음 실행으로 넘어온다. */
-export async function collectAll({ keys = {}, previous = [], only = null, log = () => {}, health: prevHealth = {}, state: prevState = {}, today: todayOverride = null } = {}) {
+export async function collectAll({ keys = {}, previous = [], only = null, log = () => {}, health: prevHealth = {}, state: prevState = {}, today: todayOverride = null, useRelay = true } = {}) {
   const state = { ...prevState };
   const prevById = new Map(previous.map(c => [c.id, c]));
   const stats = {};
@@ -715,6 +715,9 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     { key: "fuk", venue: "미즈호PayPay돔 후쿠오카", city: "후쿠오카", mapQuery: "みずほPayPayドーム福岡",
       url: "https://www.softbankhawks.co.jp/stadium/event_schedule/", stay: STAY_AREAS.paypaydome, parse: parseFukuoka,
       headers: BROWSER_HEADERS,
+      /* Cloudflare 대역에서는 403 이라 GitHub Actions 가 받아 둔 것을 읽는다.
+         relay 가 비었거나 3일 넘게 묵으면 실패로 보고 경고가 올라온다. */
+      relay: "https://none0423.github.io/onstage/data/relay/paypaydome.json",
       pages: now => [now.getFullYear(), now.getFullYear() + 1].map(y => `https://www.softbankhawks.co.jp/stadium/event_schedule/${y}/`) }
   ];
 
@@ -758,8 +761,66 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   async function jpvenues() {
     const out = [];
     const per = {};
+
+    /* 파서가 낸 행을 사이트가 쓰는 공연 객체로 바꾼다. 공연장 페이지에서 직접 읽었든
+       중계 JSON 에서 읽었든 같은 모양이어야 하므로 한 곳에 모아 둔다. */
+    function emit(v, rows) {
+      for (const e of rows) {
+        const artist = e.artist || splitTitle(e.title).artist;
+        const tour = e.artist ? e.title : (splitTitle(e.title).tour || `${v.venue} 공연`);
+        /* 일본은 공연마다 취급 예매처가 갈린다(e+ · ぴあ · ローソン). 한 곳만 걸어 두면
+           그 예매처가 안 파는 공연은 검색 결과가 비어 막다른 길이 된다. 셋 다 검색으로 건다.
+           URL 형식은 각 사이트의 검색 폼에서 확인했다. */
+        const kw = encodeURIComponent(searchKeyword(artist));
+        const eplus = `https://eplus.jp/sf/search?keyword=${kw}`;
+        const jpSearches = [
+          { name: "티켓피아", url: `https://t.pia.jp/pia/search_all.do?kw=${kw}` },
+          { name: "로손티켓", url: `https://l-tike.com/search/?keyword=${kw}` }
+        ];
+        out.push({
+          id: `jp-${v.key}-${e.dates[0]}-${artist.replace(/[^\w가-힣ぁ-んァ-ヶ一-龠]/g, "").slice(0, 20) || "event"}`,
+          auto: true, sourceName: `${v.venue} 공식`,
+          artist, tour,
+          category: "japan",
+          country: "일본", city: v.city, venue: v.venue, mapQuery: v.mapQuery,
+          dates: e.dates,
+          doorsNote: e.caption || "공식 공지 참고",
+          ticketOpen: null, ticketStatus: "예정",
+          price: e.price || "예매처 공지 참고",
+          /* 공연장이 그 공연의 공식 페이지를 알려 주면 그리로 보낸다. 아티스트명으로 e+ 를
+             검색시키면 동명 공연이나 빈 결과가 나와 공연과 링크가 어긋난다. */
+          vendor: e.link
+            ? { name: "공식 공연 페이지", url: e.link }
+            : { name: "이플러스 (e+)", url: eplus },
+          otherVendors: [
+            ...(e.link ? [{ name: "이플러스 (e+)", url: eplus }] : []),
+            ...jpSearches
+          ],
+          goods: { note: "", url: null },
+          stay: { areas: v.stay },
+          images: [],            // 공연장 일정 페이지에는 공연 이미지가 없다
+          tips: "",
+          source: v.url,
+          tags: []
+        });
+      }
+    }
+
     for (const v of JP_VENUES) {
       try {
+        /* 중계: Cloudflare 대역이 막힌 공연장은 GitHub Actions 가 받아 둔 JSON 을 읽는다.
+           (미즈호PayPay돔 — 집 회선에서는 200, Worker 에서는 403. relay-jp.yml 참고) */
+        if (v.relay && useRelay) {
+          const j = await get(v.relay, { json: true });
+          const got = Array.isArray(j.events) ? j.events.filter(c => c?.id?.startsWith(`jp-${v.key}-`) && c.dates?.length) : [];
+          const ageH = j.updated ? (Date.now() - Date.parse(j.updated)) / 3600000 : Infinity;
+          if (!got.length) throw new Error(`중계 파일이 비어 있습니다 (${v.relay})`);
+          if (ageH > 72) throw new Error(`중계 파일이 ${Math.round(ageH)}시간 전 것입니다 — relay-jp 워크플로 확인`);
+          per[v.key] = got.length;
+          out.push(...got);
+          continue;
+        }
+
         /* 가져올 페이지 목록. 한 페이지에 다 있는 곳은 url 하나, 월 단위인 곳은 monthUrl 로
            몇 달치, 연 단위인 곳은 pages() 로 직접 나열한다. */
         const now = new Date();
@@ -792,45 +853,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         }
         const found = [...merged.values()].map(e => (e.dates.sort(), e));
         per[v.key] = found.length;
-        for (const e of found) {
-          const artist = e.artist || splitTitle(e.title).artist;
-          const tour = e.artist ? e.title : (splitTitle(e.title).tour || `${v.venue} 공연`);
-          /* 일본은 공연마다 취급 예매처가 갈린다(e+ · ぴあ · ローソン). 한 곳만 걸어 두면
-             그 예매처가 안 파는 공연은 검색 결과가 비어 막다른 길이 된다. 셋 다 검색으로 건다.
-             URL 형식은 각 사이트의 검색 폼에서 확인했다. */
-          const kw = encodeURIComponent(searchKeyword(artist));
-          const eplus = `https://eplus.jp/sf/search?keyword=${kw}`;
-          const jpSearches = [
-            { name: "티켓피아", url: `https://t.pia.jp/pia/search_all.do?kw=${kw}` },
-            { name: "로손티켓", url: `https://l-tike.com/search/?keyword=${kw}` }
-          ];
-          out.push({
-            id: `jp-${v.key}-${e.dates[0]}-${artist.replace(/[^\w가-힣ぁ-んァ-ヶ一-龠]/g, "").slice(0, 20) || "event"}`,
-            auto: true, sourceName: `${v.venue} 공식`,
-            artist, tour,
-            category: "japan",
-            country: "일본", city: v.city, venue: v.venue, mapQuery: v.mapQuery,
-            dates: e.dates,
-            doorsNote: e.caption || "공식 공지 참고",
-            ticketOpen: null, ticketStatus: "예정",
-            price: e.price || "예매처 공지 참고",
-            /* 공연장이 그 공연의 공식 페이지를 알려 주면 그리로 보낸다. 아티스트명으로 e+ 를
-               검색시키면 동명 공연이나 빈 결과가 나와 공연과 링크가 어긋난다. */
-            vendor: e.link
-              ? { name: "공식 공연 페이지", url: e.link }
-              : { name: "이플러스 (e+)", url: eplus },
-            otherVendors: [
-              ...(e.link ? [{ name: "이플러스 (e+)", url: eplus }] : []),
-              ...jpSearches
-            ],
-            goods: { note: "", url: null },
-            stay: { areas: v.stay },
-            images: [],            // 공연장 일정 페이지에는 공연 이미지가 없다
-            tips: "",
-            source: v.url,
-            tags: []
-          });
-        }
+        emit(v, found);
       } catch (e) {
         errors.push(`jpvenues/${v.key}: ${e.message}`);
         log(`⚠️  ${v.venue} 실패: ${e.message}`);

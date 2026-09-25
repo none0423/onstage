@@ -47,7 +47,9 @@ globalThis.fetch = async url => {
   return new Response(FIX(hit[1]), { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
 };
 
-const { events, stats, errors, warnings } = await collectAll({ only: "jpvenues", today: FIXTURE_DATE });
+/* useRelay:false — 중계를 쓰는 공연장도 픽스처로 직접 파싱해 파서 자체를 시험한다.
+   중계 경로는 아래에서 따로 본다. */
+const { events, stats, errors, warnings } = await collectAll({ only: "jpvenues", today: FIXTURE_DATE, useRelay: false });
 
 /* ── Live Nation Korea: 홈 → 상세 2장, KOPIS 항목과의 조인까지 ──
    홈 픽스처에는 15개 공연이 있지만 상세 픽스처는 두 장뿐이라, 모르는 슬러그는 404 로 돌려
