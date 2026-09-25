@@ -76,7 +76,10 @@ const airportFor = c =>
    순서: 데이터에 직접 적은 genre → 아티스트 표 → 제목 키워드 → Ticketmaster 장르 → 미분류.
    Ticketmaster 를 맨 뒤에 두는 이유는 63건 중 54건이 "Pop" 으로만 와서 변별력이 없기 때문이다. */
 const GENRE_LABEL = Object.fromEntries((typeof GENRES !== "undefined" ? GENRES : []).map(g => [g.key, g.label]));
-const gnorm = s => String(s || "").toLowerCase().replace(/[\s.\-_'"()\[\]:·,!?&/]/g, "");
+/* 『』～… 까지 지운다. 공연장 제목에서 온 이름에 장식이 붙어 오기 때문이다
+   ('『TOMORROW X TOGETHER' 가 표에도 자동 조회에도 안 걸리던 원인).
+   tools/artists.mjs 의 norm 과 같은 집합으로 유지해야 같은 키로 맞물린다. */
+const gnorm = s => String(s || "").toLowerCase().replace(/[\s.\-_'"()\[\]:·,!?&/『』「」〈〉《》…～~]/g, "");
 
 /* 짧은 이름(2~3자)은 단어 단위로만 맞춘다. 'IVE' 가 'live' 안에서 걸리는 걸 막기 위함이다. */
 const GENRE_LONG = [], GENRE_SHORT = new Map();

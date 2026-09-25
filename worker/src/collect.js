@@ -119,13 +119,13 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
 
   /* retry: 일시적 실패(4xx/5xx·네트워크)에 한해 한 번 더 시도한다.
      KOPIS 상세는 같은 요청이 Worker 에서 간헐적으로 400 을 반환하는 일이 있다. */
-  async function get(url, { json: asJson = false, retry = 0 } = {}) {
+  async function get(url, { json: asJson = false, retry = 0, headers: extra = null } = {}) {
     for (let attempt = 0; ; attempt++) {
       if (used >= MAX_SUBREQUESTS) throw new Error("서브리퀘스트 한도 도달 — 다음 실행으로 이월");
       used++;
       try {
         const res = await fetch(url, {
-          headers: { "User-Agent": UA, Accept: asJson ? "application/json" : "*/*" },
+          headers: { "User-Agent": UA, Accept: asJson ? "application/json" : "*/*", ...(extra || {}) },
           signal: AbortSignal.timeout(20000)
         });
         if (res.ok) return asJson ? res.json() : res.text();
@@ -675,6 +675,16 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     return mergeByTitle(rows);
   }
 
+  /* 일부 일본 CDN 은 Cloudflare 대역에서 오는 헤더가 빈약한 요청을 403 으로 막는다
+     (미즈호PayPay돔, 2026-09-25. 같은 UA 로 집 회선에서는 200 이 온다).
+     브라우저가 실제로 보내는 헤더를 갖춰 보낸다 — 우회가 아니라 정상적인 공개 페이지 요청이다. */
+  const BROWSER_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
+    "Upgrade-Insecure-Requests": "1"
+  };
+
   const JP_VENUES = [
     { key: "td",  venue: "도쿄돔",            city: "도쿄",     mapQuery: "東京ドーム",
       url: "https://www.tokyo-dome.co.jp/dome/event/schedule.html", stay: STAY_AREAS.tokyodome, parse: parseTokyoDome },
@@ -704,6 +714,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
     /* 미즈호PayPay돔은 연 단위. 다음 해 페이지는 아직 없으면 404 */
     { key: "fuk", venue: "미즈호PayPay돔 후쿠오카", city: "후쿠오카", mapQuery: "みずほPayPayドーム福岡",
       url: "https://www.softbankhawks.co.jp/stadium/event_schedule/", stay: STAY_AREAS.paypaydome, parse: parseFukuoka,
+      headers: BROWSER_HEADERS,
       pages: now => [now.getFullYear(), now.getFullYear() + 1].map(y => `https://www.softbankhawks.co.jp/stadium/event_schedule/${y}/`) }
   ];
 
@@ -765,7 +776,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
         const rows = [];
         for (let i = 0; i < urls.length; i++) {
           try {
-            rows.push(...v.parse(await get(urls[i])));
+            rows.push(...v.parse(await get(urls[i], v.headers ? { headers: v.headers } : {})));
           } catch (e) {
             if (i === 0 || used >= MAX_SUBREQUESTS) throw e;
             log(`   ${v.venue} 부가 페이지 건너뜀: ${e.message.slice(0, 80)}`);
@@ -823,6 +834,13 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       } catch (e) {
         errors.push(`jpvenues/${v.key}: ${e.message}`);
         log(`⚠️  ${v.venue} 실패: ${e.message}`);
+        /* 그 공연장의 지난 결과를 살려 둔다. 소스 전체가 죽었을 때와 같은 이유다 —
+           한 곳이 잠깐 막혔다고 그 공연장 공연이 사이트에서 사라지면 안 된다
+           (미즈호PayPay돔이 403 을 맞자 21건이 통째로 빠졌다). 취소·종료는
+           아래 날짜 필터가 어차피 걸러내므로 오래된 것이 쌓이지는 않는다. */
+        const keep = previous.filter(c => c.id.startsWith(`jp-${v.key}-`));
+        if (keep.length) { out.push(...keep); log(`   ${v.venue} 이전 ${keep.length}건 유지`); }
+        per[v.key] = null;                                  // 0 건이 아니라 '못 읽음'
       }
     }
     stats.jpvenues = { count: out.length, ...per };
@@ -1115,7 +1133,7 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
   if (!only || only === "livenation") unit("livenation", "Live Nation Korea", stats.livenation?.count ?? 0, failedSources.has("livenation") || !stats.livenation);
   if (!only || only === "jpvenues") {
     const jpFailed = new Set(errors.filter(e => e.startsWith("jpvenues/")).map(e => e.slice(9).split(":")[0]));
-    for (const v of JP_VENUES) unit(`jp-${v.key}`, v.venue, stats.jpvenues?.[v.key] ?? 0, jpFailed.has(v.key));
+    for (const v of JP_VENUES) unit(`jp-${v.key}`, v.venue, stats.jpvenues?.[v.key] ?? 0, jpFailed.has(v.key) || stats.jpvenues?.[v.key] === null);
   }
   /* 제목 분리가 빗나가 'LIVE' 같은 일반명사가 아티스트로 남은 항목 */
   const generic = finalEvents.filter(c => GENERIC_ARTIST.test(String(c.artist || "").trim()));
