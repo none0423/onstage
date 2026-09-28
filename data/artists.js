@@ -139,7 +139,7 @@ const ARTIST_INFO = {
   "장윤정 라이브": {
     "country": null,
     "genre": null,
-    "rule": 2
+    "rule": 3
   },
   "Spot the GIG by Wanderloch, Michael Mayo 마이클 마요": {
     "country": null,
@@ -169,12 +169,12 @@ const ARTIST_INFO = {
   "NOL FESTIVAL: DAY 2, K-POP STAGE": {
     "country": null,
     "genre": null,
-    "rule": 2
+    "rule": 3
   },
   "Qiu Feng Ze": {
     "country": null,
     "genre": null,
-    "rule": 2
+    "rule": 3
   },
   "스카 페스티벌 10주년 기념공연 SKA FESTIVAL: Super-Swag": {
     "country": null,
@@ -546,12 +546,12 @@ const ARTIST_INFO = {
   "POW": {
     "country": null,
     "genre": null,
-    "rule": 2
+    "rule": 3
   },
   "NOL FESTIVAL: DAY 1, SUPER LIVE STAGE": {
     "country": null,
     "genre": null,
-    "rule": 2
+    "rule": 3
   },
   "최항석과 부기몬스터": {
     "country": null,
@@ -617,7 +617,7 @@ const ARTIST_INFO = {
   "JX TOUR CONCERT: CORE": {
     "country": null,
     "genre": null,
-    "rule": 2
+    "rule": 3
   },
   "JUNE": {
     "country": null,
@@ -752,7 +752,22 @@ const ARTIST_INFO = {
   },
   "NEXZ": {
     "country": "JP",
-    "genre": "kpop"
+    "genre": "jpop",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 2
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      }
+    ]
   },
   "ILLIT": {
     "country": null,
@@ -908,7 +923,8 @@ const ARTIST_INFO = {
   "マカロニえんぴつ": {
     "country": "JP",
     "genre": null,
-    "rule": 2
+    "rule": 3,
+    "tags": []
   },
   "NEWS": {
     "country": null,
@@ -918,7 +934,7 @@ const ARTIST_INFO = {
   "DJMAX MIRACLE": {
     "country": null,
     "genre": null,
-    "rule": 2
+    "rule": 3
   },
   "Hey! Say! JUMP": {
     "country": "JP",
@@ -1270,6 +1286,30 @@ const ARTIST_INFO = {
     "rule": 3
   },
   "ANISAMA FUKUOKA 2027": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "コブクロ": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "folk pop",
+        "count": 1
+      },
+      {
+        "name": "likedis auto",
+        "count": 1
+      }
+    ]
+  },
+  "SUD": {
     "country": null,
     "genre": null,
     "rule": 3
