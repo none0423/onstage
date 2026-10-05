@@ -1313,5 +1313,255 @@ const ARTIST_INFO = {
     "country": null,
     "genre": null,
     "rule": 3
+  },
+  "高嶋ちさ子のザワつく！音楽会 2026": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "MODYSSEY": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "藤井フミヤ": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "cleanup likedis",
+        "count": 1
+      },
+      {
+        "name": "likedis auto",
+        "count": 1
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "j-rock",
+        "count": 1
+      }
+    ]
+  },
+  "佐伯イッテツ / 赤城ウェン / 宇佐美リト / 緋八マナ / 星導ショウ / 叢雲カゲツ / 小柳ロウ / 伊波ライ": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "石田組": {
+    "country": "JP",
+    "genre": null,
+    "rule": 3,
+    "tags": [],
+    "disamb": "Ishida-led string orchestra collective"
+  },
+  "剣持刀也": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "virtual youtuber",
+        "count": 3
+      },
+      {
+        "name": "にじさんじ",
+        "count": 3
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "vtuber",
+        "count": 1
+      }
+    ],
+    "disamb": "にじさんじ"
+  },
+  "葛葉 / 剣持刀也 / 不破湊 / イブラヒム / ローレン・イロアス": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "Mr.Children【振替公演】": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "ゆず": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "さくらみこ": {
+    "country": "JP",
+    "genre": null,
+    "rule": 3,
+    "tags": [
+      {
+        "name": "virtual youtuber",
+        "count": 3
+      },
+      {
+        "name": "hololive",
+        "count": 3
+      },
+      {
+        "name": "vtuber",
+        "count": 1
+      }
+    ]
+  },
+  "미스터트롯3 TOP7": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "여전히 소란스럽게 Vol.02 노브레인 with 크라잉넛, 초록불꽃소년단": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "인천공항 SKY FESTIVAL": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "Yeng Constantino": {
+    "country": "PH",
+    "genre": "rock",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "opm",
+        "count": 1
+      },
+      {
+        "name": "pop rock",
+        "count": 1
+      },
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "p-pop",
+        "count": 1
+      }
+    ]
+  },
+  "여전히 소란스럽게 Vol.03 노브레인 with 안예은, 터치드": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "MONSTA X": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "다이나믹 듀오": {
+    "country": "KR",
+    "genre": "hiphop",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "hip hop",
+        "count": 1
+      },
+      {
+        "name": "pop rap",
+        "count": 1
+      }
+    ],
+    "disamb": "Korean hip hop"
+  },
+  "Anime Festival Asia (AFA)": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "영탁 단독 콘서트: TAK SHOW5": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "소향 X 김기태 THE GREATEST": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "비 (RAIN)": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "Mulasaki Ima ONE MAN": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "LUCK LIFE": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "Kis-My-Ft2": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "boy band",
+        "count": 1
+      }
+    ]
+  },
+  "허각 전국투어 콘서트, 공연각: 사이": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "FRUITS ZIPPERのオールナイトニッポンX in 横浜アリーナ": {
+    "country": null,
+    "genre": null,
+    "rule": 3
+  },
+  "WayV": {
+    "country": "CN",
+    "genre": "pop",
+    "rule": 3,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 2
+      },
+      {
+        "name": "mandopop",
+        "count": 2
+      },
+      {
+        "name": "c-pop",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 1
+      }
+    ]
+  },
+  "프레야 스카이": {
+    "country": null,
+    "genre": null,
+    "rule": 3
   }
 };
