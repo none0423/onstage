@@ -1,6 +1,10 @@
 /* ON STAGE — 콘서트 티켓팅 브리핑 */
 
+/* 색은 전부 여기서만 정한다. 라이트가 기본이고, 다크는 아래 prefers-color-scheme 에서
+   같은 이름을 다시 정의한다 — 나머지 규칙은 한 줄도 고치지 않아도 따라온다. */
 :root{
+  color-scheme:light dark;        /* 스크롤바·기본 폼 컨트롤도 테마를 따라가게 */
+
   --paper:#f6f2ea;
   --paper-2:#fffdf9;
   --ink:#111110;
@@ -10,8 +14,51 @@
   --line-strong:#111110;
   --pink:#ff4e8b;
   --lime:#d8ff3e;
+
+  /* 반전 표면 — 선택된 칩·UP NEXT 패널·카드 CTA·원정 가이드처럼 '바탕을 뒤집은' 곳.
+     라이트에서는 잉크색 판이지만, 다크에서 그냥 뒤집으면 새하얀 판이 돼 눈을 찌른다.
+     그래서 색을 따로 둔다 — 다크에서는 페이지보다 한 단계 밝은 회색 판이 된다. */
+  --invert-bg:#111110;
+  --invert-fg:#f6f2ea;
+  --invert-fg-2:#a8a49b;          /* 반전 판 위의 보조 글자 — --ink-2 를 쓰면 안 된다(테마마다 뒤집힌다) */
+  --line-invert:#333330;
+
+  /* 적용 중인 필터 줄에서 쓴다. 한동안 :root 에 없어 배경이 투명하게 비어 있었다. */
+  --accent:#d6396c;
+  --accent-soft:#fdeef3;
+  --sunk:#edeae2;                 /* 끝난 일정처럼 가라앉은 배경 */
+  --shadow:rgba(17,17,16,.09);
+
+  /* 라임·핑크·흰 배지 위의 글자. 테마와 무관하게 늘 어둡다 —
+     var(--ink) 를 쓰면 다크에서 흰 글자가 돼 라임 위에서 읽을 수 없다. */
+  --on-bright:#111110;           /* 핑크 배지도 같다 — 흰 글씨는 3.1:1 이라 임박 배지가 가장 안 읽혔다 */
   --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",sans-serif;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+
+/* 다크 — 운영체제·브라우저 설정을 따른다. 토큰 이름이 같아 아래 규칙은 그대로 쓰인다.
+   페이지(#101014)보다 카드(#17171d)를, 카드보다 반전 판(#23232c)을 밝게 둬
+   라이트에서와 같은 '뒤로 갈수록 어두운' 층위를 유지한다. */
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#101014;
+    --paper-2:#17171d;
+    --ink:#f2f1ee;
+    --ink-2:#a9a7a1;
+    --ink-3:#8f8d86;             /* 4.5:1 을 넘기려면 이 정도는 돼야 한다(#7c7a74 는 4.2 였다) */
+    --line:#2b2b34;
+    --line-strong:#f2f1ee;
+
+    --invert-bg:#23232c;
+    --invert-fg:#f2f1ee;
+    --invert-fg-2:#a9a7a1;
+    --line-invert:#35353f;
+
+    --accent:#ff7aa8;             /* 어두운 바탕에서 대비가 나오게 한 단계 밝게 */
+    --accent-soft:#2a1a22;
+    --sunk:#262630;
+    --shadow:rgba(0,0,0,.5);
+  }
 }
 
 *{box-sizing:border-box}
@@ -26,7 +73,7 @@ h1,h2,h3,p{margin:0}
 .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
 
 .mono-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-.mono-label.lime{background:var(--lime);color:var(--ink);padding:3px 7px}
+.mono-label.lime{background:var(--lime);color:var(--on-bright);padding:3px 7px}
 
 /* ── NAV ───────────────────────────── */
 .nav{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:50}
@@ -39,7 +86,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   position:fixed;top:72px;left:0;right:0;z-index:45;
   background:var(--paper-2);border-bottom:1px solid var(--line);
   transform:translateY(-110%);transition:transform .18s ease;
-  box-shadow:0 6px 18px rgba(17,17,16,.05);
+  box-shadow:0 6px 18px var(--shadow);
 }
 .sumbar.on{transform:none}
 .sumbar-in{display:flex;align-items:center;gap:14px;height:46px;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em}
@@ -50,7 +97,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-2);padding:5px 10px;white-space:nowrap;
 }
 .sum-fav:hover,.sum-jump:hover{border-color:var(--ink-2);color:var(--ink)}
-.sum-fav.on{background:var(--lime);border-color:var(--lime);color:var(--ink);font-weight:700}
+.sum-fav.on{background:var(--lime);border-color:var(--lime);color:var(--on-bright);font-weight:700}
 .nav-in{display:flex;align-items:center;gap:28px;height:72px}
 .logo{font-weight:800;font-size:23px;letter-spacing:.06em;display:flex;align-items:center;gap:10px}
 .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);display:inline-block;transform:translateY(-6px)}
@@ -59,11 +106,11 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 .nav-links a:hover{color:var(--ink)}
 .nav-links a.on{color:var(--ink);border-bottom-color:var(--ink)}
 .btn-lime{
-  margin-left:auto;background:var(--lime);border:1.5px solid var(--ink);
+  margin-left:auto;background:var(--lime);color:var(--on-bright);border:1.5px solid var(--ink);
   padding:9px 18px;border-radius:999px;font-weight:700;font-size:14px;
   display:inline-flex;gap:6px;align-items:center;transition:.12s;
 }
-.btn-lime:hover{background:var(--ink);color:var(--lime)}
+.btn-lime:hover{background:var(--invert-bg);color:var(--lime)}
 
 /* ── HERO ──────────────────────────── */
 .hero{padding:56px 32px 40px;position:relative}
@@ -77,10 +124,10 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 
 .sticky-note{
   position:absolute;right:32px;bottom:52px;transform:rotate(-4deg);
-  background:var(--lime);padding:24px 28px;
+  background:var(--lime);color:var(--on-bright);padding:24px 28px;
   /* 한글은 모노 폭이 넓다 — 자간을 줄여야 세 줄이 흐트러지지 않는다 */
   font-family:var(--mono);font-size:16px;font-weight:700;line-height:1.8;letter-spacing:.01em;white-space:nowrap;
-  box-shadow:6px 8px 0 rgba(17,17,16,.09);
+  box-shadow:6px 8px 0 var(--shadow);
 }
 
 /* ── STATS ─────────────────────────── */
@@ -113,7 +160,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   border-radius:999px;padding:9px 19px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.12s;
 }
 .chip:hover{border-color:var(--ink);color:var(--ink)}
-.chip[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip[aria-selected="true"]{background:var(--invert-bg);border-color:var(--invert-bg);color:var(--invert-fg)}
 .chip .n{font-family:var(--mono);font-size:11px;opacity:.6;margin-left:7px}
 .mono-toggle{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-2);cursor:pointer;user-select:none}
 .mono-toggle input{accent-color:var(--ink);width:14px;height:14px;cursor:pointer}
@@ -126,7 +173,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   padding:2px 7px;line-height:1.5;
 }
 .ev-foot .fav:hover{border-color:var(--ink-2);color:var(--ink)}
-.ev-foot .fav.on{background:var(--lime);border-color:var(--lime);color:var(--ink);font-weight:700}
+.ev-foot .fav.on{background:var(--lime);border-color:var(--lime);color:var(--on-bright);font-weight:700}
 
 .fav-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
 .ics-btn{
@@ -134,7 +181,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--ink);
   padding:10px 16px;
 }
-.ics-btn:hover{background:var(--lime);border-color:var(--lime)}
+.ics-btn:hover{background:var(--lime);border-color:var(--lime);color:var(--on-bright)}
 .fav-note{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3)}
 
 /* ── UP NEXT ───────────────────────── */
@@ -146,7 +193,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 .un-body{padding:26px 28px;display:flex;flex-direction:column;justify-content:center;gap:9px}
 .un-body h3{font-size:23px;font-weight:800;letter-spacing:-.035em}
 .un-body p{font-size:14px;color:var(--ink-2)}
-.un-cta{background:var(--ink);color:var(--paper);padding:26px 28px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.un-cta{background:var(--invert-bg);color:var(--invert-fg);padding:26px 28px;display:flex;flex-direction:column;justify-content:center;gap:14px}
 .un-cta p{font-size:14.5px;font-weight:600;line-height:1.55}
 .un-cta a{color:var(--lime);font-weight:800;font-size:15px}
 .un-cta a:hover{text-decoration:underline}
@@ -157,8 +204,8 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 .soon{margin-bottom:56px}
 .soon-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .soon-list li{display:flex;align-items:center;gap:20px;padding:15px 4px;border-bottom:1px solid var(--line);font-size:14.5px}
-.soon-d{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.06em;background:var(--lime);padding:4px 9px;flex:none;min-width:62px;text-align:center}
-.soon-d.today{background:var(--pink);color:#fff}
+.soon-d{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.06em;background:var(--lime);color:var(--on-bright);padding:4px 9px;flex:none;min-width:62px;text-align:center}
+.soon-d.today{background:var(--pink);color:var(--on-bright)}
 .soon-name{font-weight:700;flex:none}
 .soon-meta{color:var(--ink-2);font-size:13.5px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .soon-go{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);flex:none}
@@ -179,11 +226,11 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   overflow:hidden;transition:.18s;
 }
 .ev-badge{
-  position:absolute;top:14px;right:14px;background:var(--lime);color:var(--ink);
+  position:absolute;top:14px;right:14px;background:var(--lime);color:var(--on-bright);
   font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 8px;
 }
-.ev-badge.done{background:rgba(255,255,255,.82)}
-.ev-badge.hot{background:var(--pink);color:#fff}
+.ev-badge.done{background:rgba(255,255,255,.82);color:var(--on-bright)}   /* 흰 배지 — 다크에서도 글자는 어둡게 */
+.ev-badge.hot{background:var(--pink);color:var(--on-bright)}
 .ev-tour{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:rgba(255,255,255,.82);text-transform:uppercase;margin-bottom:8px;position:relative}
 .ev-name{font-size:27px;font-weight:800;letter-spacing:-.03em;line-height:1.12;color:#fff;position:relative;text-shadow:0 1px 20px rgba(0,0,0,.28)}
 
@@ -219,24 +266,25 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 }
 .links a:hover{border-color:var(--ink);color:var(--ink);background:var(--paper)}
 .ev-cta{
-  margin-top:14px;display:block;text-align:center;background:var(--ink);color:var(--paper);
+  margin-top:14px;display:block;text-align:center;background:var(--invert-bg);color:var(--invert-fg);
   padding:11px;font-size:13.5px;font-weight:700;transition:.12s;
 }
-.ev-cta:hover{background:var(--pink);color:#fff}
+.ev-cta:hover{background:var(--pink);color:var(--on-bright)}
 .ev-cta.soft{background:var(--paper);color:var(--ink);border:1px solid var(--ink)}
-.ev-cta.soft:hover{background:var(--ink);color:var(--paper)}
+.ev-cta.soft:hover{background:var(--invert-bg);color:var(--invert-fg)}
 
 .empty{text-align:center;color:var(--ink-3);padding:70px 0 90px;font-size:15px}
 
 /* ── 가이드 ────────────────────────── */
-.guide{background:var(--ink);color:var(--paper);padding:76px 0 84px}
+.guide{background:var(--invert-bg);color:var(--invert-fg);padding:76px 0 84px}
 .guide-h{font-size:30px;font-weight:800;letter-spacing:-.04em;margin-bottom:38px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #333330;border-left:1px solid #333330}
-.guide-grid article{border-right:1px solid #333330;border-bottom:1px solid #333330;padding:28px 26px 32px}
-.g-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--lime);margin-bottom:14px}
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-invert);border-left:1px solid var(--line-invert)}
+.guide-grid article{border-right:1px solid var(--line-invert);border-bottom:1px solid var(--line-invert);padding:28px 26px 32px}
+/* .guide-grid p (클래스+요소) 가 .g-num (클래스) 를 이겨서 라임색이 묻혀 있었다 — 선택자를 올린다 */
+.guide-grid .g-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--lime);margin-bottom:14px}
 .guide-grid h3{font-size:19px;font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
-.guide-grid p{font-size:13.5px;line-height:1.75;color:#a8a49b}
-.guide-grid p b{color:var(--paper);font-weight:600}
+.guide-grid p{font-size:13.5px;line-height:1.75;color:var(--invert-fg-2)}
+.guide-grid p b{color:var(--invert-fg);font-weight:600}
 
 /* ── 푸터 ──────────────────────────── */
 .foot{border-top:1px solid var(--line);padding:34px 0 60px}
@@ -259,7 +307,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   background:var(--paper-2);border:1px solid var(--line);cursor:pointer;
   font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink);
 }
-.more-btn:hover{background:var(--lime)}
+.more-btn:hover{background:var(--lime);color:var(--on-bright)}
 
 /* 모아보기 표는 어느 화면에서든 접어 둔다 — 데스크톱에서도 23화면 분량이라
    페이지 끝까지 가려면 표를 지나쳐야 했다. 펼치면 그대로 나온다. */
@@ -268,7 +316,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
   background:var(--paper-2);border:1px solid var(--line);cursor:pointer;
   font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink);
 }
-.collect-toggle:hover{background:var(--lime)}
+.collect-toggle:hover{background:var(--lime);color:var(--on-bright)}
 .collect-body{display:none}
 .collect.open .collect-body{display:block}
 
@@ -317,7 +365,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 .det-src a:hover{color:var(--ink);border-color:var(--ink)}
 
 /* 자동 수집 표시 */
-.ev-foot .auto{background:var(--lime);color:var(--ink);padding:1px 6px;font-weight:700;font-size:10px}
+.ev-foot .auto{background:var(--lime);color:var(--on-bright);padding:1px 6px;font-weight:700;font-size:10px}
 
 /* ── 카드 포스터 ───────────────────── */
 .ev-art{isolation:isolate}
@@ -403,7 +451,7 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 .mchip:hover{background:var(--paper)}
 .m-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink-3);white-space:nowrap}
 .m-bar{display:block;width:100%;height:34px;display:flex;align-items:flex-end;justify-content:center}
-.m-bar i{display:block;width:60%;background:var(--ink);min-height:3px}
+.m-bar i{display:block;width:60%;background:var(--accent);min-height:3px}
 .mchip:hover .m-bar i{background:var(--pink)}
 .m-n{font-family:var(--mono);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
 
@@ -431,12 +479,12 @@ section[id], main[id], div[id]{scroll-margin-top:127px}
 .ctable .c-ven{max-width:190px}
 .ctable .c-open{max-width:210px}
 .ctable .gtag{font-family:var(--mono);font-size:10px;border:1px solid var(--line);padding:2px 6px;color:var(--ink-2)}
-.ctable .st{font-family:var(--mono);font-size:10.5px;font-weight:600;padding:2px 6px;background:var(--lime)}
-.ctable .st.hot{background:var(--pink);color:#fff}
-.ctable .st.done{background:var(--sunk,#eee);color:var(--ink-3)}
+.ctable .st{font-family:var(--mono);font-size:10.5px;font-weight:600;padding:2px 6px;background:var(--lime);color:var(--on-bright)}
+.ctable .st.hot{background:var(--pink);color:var(--on-bright)}
+.ctable .st.done{background:var(--sunk);color:var(--ink-2)}   /* ink-3 은 가라앉은 배경 위에서 3.1:1 밖에 안 나온다 */
 .ctable .auto-s{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--ink-3)}
 .ctable tr.c-month td{
-  background:var(--ink);color:var(--paper);font-weight:700;font-size:13px;letter-spacing:-.02em;
+  background:var(--invert-bg);color:var(--invert-fg);font-weight:700;font-size:13px;letter-spacing:-.02em;
   padding:8px 14px;position:sticky;top:34px;z-index:1;
 }
 .ctable tr.c-month td span{float:right;font-family:var(--mono);font-size:11px;font-weight:400;opacity:.7}

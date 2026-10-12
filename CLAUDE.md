@@ -107,6 +107,14 @@ Four files matter: `index.html` (static shell with fixed element IDs), `assets/a
 
 **The 오픈 임박 section falls back.** `renderSummary()` shows imminent *ticket opens* when any exist, and otherwise switches its own heading and rows to a *concert* countdown. Real data usually has no future open times, so the fallback is the normal path — don't "fix" the empty state by deleting the section.
 
+**Two themes, chosen by the OS.** Light is the default in `:root`; `@media (prefers-color-scheme:dark)` redefines the same token names, so no other rule changes. `color-scheme:light dark` on `:root` makes scrollbars and native form controls follow too. Three groups of tokens exist only because a naive flip breaks them:
+
+- **`--invert-bg` / `--invert-fg` / `--invert-fg-2` / `--line-invert`** — the surfaces that deliberately reverse the page: the selected chip, the UP NEXT panel, the card CTA, the 원정 가이드 section, the month header row. They used `background:var(--ink); color:var(--paper)`, which in dark becomes a glaring near-white slab. In dark they are a *lighter* grey (`#23232c`) instead, keeping the same depth order (page darkest → card → inverted panel). `--invert-fg-2` exists because 원정 가이드's body text was switched to `--ink-2` once and went black-on-black in light mode.
+- **`--on-bright`** — always `#111110`. Text on lime, pink or the translucent white badge must stay dark in both themes; `var(--ink)` there turns white in dark and vanishes. Fixing this also raised the pink 임박 badge from 3.13:1 to 6:1 — it had been white-on-pink since the beginning.
+- **`--accent` / `--accent-soft` / `--sunk`** — used by `.active-filters` and the ended-badge but never defined, so the filter summary's background was silently transparent.
+
+Verify with a contrast sweep, not by eye: walk every rendered text node, resolve its real background up the tree, and require 4.5:1 (3:1 for large bold), skipping `.ev-art` where white-on-poster is intended. Dark passes with zero failures. Light still has ~26 elements at 2.7:1, all of them `--ink-3` micro-labels — that predates the themes and darkening it would change the established look, so it is a standing decision, not an oversight.
+
 **Design.** Modeled on a reference layout the user supplied: warm paper background, heavy Pretendard headlines with a pink highlight, lime accents, monospace micro-labels, and flush bordered grids (containers carry `border-top`/`border-left`, children carry `border-right`/`border-bottom` — this is what makes an incomplete last row look right). All colors and both font stacks are tokens in `:root` in `assets/styles.css`; don't hardcode hex values in `app.js` except inside the `ART` palette.
 
 ## Editing data
