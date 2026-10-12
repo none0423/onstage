@@ -53,10 +53,21 @@ for (const r of RELAYED) {
   }
 
   const body = JSON.stringify({ updated: new Date().toISOString(), count: mine.length, events: mine }, null, 1);
+  /* 내용이 같으면 커밋하지 않되, 하루에 한 번은 updated 를 새로 찍는다.
+     Worker 는 이 값으로 '중계가 살아 있는지' 를 판단하므로, 내용이 안 바뀐다고
+     계속 건너뛰면 멀쩡히 도는 중계가 72시간 뒤 '묵었다' 로 보인다 —
+     실제로 그렇게 7일간 경고가 났다(2026-10-12). */
   const before = existsSync(path) ? readFileSync(path, "utf8") : "";
   const strip = t => t.replace(/"updated": "[^"]*",/, "");
-  if (strip(before) === strip(body)) console.log(`   ${r.name}: 변경 없음 · ${mine.length}건`);
-  else { writeFileSync(path, body); console.log(`✅ ${r.name}: ${mine.length}건 저장 → data/relay/${r.file}`); }
+  let prevAt = 0;
+  try { prevAt = Date.parse(JSON.parse(before).updated) || 0; } catch { /* 없거나 깨졌으면 새로 쓴다 */ }
+  const ageH = (Date.now() - prevAt) / 3600000;
+  if (strip(before) === strip(body) && ageH < 24) {
+    console.log(`   ${r.name}: 변경 없음 · ${mine.length}건 (${ageH.toFixed(1)}시간 전 기록 유지)`);
+  } else {
+    writeFileSync(path, body);
+    console.log(`✅ ${r.name}: ${mine.length}건 저장${strip(before) === strip(body) ? " (내용 동일 · 생존 표시 갱신)" : ""} → data/relay/${r.file}`);
+  }
 }
 
 process.exit(failed ? 1 : 0);
