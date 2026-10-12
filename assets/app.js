@@ -582,7 +582,6 @@ function cardHTML(c) {
         <span>${esc(code(c))}</span><span class="sep">·</span>
         <span>${esc(mmdd(c.dates[0]))}</span><span class="sep">·</span>
         <span>${esc(c.vendor.name)}</span>
-        ${c.auto ? `<span class="sep">·</span><span class="auto">AUTO ${esc(c.sourceName || "")}</span>` : ""}
         <button class="fav${isFav(c) ? " on" : ""}" data-fav="${esc(c.id)}" aria-pressed="${isFav(c)}"
                 title="관심 공연에 ${isFav(c) ? "서 빼기" : " 담기"}">${isFav(c) ? "★" : "☆"} 관심</button>
       </div>
@@ -750,7 +749,7 @@ function renderCollect(list) {
         <td class="c-gen">${g ? `<span class="gtag">${esc(GENRE_LABEL[g])}</span>` : "—"}</td>
         <td class="c-open"><span class="st ${st.tone}">${esc(st.badge)}</span><small>${
           c.ticketOpen ? esc(fmtOpen(c.ticketOpen)) : esc(priceOf(c))}</small></td>
-        <td class="c-ven">${esc(c.vendor.name)}${c.auto ? '<small class="auto-s">AUTO</small>' : ""}</td>
+        <td class="c-ven">${esc(c.vendor.name)}</td>
       </tr>`;
   }).join("");
 }

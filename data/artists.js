@@ -44,7 +44,7 @@ const ARTIST_INFO = {
   "NCT 127": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -122,9 +122,31 @@ const ARTIST_INFO = {
     "rule": 3
   },
   "김건모. 35TH ANNIVERSARY": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "ballad",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "dance-pop",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      },
+      {
+        "name": "korean ballad",
+        "count": 1
+      }
+    ]
   },
   "Shi Shi, The Taste Of…": {
     "country": null,
@@ -134,27 +156,27 @@ const ARTIST_INFO = {
   "하루 첫 팬 콘서트: 오늘, 하루: 처음 들려주는 이야기": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "장윤정 라이브": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Spot the GIG by Wanderloch, Michael Mayo 마이클 마요": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "NOL FESTIVAL: DAY 1, K-POP STAGE": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "NOL FESTIVAL: DAY 1, EDM STAGE": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Rock of Ages": {
     "country": null,
@@ -164,62 +186,62 @@ const ARTIST_INFO = {
   "NOL FESTIVAL: DAY 2, SUPER LIVE STAGE": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "NOL FESTIVAL: DAY 2, K-POP STAGE": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Qiu Feng Ze": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "스카 페스티벌 10주년 기념공연 SKA FESTIVAL: Super-Swag": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Bobby Chen": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "BINI": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "MTV VMAJ 2026": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "칸호 야쿠시지": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "EverBlue Festival 에버블루 페스티벌": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "EXO PLANET #6, EXhOrizon": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "AKANE YONEZAWA, Black Pasta": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "William So": {
     "country": "HK",
     "genre": "pop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "pop",
@@ -250,7 +272,7 @@ const ARTIST_INFO = {
   "My Chemical Romance": {
     "country": "US",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "pop punk",
@@ -281,12 +303,12 @@ const ARTIST_INFO = {
   "YoungCaptain 队长": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Songs That Keep Us Together 3": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "MAMA AWARDS": {
     "country": null,
@@ -296,7 +318,7 @@ const ARTIST_INFO = {
   "Wave To Earth": {
     "country": "KR",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "indie rock",
@@ -315,7 +337,7 @@ const ARTIST_INFO = {
   "AKASAKI": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "pop",
@@ -343,12 +365,12 @@ const ARTIST_INFO = {
   "Joji": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Guns N' Roses": {
     "country": "US",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "hard rock",
@@ -380,18 +402,18 @@ const ARTIST_INFO = {
   "이승철 40주년": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "LET ME KNOW": {
     "country": "JP",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": []
   },
   "Queens of the Stone Age": {
     "country": "US",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "stoner rock",
@@ -420,24 +442,25 @@ const ARTIST_INFO = {
     ]
   },
   "brb": {
-    "country": null,
+    "country": "SG",
     "genre": null,
-    "rule": 3
+    "rule": 4,
+    "tags": []
   },
   "대구 힙합 페스티벌": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "원웨이 페스티벌": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Eric Moo": {
     "country": "TW",
     "genre": "pop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "pop",
@@ -502,7 +525,7 @@ const ARTIST_INFO = {
   "산들 단독 콘서트: 바람결": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -511,9 +534,15 @@ const ARTIST_INFO = {
     ]
   },
   "최유리": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "indie pop",
+        "count": 1
+      }
+    ]
   },
   "울림콘서트, 10월항쟁 80주년 헌정콘서트": {
     "country": null,
@@ -523,7 +552,7 @@ const ARTIST_INFO = {
   "Moira Dela Torre": {
     "country": "PH",
     "genre": "ballad",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "pop",
@@ -551,22 +580,22 @@ const ARTIST_INFO = {
   "NOL FESTIVAL: DAY 1, SUPER LIVE STAGE": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "최항석과 부기몬스터": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "WONDERLIVET (원더리벳)": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "ELLEGARDEN, Bad For Education": {
     "country": "JP",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "j-rock",
@@ -585,18 +614,18 @@ const ARTIST_INFO = {
   "펜트하우스": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Rain Tree": {
     "country": "JP",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": []
   },
   "Carpenters Reborn": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "松田聖子": {
     "country": "JP",
@@ -630,19 +659,34 @@ const ARTIST_INFO = {
     "rule": 3
   },
   "HIGHLIGHT FAN CON": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 2
+      },
+      {
+        "name": "boy band",
+        "count": 1
+      }
+    ],
+    "disamb": "South Korean boy group, formerly known as BEAST"
   },
   "TAKASE TOYA": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "데이먼스 이어": {
     "country": "KR",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "indie",
@@ -657,31 +701,31 @@ const ARTIST_INFO = {
   "심규선": {
     "country": "KR",
     "genre": "ballad",
-    "rule": 3,
+    "rule": 4,
     "tags": [],
     "disamb": "Korean singer-songwriter"
   },
   "브로콜리너마저의 전국 인디 교류 투어": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "FLOW NARUTO THE ROCK": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "이창섭": {
     "country": "KR",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": [],
     "disamb": "BTOB"
   },
   "김재환": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -692,28 +736,28 @@ const ARTIST_INFO = {
   "Awesome Stage, N.Flying x Hi-Fi Un!corn": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "김필 콘서트: JOURNEY": {
     "country": "KR",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": []
   },
   "藤井風 ピアノリサイタル": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Mahiru": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Yesung": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -724,7 +768,7 @@ const ARTIST_INFO = {
   "ZAZEN BOYS MATSURI SESSION": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Josh Cullen": {
     "country": "PH",
@@ -748,12 +792,12 @@ const ARTIST_INFO = {
   "재즈, 이야기를 노래하다": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "NEXZ": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "j-pop",
@@ -770,21 +814,36 @@ const ARTIST_INFO = {
     ]
   },
   "ILLIT": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 5
+      },
+      {
+        "name": "girl group",
+        "count": 4
+      },
+      {
+        "name": "5th gen k-pop",
+        "count": 1
+      }
+    ],
+    "disamb": "South Korean girl group"
   },
   "Zephanie": {
     "country": "PH",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": [],
     "disamb": "Filipino Artist"
   },
   "82MAJOR": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "boy group",
@@ -799,7 +858,7 @@ const ARTIST_INFO = {
   "ONEW": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -827,40 +886,65 @@ const ARTIST_INFO = {
   "KWON JIN AH": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Baby Dolls": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "로이킴": {
     "country": "KR",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": []
   },
   "김수희": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "trot",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "korean ballad",
+        "count": 1
+      },
+      {
+        "name": "trot",
+        "count": 1
+      }
+    ]
   },
   "조항조": {
     "country": "KR",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": [],
     "disamb": "Korean Guitar Artist"
   },
   "GUMMY": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "kpop",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      },
+      {
+        "name": "yg family",
+        "count": 1
+      }
+    ],
+    "disamb": "Korean singer"
   },
   "Malcolm Todd": {
     "country": "US",
     "genre": "hiphop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "r&b",
@@ -891,22 +975,22 @@ const ARTIST_INFO = {
   "정승환 10주년": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "베니싱스": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Doh Kyung-soo": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Freya Skye": {
     "country": "GB",
     "genre": "pop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "pop",
@@ -918,12 +1002,12 @@ const ARTIST_INFO = {
   "milet": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "マカロニえんぴつ": {
     "country": "JP",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": []
   },
   "NEWS": {
@@ -939,7 +1023,7 @@ const ARTIST_INFO = {
   "Hey! Say! JUMP": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "j-pop",
@@ -962,28 +1046,28 @@ const ARTIST_INFO = {
   "잔나비 발라드 컬렉션": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "with MAMO～STAR～": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "까치산": {
     "country": "KR",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": []
   },
   "U-KNOW (東方神起)": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "i☆Ris": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "j-pop",
@@ -1007,7 +1091,7 @@ const ARTIST_INFO = {
   "MAX CHANGMIN": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -1018,17 +1102,17 @@ const ARTIST_INFO = {
   "バズリズム": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "PARK JINYOUNG": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "D’MASIV": {
     "country": "ID",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "alternative rock",
@@ -1041,44 +1125,63 @@ const ARTIST_INFO = {
     ]
   },
   "aiko": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "japanese",
+        "count": 1
+      },
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "likedis auto",
+        "count": 1
+      }
+    ],
+    "disamb": "singer-songwriter Aiko Yanai"
   },
   "LoveLive! Series 15th Anniversary ラブライブ！フェス": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Prema": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "東武鉄道 presents ANIMAX MUSIX 2026 supported by Lemino": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "더 보컬": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Undivided": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "조용필 & 위대한 탄생": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "L'Arc～en～Ciel": {
     "country": "JP",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "rock",
@@ -1110,12 +1213,12 @@ const ARTIST_INFO = {
   "말콤 토드": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Mr.Children": {
     "country": "JP",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "japanese",
@@ -1134,7 +1237,7 @@ const ARTIST_INFO = {
   "緑黄色社会": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "j-pop",
@@ -1153,14 +1256,14 @@ const ARTIST_INFO = {
   "MC TYSON": {
     "country": "JP",
     "genre": "hiphop",
-    "rule": 3,
+    "rule": 4,
     "tags": [],
     "disamb": "Japanese rapper"
   },
   "Jane Remover:": {
     "country": "US",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "digicore",
@@ -1191,17 +1294,17 @@ const ARTIST_INFO = {
   "モーニング娘。'26 コンサートツアー秋": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "조용필 & 위대한탄생": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "『TOMORROW X TOGETHER": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -1224,7 +1327,7 @@ const ARTIST_INFO = {
   "UVERworld": {
     "country": "JP",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "hard rock",
@@ -1255,12 +1358,12 @@ const ARTIST_INFO = {
   "Idol Xmas Fes 2026": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "TOMORROW X TOGETHER": {
     "country": "KR",
     "genre": "kpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -1283,17 +1386,17 @@ const ARTIST_INFO = {
   "FUKUOKA MUSIC FES.2027 supported by Trunk": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "ANISAMA FUKUOKA 2027": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "コブクロ": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "j-pop",
@@ -1312,7 +1415,7 @@ const ARTIST_INFO = {
   "SUD": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "高嶋ちさ子のザワつく！音楽会 2026": {
     "country": null,
@@ -1327,7 +1430,7 @@ const ARTIST_INFO = {
   "藤井フミヤ": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "cleanup likedis",
@@ -1355,14 +1458,14 @@ const ARTIST_INFO = {
   "石田組": {
     "country": "JP",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": [],
     "disamb": "Ishida-led string orchestra collective"
   },
   "剣持刀也": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "virtual youtuber",
@@ -1386,22 +1489,47 @@ const ARTIST_INFO = {
   "葛葉 / 剣持刀也 / 不破湊 / イブラヒム / ローレン・イロアス": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Mr.Children【振替公演】": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "JP",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "japanese",
+        "count": 1
+      },
+      {
+        "name": "pop rock",
+        "count": 1
+      },
+      {
+        "name": "j-rock",
+        "count": 1
+      }
+    ]
   },
   "ゆず": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "pop rock",
+        "count": 1
+      }
+    ],
+    "disamb": "Japanese pop rock duo"
   },
   "さくらみこ": {
     "country": "JP",
     "genre": null,
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "virtual youtuber",
@@ -1420,22 +1548,22 @@ const ARTIST_INFO = {
   "미스터트롯3 TOP7": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "여전히 소란스럽게 Vol.02 노브레인 with 크라잉넛, 초록불꽃소년단": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "인천공항 SKY FESTIVAL": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Yeng Constantino": {
     "country": "PH",
     "genre": "rock",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "opm",
@@ -1458,17 +1586,36 @@ const ARTIST_INFO = {
   "여전히 소란스럽게 Vol.03 노브레인 with 안예은, 터치드": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "MONSTA X": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 5
+      },
+      {
+        "name": "boy band",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 2
+      },
+      {
+        "name": "3rd gen k-pop",
+        "count": 2
+      }
+    ],
+    "disamb": "South Korean boy group"
   },
   "다이나믹 듀오": {
     "country": "KR",
     "genre": "hiphop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "hip hop",
@@ -1484,37 +1631,37 @@ const ARTIST_INFO = {
   "Anime Festival Asia (AFA)": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "영탁 단독 콘서트: TAK SHOW5": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "소향 X 김기태 THE GREATEST": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "비 (RAIN)": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Mulasaki Ima ONE MAN": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "LUCK LIFE": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "Kis-My-Ft2": {
     "country": "JP",
     "genre": "jpop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "j-pop",
@@ -1529,17 +1676,17 @@ const ARTIST_INFO = {
   "허각 전국투어 콘서트, 공연각: 사이": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "FRUITS ZIPPERのオールナイトニッポンX in 横浜アリーナ": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
   },
   "WayV": {
     "country": "CN",
     "genre": "pop",
-    "rule": 3,
+    "rule": 4,
     "tags": [
       {
         "name": "k-pop",
@@ -1562,6 +1709,286 @@ const ARTIST_INFO = {
   "프레야 스카이": {
     "country": null,
     "genre": null,
-    "rule": 3
+    "rule": 4
+  },
+  "Novelbright": {
+    "country": "JP",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "rock",
+        "count": 1
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "j-rock",
+        "count": 1
+      },
+      {
+        "name": "pop rock",
+        "count": 1
+      }
+    ]
+  },
+  "NOL FESTIVAL: DAY 1, MEET & GREET": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "TOKYO": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "NOL FESTIVAL: DAY 2, MEET & GREET": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Ms.OOJA": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 1
+      }
+    ],
+    "disamb": "hiphop"
+  },
+  "GHOSTIVAL": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "다다다": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "WOODZ": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "pop rock",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      }
+    ],
+    "disamb": "South Korean singer"
+  },
+  "윤마치 (MRCH)": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "BOL4": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "kpop",
+        "count": 1
+      },
+      {
+        "name": "girl group",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      }
+    ]
+  },
+  "박재정": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": [],
+    "disamb": "South Korean singer"
+  },
+  "KGMA, KOREA GRAND MUSIC AWARD 코리아 그랜드 뮤직어워즈": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "최정윤": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "조장혁 30주년 소극장 투어": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "IDIOTAPE 4TH ALBUM: SUBHUMAN RELEASE": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "CRAVITY": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 2
+      },
+      {
+        "name": "boy band",
+        "count": 1
+      }
+    ]
+  },
+  "MAMA AWARDS Presented by Visa": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Lee Min-hyuk (HUTA)": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "HAHA": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "김광진": {
+    "country": "KR",
+    "genre": "ballad",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "korean ballad",
+        "count": 1
+      }
+    ]
+  },
+  "DAVICHI": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "girl group",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      },
+      {
+        "name": "korean ballad",
+        "count": 1
+      }
+    ]
+  },
+  "BTS": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Siklaban Music Festival": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "박진영": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "dance-pop",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      }
+    ],
+    "disamb": "South Korean singer and producer J.Y. Park"
+  },
+  "에픽하이": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "korean",
+        "count": 1
+      },
+      {
+        "name": "hiphop",
+        "count": 1
+      },
+      {
+        "name": "kpop",
+        "count": 1
+      },
+      {
+        "name": "kr",
+        "count": 1
+      }
+    ]
+  },
+  "Hump Back: HELLO ANEW": {
+    "country": "JP",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [],
+    "disamb": "japanese rock band"
+  },
+  "NANAOAKARI, ALL EYES in Seoul": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 4
+      },
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "utaite",
+        "count": 1
+      }
+    ]
+  },
+  "beabadoobee": {
+    "country": null,
+    "genre": null,
+    "rule": 4
   }
 };

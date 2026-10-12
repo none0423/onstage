@@ -27,7 +27,14 @@ const UA = "onstage-collector/1.0 (personal concert dashboard; github.com/none04
 const MAX_LOOKUPS = Number(process.env.MAX_LOOKUPS || 80);   // 1초에 1건 — 한 번에 너무 오래 돌지 않게
 /* 판정 규칙을 바꾸면 이 값을 올린다. 예전 규칙으로 '매칭 없음' 이 된 이름을 다시 조회한다 —
    그렇게 하지 않으면 규칙을 고쳐도 이미 기록된 실패가 영원히 남는다. */
-const RULE_VERSION = 3;
+const RULE_VERSION = 4;
+
+/* 공연이 열리는 나라. 동명이인을 가를 때 쓴다 — 장충체육관·부산·대구를 도는 GUMMY 는
+   일본 비주얼계 밴드가 아니라 거미다. 이 힌트가 없을 때 실제로 그렇게 틀렸다. */
+const COUNTRY_ISO = {
+  "대한민국": "KR", "일본": "JP", "싱가포르": "SG", "필리핀": "PH", "말레이시아": "MY",
+  "대만": "TW", "홍콩": "HK", "태국": "TH", "인도네시아": "ID", "베트남": "VN", "중국": "CN"
+};
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 /* 『』～… 까지 지운다. 공연장 제목에서 온 이름에 이런 장식이 붙어 오고,
@@ -44,6 +51,9 @@ function searchName(raw) {
     .replace(/\s+(단독\s?콘서트|팬\s?콘서트|콘서트|내한공연|리사이틀).*$/, "")
     .replace(/\s+\d+(st|nd|rd|th)\s+(anniversary|concert|tour).*$/i, "")
     .replace(/\s+(fan\s?con|tour\s?concert|world\s?tour|live\s?tour)\b.*$/i, "")
+    .replace(/【[^】]*】/g, "")                              /* Mr.Children【振替公演】 */
+    .replace(/\s+(전국\s?투어|소극장\s?투어|앵콜|앙코르)\b.*$/, "")
+    .replace(/\s+\d+(주년|th\s?anniversary)\b.*$/i, "")
     .replace(/[…~～]+$/, "")
     .trim();
   return t.length >= 2 ? t : String(raw || "").trim();
@@ -106,7 +116,7 @@ function genreFrom(tags, country, disambiguation = "") {
   return null;                                   // 장르는 못 정해도 국적은 쓸 수 있다
 }
 
-async function lookup(name, tries = 3) {
+async function lookup(name, hint = new Set(), tries = 3) {
   const url = `https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent(name)}&limit=8&fmt=json&inc=aliases`;
   let data;
   for (let i = 0; ; i++) {
@@ -120,14 +130,24 @@ async function lookup(name, tries = 3) {
     const cands = [a.name, a["sort-name"], ...(a.aliases || []).map(x => x.name)].filter(Boolean);
     return cands.some(c => norm(c) === q);       // 이름이 정확히 맞아야만 후보
   });
-  /* 동명이인이 나오면 채택하지 않는다. 한때 '대소문자까지 같은 이름' 으로 가려 봤는데
-     ILLIT·POW·최유리는 맞혔지만 실측 6건 중 3건이 틀렸다:
-       GUMMY(거미, 장충체육관 전국투어) → 일본 비주얼계 밴드. country 까지 JP 가 되어 내한으로 밀릴 뻔했다.
-       Baby Dolls(마닐라) → 이탈리아 유로비트.  BINI(필리핀 P-pop) → 장르 hiphop.
-     의도한 아티스트가 후보에 아예 없을 수 있다는 게 근본 문제라, 이름만으로는 가릴 수 없다.
-     동명이인은 data/genres.js 에 한 줄 적는 편이 빠르고 확실하다. */
-  if (exact.length !== 1) return null;
-  const hit = exact[0];
+  /* 동명이인 가리기. 이름만 보고 고르면 틀린다 — '대소문자까지 같은 이름' 으로 해 봤더니
+     실측 6건 중 3건이 오답이었다(GUMMY→일본 비주얼계, Baby Dolls→이탈리아 유로비트 …).
+     대신 공연이 열리는 나라를 쓴다. 그 나라 아티스트가 후보에 딱 하나면 그게 답이고,
+     하나도 없으면 의도한 아티스트가 아예 목록에 없다는 뜻이라 포기한다.
+       GUMMY[KR]  5명 → KR 1명 → 거미 ✅      PERSONA[KR] 8명 → KR 0명 → 포기 ✅
+       NEWS[JP]   5명 → JP 1명 → NEWS ✅      VIBES[KR]   7명 → KR 0명 → 포기 ✅
+     후보가 하나뿐일 때는 이 단계를 거치지 않는다 — 내한 공연(해외 아티스트)이 걸리면 안 된다. */
+  let cands = exact;
+  if (cands.length > 1) {
+    cands = cands.filter(a => hint.has(a.country));
+    if (cands.length > 1) {
+      const tagged = cands.filter(a => (a.tags || []).length);
+      if (tagged.length) cands = tagged;
+    }
+    if (cands.length !== 1) return null;
+  }
+  if (cands.length !== 1) return null;
+  const hit = cands[0];
   if (!hit.country) return null;                 // 국적 없는 항목은 신뢰하지 않는다
   /* 태그도 없고 설명도 없으면 근거가 약하다 — 두 글자 이하 차이의 우연일 수 있다 */
   if (!(hit.tags || []).length && !hit.disambiguation && norm(hit.name) !== q) return null;
@@ -153,6 +173,15 @@ if (recomputed) console.log(`보관한 태그로 ${recomputed}명 재계산 (조
      · 아직 모르는 이름
      · 규칙이 바뀌었는데 태그를 보관해 두지 않아 다시 계산할 수 없는 항목 (이번 한 번뿐)
      · 예전 규칙에서 '매칭 없음' 이었던 항목 */
+/* 아티스트마다 '어느 나라에서 공연하는가' 를 모아 둔다 */
+const VENUE_HINT = new Map();
+for (const c of [...CONCERTS, ...FEED]) {
+  const iso = COUNTRY_ISO[c.country];
+  if (!c.artist || !iso) continue;
+  if (!VENUE_HINT.has(c.artist)) VENUE_HINT.set(c.artist, new Set());
+  VENUE_HINT.get(c.artist).add(iso);
+}
+
 const stale = e => !e
   || ((e.rule || 1) < RULE_VERSION && !Array.isArray(e.tags))
   || (e.genre == null && e.country == null && (e.rule || 1) < RULE_VERSION);
@@ -165,9 +194,9 @@ let ok = 0, miss = 0;
 for (const a of artists.slice(0, MAX_LOOKUPS)) {
   const query = searchName(a);
   try {
-    const r = await lookup(query);
+    const r = await lookup(query, VENUE_HINT.get(a) || new Set());
     if (r) { info[a] = { country: r.country, genre: r.genre, rule: RULE_VERSION, tags: r.tags, ...(r.disamb ? { disamb: r.disamb } : {}) }; ok++;
-      console.log(`  ✅ ${a.slice(0, 26).padEnd(28)}${query !== a ? `→${query.slice(0, 16)}` : "".padEnd(17)} ${r.country}  ${(r.genre || "(장르 미상)").padEnd(9)} ${r.tags.join(",").slice(0, 26)}`); }
+      console.log(`  ✅ ${a.slice(0, 26).padEnd(28)}${query !== a ? `→${query.slice(0, 16)}` : "".padEnd(17)} ${r.country}  ${(r.genre || "(장르 미상)").padEnd(9)} ${r.tags.map(t => t.name).join(",").slice(0, 26)}`); }
     else { info[a] = { country: null, genre: null, rule: RULE_VERSION }; miss++;   // 규칙이 바뀌기 전까진 다시 조회하지 않는다
       console.log(`  —  ${a.slice(0, 26).padEnd(28)}${query !== a ? `→${query.slice(0, 16)}` : ""} 매칭 없음`); }
   } catch (e) { console.log(`  ⚠️  ${a.slice(0, 28).padEnd(30)} ${e.message}`); }
