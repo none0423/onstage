@@ -1990,5 +1990,20 @@ const ARTIST_INFO = {
     "country": null,
     "genre": null,
     "rule": 4
+  },
+  "NOL FESTIVAL: AFTER PARTY": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "JEONGHAN X JOSHUA JOURNEY INTO": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "카디 단독공연: V": {
+    "country": null,
+    "genre": null,
+    "rule": 4
   }
 };
