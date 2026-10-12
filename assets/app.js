@@ -139,11 +139,12 @@ function saveFavs() {
 }
 const isFav = c => FAVS.has(c.id);
 
-/* 모바일은 카드 한 장이 화면의 3/4을 먹어 222장이면 144화면이 된다.
-   좁은 화면에서만 목록을 잘라 그리고 '더 보기'로 이어 붙인다. */
+/* 목록은 어느 화면에서든 잘라 그린다. 한때 좁은 화면에서만 잘랐는데, 데스크톱은
+   1280px 에서 전체 92화면(카드 그리드만 66화면)이 됐다 — 끝까지 스크롤할 사람은 없고
+   카드 300장의 이미지를 한 번에 요청하게 된다. 폭에 따라 한 번에 보여 줄 양만 다르다. */
 const MOBILE_Q = "(max-width:760px)";
-const PAGE_SIZE = 20;
-let shownCount = PAGE_SIZE;
+const pageSize = () => (matchMedia(MOBILE_Q).matches ? 20 : 24);
+let shownCount = pageSize();
 let lastFilterSig = null;
 
 /* ── 수동 데이터(concerts.js) + 자동 수집 병합 ──────────
@@ -713,6 +714,12 @@ const ymLabel = ym => `${+ym.slice(0, 4)}년 ${+ym.slice(5, 7)}월`;
 function renderCollect(list) {
   const rows = list.slice().sort((a, b) => nextDate(a).localeCompare(nextDate(b)));
   document.getElementById("collect-count").textContent = `${rows.length}건`;
+  /* 접혀 있을 때도 몇 건이 들었는지 보이게 한다 — 안 그러면 열어 봐야 안다 */
+  const ct = document.getElementById("collect-toggle");
+  if (ct) {
+    const open = document.getElementById("collect").classList.contains("open");
+    ct.textContent = open ? "표 접기" : `표 펼치기 (${rows.length}건)`;
+  }
   document.getElementById("collect-empty").hidden = rows.length > 0;
 
   /* 달별 분포 막대 */
@@ -750,14 +757,20 @@ function renderCollect(list) {
 
 /* 어떤 필터가 걸려 있는지 한 줄로 보여 주고, 한 번에 풀 수 있게 한다.
    축이 셋이라 결과가 왜 적은지 모르는 일이 생긴다. */
-function renderActiveFilters() {
-  const el = document.getElementById("active-filters");
-  if (!el) return;
+function activeFilterParts() {
   const parts = [];
   if (state.cat !== "all") parts.push(`지역 ${(CATEGORIES.find(c => c.key === state.cat) || {}).label}`);
   if (state.genre !== "all") parts.push(`장르 ${state.genre === "none" ? "미분류" : GENRE_LABEL[state.genre]}`);
   if (state.status !== "all") parts.push(`상태 ${(STATES.find(s => s.key === state.status) || {}).label}`);
-  if (state.q.trim()) parts.push(`검색 "${esc(state.q.trim())}"`);
+  if (state.favOnly) parts.push("관심만");
+  if (state.q.trim()) parts.push(`검색 "${state.q.trim()}"`);
+  return parts;
+}
+
+function renderActiveFilters() {
+  const el = document.getElementById("active-filters");
+  if (!el) return;
+  const parts = activeFilterParts().map(esc);
   if (!parts.length) { el.hidden = true; return; }
   el.hidden = false;
   el.innerHTML = `적용 중 — ${parts.join(" · ")} <button type="button" id="clear-filters">모두 해제</button>`;
@@ -766,25 +779,30 @@ function renderActiveFilters() {
 function render() {
   renderChips();
   const list = visibleList();
-  const mobile = matchMedia(MOBILE_Q).matches;
 
   /* 필터가 바뀌면 '더 보기'로 늘려 둔 만큼을 처음으로 되돌린다.
      limit 자체는 서명에서 빼야 한다 — 넣으면 더 보기를 누를 때마다 초기화된다. */
-  const sig = [state.cat, state.genre, state.status, state.q, state.sort, state.hidePast].join("|");
-  if (sig !== lastFilterSig) { shownCount = PAGE_SIZE; lastFilterSig = sig; }
+  const sig = [state.cat, state.genre, state.status, state.q, state.sort, state.hidePast, state.favOnly].join("|");
+  if (sig !== lastFilterSig) { shownCount = pageSize(); lastFilterSig = sig; }
 
-  const shown = mobile ? list.slice(0, shownCount) : list;
+  const shown = list.slice(0, shownCount);
   document.getElementById("grid").innerHTML = shown.map(cardHTML).join("");
-  document.getElementById("empty").hidden = list.length > 0;
+  const empty = document.getElementById("empty");
+  empty.hidden = list.length > 0;
+  if (!list.length) empty.textContent = state.favOnly
+    ? "담아 둔 관심 공연이 없습니다. 카드 아래 ☆ 관심을 눌러 담아 보세요."
+    : "조건에 맞는 공연이 없습니다.";
   document.getElementById("result-count").textContent = `${list.length}건`;
 
+  const favN = EVENTS.filter(isFav).length;
   const favCount = document.getElementById("fav-count");
-  if (favCount) favCount.textContent = String(EVENTS.filter(isFav).length);
+  if (favCount) favCount.textContent = String(favN);
+  paintSumbar(list.length, favN);
 
   const moreBtn = document.getElementById("more");
   const rest = list.length - shown.length;
   moreBtn.hidden = rest <= 0;
-  if (rest > 0) moreBtn.textContent = `더 보기 (${rest}건 남음)`;
+  if (rest > 0) moreBtn.textContent = `${shown.length}건 표시 중 · 더 보기 (${rest}건 남음)`;
 
   renderCollect(list);
   renderActiveFilters();
@@ -816,7 +834,7 @@ document.getElementById("hide-past").addEventListener("change", e => { state.hid
 
 /* 더 보기 — 좁은 화면에서만 나타난다. 누른 자리를 유지해야 하므로 스크롤은 건드리지 않는다. */
 document.getElementById("more").addEventListener("click", () => {
-  shownCount += PAGE_SIZE;                    // 필터 서명이 그대로라 render 가 되돌리지 않는다
+  shownCount += pageSize();                   // 필터 서명이 그대로라 render 가 되돌리지 않는다
   render();
 });
 
@@ -824,11 +842,46 @@ document.getElementById("more").addEventListener("click", () => {
 document.getElementById("collect-toggle").addEventListener("click", e => {
   const open = document.getElementById("collect").classList.toggle("open");
   e.currentTarget.setAttribute("aria-expanded", String(open));
-  e.currentTarget.textContent = open ? "표 접기" : "표 펼치기";
+  const n = document.querySelectorAll("#ctable-body tr:not(.c-month)").length;
+  e.currentTarget.textContent = open ? "표 접기" : `표 펼치기 (${n}건)`;
 });
 
 /* 화면 폭이 모바일 경계를 넘나들면 목록을 다시 그린다(자르기 여부가 달라진다) */
-matchMedia(MOBILE_Q).addEventListener("change", () => { shownCount = PAGE_SIZE; render(); });
+matchMedia(MOBILE_Q).addEventListener("change", () => { shownCount = pageSize(); render(); });
+
+/* ── 상단 요약 바 ───────────────────────────── */
+function paintSumbar(count, favN) {
+  const n = document.getElementById("sum-n");
+  if (!n) return;
+  n.textContent = `${count}건`;
+  const f = document.getElementById("sum-f");
+  const parts = activeFilterParts();
+  if (f) f.textContent = parts.length ? parts.join(" · ") : "전체 공연";
+  const fav = document.getElementById("sum-fav");
+  if (fav) {
+    fav.innerHTML = `${state.favOnly ? "★" : "☆"} 관심 <b>${favN}</b>`;
+    fav.classList.toggle("on", state.favOnly);
+    fav.setAttribute("aria-pressed", String(state.favOnly));
+  }
+}
+
+/* 필터 영역을 지나쳤을 때만 띄운다. 스크롤 핸들러 대신 관찰자를 쓰면 매 프레임 계산이 없다. */
+step("sumbar", () => {
+  const bar = document.getElementById("sumbar"), find = document.getElementById("find");
+  if (!bar || !find || !("IntersectionObserver" in window)) return;
+  new IntersectionObserver(([e]) => {
+    const passed = !e.isIntersecting && e.boundingClientRect.top < 0;
+    bar.classList.toggle("on", passed);
+    bar.setAttribute("aria-hidden", String(!passed));
+  }, { rootMargin: "-92px 0px 0px 0px" }).observe(find);
+
+  document.getElementById("sum-fav").addEventListener("click", () => {
+    state.favOnly = !state.favOnly;
+    const box = document.getElementById("fav-only");
+    if (box) box.checked = state.favOnly;         // 아래 체크박스와 어긋나지 않게
+    render();
+  });
+});
 
 /* 관심 담기 — 카드 안의 button 이라 openVendor 가 무시한다(a·button·summary 제외 규칙) */
 document.getElementById("grid").addEventListener("click", e => {

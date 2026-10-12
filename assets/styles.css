@@ -30,6 +30,27 @@ h1,h2,h3,p{margin:0}
 
 /* ── NAV ───────────────────────────── */
 .nav{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:50}
+
+/* 앵커로 이동할 때 고정 헤더(72) + 요약 바(47) 아래로 숨지 않게 */
+section[id], main[id], div[id]{scroll-margin-top:127px}
+
+/* 요약 바 — fixed 라 나타나고 사라질 때 본문이 밀리지 않는다(sticky 였다면 44px 씩 튄다) */
+.sumbar{
+  position:fixed;top:72px;left:0;right:0;z-index:45;
+  background:var(--paper-2);border-bottom:1px solid var(--line);
+  transform:translateY(-110%);transition:transform .18s ease;
+  box-shadow:0 6px 18px rgba(17,17,16,.05);
+}
+.sumbar.on{transform:none}
+.sumbar-in{display:flex;align-items:center;gap:14px;height:46px;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em}
+.sum-n{font-weight:700;color:var(--ink);white-space:nowrap}
+.sum-f{color:var(--ink-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.sum-fav,.sum-jump{
+  border:1px solid var(--line);background:transparent;cursor:pointer;text-decoration:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-2);padding:5px 10px;white-space:nowrap;
+}
+.sum-fav:hover,.sum-jump:hover{border-color:var(--ink-2);color:var(--ink)}
+.sum-fav.on{background:var(--lime);border-color:var(--lime);color:var(--ink);font-weight:700}
 .nav-in{display:flex;align-items:center;gap:28px;height:72px}
 .logo{font-weight:800;font-size:23px;letter-spacing:.06em;display:flex;align-items:center;gap:10px}
 .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);display:inline-block;transform:translateY(-6px)}
@@ -234,16 +255,30 @@ h1,h2,h3,p{margin:0}
 .det-route{font-size:12.5px;color:var(--ink-2);margin:2px 0 8px}
 
 .more-btn{
-  display:none;width:100%;padding:16px;margin:-64px 0 80px;
+  display:block;width:100%;padding:16px;margin:-64px 0 80px;
   background:var(--paper-2);border:1px solid var(--line);cursor:pointer;
   font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink);
 }
 .more-btn:hover{background:var(--lime)}
-.collect-toggle{display:none}
+
+/* 모아보기 표는 어느 화면에서든 접어 둔다 — 데스크톱에서도 23화면 분량이라
+   페이지 끝까지 가려면 표를 지나쳐야 했다. 펼치면 그대로 나온다. */
+.collect-toggle{
+  display:block;width:100%;padding:14px;margin-bottom:20px;
+  background:var(--paper-2);border:1px solid var(--line);cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink);
+}
+.collect-toggle:hover{background:var(--lime)}
+.collect-body{display:none}
+.collect.open .collect-body{display:block}
 
 @media (max-width:760px){
   .wrap{padding:0 20px}
   .nav-in{height:62px;gap:14px}
+  .sumbar{top:62px}
+  .sumbar-in{height:42px;gap:9px}
+  .sum-f{display:none}   /* 좁은 화면에서는 건수와 버튼만 */
+  section[id],main[id],div[id]{scroll-margin-top:112px}   /* 62 + 42 + 여유 */
   .nav-links{display:none}
   .hero{padding:48px 20px 34px}
   .hero-h1{font-size:38px}
@@ -462,14 +497,5 @@ h1,h2,h3,p{margin:0}
   .ev-more{margin-top:7px}
   .det-flight{display:block}
 
-  .more-btn{display:block;margin:0 0 60px}
-
-  /* 모아보기 표는 모바일에서 24화면 분량이라 접어 둔다 */
-  .collect-toggle{
-    display:block;width:100%;padding:14px;margin-bottom:20px;
-    background:var(--paper-2);border:1px solid var(--line);cursor:pointer;
-    font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink);
-  }
-  .collect-body{display:none}
-  .collect.open .collect-body{display:block}
+  .more-btn{margin:0 0 60px}
 }

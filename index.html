@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%23ff4e8b'/></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/styles.css?v=20261012a">
+<link rel="stylesheet" href="assets/styles.css?v=20261012b">
 </head>
 <body>
 
@@ -23,6 +23,17 @@
     <a class="btn-lime" href="#soon">오픈 임박 <span>↗</span></a>
   </div>
 </header>
+
+<!-- 스크롤이 필터를 지나가면 나타나는 요약 줄. 카드를 보다가 맨 위로 올라가지 않고도
+     몇 건인지 보고, 관심만 보기로 바꾸고, 필터로 돌아갈 수 있어야 한다. -->
+<div class="sumbar" id="sumbar" aria-hidden="true">
+  <div class="wrap sumbar-in">
+    <span class="sum-n" id="sum-n">—</span>
+    <span class="sum-f" id="sum-f"></span>
+    <button type="button" class="sum-fav" id="sum-fav" aria-pressed="false">☆ 관심 <b id="sum-fav-n">0</b></button>
+    <a class="sum-jump" href="#find">필터 ↑</a>
+  </div>
+</div>
 
 <main id="top">
 
@@ -115,7 +126,6 @@
       <h2>다가오는 공연</h2>
       <span class="mono-label" id="result-count"></span>
     </div>
-    <p class="grid-hint">카드를 누르면 해당 공연의 예매처로 이동합니다.</p>
     <div class="grid" id="grid"></div>
     <button class="more-btn" id="more" hidden></button>
     <p class="empty" id="empty" hidden>조건에 맞는 공연이 없습니다.</p>
@@ -192,11 +202,11 @@
   </div>
 </footer>
 
-<script src="data/config.js?v=20261012a"></script>
-<script src="data/genres.js?v=20261012a"></script>
-<script src="data/artists.js?v=20261012a"></script>
-<script src="data/concerts.js?v=20261012a"></script>
-<script src="data/feed.js?v=20261012a"></script>
-<script src="assets/app.js?v=20261012a"></script>
+<script src="data/config.js?v=20261012b"></script>
+<script src="data/genres.js?v=20261012b"></script>
+<script src="data/artists.js?v=20261012b"></script>
+<script src="data/concerts.js?v=20261012b"></script>
+<script src="data/feed.js?v=20261012b"></script>
+<script src="assets/app.js?v=20261012b"></script>
 </body>
 </html>
