@@ -46,3 +46,14 @@ jobs:
           git add data/relay
           git commit -m "chore(relay): 일본 공연장 중계 수집 $(date -u +%Y-%m-%d\ %H:%M)Z"
           git push
+
+  # GITHUB_TOKEN 으로 민 커밋은 다른 워크플로를 깨우지 않는다. deploy.yml 의 push 트리거가
+  # 걸리지 않아 중계 파일이 저장소에만 쌓이고 Pages 는 옛 파일을 계속 내줬다(7일간).
+  # artists.yml 과 같은 방식으로 배포를 직접 호출한다.
+  deploy:
+    needs: relay
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
