@@ -121,7 +121,23 @@ const DAY = ["일", "월", "화", "수", "목", "금", "토"];
 const DAY_EN = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 const MS_DAY = 86400000;
 
-const state = { cat: "all", genre: "all", status: "all", q: "", sort: "mix", hidePast: true };
+const state = { cat: "all", genre: "all", status: "all", q: "", sort: "mix", hidePast: true, favOnly: false };
+
+/* ── 관심 공연 ───────────────────────────────
+   브라우저에만 저장한다. 서버가 없으므로 기기 간 동기화는 없고, 그래도 되는 기능이다.
+   사생활 보호 모드·사이트 데이터 삭제로 읽기·쓰기가 통째로 실패할 수 있으니 전부 감싼다. */
+const FAV_KEY = "onstage:fav";
+let FAVS = new Set();
+try {
+  const raw = localStorage.getItem(FAV_KEY);
+  if (raw) FAVS = new Set(JSON.parse(raw).filter(x => typeof x === "string"));
+} catch (e) { console.warn("관심 공연을 읽지 못했습니다:", e.message); }
+
+function saveFavs() {
+  try { localStorage.setItem(FAV_KEY, JSON.stringify([...FAVS])); }
+  catch (e) { console.warn("관심 공연을 저장하지 못했습니다:", e.message); }
+}
+const isFav = c => FAVS.has(c.id);
 
 /* 모바일은 카드 한 장이 화면의 3/4을 먹어 222장이면 144화면이 된다.
    좁은 화면에서만 목록을 잘라 그리고 '더 보기'로 이어 붙인다. */
@@ -323,8 +339,88 @@ function matchSearch(c, q) {
     .join(" ").toLowerCase().includes(q);
 }
 
+/* ── 캘린더 내보내기 (.ics) ───────────────────
+   이 사이트에서 가장 쓸모 있는 행동은 '티켓 오픈 시각을 폰 캘린더에 넣는 것'이다.
+   서버 없이 되는 방법은 파일을 만들어 내려받게 하는 것뿐이라 그렇게 한다.
+   공연마다 두 개를 넣는다 — 오픈 시각(30분 전 알림)과 공연 당일(종일).
+   오픈 시각이 없는 공연은 당일 일정만 들어간다. */
+const icsEsc = s => String(s || "").replace(/\\/g, "\\\\").replace(/[;,]/g, m => "\\" + m).replace(/\r?\n/g, "\\n");
+const utcStamp = d => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const dayStamp = iso => iso.replace(/-/g, "");
+
+/* RFC 5545 는 한 줄 75바이트를 넘기면 접으라고 한다. 한글은 글자당 3바이트라
+   글자 수로 세면 금방 넘는다 — 바이트로 세고, 글자 중간에서 자르지 않는다. */
+function fold(line) {
+  const enc = new TextEncoder();
+  if (enc.encode(line).length <= 73) return line;
+  const out = [];
+  let cur = "", bytes = 0;
+  for (const ch of line) {
+    const n = enc.encode(ch).length;
+    if (bytes + n > (out.length ? 72 : 73)) { out.push(cur); cur = ""; bytes = 0; }
+    cur += ch; bytes += n;
+  }
+  if (cur) out.push(cur);
+  return out.join("\r\n ");                       // 이어지는 줄은 공백 한 칸으로 시작한다
+}
+
+function icsFor(list) {
+  const now = utcStamp(new Date());
+  const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//ON STAGE//concert dashboard//KO",
+             "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:ON STAGE 관심 공연"];
+  for (const c of list) {
+    const where = `${c.venue}${c.city ? `, ${c.city}` : ""}`;
+    const url = c.vendor?.url || "";
+    const open = c.ticketOpen && !isNaN(new Date(c.ticketOpen)) ? new Date(c.ticketOpen) : null;
+    if (open) {
+      L.push("BEGIN:VEVENT", `UID:${c.id}-open@onstage`, `DTSTAMP:${now}`,
+        `DTSTART:${utcStamp(open)}`, "DURATION:PT30M",
+        fold(`SUMMARY:🎟 ${icsEsc(c.artist)} 티켓 오픈`),
+        fold(`DESCRIPTION:${icsEsc(`${c.tour || ""}\n${where}\n${url}`)}`),
+        fold(`LOCATION:${icsEsc(where)}`),
+        ...(url ? [fold(`URL:${icsEsc(url)}`)] : []),
+        "BEGIN:VALARM", "ACTION:DISPLAY", "TRIGGER:-PT30M",
+        fold(`DESCRIPTION:${icsEsc(c.artist)} 티켓 오픈 30분 전`), "END:VALARM", "END:VEVENT");
+    }
+    const last = c.dates[c.dates.length - 1];
+    L.push("BEGIN:VEVENT", `UID:${c.id}-show@onstage`, `DTSTAMP:${now}`,
+      `DTSTART;VALUE=DATE:${dayStamp(c.dates[0])}`,
+      `DTEND;VALUE=DATE:${dayStamp(addDays(last, 1))}`,   // 종일 일정의 끝은 다음 날이다
+      fold(`SUMMARY:${icsEsc(c.artist)} — ${icsEsc(c.venue)}`),
+      fold(`DESCRIPTION:${icsEsc(`${c.tour || ""}\n${priceOf(c) || "가격 미정"}\n${url}`)}`),
+      fold(`LOCATION:${icsEsc(where)}`),
+      ...(url ? [fold(`URL:${icsEsc(url)}`)] : []),
+      "END:VEVENT");
+  }
+  L.push("END:VCALENDAR");
+  return L.join("\r\n") + "\r\n";
+}
+
+function downloadICS() {
+  const list = EVENTS.filter(isFav).sort((a, b) => a.dates[0].localeCompare(b.dates[0]));
+  const note = document.getElementById("fav-note");
+  if (!list.length) {
+    if (note) { note.textContent = "먼저 카드의 ☆ 관심을 눌러 담아 주세요."; note.hidden = false; }
+    return;
+  }
+  const blob = new Blob([icsFor(list)], { type: "text/calendar;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `onstage-${new Date().toISOString().slice(0, 10)}.ics`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  const opens = list.filter(c => c.ticketOpen).length;
+  if (note) {
+    note.textContent = `${list.length}개 공연을 내려받았습니다 · 티켓 오픈 알림 ${opens}건 포함`;
+    note.hidden = false;
+  }
+}
+
 function visibleList() {
   let list = EVENTS.slice();
+  if (state.favOnly) list = list.filter(isFav);
   if (state.hidePast) list = list.filter(c => !isPast(c));
   list = list.filter(c => matchCat(c, state.cat) && matchGenre(c, state.genre) && matchState(c, state.status));
   if (state.q.trim()) {
@@ -486,6 +582,8 @@ function cardHTML(c) {
         <span>${esc(mmdd(c.dates[0]))}</span><span class="sep">·</span>
         <span>${esc(c.vendor.name)}</span>
         ${c.auto ? `<span class="sep">·</span><span class="auto">AUTO ${esc(c.sourceName || "")}</span>` : ""}
+        <button class="fav${isFav(c) ? " on" : ""}" data-fav="${esc(c.id)}" aria-pressed="${isFav(c)}"
+                title="관심 공연에 ${isFav(c) ? "서 빼기" : " 담기"}">${isFav(c) ? "★" : "☆"} 관심</button>
       </div>
       ${flightBox}
       ${areas[0] ? `<p class="ev-trip"><span>🏨 ${esc(areas[0].name)} ${esc(areas[0].note)}</span></p>` : ""}
@@ -680,6 +778,9 @@ function render() {
   document.getElementById("empty").hidden = list.length > 0;
   document.getElementById("result-count").textContent = `${list.length}건`;
 
+  const favCount = document.getElementById("fav-count");
+  if (favCount) favCount.textContent = String(EVENTS.filter(isFav).length);
+
   const moreBtn = document.getElementById("more");
   const rest = list.length - shown.length;
   moreBtn.hidden = rest <= 0;
@@ -728,6 +829,30 @@ document.getElementById("collect-toggle").addEventListener("click", e => {
 
 /* 화면 폭이 모바일 경계를 넘나들면 목록을 다시 그린다(자르기 여부가 달라진다) */
 matchMedia(MOBILE_Q).addEventListener("change", () => { shownCount = PAGE_SIZE; render(); });
+
+/* 관심 담기 — 카드 안의 button 이라 openVendor 가 무시한다(a·button·summary 제외 규칙) */
+document.getElementById("grid").addEventListener("click", e => {
+  const b = e.target.closest("[data-fav]");
+  if (!b) return;
+  const id = b.dataset.fav;
+  const on = !FAVS.has(id);
+  if (on) FAVS.add(id); else FAVS.delete(id);
+  saveFavs();
+
+  /* 버튼 하나만 제자리에서 바꾼다. 카드 300장을 다시 그리면 펼쳐 둔 상세가 닫히고
+     누른 버튼이 DOM 에서 사라져 연속으로 담을 수가 없다. */
+  b.classList.toggle("on", on);
+  b.textContent = on ? "★ 관심" : "☆ 관심";
+  b.setAttribute("aria-pressed", String(on));
+  b.title = `관심 공연에${on ? "서 빼기" : " 담기"}`;
+  const favCount = document.getElementById("fav-count");
+  if (favCount) favCount.textContent = String(EVENTS.filter(isFav).length);
+  const note = document.getElementById("fav-note");
+  if (note) note.hidden = true;
+  if (state.favOnly) render();            // 관심만 보는 중이면 목록 자체가 달라진다
+});
+document.getElementById("fav-only").addEventListener("change", e => { state.favOnly = e.target.checked; render(); });
+document.getElementById("ics").addEventListener("click", downloadICS);
 
 /* 카드·임박 목록 클릭 → 예매처로 이동 (내부 링크/토글 클릭은 제외) */
 function openVendor(e) {

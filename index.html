@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%23ff4e8b'/></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/styles.css?v=20260925a">
+<link rel="stylesheet" href="assets/styles.css?v=20261012a">
 </head>
 <body>
 
@@ -70,6 +70,10 @@
       <span class="chip-label">지역</span>
       <div class="chips" id="tabs" role="tablist"></div>
       <label class="mono-toggle">
+        <input type="checkbox" id="fav-only">
+        <span>관심만 <b id="fav-count">0</b></span>
+      </label>
+      <label class="mono-toggle mono-toggle-tight">
         <input type="checkbox" id="hide-past" checked>
         <span>지난 공연 숨기기</span>
       </label>
@@ -86,6 +90,11 @@
     </div>
 
     <p class="active-filters" id="active-filters" hidden></p>
+    <!-- 관심 공연을 폰 캘린더에 넣는 것이 이 사이트에서 가장 쓸모 있는 행동이다 -->
+    <div class="fav-bar">
+      <button class="ics-btn" id="ics">📅 관심 공연 캘린더에 담기 (.ics)</button>
+      <span class="fav-note" id="fav-note" hidden></span>
+    </div>
   </section>
 
   <!-- ══ UP NEXT ══ -->
@@ -183,11 +192,11 @@
   </div>
 </footer>
 
-<script src="data/config.js?v=20260925a"></script>
-<script src="data/genres.js?v=20260925a"></script>
-<script src="data/artists.js?v=20260925a"></script>
-<script src="data/concerts.js?v=20260925a"></script>
-<script src="data/feed.js?v=20260925a"></script>
-<script src="assets/app.js?v=20260925a"></script>
+<script src="data/config.js?v=20261012a"></script>
+<script src="data/genres.js?v=20261012a"></script>
+<script src="data/artists.js?v=20261012a"></script>
+<script src="data/concerts.js?v=20261012a"></script>
+<script src="data/feed.js?v=20261012a"></script>
+<script src="assets/app.js?v=20261012a"></script>
 </body>
 </html>

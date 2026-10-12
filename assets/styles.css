@@ -96,6 +96,25 @@ h1,h2,h3,p{margin:0}
 .chip .n{font-family:var(--mono);font-size:11px;opacity:.6;margin-left:7px}
 .mono-toggle{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-2);cursor:pointer;user-select:none}
 .mono-toggle input{accent-color:var(--ink);width:14px;height:14px;cursor:pointer}
+.mono-toggle-tight{margin-left:18px}
+
+/* 관심 공연 — 카드 하단 모노 줄의 맨 오른쪽. 겹칠 자리가 없고 모바일에서도 남는 줄이다. */
+.ev-foot .fav{
+  margin-left:auto;border:1px solid var(--line);background:transparent;cursor:pointer;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-2);
+  padding:2px 7px;line-height:1.5;
+}
+.ev-foot .fav:hover{border-color:var(--ink-2);color:var(--ink)}
+.ev-foot .fav.on{background:var(--lime);border-color:var(--lime);color:var(--ink);font-weight:700}
+
+.fav-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
+.ics-btn{
+  border:1px solid var(--line);background:var(--paper-2);cursor:pointer;
+  font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--ink);
+  padding:10px 16px;
+}
+.ics-btn:hover{background:var(--lime);border-color:var(--lime)}
+.fav-note{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3)}
 
 /* ── UP NEXT ───────────────────────── */
 .upnext{display:grid;grid-template-columns:190px 1fr 300px;border:1px solid var(--line);background:var(--paper-2);margin-bottom:56px}
