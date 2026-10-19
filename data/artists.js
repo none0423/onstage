@@ -2005,5 +2005,389 @@ const ARTIST_INFO = {
     "country": null,
     "genre": null,
     "rule": 4
+  },
+  "絢香": {
+    "country": "JP",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "YURIN": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "SON HO YOUNG 20TH ANNIVERSARY": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "29CM STAGE, 신인류 X 29CM Editorial": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "NAM WOOHYUN 10th ANNIVERSARY": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "인���공항 SKY FESTIVAL": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "아이우에오": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Xdinary Heroes": {
+    "country": "KR",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "rock",
+        "count": 2
+      },
+      {
+        "name": "k-rock",
+        "count": 2
+      },
+      {
+        "name": "metal",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      },
+      {
+        "name": "boy group",
+        "count": 1
+      },
+      {
+        "name": "korean rock",
+        "count": 1
+      }
+    ]
+  },
+  "Jang Wooyoung": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": [],
+    "disamb": "2PM"
+  },
+  "HAON 1st": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "EVNNE FAN-CONCERT": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "데뷔 60주년 기념공연, 남진": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "아시안 팝 스테이지 vol.1": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "MINHO": {
+    "country": "KR",
+    "genre": "hiphop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 1
+      },
+      {
+        "name": "r&b",
+        "count": 1
+      },
+      {
+        "name": "hip hop",
+        "count": 1
+      },
+      {
+        "name": "funk",
+        "count": 1
+      },
+      {
+        "name": "2nd gen k-pop",
+        "count": 1
+      },
+      {
+        "name": "soul",
+        "count": 1
+      }
+    ],
+    "disamb": "Choi Min-ho, member of SHINee"
+  },
+  "이승철 40주���": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Hi-Fi Un!corn,": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 1
+      }
+    ]
+  },
+  "풍류고생": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "SIX60": {
+    "country": "NZ",
+    "genre": "hiphop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "rock",
+        "count": 1
+      },
+      {
+        "name": "r&b",
+        "count": 1
+      },
+      {
+        "name": "electronica",
+        "count": 1
+      },
+      {
+        "name": "alternative rock",
+        "count": 1
+      },
+      {
+        "name": "indietronica",
+        "count": 1
+      },
+      {
+        "name": "soul",
+        "count": 1
+      }
+    ]
+  },
+  "SexBomb Girls": {
+    "country": "PH",
+    "genre": "ballad",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "p-pop",
+        "count": 2
+      },
+      {
+        "name": "opm",
+        "count": 1
+      },
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "pinoy pop",
+        "count": 1
+      },
+      {
+        "name": "dance-pop",
+        "count": 1
+      },
+      {
+        "name": "ballad",
+        "count": 1
+      }
+    ],
+    "disamb": "Filipino girl group"
+  },
+  "Awesome Stage Special": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "메이트": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": [],
+    "disamb": "Korean band"
+  },
+  "임한별 연말": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "COUNTDOWN FANTASY": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Cao Yang": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Hey!Say!JUMP": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 2
+      },
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "fixme",
+        "count": 1
+      },
+      {
+        "name": "fixme label disaster",
+        "count": 1
+      }
+    ]
+  },
+  "KENSHI YONEZU": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 3
+      },
+      {
+        "name": "j-pop",
+        "count": 3
+      },
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "alternative rock",
+        "count": 1
+      },
+      {
+        "name": "japanese",
+        "count": 1
+      },
+      {
+        "name": "j-rock",
+        "count": 1
+      }
+    ]
+  },
+  "M!LK": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 1
+      }
+    ]
+  },
+  "Taya Gaukrodger": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Kenshi Yonezu": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 3
+      },
+      {
+        "name": "j-pop",
+        "count": 3
+      },
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "alternative rock",
+        "count": 1
+      },
+      {
+        "name": "japanese",
+        "count": 1
+      },
+      {
+        "name": "j-rock",
+        "count": 1
+      }
+    ]
+  },
+  "Damien Rice": {
+    "country": "IE",
+    "genre": "ballad",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "folk",
+        "count": 4
+      },
+      {
+        "name": "alternative rock",
+        "count": 1
+      },
+      {
+        "name": "irish",
+        "count": 1
+      },
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "songwriter",
+        "count": 1
+      },
+      {
+        "name": "singer",
+        "count": 1
+      }
+    ]
+  },
+  "＝LOVE DOME LIVE in NAGOYA": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "비바두비": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "M2M": {
+    "country": null,
+    "genre": null,
+    "rule": 4
   }
 };
