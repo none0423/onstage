@@ -1,69 +1,7 @@
 {
- "updated": "2026-10-24T20:43:37.888Z",
- "count": 13,
+ "updated": "2026-10-25T04:34:47.361Z",
+ "count": 12,
  "events": [
-  {
-   "id": "jp-fuk-2026-10-24-StrayKids",
-   "auto": true,
-   "sourceName": "미즈호PayPay돔 후쿠오카 공식",
-   "artist": "Stray Kids",
-   "tour": "World Tour <RUN IT JAPAN>",
-   "category": "japan",
-   "country": "일본",
-   "city": "후쿠오카",
-   "venue": "미즈호PayPay돔 후쿠오카",
-   "mapQuery": "みずほPayPayドーム福岡",
-   "dates": [
-    "2026-10-24"
-   ],
-   "doorsNote": "공식 공지 참고",
-   "ticketOpen": null,
-   "ticketStatus": "예정",
-   "price": "예매처 공지 참고",
-   "vendor": {
-    "name": "공식 공연 페이지",
-    "url": "https://www.straykidsjapan.com/info/archive/?584436"
-   },
-   "otherVendors": [
-    {
-     "name": "이플러스 (e+)",
-     "url": "https://eplus.jp/sf/search?keyword=Stray%20Kids"
-    },
-    {
-     "name": "티켓피아",
-     "url": "https://t.pia.jp/pia/search_all.do?kw=Stray%20Kids"
-    },
-    {
-     "name": "로손티켓",
-     "url": "https://l-tike.com/search/?keyword=Stray%20Kids"
-    }
-   ],
-   "goods": {
-    "note": "",
-    "url": null
-   },
-   "stay": {
-    "areas": [
-     {
-      "name": "도진마치 (唐人町)",
-      "note": "도보 15분 · 지하철 공항선"
-     },
-     {
-      "name": "텐진 (天神)",
-      "note": "지하철 10분 · 번화가, 셔틀버스"
-     },
-     {
-      "name": "하카타 (博多)",
-      "note": "지하철 15분 · 신칸센·공항 직결"
-     }
-    ]
-   },
-   "images": [],
-   "tips": "",
-   "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
-   "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
-  },
   {
    "id": "jp-fuk-2026-11-14-Prema",
    "auto": true,
@@ -125,7 +63,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2026-11-28-YOASOBI",
@@ -188,7 +126,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2026-12-04-SnowMan",
@@ -252,7 +190,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2026-12-12-HeySayJUMP",
@@ -315,7 +253,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2026-12-19-TOMORROWXTOGETHER",
@@ -378,7 +316,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2026-12-26-BIGBANG",
@@ -441,7 +379,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2027-01-16-Number_i",
@@ -504,7 +442,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2027-01-23-BrunoMarsTheRomantic",
@@ -567,7 +505,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2027-01-30-FUKUOKAMUSICFES2027s",
@@ -630,7 +568,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2027-02-06-ENHYPEN",
@@ -693,7 +631,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2027-02-13-BEFIRST5thAnniversar",
@@ -756,7 +694,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   },
   {
    "id": "jp-fuk-2027-03-13-ANISAMAFUKUOKA2027",
@@ -819,7 +757,7 @@
    "tips": "",
    "source": "https://www.softbankhawks.co.jp/stadium/event_schedule/",
    "tags": [],
-   "firstSeen": "2026-10-24T20:43:37.750Z"
+   "firstSeen": "2026-10-25T04:34:47.347Z"
   }
  ]
 }
