@@ -2389,5 +2389,135 @@ const ARTIST_INFO = {
     "country": null,
     "genre": null,
     "rule": 4
+  },
+  "Livejack 2026 SMASH BEAT SP": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "千原ジュニアの座王 東西２大ライブツアー": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "MMA": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "LEE SEUNG CHUL": {
+    "country": "KR",
+    "genre": "ballad",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "ballad",
+        "count": 1
+      },
+      {
+        "name": "pop rock",
+        "count": 1
+      },
+      {
+        "name": "korean ballad",
+        "count": 1
+      }
+    ]
+  },
+  "R.ef": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "MYRUS": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Puso, Pasko, at Pag-Asa": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Dragon Pony (드래곤포니)": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "LOCO": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "V.O.S": {
+    "country": "KR",
+    "genre": "hiphop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "boy group",
+        "count": 1
+      },
+      {
+        "name": "contemporary r&b",
+        "count": 1
+      },
+      {
+        "name": "korean ballad",
+        "count": 1
+      }
+    ]
+  },
+  "요네즈 켄시": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "超ときめき♡STAGE 2027 あけおめ新年会フォーエバー": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Kehlani": {
+    "country": "US",
+    "genre": "hiphop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "pop",
+        "count": 2
+      },
+      {
+        "name": "hip hop",
+        "count": 2
+      },
+      {
+        "name": "neo soul",
+        "count": 2
+      },
+      {
+        "name": "r&b",
+        "count": 2
+      },
+      {
+        "name": "electronic",
+        "count": 1
+      },
+      {
+        "name": "soul",
+        "count": 1
+      }
+    ],
+    "disamb": "Kehlani Ashley Parrish, an American singer-songwriter"
+  },
+  "I AM KORESAWA vol.1": {
+    "country": null,
+    "genre": null,
+    "rule": 4
   }
 };
