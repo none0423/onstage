@@ -2519,5 +2519,360 @@ const ARTIST_INFO = {
     "country": null,
     "genre": null,
     "rule": 4
+  },
+  "秦 基博": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      }
+    ]
+  },
+  "KviBaba": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "GLAY": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "長月 あおい (花海 咲季役) / 小鹿 なお (月村 手毬役) / 飯田 ヒカル (藤田 ことね役) / 七瀬 つむぎ (有村 麻央役) / 花岩 香奈 (葛城 リーリヤ役) / 伊藤 舞音 (倉本 千奈役) / 湊 みや (紫雲 清夏 役) / 川村 玲奈 (篠澤 広役) / 薄井 友里 (姫崎 莉波役) / 松田 彩音(花海 佑芽役) / 春咲 暖 (秦谷 美鈴役) / 陽高 真白 (十王 星南役) / 天音 ゆかり (雨夜 燕役)": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "米津玄師": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 3
+      },
+      {
+        "name": "j-pop",
+        "count": 3
+      },
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "alternative rock",
+        "count": 1
+      },
+      {
+        "name": "japanese",
+        "count": 1
+      },
+      {
+        "name": "j-rock",
+        "count": 1
+      }
+    ]
+  },
+  "きゅるりんってしてみて": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [],
+    "disamb": "Japanese idol group"
+  },
+  "日常組（ぺいんと / クロノア / しにがみ / トラゾー）": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Aぇ! group / JO1 / Novelbright / マルシィ / ももいろクローバーZ": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "BAND DALDAM": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "CHENLE B-day PARTY: Lele's": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "IRON MAIDEN": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "NMIXX": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "girl group",
+        "count": 3
+      },
+      {
+        "name": "k-pop",
+        "count": 3
+      },
+      {
+        "name": "4th gen k-pop",
+        "count": 3
+      }
+    ]
+  },
+  "공원 첫 번째 단독 콘서트: TAKE 01": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "hrtz.wav 1st CONNECT!ON": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "이츠 (IT’S)": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "THE IDOLM＠STER CINDERELLA GIRLS": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "San Pablo Music Fest": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "이승윤": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "PEPPERTONES": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "indie pop",
+        "count": 1
+      }
+    ]
+  },
+  "꽃다지": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Rothy": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 2
+      },
+      {
+        "name": "contemporary r&b",
+        "count": 1
+      },
+      {
+        "name": "r&b",
+        "count": 1
+      }
+    ]
+  },
+  "자우림": {
+    "country": "KR",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "rock",
+        "count": 2
+      },
+      {
+        "name": "indie rock",
+        "count": 1
+      },
+      {
+        "name": "pop rock",
+        "count": 1
+      },
+      {
+        "name": "south korea",
+        "count": 1
+      },
+      {
+        "name": "co-ed",
+        "count": 1
+      }
+    ]
+  },
+  "규현 (KYUHYUN)": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "탁재훈쇼": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "김종국": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "Feast & Hindia": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "하동균": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "なにわ男子": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "boy band",
+        "count": 1
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      }
+    ]
+  },
+  "Travis": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "QWER": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "사이먼 도미닉": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "JO1、INI、DXTEEN、KO1KEYZ、ME:I、IS:SUE": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "MISIA": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "contemporary r&b",
+        "count": 1
+      },
+      {
+        "name": "likedis auto",
+        "count": 1
+      }
+    ],
+    "disamb": "Japanese singer"
+  },
+  "ニッポン放送 ももいろクローバーZ ももクロくらぶxoxo ～バレンタイン DE NIGHT だぁ～Z！2027": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Asia Pop Fest": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "スガシカオ": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "jazz",
+        "count": 1
+      },
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "j-rock",
+        "count": 1
+      },
+      {
+        "name": "fixme label mess",
+        "count": 1
+      },
+      {
+        "name": "likedis auto",
+        "count": 1
+      }
+    ]
+  },
+  "オーイシマサヨシ": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "likedis auto",
+        "count": 1
+      },
+      {
+        "name": "multiple vgmdb profiles",
+        "count": 1
+      }
+    ]
+  },
+  "Disturbed": {
+    "country": null,
+    "genre": null,
+    "rule": 4
   }
 };
