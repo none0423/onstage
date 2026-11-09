@@ -2874,5 +2874,185 @@ const ARTIST_INFO = {
     "country": null,
     "genre": null,
     "rule": 4
+  },
+  "ベストヒット歌謡祭2026": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "U-KNOW": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "인디키친 피날레": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "이디피 EDP": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "PENTAGON": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Sophie Powers": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Silent Sanctuary": {
+    "country": "PH",
+    "genre": "pop",
+    "rule": 4,
+    "tags": [],
+    "disamb": "Filipino Group"
+  },
+  "NIGHT HIKE": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "변진섭": {
+    "country": "KR",
+    "genre": "ballad",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "ballad",
+        "count": 1
+      },
+      {
+        "name": "korean ballad",
+        "count": 1
+      }
+    ]
+  },
+  "THE PLAYHOUSE YEAR END DRAG CONCERT": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Anthony Kavanagh": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "토탈셋 패밀리": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "FLY TO THE SKY SPECIAL": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "크라잉넛": {
+    "country": "KR",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "indie rock",
+        "count": 1
+      },
+      {
+        "name": "punk rock",
+        "count": 1
+      },
+      {
+        "name": "punk",
+        "count": 1
+      }
+    ]
+  },
+  "성시경 연말": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "NCT WISH": {
+    "country": "JP",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "boy group",
+        "count": 2
+      },
+      {
+        "name": "j-pop",
+        "count": 1
+      },
+      {
+        "name": "k-pop",
+        "count": 1
+      }
+    ]
+  },
+  "Gareth Gates": {
+    "country": "GB",
+    "genre": "ballad",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "ballad",
+        "count": 1
+      },
+      {
+        "name": "uk",
+        "count": 1
+      },
+      {
+        "name": "british",
+        "count": 1
+      },
+      {
+        "name": "english",
+        "count": 1
+      },
+      {
+        "name": "pop idol",
+        "count": 1
+      }
+    ]
+  },
+  "Toto": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Ben&Ben": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Chris Tomlin": {
+    "country": "US",
+    "genre": null,
+    "rule": 4,
+    "tags": [
+      {
+        "name": "contemporary christian",
+        "count": 2
+      },
+      {
+        "name": "contemporary worship",
+        "count": 1
+      }
+    ]
   }
 };
