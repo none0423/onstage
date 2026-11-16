@@ -3054,5 +3054,211 @@ const ARTIST_INFO = {
         "count": 1
       }
     ]
+  },
+  "TOMOO": {
+    "country": "JP",
+    "genre": "jpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 2
+      },
+      {
+        "name": "j-pop",
+        "count": 2
+      }
+    ],
+    "disamb": "Tokyo Singer-songwriter"
+  },
+  "GENERATIONS": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "L'Arc-en-Ciel": {
+    "country": "JP",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "rock",
+        "count": 2
+      },
+      {
+        "name": "visual kei",
+        "count": 2
+      },
+      {
+        "name": "pop",
+        "count": 1
+      },
+      {
+        "name": "alternative rock",
+        "count": 1
+      },
+      {
+        "name": "progressive rock",
+        "count": 1
+      },
+      {
+        "name": "japanese",
+        "count": 1
+      }
+    ],
+    "disamb": "Japanese rock band"
+  },
+  "29CM STAGE, 노이즈가든": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "심아일랜드": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "FIFTY FIFTY": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Becky Armstrong": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "WAVE of ECLIPSE": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "ROCKY (Park Min-hyuk)": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "MCND": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 2
+      }
+    ],
+    "disamb": "South Korean boy group"
+  },
+  "FLARE U": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 1
+      }
+    ]
+  },
+  "saewool (새울) Oneman": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "한로로": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "HYUKOH": {
+    "country": "KR",
+    "genre": "hiphop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "hip hop",
+        "count": 1
+      },
+      {
+        "name": "korea",
+        "count": 1
+      },
+      {
+        "name": "r&b",
+        "count": 1
+      }
+    ],
+    "disamb": "South Korean indie pop/rock band"
+  },
+  "Cho Q May: Starlight Map": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Songs That keep Us Together": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Tiffany Day": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "캣츠아이": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "ニッポン放送 ももいろクローバーZ ももクロくらぶxoxo ～バレンタイン DE NIGHT だ��～Z！2027": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "제프 버넷": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Tori Kelly": {
+    "country": "US",
+    "genre": "hiphop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "soul",
+        "count": 4
+      },
+      {
+        "name": "pop",
+        "count": 2
+      },
+      {
+        "name": "contemporary r&b",
+        "count": 2
+      },
+      {
+        "name": "producer",
+        "count": 1
+      },
+      {
+        "name": "southern soul",
+        "count": 1
+      },
+      {
+        "name": "neo soul",
+        "count": 1
+      }
+    ]
   }
 };
