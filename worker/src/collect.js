@@ -1004,7 +1004,11 @@ export async function collectAll({ keys = {}, previous = [], only = null, log = 
       id: `ln-${e.slug}-${e.date}`,
       auto: true, sourceName: "Live Nation Korea", lnSlug: e.slug,
       artist: e.artist || e.title, tour: e.title,
-      category: "visit",
+      /* 한국에서 열리는 공연이므로 KOPIS 와 똑같이 domestic 으로 두고, 해외 아티스트인지는
+         categoryOf() 가 장르·이름으로 판정하게 맡긴다. 한때 여기서 "visit" 으로 박아 뒀는데
+         — 라이브네이션이 내한 프로모터라고만 생각해서 — 이승철 40주년 콘서트가 내한이 됐다.
+         categoryOf 는 domestic 만 덮어쓰므로 visit 으로 들어온 건 교정될 길이 없다. */
+      category: "domestic",
       country: "대한민국", city: e.city, venue: e.venue,
       dates: [e.date],
       doorsNote: "",

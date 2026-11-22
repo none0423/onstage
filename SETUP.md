@@ -128,6 +128,56 @@ curl "https://onstage-collector.<계정>.workers.dev/collect?token=아무문자�
 
 ---
 
+## STEP 6 — SNS 공지 알림 (선택)
+
+15분마다 네이버 카페글·블로그를 검색해 **추가 회차 · 추가 오픈 · 잔여석 ·
+시야제한석 · 공식 재판매 · 선예매** 공지가 뜨면 텔레그램으로 보냅니다.
+
+> **먼저 알아둘 것** — 이 알림으로 취소표를 잡을 수는 없습니다. 누군가
+> "취소표 떴다"고 글을 쓰는 시점은 이미 그 사람이 잡은 뒤이고, 거기에 네이버
+> 색인 지연까지 붙습니다. 그래서 감시 대상을 *몇십 분 늦어도 유효한 공지*로만
+> 한정했습니다. 트위터(X)는 2026년 2월부터 포스트 읽기당 약 $0.005 유료라
+> 쓰지 않습니다 — 이 프로젝트의 '정기 비용 0원'과 어긋납니다.
+
+### 1) 네이버 검색 API 키
+
+https://developers.naver.com → 애플리케이션 등록 → **검색** API 선택.
+무료이고 하루 25,000회까지 호출할 수 있습니다. 클라이언트 ID와 시크릿이 나옵니다.
+
+### 2) 텔레그램 봇
+
+1. 텔레그램에서 **@BotFather** 에게 `/newbot` → 이름을 정하면 **토큰**을 줍니다.
+2. 만든 봇과의 대화방을 열어 아무 메시지나 한 번 보냅니다(봇은 먼저 말을 못 겁니다).
+3. 아래로 `chat_id` 를 확인합니다.
+
+```bash
+curl -s "https://api.telegram.org/bot<토큰>/getUpdates" | grep -o '"chat":{"id":[-0-9]*'
+```
+
+### 3) 등록
+
+```bash
+cd worker
+npx wrangler secret put NAVER_CLIENT_ID
+npx wrangler secret put NAVER_CLIENT_SECRET
+npx wrangler secret put TELEGRAM_TOKEN
+npx wrangler secret put TELEGRAM_CHAT_ID
+npx wrangler deploy          # 크론이 하나 늘었으므로 이번엔 재배포가 필요합니다
+```
+
+넷 중 하나라도 없으면 그 단계만 건너뜁니다 — 네이버 키가 없으면 검색을 하지
+않고, 텔레그램 설정이 없으면 걸린 공지를 `/sns` 에만 남깁니다. **보내기가
+실패하면 '이미 본 글' 기록을 갱신하지 않으므로** 다음 실행에서 다시 시도합니다.
+
+### 4) 확인
+
+```bash
+curl https://onstage-collector.<계정>.workers.dev/sns
+curl "https://onstage-collector.<계정>.workers.dev/sns/run?token=아무문자열"   # 즉시 한 번
+```
+
+---
+
 ## 로컬에서 직접 돌려보기
 
 Worker와 **똑같은 수집 로직**(`worker/src/collect.js`)을 Node로 돌려
@@ -139,6 +189,26 @@ node tools/collect.mjs --only=tokyodome   # 한 소스만
 node tools/check.mjs                      # 데이터 형식 검사
 
 TICKETMASTER_KEY=xxx KOPIS_KEY=yyy node tools/collect.mjs
+```
+
+SNS 공지 감시도 같은 방식으로 돌려볼 수 있습니다. **기본은 보내지 않고
+무엇이 걸리는지만 출력합니다** — 키워드를 손볼 때마다 알림이 날아가면
+쓸모 없는 알림에 익숙해져 버리기 때문입니다.
+
+```bash
+node tools/sns.mjs           # 미리보기 (아무것도 보내지 않음)
+node tools/sns.mjs --json    # 결과를 JSON 으로
+node tools/sns.mjs --send    # 실제 전송 + 본 글 기록(.sns-seen.json)
+node tools/test-sns.mjs      # 판정 로직 테스트 (네트워크 불필요)
+```
+
+키는 `.env.local` 에 넣어 두면 자동으로 읽습니다.
+
+```
+NAVER_CLIENT_ID=...
+NAVER_CLIENT_SECRET=...
+TELEGRAM_TOKEN=...
+TELEGRAM_CHAT_ID=...
 ```
 
 ## 데이터 우선순위

@@ -85,7 +85,7 @@ const ARTIST_GENRE = {
   "존박": "hiphop", "크러쉬": "hiphop", "자이언티": "hiphop", "Morgenshtern": "hiphop",
 
   /* ── 발라드 ────────────────────────── */
-  "이승철": "ballad", "엠씨더맥스": "ballad", "성시경": "ballad",
+  "이승철": "ballad", "LEE SEUNG CHUL": "ballad", "엠씨더맥스": "ballad", "성시경": "ballad",
   "김건모": "ballad", "김장훈": "ballad", "조관우": "ballad", "박효신": "ballad",
   "이수": "ballad", "규현": "ballad", "김범수": "ballad", "이승기": "ballad",
   "스테이지 네임": "ballad", "정승환": "ballad", "김필": "ballad", "홍이삭": "ballad",
@@ -110,7 +110,8 @@ const FOREIGN_ARTISTS = [
   "SPYAIR", "KANA-BOON", "Sunny Day Service", "Homecomings", "홈커밍스",
   "Touche Amore", "Slowdive", "슬로우다이브", "Paul Gilbert", "폴 길버트",
   "Ezra Collective", "에즈라 콜렉티브", "Morgenshtern", "모르겐슈테른",
-  "AKASAKI", "AKANE YONEZAWA", "칸호 야쿠시지", "Shi Shi"
+  "AKASAKI", "AKANE YONEZAWA", "칸호 야쿠시지", "Shi Shi",
+  "FKJ", "SIENNA SPIRO"
 ];
 
 /* 대응표에 없을 때 공연 제목에서 잡아내는 규칙 (앞에서부터 먼저 맞는 것) */

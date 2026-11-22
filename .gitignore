@@ -6,3 +6,6 @@ tools/.debug/
 .DS_Store
 node_modules/
 .claude/
+
+# tools/sns.mjs --send 가 남기는 "이미 알린 글" 기록
+.sns-seen.json

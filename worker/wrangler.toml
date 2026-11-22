@@ -3,15 +3,21 @@
 #   npx wrangler secret put TICKETMASTER_KEY
 #   npx wrangler secret put KOPIS_KEY
 #   npx wrangler secret put COLLECT_TOKEN     (수동 실행용, 선택)
+#   npx wrangler secret put NAVER_CLIENT_ID       SNS 공지 감시
+#   npx wrangler secret put NAVER_CLIENT_SECRET
+#   npx wrangler secret put TELEGRAM_TOKEN        알림 보낼 봇
+#   npx wrangler secret put TELEGRAM_CHAT_ID
 #   npx wrangler deploy
 
 name = "onstage-collector"
 main = "src/index.js"
 compatibility_date = "2026-08-01"
 
-# 매시 정각. Cloudflare 크론은 GitHub 과 달리 거의 정시에 실행됩니다.
+# 매시 정각은 공연 수집, 15분마다는 SNS 공지 감시. Workers 무료의 10ms CPU·
+# 50 subrequest 한도는 '호출당'이라 둘을 나눠 돌리면 예산을 공유하지 않습니다.
+# Cloudflare 크론은 GitHub 과 달리 거의 정시에 실행됩니다.
 [triggers]
-crons = ["0 * * * *"]
+crons = ["0 * * * *", "*/15 * * * *"]
 
 [[kv_namespaces]]
 binding = "FEED"
