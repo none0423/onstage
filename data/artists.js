@@ -654,9 +654,20 @@ const ARTIST_INFO = {
     "rule": 3
   },
   "PENTAGON 10th Anniversary": {
-    "country": null,
-    "genre": null,
-    "rule": 3
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "k-pop",
+        "count": 2
+      },
+      {
+        "name": "boy group",
+        "count": 1
+      }
+    ],
+    "disamb": "South Korean boy band"
   },
   "HIGHLIGHT FAN CON": {
     "country": "KR",
@@ -3260,5 +3271,124 @@ const ARTIST_INFO = {
         "count": 1
       }
     ]
+  },
+  "矢沢永吉": {
+    "country": "JP",
+    "genre": "rock",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "singer-songwriter",
+        "count": 1
+      },
+      {
+        "name": "rock",
+        "count": 1
+      },
+      {
+        "name": "likedis auto",
+        "count": 1
+      },
+      {
+        "name": "fixme label mess",
+        "count": 1
+      }
+    ]
+  },
+  "타임캡슐 슈퍼콘서트": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "DAY6 Special": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "재규어 트윈": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "My Boys": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "어반자카파": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "FORESTELLA": {
+    "country": "KR",
+    "genre": "kpop",
+    "rule": 4,
+    "tags": [
+      {
+        "name": "crossover",
+        "count": 1
+      }
+    ],
+    "disamb": "South Korean crossover vocal group"
+  },
+  "CRUSH": {
+    "country": "KR",
+    "genre": "hiphop",
+    "rule": 4,
+    "tags": [],
+    "disamb": "South Korean R&B/hip hop singer"
+  },
+  "New Year's Celebration": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "FLY TO THE SKY": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "손태진": {
+    "country": "KR",
+    "genre": null,
+    "rule": 4,
+    "tags": []
+  },
+  "KIMCHIKURA x ANISAMA": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "티파니 데이": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Tiffany Day HALO": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "ニ��ポン放送 ももいろクローバーZ ももクロくらぶxoxo ～バレンタイン DE NIGHT だぁ～Z！2027": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "헤일리 윌리엄스": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "Tori Kelly God Must Really Love Me": {
+    "country": null,
+    "genre": null,
+    "rule": 4
+  },
+  "워터밤": {
+    "country": null,
+    "genre": null,
+    "rule": 4
   }
 };
